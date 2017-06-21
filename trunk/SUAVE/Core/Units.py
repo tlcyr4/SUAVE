@@ -22,8 +22,10 @@ Units = UnitRegistry()
 #   Monkey Patching
 # ------------------------------------------------------------
  
-# multiplication covnverts in to base unit
+
 def __rmul__(self,other):
+    """ multiplication covnverts in to base unit
+    """
     if isinstance(other,_Quantity):
         return _Quantity.__rmul__(self,other)
     else:
@@ -31,8 +33,10 @@ def __rmul__(self,other):
         self.ito_base_units()
         return self.magnitude
 
-# division converts out of base unit
+
 def __rdiv__(self,other):
+    """ division converts out of base unit
+    """
     if isinstance(other,_Quantity):
         return _Quantity.__truediv__(self,other)
     else:

@@ -44,11 +44,16 @@ class Property(object):
 # ----------------------------------------------------------------------        
 
 class DataOrdered(OrderedDict):
+    """     An extension of the ordered dictionary data structure meant to be nested into a tree-like data structure.  Enables attribute style access names ie data.key = data[key] and deep access for attributes further down the tree.
+        
+    """
     
     _root = Property('_root')
     _map  = Property('_map')    
     
     def append(self,value,key=None):
+        """ Adds value to dictionary, using value's tag as its key if none is provided.
+        """
         if key is None: key = value.tag
         key_in = key
         key = key.translate(t_table)
@@ -58,15 +63,21 @@ class DataOrdered(OrderedDict):
         self[key] = value    
 
     def __defaults__(self):
+        """ No defaults to add.
+        """
         pass
     
     def __getitem__(self,k):
+        """ Provides dict/array style access to attributes
+        """
         if not isinstance(k,int):
             return super(DataOrdered,self).__getattribute__(k)
         else:
             return super(DataOrdered,self).__getattribute__(self.keys()[k])
     
     def __new__(cls,*args,**kwarg):
+        """ Initializes with defaults from trunk to leaf.
+        """
         # Make the new:
         self = OrderedDict.__new__(cls)
         
@@ -91,6 +102,8 @@ class DataOrdered(OrderedDict):
         return self
     
     def __init__(self,*args,**kwarg):
+        """ Initializes with any arguments passed in immediately added to the data structure
+        """
 
         # handle input data (ala class factory)
         input_data = DataOrdered.__base__(*args,**kwarg)
@@ -100,6 +113,8 @@ class DataOrdered(OrderedDict):
         
         
     def __init2(self, items=None, **kwds):
+        """ Initializes with given inputs immediately added to the dictionary.
+        """
         def append_value(key,value):               
             self[key] = value            
         
@@ -121,11 +136,15 @@ class DataOrdered(OrderedDict):
         for key, value in kwds.iteritems():
             append_value(key,value)     
 
-    # iterate on values, not keys
+
     def __iter__(self):
+        """ iterate on values, not keys
+        """
         return self.itervalues()
             
     def __str__(self,indent=''):
+        """ Returns string representation as dataname and string representation as dictionary
+        """
         new_indent = '  '
         args = ''
         
@@ -140,9 +159,13 @@ class DataOrdered(OrderedDict):
         return args
         
     def __repr__(self):
+        """ Returns data name
+        """
         return self.dataname()
     
     def get_bases(self):
+        """ Returns all classes in heirarchy from leaf to trunk
+        """
         klass = self.__class__
         klasses = []
         while klass:
@@ -156,6 +179,8 @@ class DataOrdered(OrderedDict):
         return klasses
     
     def typestring(self):
+        """ Returns a string indicating the type of the data object
+        """
         typestring = str(type(self)).split("'")[1]
         typestring = typestring.split('.')
         if typestring[-1] == typestring[-2]:
@@ -164,10 +189,13 @@ class DataOrdered(OrderedDict):
         return typestring
     
     def dataname(self):
+        """ Returns a string indicating that the object is a data object and its type.
+        """
         return "<data object '" + self.typestring() + "'>"
 
     def deep_set(self,keys,val):
-        
+        """ Use dot notation to specify a path of keys to follow and set a value deeper down a tree of nested data types.
+        """
         if isinstance(keys,str):
             keys = keys.split('.')
         
@@ -182,7 +210,8 @@ class DataOrdered(OrderedDict):
         return data
 
     def deep_get(self,keys):
-        
+        """ Use dot notation to specify a path of keys to follow and get a value deeper down a tree of nested data types.
+        """
         if isinstance(keys,str):
             keys = keys.split('.')
         
@@ -197,6 +226,8 @@ class DataOrdered(OrderedDict):
         return value   
     
     def update(self,other):
+        """ Appends all the data from another data object.  If the other data object has data attributes matching ones in this object, recursively append their attributes.
+        """
         if not isinstance(other,dict):
             raise TypeError , 'input is not a dictionary type'
         for k,v in other.iteritems():
@@ -211,21 +242,26 @@ class DataOrdered(OrderedDict):
         return 
 
     def __delattr__(self, key):
-        # Deleting an existing item uses self._map to find the link which is
-        # then removed by updating the links in the predecessor and successor nodes.
+        """ Deleting an existing item uses self._map to find the link which is then removed by updating the links in the predecessor and successor nodes.
+        """
         OrderedDict.__delattr__(self,key)
         link_prev, link_next, key = self._map.pop(key)
         link_prev[1] = link_next
         link_next[0] = link_prev
         
     def __eq__(self, other):
+        """ Determines equality based on equality of antries and order (if both are ordered)
+        """
         if isinstance(other, (DataOrdered,OrderedDict)):
             return len(self)==len(other) and np.all(self.items() == other.items())
         return dict.__eq__(self, other)
         
     def __len__(self):
+        """ Returns number of key value pairs
+        """
         return self.__dict__.__len__()   
 
+    ###duplicate method?
     def __iter__(self):
         root = self._root
         curr = root[1]
@@ -241,8 +277,8 @@ class DataOrdered(OrderedDict):
         return (_reconstructor, (self.__class__,items,), inst_dict)
     
     def __setattr__(self, key, value):
-        # Setting a new item creates a new link which goes at the end of the linked
-        # list, and the inherited dictionary is updated with the new key/value pair.
+        """Setting a new item creates a new link which goes at the end of the linked list, and the inherited dictionary is updated with the new key/value pair.
+        """
         if not hasattr(self,key) and not hasattr(self.__class__,key):
         #if not self.has_key(key) and not hasattr(self.__class__,key):
             root = dict.__getitem__(self,'_root')
@@ -252,10 +288,13 @@ class DataOrdered(OrderedDict):
         OrderedDict.__setattr__(self,key, value)
 
     def __setitem__(self,k,v):
+        """ Sets as an attribute
+        """
         self.__setattr__(k,v)
         
     def __str2(self,indent=''):
-        
+        """ Recursively generates string representation of all data in structure
+        """
         new_indent = '  '
         args = ''
         
@@ -289,6 +328,8 @@ class DataOrdered(OrderedDict):
         return args     
 
     def clear(self):
+        """ Clear the dictionary
+        """
         try:
             for node in self._map.itervalues():
                 del node[:]
@@ -300,9 +341,13 @@ class DataOrdered(OrderedDict):
         self.__dict__.clear()
         
     def get(self,k,d=None):
+        """ Return the value for a given key
+        """
         return self.__dict__.get(k,d)
         
     def has_key(self,k):
+        """ Check to see if the key appears in the dictionary.
+        """
         return self.__dict__.has_key(k)
 
     # allow override of iterators
@@ -310,22 +355,34 @@ class DataOrdered(OrderedDict):
     __getitem2 = OrderedDict.__getattribute__ 
 
     def keys(self):
+        """ Return a list of the keys in the dictionary
+        """
         return list(self.__iter())
     
     def values(self):
+        """ Return a list of the values in the dictionary
+        """
         return [self[key] for key in self.__iter()]
     
     def items(self):
+        """ Return a list of the keys and values in the dictionary
+        """
         return [(key, self[key]) for key in self.__iter()]
     
     def iterkeys(self):
+        """ Generate keys in the dictionary
+        """
         return self.__iter()
     
     def itervalues(self):
+        """ Generate items rather than keys
+        """
         for k in self.__iter():
             yield self[k]
     
     def iteritems(self):
+        """ Generate keys and items
+        """
         for k in self.__iter():
             yield (k, self[k])   
 

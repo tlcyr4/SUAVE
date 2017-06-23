@@ -73,7 +73,7 @@ def propeller_design(prop_attributes):
     
     chi0    = Rh/R # Where the propeller blade actually starts
     chi     = np.linspace(chi0,1,N+1) # Vector of nondimensional radii
-    chi     = chi[0:N]
+    chi     = chi[0:int(N)]
     lamda   = V/(omega*R)             # Speed ratio
     r       = chi*R                   # Radial coordinate
     x       = omega*r/V               # Nondimensional distance

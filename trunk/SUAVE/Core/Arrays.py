@@ -18,9 +18,13 @@ matrix_type = np.matrixlib.defmatrix.matrix
 
 
 def atleast_2d_col(A):
+    """ Ensures A is an array and at least of rank 2.  If A is a 1d array, its elements will make up a column in the result.
+    """
     return atleast_2d(A,'col')
 
 def atleast_2d_row(A):
+    """ Ensures A is an array and at least of rank 2.  If A is a 1d array, its elements will make up a row in the result.
+    """
     return atleast_2d(A,'row')
 
 def atleast_2d(A,oned_as='row'):

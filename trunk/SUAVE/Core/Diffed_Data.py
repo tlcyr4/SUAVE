@@ -19,30 +19,41 @@ import numpy as np
 
 class Diffed_Data(Data):
     """ SUAVE.Core.DiffedData()
+        Data object that remembers itself, a base version of itself, and the difference between the two.
     """
     
     def __defaults__(self):
+        """ Default tag is config and base and diff default to default Data instances
+        """
         self.tag    = 'config'
         self._base  = Data()
         self._diff  = Data()
         
     def __init__(self,base=None):
+        """ Sets base to be the initial state and initializes as Data
+        """
         if base is None: base = Data()
         self._base = base
         this = deepcopy(base) # deepcopy is needed here to build configs - Feb 2016, T. MacDonald
         Data.__init__(self,this)
         
     def store_diff(self):
+        """ Calculates the difference between itself and the base and stores the result.
+        """
         delta = diff(self,self._base)
         self._diff = delta
         
     def pull_base(self):
+        """ Pulls data from base to match it.
+        """
         try: self._base.pull_base()
         except AttributeError: pass
         self.update(self._base)
         self.update(self._diff)
     
     def __str__(self,indent=''):
+        """ String representation includes stored difference and base.
+        """
         try: 
             args = self._diff.__str__(indent)
             args += indent + '_base : ' + self._base.__repr__() + '\n'
@@ -63,23 +74,32 @@ class Diffed_Data(Data):
 
 class Container(ContainerBase):
     """ SUAVE.Core.Diffed_Data.Container()
+        Container of Diffed Data
     """
     def append(self,value):
+        """ Checks to see if the value is diffed data and appends
+        """
         try: value.store_diff()
         except AttributeError: pass
         ContainerBase.append(self,value)
         
     def pull_base(self):
+        """ Calls pull for all Diffed data held in container
+        """
         for config in self:
             try: config.pull_base()
             except AttributeError: pass
 
     def store_diff(self):
+        """ Stores differences from all Diffed data held in container
+        """
         for config in self:
             try: config.store_diff()
             except AttributeError: pass
     
     def finalize(self):
+        """ Finalizes all diffed data held in container
+        """
         for config in self:
             try: config.finalize()
             except AttributeError: pass
@@ -96,6 +116,8 @@ Diffed_Data.Container = Container
 # ------------------------------------------------------------
 
 def diff(A,B):
+    """ Determines the differences between two pieces of data
+    """
 
     keys = set([])
     keys.update( A.keys() )

@@ -22,15 +22,35 @@ objgetattrib = object.__getattribute__
 # ----------------------------------------------------------------------        
 
 class Data(dict):
-    """"""
+    """     An extension of the dictionary data structure meant to be nested into a tree-like data structure.  Enables attribute style access names ie data.key = data[key] and deep access for attributes further down the tree.  Enables defaults to compound for all extenstions of the Data class and supports packing and unpacking from a 1d or 2d array.
+        
+    """
     
     def __getattribute__(self, k):
+        """ Data.__getattribute__(key)
+            Allows get-access to items in the dictionary as if they were attributes.
+            Inputs:
+            key - the attribute name or key of the item
+            
+            Outputs:
+            corresponding value in the dictionary
+            
+        """
+
         try:
             return dictgetitem(self,k)
         except:
             return objgetattrib(self,k)
 
     def __setattr__(self, k, v):
+        """ Data.__setattr__(key, value)
+            Allows set-access to items in the dictionary as if they were attributes.
+            Inputs:
+            key - the attribute name or key of the item
+            value - the new value to be set
+
+            
+        """
         try:
             objgetattrib(self, k)
         except:
@@ -39,6 +59,12 @@ class Data(dict):
             object.__setattr__(self, k, v) 
             
     def __delattr__(self, k):
+        """ Data.__getattr__(key, value)
+            Allows deletion of items in the dictionary as if they were attributes.
+            Inputs:
+            key - the attribute name or key of the item
+            
+        """
         try:
             objgetattrib(self, k)
         except:
@@ -47,10 +73,16 @@ class Data(dict):
             object.__delattr__(self, k)
     
     def __defaults__(self):
+        """ Data.__defaults__()
+            Sets no default values.
+            
+            """
         pass      
     
     def __new__(cls,*args,**kwarg):
-        
+        """ Data.__new__(cls,*args,**kwarg)
+            Initializes data with all defaults from trunk to leaf of class heirarchy
+        """
         # initialize data, no inputs
         self = super(Data,cls).__new__(cls)
         super(Data,self).__init__() 
@@ -65,6 +97,12 @@ class Data(dict):
         return self
     
     def typestring(self):
+        """ Data.typestring()
+            Builds a string indicating the type of the data
+            
+            Outputs:
+            typestring - a string indicating the type of the data
+        """
         # build typestring
         typestring = str(type(self)).split("'")[1]
         typestring = typestring.split('.')
@@ -74,10 +112,16 @@ class Data(dict):
         return typestring    
     
     def dataname(self):
+        """ Generates a name tag describing the data as a data object of its type.
+
+        """
         return "<data object '" + self.typestring() + "'>"     
-    
+        
     
     def __str__(self,indent=''):
+        """ Specifies string representation of the data object, composed of the data nametag and a string representation of it as a dictionary.
+
+        """
         new_indent = '  '
         args = ''
         
@@ -129,6 +173,8 @@ class Data(dict):
         return args        
     
     def __init__(self,*args,**kwarg):
+        """ Initializes the data object and appends any inputs to its dictionary entries.
+        """
 
         # handle input data (ala class factory)
         input_data = Data.__base__(*args,**kwarg)
@@ -137,19 +183,29 @@ class Data(dict):
         self.update(input_data)    
 
     def __iter__(self):
+        """ Generates values in dictionary
+        """
         return self.itervalues()
     
     def itervalues(self):
+        """ Generates values in dictionary
+        """
         for k in super(Data,self).__iter__():
             yield self[k]
             
     def values(self):
+        """ Return all values in dictionary
+        """
         return self.__values()          
             
     def __values(self):
+        """ Return all values in dictionary
+        """
         return [self[key] for key in super(Data,self).__iter__()]    
     
     def update(self,other):
+        """ Appends all the data from another data object.  If the other data object has data attributes matching ones in this object, recursively append their attributes.
+        """
         if not isinstance(other,dict):
             raise TypeError , 'input is not a dictionary type'
         for k,v in other.iteritems():
@@ -164,6 +220,8 @@ class Data(dict):
         return         
     
     def get_bases(self):
+        """ Return a list of the classes in the heirarchy from leaf to trunk.
+        """
         klass = self.__class__
         klasses = []
         while klass:
@@ -177,6 +235,8 @@ class Data(dict):
         return klasses    
     
     def append(self,value,key=None):
+        """ Add an entry to the dictionary
+        """
         if key is None: key = value.tag
         key_in = key
         key = key.translate(t_table)
@@ -186,7 +246,8 @@ class Data(dict):
         self[key] = value        
     
     def deep_set(self,keys,val):
-        
+        """ Use dot notation to specify a path of keys to follow and set a value deeper down a tree of nested data types.
+        """
         if isinstance(keys,str):
             keys = keys.split('.')
         
@@ -201,7 +262,8 @@ class Data(dict):
         return data
 
     def deep_get(self,keys):
-        
+        """ Use dot notation to specify a path of keys to follow and get a value deeper down a tree of nested data types.
+        """
         if isinstance(keys,str):
             keys = keys.split('.')
         
@@ -389,7 +451,8 @@ class Data(dict):
         return self     
     
     def do_recursive(self,method,other=None,default=None):
-    
+        """ Apply a method recursively down the data structure.
+        """
         # result data structure
         klass = self.__class__
         if isinstance(klass,Data):
@@ -428,6 +491,8 @@ class Data(dict):
         return result
 
 def bunchify(x):
+    """ Recursively converts a dictionary to a Bunch (object version of a dict with attribute-style access).
+    """
     if isinstance(x, dict):
         return Bunch( (k, bunchify(v)) for k,v in iteritems(x) )
     elif isinstance(x, (list, tuple)):
@@ -436,6 +501,8 @@ def bunchify(x):
         return x
 
 def unbunchify(x):
+    """ Recursively converts a Bunch (object version of a dict with attribute-style access) to a dictionary.
+    """
     if isinstance(x, dict):
         return dict( (k, unbunchify(v)) for k,v in iteritems(x) )
     elif isinstance(x, (list, tuple)):

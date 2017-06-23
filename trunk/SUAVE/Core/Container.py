@@ -27,17 +27,25 @@ class Container(Data):
     """
         
     def __defaults__(self):
+        """ No defaults.
+        """
         pass
     
     def __init__(self,*args,**kwarg):
+        """ Initializes with defaults.
+        """
         super(Container,self).__init__(*args,**kwarg)
         self.__defaults__()
     
     def append(self,val):
+        """ Inherits append method from Data, adds data to the dictionary
+        """
         #val = self.check_new_val(val)
         Data.append(self,val)
         
     def extend(self,vals):
+        """ Simply appends vals if it is a list or tuple, recursively updates with vals if it is a dict.
+        """
         if isinstance(vals,(list,tuple)):
             for v in val: self.append(v)
         elif isinstance(vals,dict):

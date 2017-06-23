@@ -20,31 +20,43 @@ from warnings import warn
 class Container(Data):
     """ SUAVE.Core.Container()
         
-        a dict-type container with attribute, item and index style access
-        intended to hold a attribute-accessible list of Data()
-        no defaults are allowed
+        dict-type container with attribute-style access.
     
     """
         
     def __defaults__(self):
-        """ No defaults.
+        """ SUAVE.Core.Container.__defaults__()
+            No defaults.
         """
         pass
     
     def __init__(self,*args,**kwarg):
-        """ Initializes with defaults.
+        """ SUAVE.Core.Container.__init__(*args, **kwargs)
+            Initializes with defaults.
+            
+            Inputs:
+                *args - input data to be appended into data object
+                **kwarg - input data to be appended into data object
         """
         super(Container,self).__init__(*args,**kwarg)
         self.__defaults__()
     
     def append(self,val):
-        """ Inherits append method from Data, adds data to the dictionary
+        """ SUAVE.Core.Container.append(val)
+            Add an entry to the dictionary with tag as key.
+            
+            Inputs:
+                value - value to be added
         """
         #val = self.check_new_val(val)
         Data.append(self,val)
         
     def extend(self,vals):
-        """ Simply appends vals if it is a list or tuple, recursively updates with vals if it is a dict.
+        """ SUAVE.Core.Container.extend(vals)
+            Adds values to container. Appends for list/tuple, updates for dict.
+            
+            Inputs:
+                vals - values to be added to container
         """
         if isinstance(vals,(list,tuple)):
             for v in val: self.append(v)

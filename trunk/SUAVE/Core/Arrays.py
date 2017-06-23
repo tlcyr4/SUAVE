@@ -18,18 +18,40 @@ matrix_type = np.matrixlib.defmatrix.matrix
 
 
 def atleast_2d_col(A):
-    """ Ensures A is an array and at least of rank 2.  If A is a 1d array, its elements will make up a column in the result.
+    """ SUAVE.Core.Arrays.atleast_2d_col(A)
+        Ensures A is an array and at least of rank 2.
+        
+        Inputs:
+            A - array to be resized
+            
+        Outputs:
+            2d version of array (if 1d, elements make up a column)
     """
     return atleast_2d(A,'col')
 
 def atleast_2d_row(A):
-    """ Ensures A is an array and at least of rank 2.  If A is a 1d array, its elements will make up a row in the result.
+    """ SUAVE.Core.Arrays.atleast_2d_row(A)
+        Ensures A is an array and at least of rank 2.
+        
+        Inputs:
+            A - array to be resized
+            
+        Outputs:
+            2d version of array (if 1d, elements make up a column)
     """
     return atleast_2d(A,'row')
 
 def atleast_2d(A,oned_as='row'):
-    ''' ensures A is an array and at least of rank 2
-    '''
+    """ SUAVE.Core.Arrays.atleast_2d(A, oned_as = 'row')
+        Ensures A is an array and at least of rank 2.
+        
+        Inputs:
+            A - array to be resized
+            oned-as - string specifying how to handle 1d arrays
+            
+        Outputs:
+            2d version of array
+    """
     
     # not an array yet
     if not isinstance(A,(array_type,matrix_type)):

@@ -22,18 +22,20 @@ objgetattrib = object.__getattribute__
 # ----------------------------------------------------------------------        
 
 class Data(dict):
-    """     An extension of the dictionary data structure meant to be nested into a tree-like data structure.  Enables attribute style access names ie data.key = data[key] and deep access for attributes further down the tree.  Enables defaults to compound for all extenstions of the Data class and supports packing and unpacking from a 1d or 2d array.
+    """ SUAVE.Core.Data
+        Dictionary-like data structure with attribute style access.
         
     """
     
     def __getattribute__(self, k):
-        """ Data.__getattribute__(key)
-            Allows get-access to items in the dictionary as if they were attributes.
+        """ SUAVE.Core.Data.__getattribute__(k)
+            Allows attribute-style access to values in data object.
+            
             Inputs:
-            key - the attribute name or key of the item
+                k - the attribute name or key of the item
             
             Outputs:
-            corresponding value in the dictionary
+                attribute or corresponding value in dictionary
             
         """
 
@@ -43,13 +45,13 @@ class Data(dict):
             return objgetattrib(self,k)
 
     def __setattr__(self, k, v):
-        """ Data.__setattr__(key, value)
-            Allows set-access to items in the dictionary as if they were attributes.
-            Inputs:
-            key - the attribute name or key of the item
-            value - the new value to be set
-
+        """ SUAVE.Core.Data.__setattr__(k, v)
+            Allows attribute-style access to values in data object.
             
+            Inputs:
+                k - the attribute name or key of the item
+                v - the new value to be set as attribute or value
+                
         """
         try:
             objgetattrib(self, k)
@@ -59,10 +61,11 @@ class Data(dict):
             object.__setattr__(self, k, v) 
             
     def __delattr__(self, k):
-        """ Data.__getattr__(key, value)
-            Allows deletion of items in the dictionary as if they were attributes.
+        """ SUAVE.Core.Data.__delattr__(key, value)
+            Allows attribute-style deletion of values in data object.
+            
             Inputs:
-            key - the attribute name or key of the item
+                k - the attribute name or key of the item
             
         """
         try:
@@ -73,15 +76,24 @@ class Data(dict):
             object.__delattr__(self, k)
     
     def __defaults__(self):
-        """ Data.__defaults__()
+        """ SUAVE.Core.Data.__defaults__()
             Sets no default values.
             
-            """
+        """
         pass      
     
     def __new__(cls,*args,**kwarg):
-        """ Data.__new__(cls,*args,**kwarg)
-            Initializes data with all defaults from trunk to leaf of class heirarchy
+        """ SUAVE.Core.Data.__new__(cls,*args,**kwarg)
+            Initializes data with all defaults from trunk to leaf of class heirarchy.
+            
+            Inputs:
+                cls - class of data object
+                *args - not used
+                **kwarg - not used
+            
+            Outputs:
+                self - new instance of data object
+                
         """
         # initialize data, no inputs
         self = super(Data,cls).__new__(cls)
@@ -97,11 +109,11 @@ class Data(dict):
         return self
     
     def typestring(self):
-        """ Data.typestring()
-            Builds a string indicating the type of the data
+        """ SUAVE.Core.Data.typestring()
+            Builds a string indicating the type of the data object.
             
             Outputs:
-            typestring - a string indicating the type of the data
+                typestring - a string indicating the type of the data
         """
         # build typestring
         typestring = str(type(self)).split("'")[1]
@@ -112,14 +124,25 @@ class Data(dict):
         return typestring    
     
     def dataname(self):
-        """ Generates a name tag describing the data as a data object of its type.
+        """ SUAVE.Core.Data.dataname()
+            Builds a tag describing the data as a data object of its type.
+        
+            Ouptuts:
+                tag describing the data object as a data object of its own type
 
         """
         return "<data object '" + self.typestring() + "'>"     
         
     
     def __str__(self,indent=''):
-        """ Specifies string representation of the data object, composed of the data nametag and a string representation of it as a dictionary.
+        """ SUAVE.Core.Data.__str__(indent = '')
+            String representation of data object composed of the data nametag and contents.
+        
+            Inputs:
+                indent - specifies separation between items
+                
+            Outputs:
+                args - string representation of data object
 
         """
         new_indent = '  '
@@ -137,7 +160,14 @@ class Data(dict):
     
     
     def __str2(self,indent=''):
-        """ String-form of a Dict.
+        """ SUAVE.Core.Data.__str2(indent = '')
+            String-form of a Dict.
+            
+            Inputs:
+                indent - specifies separation between items
+                
+            Outputs:
+                args - string representation of the contents of the data object
         """
         
         new_indent = '  '
@@ -173,7 +203,13 @@ class Data(dict):
         return args        
     
     def __init__(self,*args,**kwarg):
-        """ Initializes the data object and appends any inputs to its dictionary entries.
+        """ SUAVE.Core.Data.__init__()
+            Initializes the data object.
+            
+            Inputs:
+                *args - input data to be appended into data object
+                **kwarg - input data to be appended into data object
+            
         """
 
         # handle input data (ala class factory)
@@ -183,28 +219,49 @@ class Data(dict):
         self.update(input_data)    
 
     def __iter__(self):
-        """ Generates values in dictionary
+        """ SUAVE.Core.Data.__init__()
+            Generates values in dictionary.
+            
+            Outputs:
+                One value at a time from dictionary
         """
         return self.itervalues()
     
     def itervalues(self):
-        """ Generates values in dictionary
+        """ SUAVE.Core.Data.itervalues()
+            Generates values in dictionary
+            
+            Outputs:
+                One value at a time from dictionary
         """
         for k in super(Data,self).__iter__():
             yield self[k]
             
     def values(self):
-        """ Return all values in dictionary
+        """ SUAVE.Core.Data.values()
+            Return all values in dictionary
+            
+            Outputs:
+                list of values in dictionary
         """
         return self.__values()          
             
     def __values(self):
-        """ Return all values in dictionary
+        """ SUAVE.Core.Data.__values()
+            Return all values in dictionary
+            
+            Outputs:
+                list of values in dictionary
         """
         return [self[key] for key in super(Data,self).__iter__()]    
     
     def update(self,other):
-        """ Appends all the data from another data object.  If the other data object has data attributes matching ones in this object, recursively append their attributes.
+        """ SUAVE.Core.Data.update(other)
+            Recursively appends new items from another data object.
+            
+            Inputs:
+                other - another dict-type with items to be appended
+                
         """
         if not isinstance(other,dict):
             raise TypeError , 'input is not a dictionary type'
@@ -220,7 +277,11 @@ class Data(dict):
         return         
     
     def get_bases(self):
-        """ Return a list of the classes in the heirarchy from leaf to trunk.
+        """ SUAVE.Core.Data.get_bases()
+            Finds all classes in heirarchy up to Data.
+            
+            Outputs:
+                List of classes in hierarchy from leaf to trunk
         """
         klass = self.__class__
         klasses = []
@@ -235,7 +296,12 @@ class Data(dict):
         return klasses    
     
     def append(self,value,key=None):
-        """ Add an entry to the dictionary
+        """ SUAVE.Core.Data.append(value, key = None)
+            Add an entry to the dictionary.
+            
+            Inputs:
+                value - value to be added
+                key - key/attribute name for value, uses tag if none given
         """
         if key is None: key = value.tag
         key_in = key
@@ -246,7 +312,12 @@ class Data(dict):
         self[key] = value        
     
     def deep_set(self,keys,val):
-        """ Use dot notation to specify a path of keys to follow and set a value deeper down a tree of nested data types.
+        """ SUAVE.Core.Data.deep_set(keys, val)
+            Attribute-style access to items down tree of nested data objects.
+            
+            Inputs:
+                keys - attribute names down to value, separated by dots
+                val - value to be set
         """
         if isinstance(keys,str):
             keys = keys.split('.')
@@ -262,7 +333,12 @@ class Data(dict):
         return data
 
     def deep_get(self,keys):
-        """ Use dot notation to specify a path of keys to follow and get a value deeper down a tree of nested data types.
+        """ SUAVE.Core.Data.deep_set(keys, val)
+            Attribute-style access to items down tree of nested data objects.
+            
+            Inputs:
+                keys - attribute names down to value, separated by dots
+                val - value to be retrieved
         """
         if isinstance(keys,str):
             keys = keys.split('.')
@@ -451,7 +527,17 @@ class Data(dict):
         return self     
     
     def do_recursive(self,method,other=None,default=None):
-        """ Apply a method recursively down the data structure.
+        """ SUAVE.Core.Data.do_recursive(method, other = None, default = None)
+            Apply a method recursively down the data structure.
+            
+            Inputs:
+                method - function to apply to data
+                other - second parameter to function (value or data object)
+                default - does not appear to be used
+                
+            Outputs:
+                result - data object with method applied to all items
+            
         """
         # result data structure
         klass = self.__class__
@@ -491,7 +577,14 @@ class Data(dict):
         return result
 
 def bunchify(x):
-    """ Recursively converts a dictionary to a Bunch (object version of a dict with attribute-style access).
+    """ SUAVE.Core.Data.bunchify(x)
+        Converts a dictionary to a Bunch.
+        
+        Inputs:
+            x - dictionary
+            
+        Outputs:
+            x - Bunch version of dictionary (is now an object)
     """
     if isinstance(x, dict):
         return Bunch( (k, bunchify(v)) for k,v in iteritems(x) )
@@ -501,7 +594,14 @@ def bunchify(x):
         return x
 
 def unbunchify(x):
-    """ Recursively converts a Bunch (object version of a dict with attribute-style access) to a dictionary.
+    """ SUAVE.Core.Data.unbunchify(x)
+        Converts a Bunch to a dictionary
+        
+        Inputs:
+            x - Bunch
+            
+        Outputs:
+            x - dictionary version of Bunch
     """
     if isinstance(x, dict):
         return dict( (k, unbunchify(v)) for k,v in iteritems(x) )

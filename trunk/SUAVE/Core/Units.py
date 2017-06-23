@@ -24,7 +24,11 @@ Units = UnitRegistry()
  
 
 def __rmul__(self,other):
-    """ multiplication covnverts in to base unit
+    """ SUAVE.Core.Units.__rmul__(other)
+        multiplication covnverts in to base unit
+        
+        Inputs:
+            other - quantity to be converted to base unit
     """
     if isinstance(other,_Quantity):
         return _Quantity.__rmul__(self,other)
@@ -35,7 +39,11 @@ def __rmul__(self,other):
 
 
 def __rdiv__(self,other):
-    """ division converts out of base unit
+    """ SUAVE.Core.Units.__rdiv__(other)
+        division converts out of base unit
+        
+        Inputs:
+            other - quantity to be converted out of base unit
     """
     if isinstance(other,_Quantity):
         return _Quantity.__truediv__(self,other)

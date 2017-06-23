@@ -26,16 +26,47 @@ import numpy as np
 class Property(object):
     
     def __init__(self,key=None):
+        """ SUAVE.Core.DataOrdered.Property.__init__(key = None)
+            Initializes with a key.
+            
+            Inputs:
+                key - key to be associated with object
+            
+        """
         self._key = key
         
     def __get__(self,obj,kls=None):
+        """ SUAVE.Core.DataOrdered.Property.__init__(obj, kls = none)
+            Finds value for property's key in obj.
+            
+            Inputs:
+                obj - dict with key matching property's key
+                
+            Outputs:
+                this property object or value corresponding to key
+        """
         if obj is None: return self
         else          : return dict.__getitem__(obj,self._key)
         
     def __set__(self,obj,val):
+        """ SUAVE.Core.DataOrdered.Property.__init__(obj, kls = none)
+            Sets value for property's key in obj.
+            
+            Inputs:
+                obj - dict with key matching property's key
+                val - value to be set
+                
+        """
         dict.__setitem__(obj,self._key,val)
         
     def __delete__(self,obj):
+        """ SUAVE.Core.DataOrdered.Property.__init__(obj, kls = none)
+            Deletes value for property's key from obj.
+            
+            Inputs:
+                obj - dict with key matching property's key
+
+        """
         dict.__delitem__(obj,self._key)
 
     
@@ -44,15 +75,20 @@ class Property(object):
 # ----------------------------------------------------------------------        
 
 class DataOrdered(OrderedDict):
-    """     An extension of the ordered dictionary data structure meant to be nested into a tree-like data structure.  Enables attribute style access names ie data.key = data[key] and deep access for attributes further down the tree.
-        
+    """     SUAVE.Core.DataOrdered
+            Ordered-dictionary-like data structure with attribute style access.
     """
     
     _root = Property('_root')
     _map  = Property('_map')    
     
     def append(self,value,key=None):
-        """ Adds value to dictionary, using value's tag as its key if none is provided.
+        """ SUAVE.Core.DataOrdered.append(value, key = None)
+            Add an entry to the dictionary.
+            
+            Inputs:
+                value - value to be added
+                key - key/attribute name for value, uses tag if none given
         """
         if key is None: key = value.tag
         key_in = key
@@ -63,12 +99,21 @@ class DataOrdered(OrderedDict):
         self[key] = value    
 
     def __defaults__(self):
-        """ No defaults to add.
+        """ SUAVE.Core.DataOrdered.__defaults__()
+            No defaults to add.
         """
         pass
     
     def __getitem__(self,k):
-        """ Provides dict/array style access to attributes
+        """ SUAVE.Core.DataOrdered.__getattribute__(k)
+            Allows dict-style access to values in data object.
+            
+            Inputs:
+                k - the attribute name or key of the item
+            
+            Outputs:
+                attribute or corresponding value in dictionary
+            
         """
         if not isinstance(k,int):
             return super(DataOrdered,self).__getattribute__(k)
@@ -76,7 +121,17 @@ class DataOrdered(OrderedDict):
             return super(DataOrdered,self).__getattribute__(self.keys()[k])
     
     def __new__(cls,*args,**kwarg):
-        """ Initializes with defaults from trunk to leaf.
+        """ SUAVE.Core.DataOrdered.__new__(cls,*args,**kwarg)
+            Initializes data with all defaults from trunk to leaf of class heirarchy.
+            
+            Inputs:
+                cls - class of data object
+                *args - not used
+                **kwarg - not used
+            
+            Outputs:
+                self - new instance of data object
+                
         """
         # Make the new:
         self = OrderedDict.__new__(cls)
@@ -102,7 +157,13 @@ class DataOrdered(OrderedDict):
         return self
     
     def __init__(self,*args,**kwarg):
-        """ Initializes with any arguments passed in immediately added to the data structure
+        """ SUAVE.Core.DataOrdered.__init__()
+            Initializes the data object.
+            
+            Inputs:
+                *args - input data to be appended into data object
+                **kwarg - input data to be appended into data object
+            
         """
 
         # handle input data (ala class factory)
@@ -113,7 +174,13 @@ class DataOrdered(OrderedDict):
         
         
     def __init2(self, items=None, **kwds):
-        """ Initializes with given inputs immediately added to the dictionary.
+        """ SUAVE.Core.DataOrdered.__init__()
+            Initializes the data object.
+            
+            Inputs:
+                items - input data to be appended into data object
+                **kwds - input data to be appended into data object
+            
         """
         def append_value(key,value):               
             self[key] = value            
@@ -138,12 +205,24 @@ class DataOrdered(OrderedDict):
 
 
     def __iter__(self):
-        """ iterate on values, not keys
+        """ SUAVE.Core.DataOrdered.__init__()
+            Generates values from dictionary.
+            
+            Outputs:
+                One value at a time from dictionary
         """
         return self.itervalues()
             
     def __str__(self,indent=''):
-        """ Returns string representation as dataname and string representation as dictionary
+        """ SUAVE.Core.DataOrdered.__str__(indent = '')
+            String representation of data object composed of the data nametag and contents.
+        
+            Inputs:
+                indent - specifies separation between items
+                
+            Outputs:
+                args - string representation of data object
+
         """
         new_indent = '  '
         args = ''
@@ -159,12 +238,20 @@ class DataOrdered(OrderedDict):
         return args
         
     def __repr__(self):
-        """ Returns data name
+        """ SUAVE.Core.DataOrdered.__repr__()
+            Representation of data object
+            
+            Outputs:
+                data nametag
         """
         return self.dataname()
     
     def get_bases(self):
-        """ Returns all classes in heirarchy from leaf to trunk
+        """ SUAVE.Core.DataOrdered.get_bases()
+            Finds all classes in heirarchy up to Data.
+            
+            Outputs:
+                List of classes in hierarchy from leaf to trunk
         """
         klass = self.__class__
         klasses = []
@@ -179,7 +266,11 @@ class DataOrdered(OrderedDict):
         return klasses
     
     def typestring(self):
-        """ Returns a string indicating the type of the data object
+        """ SUAVE.Core.DataOrdered.typestring()
+            Builds a string indicating the type of the data object.
+            
+            Outputs:
+                typestring - a string indicating the type of the data
         """
         typestring = str(type(self)).split("'")[1]
         typestring = typestring.split('.')
@@ -189,12 +280,22 @@ class DataOrdered(OrderedDict):
         return typestring
     
     def dataname(self):
-        """ Returns a string indicating that the object is a data object and its type.
+        """ SUAVE.Core.DataOrdered.dataname()
+            Builds a tag describing the data as a data object of its type.
+        
+            Ouptuts:
+                tag describing the data object as a data object of its own type
+
         """
         return "<data object '" + self.typestring() + "'>"
 
     def deep_set(self,keys,val):
-        """ Use dot notation to specify a path of keys to follow and set a value deeper down a tree of nested data types.
+        """ SUAVE.Core.DataOrdered.deep_set(keys, val)
+            Attribute-style access to items down tree of nested data objects.
+            
+            Inputs:
+                keys - attribute names down to value, separated by dots
+                val - value to be set
         """
         if isinstance(keys,str):
             keys = keys.split('.')
@@ -210,7 +311,12 @@ class DataOrdered(OrderedDict):
         return data
 
     def deep_get(self,keys):
-        """ Use dot notation to specify a path of keys to follow and get a value deeper down a tree of nested data types.
+        """ SUAVE.Core.DataOrdered.deep_set(keys, val)
+            Attribute-style access to items down tree of nested data objects.
+            
+            Inputs:
+                keys - attribute names down to value, separated by dots
+                val - value to be retrieved
         """
         if isinstance(keys,str):
             keys = keys.split('.')
@@ -226,7 +332,12 @@ class DataOrdered(OrderedDict):
         return value   
     
     def update(self,other):
-        """ Appends all the data from another data object.  If the other data object has data attributes matching ones in this object, recursively append their attributes.
+        """ SUAVE.Core.Data.update(other)
+            Recursively appends new items from another data object.
+            
+            Inputs:
+                other - another dict-type with items to be appended
+                
         """
         if not isinstance(other,dict):
             raise TypeError , 'input is not a dictionary type'
@@ -242,7 +353,12 @@ class DataOrdered(OrderedDict):
         return 
 
     def __delattr__(self, key):
-        """ Deleting an existing item uses self._map to find the link which is then removed by updating the links in the predecessor and successor nodes.
+        """ SUAVE.Core.DataOrdered.__delattr__(key, value)
+            Allows attribute-style deletion of values in data object.
+            
+            Inputs:
+                k - the attribute name or key of the item
+            
         """
         OrderedDict.__delattr__(self,key)
         link_prev, link_next, key = self._map.pop(key)
@@ -250,14 +366,25 @@ class DataOrdered(OrderedDict):
         link_next[0] = link_prev
         
     def __eq__(self, other):
-        """ Determines equality based on equality of antries and order (if both are ordered)
+        """ SUAVE.Core.DataOrdered.__eq__(other)
+            Equality based on equality of antries and order (if both are ordered)
+            
+            Inputs:
+                other - object to be compared to self
+                
+            Outputs:
+                boolean value of whether or not objects are equal
         """
         if isinstance(other, (DataOrdered,OrderedDict)):
             return len(self)==len(other) and np.all(self.items() == other.items())
         return dict.__eq__(self, other)
         
     def __len__(self):
-        """ Returns number of key value pairs
+        """ SUAVE.Core.DataOrdered.__len__()
+            Determines length of data object.
+            
+            Outputs:
+                the number of key-balue pairs in dict
         """
         return self.__dict__.__len__()   
 
@@ -277,7 +404,13 @@ class DataOrdered(OrderedDict):
         return (_reconstructor, (self.__class__,items,), inst_dict)
     
     def __setattr__(self, key, value):
-        """Setting a new item creates a new link which goes at the end of the linked list, and the inherited dictionary is updated with the new key/value pair.
+        """ SUAVE.Core.DataOrdered.__setattr__(k, v)
+            Allows attribute-style access to values in data object.
+            
+            Inputs:
+                key - the attribute name or key of the item
+                value - the new value to be set as attribute or value
+                
         """
         if not hasattr(self,key) and not hasattr(self.__class__,key):
         #if not self.has_key(key) and not hasattr(self.__class__,key):
@@ -288,12 +421,25 @@ class DataOrdered(OrderedDict):
         OrderedDict.__setattr__(self,key, value)
 
     def __setitem__(self,k,v):
-        """ Sets as an attribute
+        """ SUAVE.Core.DataOrdered.__setattr__(k, v)
+            Allows dict-style access to values in data object.
+            
+            Inputs:
+                k - the attribute name or key of the item
+                v - the new value to be set as attribute or value
+                
         """
         self.__setattr__(k,v)
         
     def __str2(self,indent=''):
-        """ Recursively generates string representation of all data in structure
+        """ SUAVE.Core.DataOrdered.__str2(indent = '')
+            Recursively generates string representation of all data in structure
+            
+            Inputs:
+                indent - specified separation between items
+                
+            Outputs:
+                args - string representation of all data
         """
         new_indent = '  '
         args = ''
@@ -328,7 +474,8 @@ class DataOrdered(OrderedDict):
         return args     
 
     def clear(self):
-        """ Clear the dictionary
+        """ SUAVE.Core.DataOrdered.clear()
+            Clear the dictionary.
         """
         try:
             for node in self._map.itervalues():
@@ -341,12 +488,24 @@ class DataOrdered(OrderedDict):
         self.__dict__.clear()
         
     def get(self,k,d=None):
-        """ Return the value for a given key
+        """ SUAVE.Core.DataOrdered.get(k, d = None)
+            Return the value for a given key.
+            
+            Inputs:
+                k - key associated with desired value
+                d - default to be returned if key is not in dict
         """
         return self.__dict__.get(k,d)
         
     def has_key(self,k):
-        """ Check to see if the key appears in the dictionary.
+        """ SUAVE.Core.DataOrdered.has_key()
+            Check to see if the key appears in the dictionary.
+            
+            Inputs:
+                k - key to be checked
+                
+            Outputs:
+                boolean value for whether or not key is in dict
         """
         return self.__dict__.has_key(k)
 
@@ -355,33 +514,57 @@ class DataOrdered(OrderedDict):
     __getitem2 = OrderedDict.__getattribute__ 
 
     def keys(self):
-        """ Return a list of the keys in the dictionary
+        """ SUAVE.Core.DataOrdered.keys()
+            Return a list of keys in the dictionary
+            
+            Outputs:
+                list of keys in the dictionary
         """
         return list(self.__iter())
     
     def values(self):
-        """ Return a list of the values in the dictionary
+        """ SUAVE.Core.DataOrdered.keys()
+            Return a list of values in the dictionary
+            
+            Outputs:
+                list of keys in the dictionary
         """
         return [self[key] for key in self.__iter()]
     
     def items(self):
-        """ Return a list of the keys and values in the dictionary
+        """ SUAVE.Core.DataOrdered.keys()
+            Return a list of tuples of keys and values in the dictionary
+            
+            Outputs:
+                list of keys in the dictionary
         """
         return [(key, self[key]) for key in self.__iter()]
     
     def iterkeys(self):
-        """ Generate keys in the dictionary
+        """ SUAVE.Core.DataOrdered.iterkeys()
+            Generate keys in the dictionary
+            
+            Outputs:
+                One key at a time
         """
         return self.__iter()
     
     def itervalues(self):
-        """ Generate items rather than keys
+        """ SUAVE.Core.DataOrdered.iterkeys()
+            Generate values in the dictionary
+            
+            Outputs:
+                One value at a time
         """
         for k in self.__iter():
             yield self[k]
     
     def iteritems(self):
-        """ Generate keys and items
+        """ SUAVE.Core.DataOrdered.iterkeys()
+            Generate tuples of keys and values in the dictionary
+            
+            Outputs:
+                One tuple of key-value pair at a time
         """
         for k in self.__iter():
             yield (k, self[k])   
@@ -389,6 +572,15 @@ class DataOrdered(OrderedDict):
 
 # for rebuilding dictionaries with attributes
 def _reconstructor(klass,items):
+    """ SUAVE.Core.DataOrdered._reconstructor(klass, items)
+        Rebuilds a dictionary with attributes.
+        
+        Inputs:
+            klass - desired class for data
+            
+        Outputs:
+            self - instance of DataOrdered
+    """
     self = DataOrdered.__new__(klass)
     DataOrdered.__init__(self,items)
     return self

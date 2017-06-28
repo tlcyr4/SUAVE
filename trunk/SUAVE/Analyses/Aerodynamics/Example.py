@@ -14,7 +14,7 @@ import SUAVE.Analyses.Aerodynamics.Results as Results
 #   Example
 # ----------------------------------------------------------------------   \
 class Example(Aerodynamics):
-    """ SUAVE.Analyses.Aerodynamics.Tigar()
+    """ SUAVE.Analyses.Aerodynamics.Example()
         Simple and inaccurate aerodynamic model grossly approximated from a NACA 0012's lift and drag curves.
     """
     def evaluate(self, state):

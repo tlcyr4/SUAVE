@@ -1,4 +1,4 @@
-# Tigar.py
+# Structured_Example.py
 #
 # Created:  Jun 2017, Tigar Cyr
 # Modified: 
@@ -13,10 +13,10 @@ import SUAVE.Methods.Aerodynamics.Example as Methods
 
 
 # ----------------------------------------------------------------------
-#   Tigar
+#   Structured_Example
 # ----------------------------------------------------------------------   \
 class Structured_Example(Aerodynamics):
-    """ SUAVE.Analyses.Aerodynamics.Tigar()
+    """ SUAVE.Analyses.Aerodynamics.Structured_Example()
         Simple and inaccurate aerodynamic model grossly approximated from a NACA 0012's lift and drag curves.
     """
     def evaluate(self, state):

@@ -44,6 +44,16 @@ class Transonic(Aerodynamics):
         beta = state.conditions.aerodynamics.side_slip_angle
         phi = [180] + state.conditions.aerodynamics.roll_angle
         
+        if mach[0,0] < .75:
+            model = Fidelity_Zero.Fidelity_Zero()
+            #model.settings = self.settings
+            model.geometry = self.geometry
+            
+            model.process.compute.lift.inviscid_wings.geometry = self.geometry
+            model.process.compute.lift.inviscid_wings.initialize()
+            
+            return model(state)
+        
         # prepare vector
         predictors = np.copy(mach)
         predictors = np.append(predictors, alpha, 1)
@@ -101,5 +111,16 @@ transonic = Transonic()
 result = transonic.evaluate(state)
 print result.drag.total
 print result.lift.total"""
+"""trans = Transonic()
+
+model = Fidelity_Zero.Fidelity_Zero()
+model.settings = trans.settings
+model.geometry = trans.geometry
+
+model.process.compute.lift.inviscid_wings.geometry = trans.geometry
+model.process.compute.lift.inviscid_wings.initialize()
+
+print model.process.compute.lift.inviscid_wings"""
+
 
 

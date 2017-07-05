@@ -31,6 +31,7 @@ class Transonic(Aerodynamics):
         # b = [8.57222709094397 -0.897800934092333 0.626871359450883 1.78975587167322e-05 0.00131719217498857 -7.33801361840798 119.803398627759 0.144319023849905 -0.00105278583037119]
         # R^2 = .947
         
+        print 'yay'
         
         
         # Initialize results object
@@ -44,7 +45,7 @@ class Transonic(Aerodynamics):
         beta = state.conditions.aerodynamics.side_slip_angle
         phi = [180] + state.conditions.aerodynamics.roll_angle
         
-        if mach[0,0] < .75:
+        if mach[0,0] < .8:
             model = Fidelity_Zero.Fidelity_Zero()
             #model.settings = self.settings
             model.geometry = self.geometry
@@ -52,7 +53,9 @@ class Transonic(Aerodynamics):
             model.process.compute.lift.inviscid_wings.geometry = self.geometry
             model.process.compute.lift.inviscid_wings.initialize()
             
-            return model(state)
+            results = model(state)
+            
+            return results
         
         # prepare vector
         predictors = np.copy(mach)
@@ -60,17 +63,11 @@ class Transonic(Aerodynamics):
         predictors = np.append(predictors, beta, 1)
         predictors = np.append(predictors, phi, 1)
         
+        
         predictors = np.transpose(predictors)
         
+        cl, cd = quadratic_single(predictors[1])
         
-        
-        # model coefficients
-        bl = np.array([[-435.789730005553], [0.742983792057789], [-0.421988197961623], [0.129666568157724], [-0.00512396188693175], [8.11823341193399], [-68.8488118397378], [1.96751918027884], [0.00250750492442697]])
-        bd = np.array([[8.57222709094397], [-0.897800934092333], [0.626871359450883], [1.78975587167322e-05], [0.00131719217498857], [-7.33801361840798], [119.803398627759], [0.144319023849905], [-0.00105278583037119]])
-        
-        # calculate
-        cl = bl[0] + np.dot(np.transpose(bl[1::2]), predictors) + np.dot(np.transpose(bl[2::2]), np.square(predictors))
-        cd = bd[0] + np.dot(np.transpose(bd[1::2]), predictors) + np.dot(np.transpose(bd[2::2]), np.square(predictors))
         
         def printall(i):
             print 'predictors'
@@ -93,6 +90,29 @@ class Transonic(Aerodynamics):
         
         
         return results
+    
+def quadratic_multi(predictors):
+    
+    # model coefficients
+    bl = np.array([[-435.789730005553], [0.742983792057789], [-0.421988197961623], [0.129666568157724], [-0.00512396188693175], [8.11823341193399], [-68.8488118397378], [1.96751918027884], [0.00250750492442697]])
+    bd = np.array([[8.57222709094397], [-0.897800934092333], [0.626871359450883], [1.78975587167322e-05], [0.00131719217498857], [-7.33801361840798], [119.803398627759], [0.144319023849905], [-0.00105278583037119]])
+    
+    # calculate
+    cl = bl[0] + np.dot(np.transpose(bl[1::2]), predictors) + np.dot(np.transpose(bl[2::2]), np.square(predictors))
+    cd = bd[0] + np.dot(np.transpose(bd[1::2]), predictors) + np.dot(np.transpose(bd[2::2]), np.square(predictors))
+    
+    return cl, cd
+        
+def quadratic_single(aoa):
+    
+    # model coefficients
+    bl = np.array([[-0.00717433179381432],	[0.144047701950893],	[0.126479444126983]])
+    bd = np.array([[0.00162236444781382],	[0.000443156656073951],	[0.0141465405789619]])
+    
+    cl = bl[2] + np.dot(np.transpose(bl[1]), aoa) + np.dot(np.transpose(bl[0]), np.square(aoa))
+    cd = bd[2] + np.dot(np.transpose(bd[1]), aoa) + np.dot(np.transpose(bd[0]), np.square(aoa))
+    
+    return cl, cd
 # ----------------------------------------------------------------------
 #   Module Testing
 # ----------------------------------------------------------------------   

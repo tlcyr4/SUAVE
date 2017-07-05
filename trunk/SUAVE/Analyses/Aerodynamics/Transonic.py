@@ -25,6 +25,7 @@ class Transonic(Aerodynamics):
     
     
     def evaluate(self, state):
+        print state.conditions.frames.body.thrust_force_vector[:,0]
         # lift model
         # y ~ b1 + b2*x1 + b3*x1^2 + b4*x2 + b5*x2^2 + b6*x3 + b7*x3^2 + b8*x4 + b9*x4^2
         # b = [-435.789730005553 0.742983792057789 -0.421988197961623 0.129666568157724 -0.00512396188693175 8.11823341193399 -68.8488118397378 1.96751918027884 0.00250750492442697]
@@ -34,8 +35,6 @@ class Transonic(Aerodynamics):
         # y ~ b1 + b2*x1 + b3*x1^2 + b4*x2 + b5*x2^2 + b6*x3 + b7*x3^2 + b8*x4 + b9*x4^2
         # b = [8.57222709094397 -0.897800934092333 0.626871359450883 1.78975587167322e-05 0.00131719217498857 -7.33801361840798 119.803398627759 0.144319023849905 -0.00105278583037119]
         # R^2 = .947
-        
-        print 'yay'
         
         
         # Initialize results object
@@ -67,13 +66,13 @@ class Transonic(Aerodynamics):
         predictors = np.append(predictors, beta, 1)
         predictors = np.append(predictors, phi, 1)
         
+        cl, cd = quadratic_single(alpha)
         
-        predictors = np.transpose(predictors)
+        results.lift.total = cl
+        results.drag.total = cd
         
-        cl, cd = quadratic_single(predictors[1])
-        
-        results.total.lift = cl
-        results.total.drag = cd
+        state.conditions.aerodynamics.lift_coefficient = cl
+        state.conditions.aerodynamics.drag_coefficient = cd
         
         return results
     
@@ -90,14 +89,14 @@ def quadratic_multi(predictors):
     return cl, cd
         
 def quadratic_single(aoa):
-    
     # model coefficients
     bl = np.array([[-0.00717433179381432],	[0.144047701950893],	[0.126479444126983]])
     bd = np.array([[0.00162236444781382],	[0.000443156656073951],	[0.0141465405789619]])
+    cl = bl[2] + bl[1] * aoa + bl[0] * np.square(aoa)
+    cd = bd[2] + bd[1] * aoa + bd[0] * np.square(aoa)
     
-    cl = bl[2] + np.dot(np.transpose(bl[1]), aoa) + np.dot(np.transpose(bl[0]), np.square(aoa))
-    cd = bd[2] + np.dot(np.transpose(bd[1]), aoa) + np.dot(np.transpose(bd[0]), np.square(aoa))
     
+
     return cl, cd
 def quartic_aoa(aoa):
     bd = [[.0016], [.00044316],[.0141]]
@@ -117,31 +116,32 @@ def printall(predictors,cl, cd, i):
 # ----------------------------------------------------------------------
 #   Module Testing
 # ----------------------------------------------------------------------   
-"""import SUAVE.Analyses.Mission.Segments.Conditions.State as State
-import SUAVE.Analyses.Mission.Segments.Conditions.Aerodynamics as Aerodynamics
+def main():
+    import SUAVE.Analyses.Mission.Segments.Conditions.State as State
+    import SUAVE.Analyses.Mission.Segments.Conditions.Aerodynamics as Aerodynamics
 
-state = State()
-state.conditions.update(Aerodynamics())
+    state = State()
+    state.conditions.update(Aerodynamics())
 
-state.conditions.freestream.mach_number = np.array([[.8503]])
-state.conditions.aerodynamics.angle_of_attack = np.array([[-0.7350]])
-state.conditions.aerodynamics.side_slip_angle = np.array([[0.0353]])
-state.conditions.aerodynamics.roll_angle = np.array([[180.0]])
+    state.conditions.freestream.mach_number = np.array([[.8503]])
+    state.conditions.aerodynamics.angle_of_attack = np.array([[4]])
+    state.conditions.aerodynamics.side_slip_angle = np.array([[0.0353]])
+    state.conditions.aerodynamics.roll_angle = np.array([[180.0]])
+    
+    transonic = Transonic()
+    result = transonic.evaluate(state)
+    #print result.drag.total
+    #print result.lift.total
+    print transonic.settings.maximum_lift_coefficient
+    
+#    model = Fidelity_Zero.Fidelity_Zero()
+#    model.settings = trans.settings
+#    model.geometry = trans.geometry
+#    
+#    model.process.compute.lift.inviscid_wings.geometry = trans.geometry
+#    model.process.compute.lift.inviscid_wings.initialize()
+#    
+#    print model.process.compute.lift.inviscid_wings
 
-transonic = Transonic()
-result = transonic.evaluate(state)
-print result.drag.total
-print result.lift.total"""
-"""trans = Transonic()
-
-model = Fidelity_Zero.Fidelity_Zero()
-model.settings = trans.settings
-model.geometry = trans.geometry
-
-model.process.compute.lift.inviscid_wings.geometry = trans.geometry
-model.process.compute.lift.inviscid_wings.initialize()
-
-print model.process.compute.lift.inviscid_wings"""
-
-
+main()
 

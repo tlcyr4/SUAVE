@@ -19,6 +19,10 @@ class Transonic(Aerodynamics):
         Model based on NASA CRM Transonic Experimental Data
     """
     
+    def __defaults__(self):
+        self.fzero = Fidelity_Zero.Fidelity_Zero()
+        
+    
     
     def evaluate(self, state):
         # lift model
@@ -68,26 +72,8 @@ class Transonic(Aerodynamics):
         
         cl, cd = quadratic_single(predictors[1])
         
-        
-        def printall(i):
-            print 'predictors'
-            print predictors[:,i]
-            print 'cl'
-            print cl[0,i]
-            print 'cd'
-            print cd[0,i]
-        
-        """for i in range(len(cl[0])):
-            if cl[0,i] < 0 or cd[0,i] < 0:
-                printall(i)
-            if predictors[1,i] > 10:
-                printall(i)
-             """   
-        
-        # Pack up results
-        results.drag.total = np.transpose(cd)
-        results.lift.total = np.transpose(cl)
-        
+        results.total.lift = cl
+        results.total.drag = cd
         
         return results
     
@@ -113,6 +99,21 @@ def quadratic_single(aoa):
     cd = bd[2] + np.dot(np.transpose(bd[1]), aoa) + np.dot(np.transpose(bd[0]), np.square(aoa))
     
     return cl, cd
+def quartic_aoa(aoa):
+    bd = [[.0016], [.00044316],[.0141]]
+    bl = [[.000058828], [-.0015], [.00027147], [.1452], [.0980]]
+    cd = bd[2] + bd[1] * aoa + bd[0] * np.power(aoa,2)
+    if aoa[0,3] > 10:
+        print cd[0,3]
+    cl = bl[4] + bl[3] * aoa + bl[2] * np.power(aoa,2) + bl[1] * np.power(aoa,3) + bl[0] * np.power(aoa,4)
+    return cl, cd
+def printall(predictors,cl, cd, i):
+    print 'predictors'
+    print predictors[:,i]
+    print 'cl'
+    print cl[0,i]
+    print 'cd'
+    print cd[0,i]
 # ----------------------------------------------------------------------
 #   Module Testing
 # ----------------------------------------------------------------------   

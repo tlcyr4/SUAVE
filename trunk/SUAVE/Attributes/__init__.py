@@ -1,11 +1,11 @@
 
 # classes
-from Analysis import Analysis
+from .Analysis import Analysis
 
 # packages
-import Constants
-import Gases
-import Planets
-import Atmospheres
-import Propellants
-import Airports
+from . import Constants
+from . import Gases
+from . import Planets
+from . import Atmospheres
+from . import Propellants
+from . import Airports

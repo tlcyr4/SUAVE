@@ -11,7 +11,7 @@
     :copyright: (c) 2012 by Hernan E. Grecco.
     :license: BSD, see LICENSE for more details.
 """
-from __future__ import with_statement
+
 import os
 import subprocess
 import pkg_resources

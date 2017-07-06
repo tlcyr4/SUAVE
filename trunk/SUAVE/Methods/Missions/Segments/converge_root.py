@@ -32,8 +32,8 @@ def converge_root(segment,state):
                                          full_output=1)
 
     if ier!=1:
-        print "Segment did not converge. Segment Tag: " + segment.tag
-        print "Error Message:\n" + msg
+        print("Segment did not converge. Segment Tag: " + segment.tag)
+        print("Error Message:\n" + msg)
         segment.state.numerics.converged = False
     else:
         segment.state.numerics.converged = True
@@ -45,8 +45,9 @@ def converge_root(segment,state):
 #  Helper Functions
 # ----------------------------------------------------------------------
     
-def iterate(unknowns,(segment,state)):
+def iterate(unknowns, xxx_todo_changeme):
 
+    (segment,state) = xxx_todo_changeme
     if isinstance(unknowns,array_type):
         state.unknowns.unpack_array(unknowns)
     else:

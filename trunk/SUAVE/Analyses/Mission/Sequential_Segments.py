@@ -12,7 +12,7 @@ from SUAVE.Core import ContainerOrdered as ContainerBase
 
 from SUAVE.Methods import Missions as Methods
 
-from Mission import Mission
+from .Mission import Mission
 """ Mission.py: Top-level mission class """
 # ----------------------------------------------------------------------
 #   Class
@@ -64,7 +64,7 @@ class Container(ContainerBase):
     def evaluate(self,state=None):
         results = SUAVE.Analyses.Results()
         
-        for key,mission in self.items():
+        for key,mission in list(self.items()):
             result = mission.evaluate(state)
             results[key] = result
             

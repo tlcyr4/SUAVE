@@ -12,11 +12,11 @@
 
 import SUAVE
 from SUAVE.Core import Data
-from Markup import Markup
+from .Markup import Markup
 from SUAVE.Analyses import Process
 
-from Vortex_Lattice import Vortex_Lattice
-from Process_Geometry import Process_Geometry
+from .Vortex_Lattice import Vortex_Lattice
+from .Process_Geometry import Process_Geometry
 from SUAVE.Methods.Aerodynamics import Supersonic_Zero as Methods
 
 import numpy as np

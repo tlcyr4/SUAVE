@@ -8,7 +8,7 @@
 # ---------------------------------------------------------------------- 
 import numpy as np
 
-from noise_clean_wing import noise_clean_wing
+from .noise_clean_wing import noise_clean_wing
 
 # ----------------------------------------------------------------------
 # Compute the slat leading edge noise

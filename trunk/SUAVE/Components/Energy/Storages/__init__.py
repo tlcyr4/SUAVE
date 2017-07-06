@@ -3,6 +3,6 @@
 # Created:  
 # Modified: Feb 2016, T. MacDonald
 
-import Batteries
+from . import Batteries
 
 

@@ -15,8 +15,8 @@ import sklearn.ensemble as ensemble
 import sklearn.gaussian_process as gaussian_process
 import sklearn.linear_model as linear_model
 import sklearn.neighbors as neighbors
-from write_sizing_outputs import write_sizing_outputs
-from read_sizing_inputs import read_sizing_inputs
+from .write_sizing_outputs import write_sizing_outputs
+from .read_sizing_inputs import read_sizing_inputs
 import numpy as np
 import scipy as sp
 import time
@@ -101,15 +101,15 @@ class Sizing_Loop(Data):
 
                 if min_norm<iteration_options.max_initial_step: #make sure data is close to current guess
                     if self.initial_step == 'Table' or min_norm<iteration_options.min_surrogate_step or len(data_outputs[:,0])< iteration_options.min_surrogate_length:
-                        print 'running table'
+                        print('running table')
                         interp = interpolate.griddata(data_inputs, data_outputs, scaled_inputs, method = 'nearest') 
                         y      = interp[0]  #different data type here
                 
                     else:
-                        print 'running surrogate method'
+                        print('running surrogate method')
                         if self.initial_step == 'SVR':
                             #for SVR, can optimize parameters C and eps for closest point
-                            print 'optimizing svr parameters'
+                            print('optimizing svr parameters')
                             x = [2.,-1.] #initial guess for 10**C, 10**eps
                         
                             t1=time.time()
@@ -225,18 +225,18 @@ class Sizing_Loop(Data):
             dy2 = y-y_save2
             norm_dy  = np.linalg.norm(dy)
             norm_dy2 = np.linalg.norm(dy2)
-            print 'norm(dy) = ', norm_dy
-            print 'norm(dy2) = ', norm_dy2
+            print('norm(dy) = ', norm_dy)
+            print('norm(dy2) = ', norm_dy2)
     
         
             
             #keep track of previous iterations, as they're used to transition between methods + for saving results
             y_save2 = 1.*y_save
             y_save = 1. *y  
-            print 'y_save2 = ', y_save2
-            print 'y_save = ', y_save
+            print('y_save2 = ', y_save2)
+            print('y_save = ', y_save)
             
-            print 'err = ', err
+            print('err = ', err)
             '''
             #uncomment this when you want to write error at each iteration
             file=open('y_err_values.txt', 'ab')
@@ -250,7 +250,7 @@ class Sizing_Loop(Data):
             
             if i>max_iter: #
                 err=float('nan')*np.ones(np.size(err))
-                print "###########sizing loop did not converge##########"
+                print("###########sizing loop did not converge##########")
                 break
     
         if i<max_iter and not np.isnan(err).any() and opt_flag == 1:  #write converged values to file
@@ -269,8 +269,8 @@ class Sizing_Loop(Data):
         results=nexus.results
         
     
-        print 'number of function calls=', i
-        print 'number of iterations total=', nexus.total_number_of_iterations
+        print('number of function calls=', i)
+        print('number of iterations total=', nexus.total_number_of_iterations)
 
     
         nexus.sizing_loop.converged = converged
@@ -289,7 +289,7 @@ class Sizing_Loop(Data):
     
     def newton_raphson_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options):
         h = iteration_options.h
-        print '###begin Finite Differencing###'
+        print('###begin Finite Differencing###')
         J, iter = Finite_Difference_Gradient(y,err, sizing_evaluation, nexus, scaling, iter, h)
         try:
             
@@ -313,10 +313,10 @@ class Sizing_Loop(Data):
             iteration_options.y_save   = y
             iteration_options.err_save = err
            
-            print 'err_out=', err_out
+            print('err_out=', err_out)
             
         except np.linalg.LinAlgError:
-            print 'singular Jacobian detected, use successive_substitution'
+            print('singular Jacobian detected, use successive_substitution')
             err_out, y_update, iter = self.successive_substitution_update(y, err, sizing_evaluation, nexus, scaling, iter, iteration_options)
         
        
@@ -328,9 +328,9 @@ class Sizing_Loop(Data):
         dy          = y - y_save
         df          = err - err_save
         Jinv        = iteration_options.Jinv
-        print 'Jinv=', Jinv
+        print('Jinv=', Jinv)
         update_step = ((dy - Jinv*df)/np.linalg.norm(df))* df
-        print 'update_step=', update_step
+        print('update_step=', update_step)
         Jinv_out    = Jinv + update_step
         
         p                      = -np.dot(Jinv_out,err)
@@ -364,7 +364,7 @@ def Finite_Difference_Gradient(x,f , my_function, inputs, scaling, iter, h):
         xu[i]=x[i]+h *x[i]  #use FD step of H*x
         fu, y_out = my_function(xu, inputs,scaling)
         
-        print 'fbase=', f
+        print('fbase=', f)
         J[:,i] = (fu-f)/(xu[i]-x[i])
         iter=iter+1
         

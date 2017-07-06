@@ -9,7 +9,7 @@
 
 import SUAVE
 from SUAVE.Core import Data
-from Markup import Markup
+from .Markup import Markup
 from SUAVE.Analyses import Process
 import numpy as np
 
@@ -18,12 +18,12 @@ from SUAVE.Input_Output.GMSH.write_geo_file import write_geo_file
 from SUAVE.Input_Output.GMSH.mesh_geo_file import mesh_geo_file
 
 # Default aero Results
-from Results import Results
+from .Results import Results
 
 # The aero methods
 from SUAVE.Methods.Aerodynamics import Supersonic_Zero as Methods
 from SUAVE.Methods.Aerodynamics import Fidelity_Zero   as FZ_Methods
-from Process_Geometry import Process_Geometry
+from .Process_Geometry import Process_Geometry
 from SUAVE.Analyses.Aerodynamics.SU2_inviscid_Super import SU2_inviscid_Super
 
 # ----------------------------------------------------------------------

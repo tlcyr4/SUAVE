@@ -1,2 +1,2 @@
 
-from Sizing import Sizing
+from .Sizing import Sizing

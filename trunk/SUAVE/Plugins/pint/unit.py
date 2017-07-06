@@ -9,7 +9,7 @@
     :license: BSD, see LICENSE for more details.
 """
 
-from __future__ import division, unicode_literals, print_function, absolute_import
+
 
 import os
 import copy
@@ -201,14 +201,14 @@ class UnitDefinition(Definition):
                 modifiers = {}
 
             converter = ParserHelper.from_string(converter)
-            if all(_is_dim(key) for key in converter.keys()):
+            if all(_is_dim(key) for key in list(converter.keys())):
                 self.is_base = True
-            elif not any(_is_dim(key) for key in converter.keys()):
+            elif not any(_is_dim(key) for key in list(converter.keys())):
                 self.is_base = False
             else:
                 raise ValueError('Base units must be referenced only to dimensions. '
                                  'Derived units must not be referenced to dimensions.')
-            self.reference = UnitsContainer(converter.items())
+            self.reference = UnitsContainer(list(converter.items()))
             if 'offset' in modifiers:
                 converter = OffsetConverter(converter.scale, modifiers['offset'])
             else:
@@ -229,12 +229,12 @@ class DimensionDefinition(Definition):
             converter = ParserHelper.from_string(converter)
             if not converter:
                 self.is_base = True
-            elif all(_is_dim(key) for key in converter.keys()):
+            elif all(_is_dim(key) for key in list(converter.keys())):
                 self.is_base = False
             else:
                 raise ValueError('Base dimensions must be referenced to None. '
                                  'Derived dimensions must only be referenced to dimensions.')
-            self.reference = UnitsContainer(converter.items())
+            self.reference = UnitsContainer(list(converter.items()))
 
         super(DimensionDefinition, self).__init__(name, symbol, aliases, converter=None)
 
@@ -247,7 +247,7 @@ class UnitsContainer(dict):
 
     def __init__(self, *args, **kwargs):
         dict.__init__(self, *args, **kwargs)
-        for key, value in self.items():
+        for key, value in list(self.items()):
             if not isinstance(key, string_types):
                 raise TypeError('key must be a str, not {}'.format(type(key)))
             if not isinstance(value, Number):
@@ -275,13 +275,13 @@ class UnitsContainer(dict):
     def __eq__(self, other):
         if isinstance(other, string_types):
             other = ParserHelper.from_string(other)
-            other = dict(other.items())
+            other = dict(list(other.items()))
         return dict.__eq__(self, other)
 
     def __str__(self):
         if not self:
             return 'dimensionless'
-        return formatter(self.items())
+        return formatter(list(self.items()))
 
     def __repr__(self):
         tmp = '{%s}' % ', '.join(["'{}': {}".format(key, value) for key, value in sorted(self.items())])
@@ -289,7 +289,7 @@ class UnitsContainer(dict):
 
     def __format__(self, spec):
         if 'L' in spec:
-            tmp = formatter(self.items(), True, True,
+            tmp = formatter(list(self.items()), True, True,
                             r' \cdot ', r'\frac[{}][{}]', '{}^[{}]',
                             r'\left( {} \right)')
             tmp = tmp.replace('[', '{').replace(']', '}')
@@ -301,12 +301,12 @@ class UnitsContainer(dict):
                 for n in range(10):
                     ret = ret.replace(str(n), PRETTY[n])
                 return ret
-            tmp = formatter(self.items(), True, False,
+            tmp = formatter(list(self.items()), True, False,
                             '·', '/', '{}{}',
                             '({})', fmt_exponent)
             return tmp
         elif 'H' in spec:
-            tmp = formatter(self.items(), True, True,
+            tmp = formatter(list(self.items()), True, True,
                             r' ', r'{}/{}', '{}<sup>{}</sup>',
                             r'({})')
             return tmp
@@ -321,9 +321,9 @@ class UnitsContainer(dict):
     def __imul__(self, other):
         if not isinstance(other, self.__class__):
             raise TypeError('Cannot multiply UnitsContainer by {}'.format(type(other)))
-        for key, value in other.items():
+        for key, value in list(other.items()):
             self[key] += value
-        keys = [key for key, value in self.items() if value == 0]
+        keys = [key for key, value in list(self.items()) if value == 0]
         for key in keys:
             del self[key]
 
@@ -341,7 +341,7 @@ class UnitsContainer(dict):
     def __ipow__(self, other):
         if not isinstance(other, NUMERIC_TYPES):
             raise TypeError('Cannot power UnitsContainer by {}'.format(type(other)))
-        for key, value in self.items():
+        for key, value in list(self.items()):
             self[key] *= other
         return self
 
@@ -356,10 +356,10 @@ class UnitsContainer(dict):
         if not isinstance(other, self.__class__):
             raise TypeError('Cannot divide UnitsContainer by {}'.format(type(other)))
 
-        for key, value in other.items():
+        for key, value in list(other.items()):
             self[key] -= value
 
-        keys = [key for key, value in self.items() if value == 0]
+        keys = [key for key, value in list(self.items()) if value == 0]
         for key in keys:
             del self[key]
 
@@ -502,7 +502,7 @@ class UnitRegistry(object):
         for ctx in ctxs:
             if getattr(ctx, '_checked', False):
                 continue
-            for (src, dst), func in ctx.funcs.items():
+            for (src, dst), func in list(ctx.funcs.items()):
                 src_ = self.get_dimensionality(dict(src))
                 dst_ = self.get_dimensionality(dict(dst))
                 if src != src_ or dst != dst_:
@@ -585,7 +585,7 @@ class UnitRegistry(object):
         elif isinstance(definition, UnitDefinition):
             d = self._units
             if definition.is_base:
-                for dimension in definition.reference.keys():
+                for dimension in list(definition.reference.keys()):
                     if dimension != '[]' and dimension in self._dimensions:
                         raise ValueError('Only one unit per dimension can be a base unit.')
                     self.define(DimensionDefinition(dimension, '', (), None, is_base=True))
@@ -619,7 +619,7 @@ class UnitRegistry(object):
                 return 'delta_' + _name
 
             d_reference = UnitsContainer({prep(ref): value
-                                          for ref, value in definition.reference.items()})
+                                          for ref, value in list(definition.reference.items())})
             self.define(UnitDefinition(d_name, d_symbol, d_aliases,
                                        ScaleConverter(definition.converter.scale),
                                        d_reference, definition.is_base))
@@ -676,7 +676,7 @@ class UnitRegistry(object):
         """
 
         deps = {name: set(definition.reference.keys())
-                for name, definition in self._units.items()}
+                for name, definition in list(self._units.items())}
 
         for unit_names in solve_dependencies(deps):
             for unit_name in unit_names:
@@ -761,7 +761,7 @@ class UnitRegistry(object):
                 del dims['[]']
             return dims
 
-        for key, value in input_units.items():
+        for key, value in list(input_units.items()):
             if _is_dim(key):
                 reg = self._dimensions[key]
                 if reg.is_base:
@@ -801,7 +801,7 @@ class UnitRegistry(object):
 
         factor = 1.
         units = UnitsContainer()
-        for key, value in input_units.items():
+        for key, value in list(input_units.items()):
             key = self.get_name(key)
             reg = self._units[key]
             if not isinstance(reg.converter, ScaleConverter):
@@ -908,7 +908,7 @@ class UnitRegistry(object):
         """Parse a unit to identify prefix, unit name and suffix
         by walking the list of prefix and suffix.
         """
-        for suffix, prefix in itertools.product(self._suffixes.keys(), self._prefixes.keys()):
+        for suffix, prefix in itertools.product(list(self._suffixes.keys()), list(self._prefixes.keys())):
             if unit_name.startswith(prefix) and unit_name.endswith(suffix):
                 name = unit_name[len(prefix):]
                 if suffix:
@@ -945,7 +945,7 @@ class UnitRegistry(object):
 
         ret = UnitsContainer()
         many = len(units) > 1
-        for name, value in units.items():
+        for name, value in list(units.items()):
             cname = self.get_name(name)
             if not cname:
                 continue

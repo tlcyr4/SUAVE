@@ -1,4 +1,4 @@
-import Chebyshev
-import soft_max
+from . import Chebyshev
+from . import soft_max
 #import Utilities
-import latin_hypercube_sampling
+from . import latin_hypercube_sampling

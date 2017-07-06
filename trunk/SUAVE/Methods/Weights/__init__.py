@@ -4,5 +4,5 @@
 
 
 # Packages
-import Correlations
+from . import Correlations
 

@@ -8,7 +8,7 @@
 # ----------------------------------------------------------------------
 
 from SUAVE.Core import Data
-from Wing        import Section
+from .Wing        import Section
 
 # ------------------------------------------------------------
 #   Body
@@ -52,7 +52,7 @@ class Body(Data):
 
 		# assert database type
 		if not isinstance(section,Data):
-			raise Exception, 'input component must be of type Data()'
+			raise Exception('input component must be of type Data()')
 
 		# store data
 		if orientation.lower() == 'horizontal':

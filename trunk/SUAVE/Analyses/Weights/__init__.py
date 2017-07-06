@@ -1,2 +1,2 @@
 
-from Weights import Weights
+from .Weights import Weights

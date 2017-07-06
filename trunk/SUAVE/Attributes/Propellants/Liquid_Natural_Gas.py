@@ -6,7 +6,7 @@
 #  Imports
 # ----------------------------------------------------------------------
 
-from Propellant import Propellant
+from .Propellant import Propellant
 
 # ----------------------------------------------------------------------
 #  Class

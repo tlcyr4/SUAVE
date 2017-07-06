@@ -178,14 +178,14 @@ if __name__ == '__main__':
     configuration.mass_properties.center_of_gravity = np.array([112.2,0,0]) * Units.feet  
     
     #Method Test
-    print '<<Test run of the taw_cmalpha() method>>'
-    print 'Boeing 747 at Mach {0}'.format(Mach[0])
+    print('<<Test run of the taw_cmalpha() method>>')
+    print('Boeing 747 at Mach {0}'.format(Mach[0]))
     
     cm_a = taw_cmalpha(vehicle,Mach,conditions,configuration)
     
     expected = -1.45
-    print 'Cm_alpha       = {0:.4f}'.format(cm_a[0])
-    print 'Expected value = {}'.format(expected)
-    print 'Percent Error  = {0:.2f}%'.format(100.0*(cm_a[0]-expected)/expected)
-    print 'Static Margin  = {0:.4f}'.format(-cm_a[0]/vehicle.wings['main_wing'].CL_alpha[0])
-    print ' '
+    print('Cm_alpha       = {0:.4f}'.format(cm_a[0]))
+    print('Expected value = {}'.format(expected))
+    print('Percent Error  = {0:.2f}%'.format(100.0*(cm_a[0]-expected)/expected))
+    print('Static Margin  = {0:.4f}'.format(-cm_a[0]/vehicle.wings['main_wing'].CL_alpha[0]))
+    print(' ')

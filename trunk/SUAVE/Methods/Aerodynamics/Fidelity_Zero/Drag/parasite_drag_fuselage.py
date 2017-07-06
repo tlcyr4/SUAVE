@@ -7,7 +7,7 @@
 #  Imports
 # ----------------------------------------------------------------------
 
-from compressible_turbulent_flat_plate import compressible_turbulent_flat_plate
+from .compressible_turbulent_flat_plate import compressible_turbulent_flat_plate
 from SUAVE.Attributes.Gases import Air # you should let the user pass this as input
 from SUAVE.Analyses import Results
 import numpy as np

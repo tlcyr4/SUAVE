@@ -214,5 +214,5 @@ if __name__ == '__main__':
 
 
     Cl_max_ls, Cd_ind = compute_max_lift_coeff(vehicle,conditions)
-    print 'CLmax : ', Cl_max_ls, 'dCDi :' , Cd_ind
+    print('CLmax : ', Cl_max_ls, 'dCDi :' , Cd_ind)
 

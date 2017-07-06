@@ -11,7 +11,7 @@
 
 from SUAVE.Core import Data
 from sklearn import svm
-from Surrogate_Problem import Surrogate_Problem
+from .Surrogate_Problem import Surrogate_Problem
 
 import numpy as np
 import time
@@ -40,7 +40,7 @@ def build_svr_models(obj_values, inputs, constraints, kernel = 'rbf', C = 1E5, e
         constraints_surrogates.append(constraint_surrogate)
      
     t2=time.time()
-    print 'time to set up = ', t2-t1
+    print('time to set up = ', t2-t1)
     surrogate_function                        = Surrogate_Problem()
     surrogate_function.obj_surrogate          = obj_surrogate
     surrogate_function.constraints_surrogates = constraints_surrogates

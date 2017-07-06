@@ -15,7 +15,7 @@ import SUAVE
 from SUAVE.Core import Data
 
 # local imports
-from Stability import Stability
+from .Stability import Stability
 
 
 # import SUAVE methods
@@ -71,7 +71,7 @@ class Fidelity_Zero(Stability):
         
         configuration.mass_properties = geometry.mass_properties
         
-	if geometry.has_key('fuel'): #fuel has been assigned(from weight statements)
+	if 'fuel' in geometry: #fuel has been assigned(from weight statements)
             configuration.fuel = geometry.fuel
         else: #assign as zero to allow things to run
             fuel = SUAVE.Components.Physical_Component()
@@ -138,7 +138,7 @@ class Fidelity_Zero(Stability):
             dynamic_stability.cl_p = Supporting_Functions.cl_p(conditions.lift_curve_slope, geometry)
             
             # Derivative of roll rate with respect to sideslip (dihedral effect)
-            if geometry.wings['main_wing'].has_key('dihedral'):
+            if 'dihedral' in geometry.wings['main_wing']:
                 dynamic_stability.cl_beta = Supporting_Functions.cl_beta(geometry, dynamic_stability.cl_p)
             else:
                 dynamic_stability.cl_beta = np.zeros(1)

@@ -1,5 +1,5 @@
-import AERODAS_setup
-import finite_aspect_ratio
-import post_stall_coefficients
-import pre_stall_coefficients
-import section_properties
+from . import AERODAS_setup
+from . import finite_aspect_ratio
+from . import post_stall_coefficients
+from . import pre_stall_coefficients
+from . import section_properties

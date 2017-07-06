@@ -1,6 +1,6 @@
 
 # classes
-from Atmosphere import Atmosphere
+from .Atmosphere import Atmosphere
 
 # packages
-import Earth
+from . import Earth

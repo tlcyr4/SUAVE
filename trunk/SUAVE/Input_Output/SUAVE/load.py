@@ -37,7 +37,7 @@ def load(filename):
     return data
 
 def read_SUAVE_json_dict(res_dict):
-    keys = res_dict.keys() # keys from top level
+    keys = list(res_dict.keys()) # keys from top level
     SUAVE_data = Data() # initialize SUAVE data structure
     
     # Assign all values
@@ -52,7 +52,7 @@ def build_data_r(v):
     
     # Transform to SUAVE data structure with appropriate types
     if tv == OrderedDict:
-        keys = v.keys()
+        keys = list(v.keys())
         # Recursively assign values
         ret = DataOrdered()
         for k in keys:
@@ -60,7 +60,7 @@ def build_data_r(v):
             ret[k] = build_data_r(v[k])
     elif tv == list:
         ret = np.array(v)
-    elif (tv == unicode): 
+    elif (tv == str): 
         ret = str(v)
     elif (tv == bool):
         ret = v

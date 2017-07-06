@@ -15,8 +15,8 @@ from SUAVE.Core import (
 from SUAVE.Methods.Aerodynamics.Supersonic_Zero.Drag import \
      wave_drag_lift, wave_drag_volume, wave_drag_body_of_rev
 
-from wave_drag_lift import wave_drag_lift
-from wave_drag_volume import wave_drag_volume
+from .wave_drag_lift import wave_drag_lift
+from .wave_drag_volume import wave_drag_volume
 
 import copy
 
@@ -52,7 +52,7 @@ def compressibility_drag_total(state,settings,geometry):
     
     wings          = geometry.wings
     fuselages      = geometry.fuselages
-    propulsor_name = geometry.propulsors.keys()[0] #obtain the key for the propulsor for assignment purposes
+    propulsor_name = list(geometry.propulsors.keys())[0] #obtain the key for the propulsor for assignment purposes
     propulsor      = geometry.propulsors[propulsor_name]
 
     Mc             = conditions.freestream.mach_number
@@ -66,7 +66,7 @@ def compressibility_drag_total(state,settings,geometry):
     
 
     # Iterate through wings
-    for k in wings.keys():
+    for k in list(wings.keys()):
         
         wing = wings[k]
 
@@ -145,7 +145,7 @@ def compressibility_drag_total(state,settings,geometry):
     # Dump total comp drag
     total_compressibility_drag = 0.0
         
-    for k in wings.keys():
+    for k in list(wings.keys()):
         total_compressibility_drag = drag_breakdown.compressible[k].compressibility_drag + total_compressibility_drag
         
     total_compressibility_drag = total_compressibility_drag + fuse_drag

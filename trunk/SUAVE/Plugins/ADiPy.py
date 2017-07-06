@@ -18,7 +18,7 @@ Copyright 2013: Abraham Lee
 
 """
 
-from __future__ import division
+
 import numpy as np
 from math import factorial
 import copy
@@ -183,7 +183,7 @@ class ad(object):
     def __ne__(self, other):
         return not self==other
     
-    def __nonzero__(self):
+    def __bool__(self):
         return self!=0
         
 def adn(nom, order=1):
@@ -229,11 +229,11 @@ def taylorderivatives(u):
             order += 1
         
         c = [0.0]*order
-        for idx in xrange(order):
+        for idx in range(order):
             tmp = u
-            for v in xrange(order - idx - 1):
+            for v in range(order - idx - 1):
                 tmp = tmp.val
-            for d in xrange(idx + 1):
+            for d in range(idx + 1):
                 if hasattr(tmp, 'der'):
                     tmp = tmp.der
                 else:
@@ -251,7 +251,7 @@ def taylorcoef(u):
     """
     if isinstance(u, ad):
         c = taylorderivatives(u)
-        for idx in xrange(len(c)):
+        for idx in range(len(c)):
             c[idx] = c[idx]/factorial(idx + 1)
         return c
     else:
@@ -304,10 +304,10 @@ def taylorfunc(u, at=None):
         try:
             x[0]
         except:
-            return c[0] + np.sum([c[i]*(x - at)**i for i in xrange(1, len(c))])
+            return c[0] + np.sum([c[i]*(x - at)**i for i in range(1, len(c))])
         else:
             tmp = [c[0] + np.sum([c[i]*(xi - at)**i 
-                for i in xrange(1, len(c))]) for xi in x]
+                for i in range(1, len(c))]) for xi in x]
             return np.array(tmp)
         
     return approxfunc
@@ -520,7 +520,7 @@ if __name__=='__main__':
             a = a - delta
         return a
     
-    print '\nnewtonfdf(5) should equal 4.8871:\n', newtonfdf(5)
+    print(('\nnewtonfdf(5) should equal 4.8871:\n', newtonfdf(5)))
     
     def fgradf(a0, v0, h0):
         a = ad(a0, np.array([1, 0, 0]))  # angle in degrees
@@ -532,7 +532,7 @@ if __name__=='__main__':
         f = (vhor/32)*(tana + sqrt(tana**2 + 64*h/vhor))  # horizontal range
         return f.double()
     
-    print '\nfgradf(20, 44, 9) should equal [56.0461, 1.0717, 1.9505, 1.4596]:\n', fgradf(20, 44, 9)
+    print(('\nfgradf(20, 44, 9) should equal [56.0461, 1.0717, 1.9505, 1.4596]:\n', fgradf(20, 44, 9)))
     
     def FJF(A):
         x = ad(A[0], np.array([1, 0, 0]))
@@ -554,8 +554,8 @@ if __name__=='__main__':
             A = A - delta
         return A
         
-    print '\nnewtonFJF([0.1, 0.1, -0.1]) should equal [0.5000, 0.0000, -0.5236]:\n', newtonFJF(np.array([0.1, 0.1, -0.1]))
+    print(('\nnewtonFJF([0.1, 0.1, -0.1]) should equal [0.5000, 0.0000, -0.5236]:\n', newtonFJF(np.array([0.1, 0.1, -0.1]))))
     
     x = adn(3, 3)
     f = x*sin(x*x)
-    print '\nf.d(3) should equal 495.9280:\n', f.d(3)
+    print(('\nf.d(3) should equal 495.9280:\n', f.d(3)))

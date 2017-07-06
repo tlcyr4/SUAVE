@@ -1,3 +1,3 @@
 
-import Curve
-import Surface
+from . import Curve
+from . import Surface

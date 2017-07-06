@@ -9,7 +9,7 @@
     :license: BSD, see LICENSE for more details.
 """
 
-from __future__ import division, unicode_literals, print_function, absolute_import
+
 
 import re
 import sys
@@ -26,8 +26,8 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 if sys.version < '3':
-    from StringIO import StringIO
-    string_types = basestring
+    from io import StringIO
+    string_types = str
     ptok = lambda input_string: tokenize.generate_tokens(StringIO(input_string).readline)
 else:
     from io import BytesIO
@@ -211,7 +211,7 @@ def pi_theorem(quantities, registry=None):
     else:
         getdim = registry.get_dimensionality
 
-    for name, value in quantities.items():
+    for name, value in list(quantities.items()):
         if isinstance(value, string_types):
             value = ParserHelper.from_string(value)
         if isinstance(value, dict):
@@ -226,7 +226,7 @@ def pi_theorem(quantities, registry=None):
                            'Assuming that it is a dimension name: {}.'.format(dims))
 
         quant.append((name, dims))
-        dimensions = dimensions.union(dims.keys())
+        dimensions = dimensions.union(list(dims.keys()))
 
     dimensions = list(dimensions)
 
@@ -263,13 +263,13 @@ def solve_dependencies(dependencies):
     r = []
     while d:
         # values not in keys (items without dep)
-        t = set(i for v in d.values() for i in v) - set(d.keys())
+        t = set(i for v in list(d.values()) for i in v) - set(d.keys())
         # and keys without value (items without dep)
-        t.update(k for k, v in d.items() if not v)
+        t.update(k for k, v in list(d.items()) if not v)
         # can be done right away
         r.append(t)
         # and cleaned up
-        d = dict(((k, v - t) for k, v in d.items() if v))
+        d = dict(((k, v - t) for k, v in list(d.items()) if v))
     return r
 
 
@@ -353,7 +353,7 @@ class ParserHelper(dict):
 
         return ParserHelper(ret.scale,
                             {key.replace('__obra__', '[').replace('__cbra__', ']'): value
-                            for key, value in ret.items()})
+                            for key, value in list(ret.items())})
 
     def __missing__(self, key):
         return 0.0
@@ -370,7 +370,7 @@ class ParserHelper(dict):
             self[key] = op(self[key], value)
 
         if cleanup:
-            keys = [key for key, value in self.items() if value == 0]
+            keys = [key for key, value in list(self.items()) if value == 0]
             for key in keys:
                 del self[key]
 
@@ -388,7 +388,7 @@ class ParserHelper(dict):
         elif isinstance(other, Number):
             self.scale *= other
         else:
-            self.operate(other.items())
+            self.operate(list(other.items()))
         return self
 
     __imul__ = __mul__
@@ -396,7 +396,7 @@ class ParserHelper(dict):
 
     def __pow__(self, other):
         self.scale **= other
-        for key in self.keys():
+        for key in list(self.keys()):
             self[key] *= other
         return self
 
@@ -408,7 +408,7 @@ class ParserHelper(dict):
         elif isinstance(other, Number):
             self.scale /= other
         else:
-            self.operate(other.items(), operator.sub)
+            self.operate(list(other.items()), operator.sub)
         return self
 
     __itruediv__ = __truediv__
@@ -421,7 +421,7 @@ class ParserHelper(dict):
         elif isinstance(other, Number):
             self.scale *= other
         else:
-            self.operate(other.items(), operator.add)
+            self.operate(list(other.items()), operator.add)
         return self
 
 

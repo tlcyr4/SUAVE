@@ -7,7 +7,7 @@
     :license: BSD, see LICENSE for more details.
 """
 
-from __future__ import division, unicode_literals, print_function, absolute_import
+
 
 import copy
 import operator
@@ -17,6 +17,7 @@ from collections import Iterable
 from .unit import DimensionalityError, UnitsContainer, UnitDefinition, UndefinedUnitError
 from .measurement import Measurement
 from .util import string_types, NUMERIC_TYPES, ndarray
+import collections
 
 try:
     import numpy as np
@@ -145,7 +146,7 @@ class _Quantity(object):
 
         if '~' in spec:
             units = UnitsContainer({self._REGISTRY.get_symbol(key): value
-                                   for key, value in self.units.items()})
+                                   for key, value in list(self.units.items())})
             spec = spec.replace('~', '')
         else:
             units = self.units
@@ -591,7 +592,7 @@ class _Quantity(object):
                 attr = getattr(self._magnitude, item)
             except AttributeError:
                 attr = getattr(_to_magnitude(self._magnitude, True), item)
-            if callable(attr):
+            if isinstance(attr, collections.Callable):
                 return functools.partial(self.__numpy_method_wrap, attr)
             return attr
         except AttributeError as ex:

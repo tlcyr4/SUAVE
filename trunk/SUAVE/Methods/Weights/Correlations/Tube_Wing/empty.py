@@ -8,13 +8,13 @@
 # ----------------------------------------------------------------------
 import SUAVE
 from SUAVE.Core import Units, Data
-from tube import tube
-from landing_gear import landing_gear
-from payload import payload
-from systems import systems
-from tail_horizontal import tail_horizontal
-from tail_vertical import tail_vertical
-from wing_main import wing_main
+from .tube import tube
+from .landing_gear import landing_gear
+from .payload import payload
+from .systems import systems
+from .tail_horizontal import tail_horizontal
+from .tail_vertical import tail_vertical
+from .wing_main import wing_main
 from SUAVE.Methods.Weights.Correlations import Propulsion as Propulsion
 import warnings
 
@@ -99,7 +99,7 @@ def empty(vehicle):
     ac_type    = vehicle.systems.accessories         
     
     
-    propulsor_name = vehicle.propulsors.keys()[0] #obtain the key for the propulsor for assignment purposes
+    propulsor_name = list(vehicle.propulsors.keys())[0] #obtain the key for the propulsor for assignment purposes
     
     propulsors     = vehicle.propulsors[propulsor_name]
     num_eng    = propulsors.number_of_engines
@@ -120,7 +120,7 @@ def empty(vehicle):
     
     S_gross_w  = vehicle.reference_area
     #S_gross_w  = vehicle.wings['main_wing'].Areas.reference
-    if not vehicle.wings.has_key('main_wing'):
+    if 'main_wing' not in vehicle.wings:
         wt_wing = 0.0
         wing_c_r = 0.0
         warnings.warn("There is no Wing Weight being added to the Configuration", stacklevel=1)
@@ -141,7 +141,7 @@ def empty(vehicle):
     h_fus      = vehicle.fuselages['fuselage'].heights.maximum
     l_fus      = vehicle.fuselages['fuselage'].lengths.total
 
-    if not vehicle.wings.has_key('horizontal_stabilizer'):
+    if 'horizontal_stabilizer' not in vehicle.wings:
         wt_tail_horizontal = 0.0
         S_h = 0.0
         warnings.warn("There is no Horizontal Tail Weight being added to the Configuration", stacklevel=1)
@@ -157,7 +157,7 @@ def empty(vehicle):
         wt_tail_horizontal = tail_horizontal(b_h,sweep_h,Nult,S_h,TOW,mac_w,mac_h,l_w2h,t_c_h, h_tail_exposed)                
         vehicle.wings['horizontal_stabilizer'].mass_properties.mass = wt_tail_horizontal        
 
-    if not vehicle.wings.has_key('vertical_stabilizer'):   
+    if 'vertical_stabilizer' not in vehicle.wings:   
         output_3 = Data()
         output_3.wt_tail_vertical = 0.0
         output_3.wt_rudder = 0.0

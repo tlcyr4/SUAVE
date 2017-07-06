@@ -1,2 +1,2 @@
 
-from Geometry import Geometry
+from .Geometry import Geometry

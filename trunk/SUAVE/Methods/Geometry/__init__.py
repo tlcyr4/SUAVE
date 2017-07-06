@@ -1,3 +1,3 @@
 
-import Two_Dimensional
-import Three_Dimensional
+from . import Two_Dimensional
+from . import Three_Dimensional

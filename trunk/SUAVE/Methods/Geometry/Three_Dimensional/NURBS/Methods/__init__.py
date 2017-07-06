@@ -1,7 +1,7 @@
 
-import basis_function
-import basis_functions
-import basis_functions_derivatives
-import evaluate_curve
-import evaluate_surface
-import find_span
+from . import basis_function
+from . import basis_functions
+from . import basis_functions_derivatives
+from . import evaluate_curve
+from . import evaluate_surface
+from . import find_span

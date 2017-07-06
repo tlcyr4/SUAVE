@@ -8,8 +8,8 @@
 # ----------------------------------------------------------------------
 
 import os, copy
-import cPickle as pickle		
-from filelock import filelock
+import pickle as pickle		
+from .filelock import filelock
 
 # TODO: don't overwrite other core_names
 
@@ -46,7 +46,7 @@ def load_data( file_name,
         scipy_loaded = False    
         
     if not os.path.exists(file_name):
-        raise Exception , 'File does not exist: %s' % file_name
+        raise Exception('File does not exist: %s' % file_name)
     
     # process file format
     if file_format == 'infer':
@@ -66,7 +66,7 @@ def load_data( file_name,
                                            chars_as_strings = True      ,
                                            struct_as_record = True       )
             # pull core variable
-            assert input_data.has_key(core_name) , 'core data field "%s%" not found' % core_name
+            assert core_name in input_data , 'core data field "%s%" not found' % core_name
             input_data = input_data[core_name]
             
             # convert recarray to dictionary
@@ -76,7 +76,7 @@ def load_data( file_name,
         elif file_format == 'pickle':
             input_data = load_pickle(file_name)
             # pull core variable
-            assert input_data.has_key(core_name) , 'core data field "%s%" not found' % core_name
+            assert core_name in input_data , 'core data field "%s%" not found' % core_name
             input_data = input_data[core_name]
             
         #: if file_format
@@ -141,14 +141,14 @@ def save_data( data_dict, file_name, append=False ,
         if append == True and os.path.exists(file_name):
             # check file exists
             if not os.path.exists(file_name):
-                raise Exception , 'Cannot append, file does not exist: %s' % file_name  
+                raise Exception('Cannot append, file does not exist: %s' % file_name)  
             # load old data
             data_dict_old = load_data( file_name   = file_name   ,
                                        file_format = file_format ,
                                        core_name   = core_name    )
             # check for keys not in new data
-            for key,value in data_dict_old.iteritems():
-                if not data_dict.has_key(key):
+            for key,value in data_dict_old.items():
+                if key not in data_dict:
                     data_dict[key] = value
             #: for each dict item
         #: if append
@@ -211,7 +211,7 @@ def save_pickle(file_name,data_dict):
         first pickle entry is a list of all following data names
     """
     pkl_file = open(file_name,'wb')
-    names = data_dict.keys()
+    names = list(data_dict.keys())
     pickle.dump(names,pkl_file)
     for key in names:
         pickle.dump(data_dict[key],pkl_file)
@@ -251,7 +251,7 @@ def rec2dict(array_in):
         value = array_in[key].tolist()[0][0]
         
         # convert string
-        if isinstance(value[0],unicode):
+        if isinstance(value[0],str):
             value = str(value[0])
             
         # convert array
@@ -305,10 +305,10 @@ def append_nestdict(base_dict,add_dict):
     add_dict = copy.deepcopy(add_dict)
     
     # append add_dict keys
-    for key in add_dict.keys():
+    for key in list(add_dict.keys()):
         
         # ensure base_dict key exists and is a list
-        if not base_dict.has_key(key):
+        if key not in base_dict:
             if isinstance( add_dict[key] , dict ):
                 base_dict[key] = {}
             else:
@@ -347,7 +347,7 @@ class mat_bunch:
     """
     
     def __init__(self, d):
-        for k, v in d.items():
+        for k, v in list(d.items()):
             if isinstance(v, dict):
                 if len(v): v = mat_bunch(v)
                 else:      v = []
@@ -358,11 +358,11 @@ class mat_bunch:
     
     # items
     def keys(self):
-        return self.__dict__.keys()
+        return list(self.__dict__.keys())
     def values(self):
-        return self.__dict__.values()
+        return list(self.__dict__.values())
     def items(self):
-        return self.__dict__.items()
+        return list(self.__dict__.items())
     
     # dictionary get/set/etc
     def __getitem__(self,k):
@@ -374,9 +374,9 @@ class mat_bunch:
     def __str__(self):
         print_format = '%s: %s'
         state = []
-        for k,v in self.__dict__.items():
+        for k,v in list(self.__dict__.items()):
             if isinstance(v,mat_bunch):
-                v = '%i-item mat_bunch' % len(v.items())
+                v = '%i-item mat_bunch' % len(list(v.items()))
             state.append(print_format % (k,v) )
         return '\n'.join(state)
 

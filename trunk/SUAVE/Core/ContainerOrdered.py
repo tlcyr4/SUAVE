@@ -9,7 +9,7 @@
 #   Imports
 # ----------------------------------------------------------------------        
 
-from DataOrdered import DataOrdered
+from .DataOrdered import DataOrdered
 from warnings    import warn
 
 # ----------------------------------------------------------------------
@@ -42,4 +42,4 @@ class ContainerOrdered(DataOrdered):
         elif isinstance(vals,dict):
             self.update(vals)
         else:
-            raise Exception, 'unrecognized data type'
+            raise Exception('unrecognized data type')

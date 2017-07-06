@@ -7,7 +7,7 @@
 #  Imports
 # ----------------------------------------------------------------------
 
-from compressible_mixed_flat_plate import compressible_mixed_flat_plate
+from .compressible_mixed_flat_plate import compressible_mixed_flat_plate
 from SUAVE.Analyses import Results
 
 import numpy as np

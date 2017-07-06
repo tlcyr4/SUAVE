@@ -8,7 +8,7 @@
 #  Imports
 # ----------------------------------------------------------------------
 
-from Propellant import Propellant
+from .Propellant import Propellant
 
 # ----------------------------------------------------------------------
 #  Liquid_H2 Propellant Class

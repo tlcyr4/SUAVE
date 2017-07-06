@@ -9,17 +9,17 @@
 
 import SUAVE
 from SUAVE.Core import Data
-from Markup import Markup
+from .Markup import Markup
 from SUAVE.Analyses import Process
 import numpy as np
 
 # default Aero Results
-from Results import Results
+from .Results import Results
 
 # the aero methods
 from SUAVE.Methods.Aerodynamics import Fidelity_Zero as Methods
-from Process_Geometry import Process_Geometry
-from Vortex_Lattice import Vortex_Lattice
+from .Process_Geometry import Process_Geometry
+from .Vortex_Lattice import Vortex_Lattice
 
 # ----------------------------------------------------------------------
 #  Analysis

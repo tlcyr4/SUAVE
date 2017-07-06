@@ -30,7 +30,7 @@ from SUAVE.Methods.Aerodynamics.AVL.Data.Results     import Results
 from SUAVE.Methods.Aerodynamics.AVL.Data.Settings    import Settings
 from SUAVE.Methods.Aerodynamics.AVL.Data.Cases       import Run_Case
 
-from Aerodynamics import Aerodynamics as Aero_Analysis
+from .Aerodynamics import Aerodynamics as Aero_Analysis
 
 
 # ----------------------------------------------------------------------

@@ -1,3 +1,3 @@
 
-import Drag
-import Lift
+from . import Drag
+from . import Lift

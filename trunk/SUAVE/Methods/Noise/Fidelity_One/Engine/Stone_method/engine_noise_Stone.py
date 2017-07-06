@@ -478,7 +478,7 @@ table_4=np.array([[-3.6, -194.1, -191.6, -188.6, -185.1, -181.1, -176.6, -170.8,
 for i in range (0,23):
    # for j in range(0,23):
        # print i
-        print table_4[0][i]
+        print(table_4[0][i])
         
         
     

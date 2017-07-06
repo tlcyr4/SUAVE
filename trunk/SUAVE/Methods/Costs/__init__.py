@@ -1,1 +1,1 @@
-import Correlations
+from . import Correlations

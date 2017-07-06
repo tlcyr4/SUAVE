@@ -47,12 +47,12 @@ class Data(Data_Base):
         
         result = Data()
         
-        if data.has_key('tag'):
+        if 'tag' in data:
             result.tag = data.tag.translate(t_table)
         else:
             result.tag = 'node'
         
-        for key,value in data.items():
+        for key,value in list(data.items()):
             if isinstance( value, dict ):
                 element = Data.from_dict(value)
                 element.tag = key

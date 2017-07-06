@@ -8,8 +8,8 @@
 # ----------------------------------------------------------------------
 #  Imports
 # ----------------------------------------------------------------------
-from purge_files import purge_files
-from create_avl_datastructure import translate_avl_wing, translate_avl_body
+from .purge_files import purge_files
+from .create_avl_datastructure import translate_avl_wing, translate_avl_body
 
 
 def write_geometry(avl_object):

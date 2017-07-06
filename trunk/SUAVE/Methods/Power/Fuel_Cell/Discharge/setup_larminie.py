@@ -10,7 +10,7 @@
 
 import SUAVE
 from SUAVE.Core import Units
-from larminie import larminie
+from .larminie import larminie
 
 # ----------------------------------------------------------------------
 #  Setup Larminie

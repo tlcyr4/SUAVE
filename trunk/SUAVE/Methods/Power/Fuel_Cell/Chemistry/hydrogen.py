@@ -14,7 +14,7 @@ def hydrogen(fuel_cell,conditions,numerics):
     
     if fuel_cell.active:
         if power.any()>fuel_cell.max_power:
-            print "Warning, maximum power output of fuel cell exceeded"
+            print("Warning, maximum power output of fuel cell exceeded")
                 
             if fuel_cell.propellant.tag=='H2 Gas' or fuel_cell.propellant.tag=='H2':
                 
@@ -49,7 +49,7 @@ def hydrogen(fuel_cell,conditions,numerics):
                         mdot_air = mdot_in-8*mdot       
                         
                     if mdot_in<mdot*o_f and mdot_in !=0:
-                        print 'Warning; oxidizer flow rate too small to match power needs'
+                        print('Warning; oxidizer flow rate too small to match power needs')
                 
                     R = (mdot_water*steam.R+mdot_air*fuel_cell.oxidizer.R)/(mdot_water+mdot_air)
                     

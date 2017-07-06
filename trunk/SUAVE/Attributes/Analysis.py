@@ -26,7 +26,7 @@ class Analysis(Data):
         
     def solve(self):
         procedure = self.procedure
-        for segment,configuration in procedure.items():
+        for segment,configuration in list(procedure.items()):
             results = segment.solve(configuration)
         
     def __str__(self):
@@ -35,7 +35,7 @@ class Analysis(Data):
         args += 'Vehicle = %s\n' % self.Vehicle.tag
         args += 'Mission = %s\n' % self.Mission.tag
         args += 'Procedure =\n'
-        for step in self.Procedure.values():
+        for step in list(self.Procedure.values()):
             seg = step[0]
             con = step[1]
             args += '  %s : %s\n' % (seg.tag,con.tag)

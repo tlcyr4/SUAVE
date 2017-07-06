@@ -79,11 +79,12 @@ More doc: https://denis-bz.github.com/docs/intergrid.html
 """
 # split class Gridmap ?
 
-from __future__ import division
+
 from time import time
 # warnings
 import numpy as np
 from scipy.ndimage import map_coordinates, spline_filter
+import collections
 
 __version__ = "2013-07-01 jul denis"
 __author_email__ = "denis-bz-py@t-online.de"  # comments welcome, testcases most welcome
@@ -121,7 +122,7 @@ class Intergrid:
             assert len(maps) == dim, "maps must have len %d, not %d" % (
                 dim, len(maps))
             for j, (map, n, l, h) in enumerate( zip( maps, griddata.shape, lo, hi )):
-                if map is None  or  callable(map):
+                if map is None  or  isinstance(map, collections.Callable):
                     lo[j], hi[j] = 0, 1
                     continue
                 maps[j] = map = np.asanyarray(map)
@@ -130,9 +131,9 @@ class Intergrid:
                     j, n, len(map) )
                 mlo, mhi = map.min(), map.max()
                 if not (l <= mlo <= mhi <= h):
-                    print "Warning: Intergrid maps[%d] min %.3g max %.3g " \
+                    print(("Warning: Intergrid maps[%d] min %.3g max %.3g " \
                         "are outside lo %.3g hi %.3g" % (
-                        j, mlo, mhi, l, h )
+                        j, mlo, mhi, l, h )))
         self.maps = maps
         self._lo = lo  # caller's lo for linear, 0 nonlinear maps
         shape_1 = np.array( self.griddata.shape, float ) - 1
@@ -160,8 +161,8 @@ class Intergrid:
         for j, map in enumerate(self.maps):
             if map is None:
                 continue
-            if callable(map):
-                X[:,j] = map( X[:,j] )  # clip again ?
+            if isinstance(map, collections.Callable):
+                X[:,j] = list(map( X[:,j] ))  # clip again ?
             else:
                 # PWL e.g. [50 52 62 63] -> [0 1 2 3] --
                 X[:,j] = np.interp( X[:,j], map, np.arange(len(map)) )
@@ -178,8 +179,8 @@ class Intergrid:
                 # test: mode="constant", cval=np.NaN,
             output=out )
         if self.verbose:
-            print "Intergrid: %.3g msec  %d points in a %s grid  %d maps  order %d" % (
-                (time() - t0) * 1000, npt, self.griddata.shape, self.nmap, self.order )
+            print(("Intergrid: %.3g msec  %d points in a %s grid  %d maps  order %d" % (
+                (time() - t0) * 1000, npt, self.griddata.shape, self.nmap, self.order )))
         return out if Xdim == 2  else out[0]
 
     at = __call__

@@ -20,7 +20,7 @@ from SUAVE.Methods.Aerodynamics.Fidelity_Zero.Lift import weissinger_vortex_latt
 
 
 # local imports
-from Aerodynamics import Aerodynamics
+from .Aerodynamics import Aerodynamics
 
 
 # package imports
@@ -183,7 +183,7 @@ def calculate_lift_vortex_lattice(conditions,settings,geometry):
 
     # iterate over wings
     total_lift_coeff = 0.0
-    for wing in geometry.wings.values():
+    for wing in list(geometry.wings.values()):
 
         [wing_lift_coeff,wing_drag_coeff] = weissinger_vortex_lattice(conditions,settings,wing)
         total_lift_coeff += wing_lift_coeff * wing.areas.reference / vehicle_reference_area

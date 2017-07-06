@@ -7,7 +7,7 @@
 #  Imports
 # ----------------------------------------------------------------------
 
-from Propellant import Propellant
+from .Propellant import Propellant
 
 # ----------------------------------------------------------------------
 #  Jet_A Propellant Class

@@ -1,4 +1,4 @@
 
-import Airfoil
-import Fuselage
-import Propulsion
+from . import Airfoil
+from . import Fuselage
+from . import Propulsion

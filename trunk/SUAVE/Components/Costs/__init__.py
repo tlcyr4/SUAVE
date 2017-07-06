@@ -4,5 +4,5 @@
 # Modified:
 
 # classes
-from Costs import Industrial_Costs
-from Costs import Operating_Costs
+from .Costs import Industrial_Costs
+from .Costs import Operating_Costs

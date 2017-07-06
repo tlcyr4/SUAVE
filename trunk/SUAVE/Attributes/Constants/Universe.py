@@ -8,7 +8,7 @@
 # ----------------------------------------------------------------------
 
 # initialized constants
-from Constant import Constant
+from .Constant import Constant
 
 # ----------------------------------------------------------------------
 #  Universe Constant Data Class

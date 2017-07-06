@@ -17,7 +17,7 @@ from SUAVE.Core import Data
 
 
 # local imports
-from Aerodynamics import Aerodynamics
+from .Aerodynamics import Aerodynamics
 
 # package imports
 import numpy as np

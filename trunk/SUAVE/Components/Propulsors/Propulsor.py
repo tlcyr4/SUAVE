@@ -29,7 +29,7 @@ class Container(Physical_Component.Container):
     
     def evaluate_thrust(self,state):
 
-        for propulsor in self.values():
+        for propulsor in list(self.values()):
             results = propulsor.evaluate_thrust(state) 
             
         return results

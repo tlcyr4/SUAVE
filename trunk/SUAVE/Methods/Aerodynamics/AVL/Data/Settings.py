@@ -8,7 +8,7 @@
 # ----------------------------------------------------------------------
 import SUAVE
 from SUAVE.Core import Data
-from Cases import Run_Case
+from .Cases import Run_Case
 
 # ------------------------------------------------------------
 #   Configuration

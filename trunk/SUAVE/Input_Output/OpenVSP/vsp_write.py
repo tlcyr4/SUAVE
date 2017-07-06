@@ -23,7 +23,7 @@ def write(vehicle,tag):
     try:
         vsp.ClearVSPModel()
     except NameError:
-        print 'VSP import failed'
+        print('VSP import failed')
         return -1
     
     area_tags = dict() # for wetted area assignment
@@ -52,8 +52,8 @@ def write(vehicle,tag):
         dihedral   = wing.dihedral / Units.deg
         
         # Check to see if segments are defined. Get count
-        if len(wing.Segments.keys())>0:
-            n_segments = len(wing.Segments.keys())
+        if len(list(wing.Segments.keys()))>0:
+            n_segments = len(list(wing.Segments.keys()))
         else:
             n_segments = 0
 
@@ -68,7 +68,7 @@ def write(vehicle,tag):
         # n_segments + 2 will create an extra segment if the root segment is 
         # included in the list of segments. This is not used and the tag is
         # removed when the segments are checked for this case.
-        for i_segs in xrange(0,n_segments+2):
+        for i_segs in range(0,n_segments+2):
             x_secs.append('XSec_' + str(i_segs))
             x_sec_curves.append('XSecCurve_' + str(i_segs))
 
@@ -176,7 +176,7 @@ def write(vehicle,tag):
             adjust = 1
         
         # Loop for the number of segments left over
-        for i_segs in xrange(1,n_segments+1):            
+        for i_segs in range(1,n_segments+1):            
             
             # Unpack
             dihedral_i = wing.Segments[i_segs-1].dihedral_outboard / Units.deg
@@ -227,9 +227,9 @@ def write(vehicle,tag):
     # Engines
     # -------------
     
-    if vehicle.propulsors.has_key('turbofan'):
+    if 'turbofan' in vehicle.propulsors:
         
-        print 'Warning: no meshing sources are currently implemented for the nacelle'
+        print('Warning: no meshing sources are currently implemented for the nacelle')
     
         # Unpack
         turbofan  = vehicle.propulsors.turbofan
@@ -239,7 +239,7 @@ def write(vehicle,tag):
         origins   = turbofan.origin
         bpr       = turbofan.bypass_ratio
         
-        for ii in xrange(0,int(n_engines)):
+        for ii in range(0,int(n_engines)):
 
             origin = origins[ii]
             
@@ -279,7 +279,7 @@ def write(vehicle,tag):
     # Fuselage
     # -------------    
     
-    if vehicle.fuselages.has_key('fuselage'):
+    if 'fuselage' in vehicle.fuselages:
         # Unpack
         fuselage = vehicle.fuselages.fuselage
         width    = fuselage.width
@@ -306,7 +306,7 @@ def write(vehicle,tag):
         vsp.SetGeomName(fuse_id, fuselage.tag)
         area_tags[fuselage.tag] = ['fuselages',fuselage.tag]
     
-        if fuselage.has_key('OpenVSP_values'):
+        if 'OpenVSP_values' in fuselage:
             
 
             vals = fuselage.OpenVSP_values
@@ -329,7 +329,7 @@ def write(vehicle,tag):
             #vsp.SetParmVal(fuse_id,"TBSym","XSec_4",vals.tail.TB_Sym)
             #vsp.SetParmVal(fuse_id,"BottomLAngle","XSec_4",vals.tail.bottom.angle)
             #vsp.SetParmVal(fuse_id,"BottomLStrength","XSec_4",vals.tail.bottom.strength)
-            if vals.tail.has_key('z_pos'):
+            if 'z_pos' in vals.tail:
                 tail_z_pos = vals.tail.z_pos
             else:
                 tail_z_pos = 0.02

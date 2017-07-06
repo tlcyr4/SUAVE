@@ -8,7 +8,7 @@
 # ----------------------------------------------------------------------
 
 # SUave imports
-from Wing import Wing
+from .Wing import Wing
 
 # ----------------------------------------------------------------------
 #  Attribute
@@ -36,4 +36,4 @@ class Horizontal_Tail(Wing):
 # ----------------------------------------------------------------------
 # this will run from command line, put simple tests for your code here
 if __name__ == '__main__':
-    raise RuntimeError , 'test failed, not implemented'
+    raise RuntimeError('test failed, not implemented')

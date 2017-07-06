@@ -5,7 +5,7 @@
 # ----------------------------------------------------------------------
 #  Imports
 # ----------------------------------------------------------------------
-from Propellant import Propellant
+from .Propellant import Propellant
 from SUAVE.Attributes.Constants import Composition
 # ----------------------------------------------------------------------
 #  Gaseous_H2 Propellant Class

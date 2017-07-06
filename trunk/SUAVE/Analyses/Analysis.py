@@ -59,7 +59,7 @@ class Container(ContainerBase):
     """
     
     def compile(self,*args,**kwarg):
-        for tag,analysis in self.items():
+        for tag,analysis in list(self.items()):
             if hasattr(analysis,'compile'):
                 analysis.compile(*args,**kwarg)
         
@@ -70,7 +70,7 @@ class Container(ContainerBase):
     
     def evaluate(self,*args,**kwarg):
         results = Results()
-        for tag,analysis in self.items(): 
+        for tag,analysis in list(self.items()): 
             if hasattr(analysis,'evaluate'):
                 result = analysis.evaluate(*args,**kwarg)
             else:
@@ -79,7 +79,7 @@ class Container(ContainerBase):
         return results
     
     def finalize(self,*args,**kwarg):
-        for tag,analysis in self.items():
+        for tag,analysis in list(self.items()):
             if hasattr(analysis,'finalize'):
                 analysis.finalize(*args,**kwarg)
     

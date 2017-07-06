@@ -1,5 +1,5 @@
-import AVL
-import AERODAS
-import Fidelity_Zero
-import Supersonic_Zero
-import SU2_Euler
+from . import AVL
+from . import AERODAS
+from . import Fidelity_Zero
+from . import Supersonic_Zero
+from . import SU2_Euler

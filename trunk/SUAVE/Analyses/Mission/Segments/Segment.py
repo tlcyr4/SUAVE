@@ -10,7 +10,7 @@
 # SUAVE imports
 
 from SUAVE.Analyses import Analysis, Settings, Process
-from Conditions import State
+from .Conditions import State
 
 # ----------------------------------------------------------------------
 #  Segment

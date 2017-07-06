@@ -9,7 +9,7 @@
 # ----------------------------------------------------------------------
 
 import scipy as sp
-from find_ragone_properties import find_ragone_properties
+from .find_ragone_properties import find_ragone_properties
 
 # ----------------------------------------------------------------------
 #  Methods

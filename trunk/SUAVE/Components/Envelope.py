@@ -8,7 +8,7 @@
 # ----------------------------------------------------------------------
 
 from SUAVE.Core import Data
-from Component import Component
+from .Component import Component
 
 
 # ----------------------------------------------------------------------

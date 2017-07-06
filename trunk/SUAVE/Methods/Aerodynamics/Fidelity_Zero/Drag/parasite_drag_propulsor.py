@@ -13,7 +13,7 @@
 # suave imports
 from SUAVE.Core import Data
 from SUAVE.Analyses import Results
-from compressible_turbulent_flat_plate import compressible_turbulent_flat_plate
+from .compressible_turbulent_flat_plate import compressible_turbulent_flat_plate
 
 # package imports
 import numpy as np

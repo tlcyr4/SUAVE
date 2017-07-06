@@ -85,7 +85,7 @@ def weissinger_vortex_lattice(conditions,configuration,wing):
         D              = np.empty(n)    
     
         # discretizing the wing sections into panels
-        for i in xrange(n):
+        for i in range(n):
     
             section_length[i] = dchord/span*(span-(i+1)*deltax+deltax/2) + tip_chord
             area_section[i]   = section_length[i]*deltax
@@ -105,7 +105,7 @@ def weissinger_vortex_lattice(conditions,configuration,wing):
     
     
         # Influence coefficient computation
-        for i in xrange(n):
+        for i in range(n):
     
             RHS[i,0] = np.sin(twist_distri[i]+aoa)
     
@@ -126,7 +126,7 @@ def weissinger_vortex_lattice(conditions,configuration,wing):
         T = np.linalg.solve(A,RHS)
         
         # Calculating the effective velocty 
-        for i in xrange(n):
+        for i in range(n):
             v[i] = 0.0      
             for j in range(0,n):
     
@@ -147,7 +147,7 @@ def weissinger_vortex_lattice(conditions,configuration,wing):
         DT    = 0.0
         arsec =0.0
     
-        for i in xrange(n):
+        for i in range(n):
     
             L[i] = deltax*Lft[i] 
             D[i] = deltax*Dg[i]    

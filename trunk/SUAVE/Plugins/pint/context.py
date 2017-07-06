@@ -9,7 +9,7 @@
     :license: BSD, see LICENSE for more details.
 """
 
-from __future__ import division, unicode_literals, print_function, absolute_import
+
 
 import re
 from collections import defaultdict
@@ -34,7 +34,7 @@ def _freeze(d):
         d = ParserHelper.from_string(d)
     if isinstance(d, frozenset):
         return d
-    return frozenset(d.items())
+    return frozenset(list(d.items()))
 
 
 def _expression_to_function(eq):
@@ -98,7 +98,7 @@ class Context(object):
             newdef = dict(context.defaults, **defaults)
             c = cls(context.name, context.aliases, newdef)
             c.funcs = context.funcs
-            for edge in context.funcs.keys():
+            for edge in list(context.funcs.keys()):
                 c.relation_to_context[edge] = c
             return c
         return context

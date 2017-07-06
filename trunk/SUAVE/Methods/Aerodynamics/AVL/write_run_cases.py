@@ -7,7 +7,7 @@
 #  Imports
 # ----------------------------------------------------------------------
 
-from purge_files import purge_files
+from .purge_files import purge_files
 #from SUAVE.Methods.Aerodynamics.AVL.write_run_cases import make_controls_case_text
 
 def write_run_cases(avl_object):

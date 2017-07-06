@@ -1,3 +1,3 @@
 
-import Correlations
-import Fidelity_One
+from . import Correlations
+from . import Fidelity_One

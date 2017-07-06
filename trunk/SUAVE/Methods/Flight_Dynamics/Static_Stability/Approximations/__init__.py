@@ -1,3 +1,3 @@
-from datcom import datcom
-import Tube_Wing
-import Supporting_Functions
+from .datcom import datcom
+from . import Tube_Wing
+from . import Supporting_Functions

@@ -1,12 +1,12 @@
 
-import Common
-import Constant_Speed_Constant_Rate
-import Constant_Mach_Constant_Rate
-import Constant_Mach_Constant_Angle
-import Linear_Mach_Constant_Rate
-import Linear_Speed_Constant_Rate
-import Constant_Throttle_Constant_Speed
-import Constant_Dynamic_Pressure_Constant_Rate
-import Constant_Speed_Constant_Angle
-import Constant_Speed_Constant_Angle_Noise
-import Constant_EAS_Constant_Rate
+from . import Common
+from . import Constant_Speed_Constant_Rate
+from . import Constant_Mach_Constant_Rate
+from . import Constant_Mach_Constant_Angle
+from . import Linear_Mach_Constant_Rate
+from . import Linear_Speed_Constant_Rate
+from . import Constant_Throttle_Constant_Speed
+from . import Constant_Dynamic_Pressure_Constant_Rate
+from . import Constant_Speed_Constant_Angle
+from . import Constant_Speed_Constant_Angle_Noise
+from . import Constant_EAS_Constant_Rate

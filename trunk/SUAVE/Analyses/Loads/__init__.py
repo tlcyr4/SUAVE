@@ -1,2 +1,2 @@
 
-from Loads import Loads
+from .Loads import Loads

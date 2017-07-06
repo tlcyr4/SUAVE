@@ -37,14 +37,14 @@ def runge_kutta_45(problem,options):
     # check input data
     m = len(problem.z0); err = False
     if len(problem.zmin) is not m:
-        print "z0 and zmin are different lengths, please check inputs."; err = True
+        print("z0 and zmin are different lengths, please check inputs."); err = True
     if len(problem.zmax) is not m:
-        print "z0 and zmax are different lengths, please check inputs."; err = True
+        print("z0 and zmax are different lengths, please check inputs."); err = True
     if problem.tf is not None:
         if problem.tf <= problem.t0:
-            print "Final time is <= initial time, please check inputs."; err = True
+            print("Final time is <= initial time, please check inputs."); err = True
     if problem.h0 is None or problem.h0 == 0.0:
-        print "Initial time step is zero or undefined, please check inputs."; err = True
+        print("Initial time step is zero or undefined, please check inputs."); err = True
     if problem.tf is None:
         err = True
         for j in range(m): 
@@ -53,14 +53,14 @@ def runge_kutta_45(problem,options):
             if not np.isnan(problem.zmax[j]) and np.isfinite(problem.zmax[j]):
                 err = False
         if err:
-            print "No final time or final conditions detected, please check inputs."
+            print("No final time or final conditions detected, please check inputs.")
     for j in range(m): 
         if problem.z0[j] < problem.zmin[j]:
-            print "Initial condition " + str(j) + " is < minimum conditions, please check inputs."; err = True
+            print("Initial condition " + str(j) + " is < minimum conditions, please check inputs."); err = True
         elif problem.z0[j] > problem.zmax[j]:
-            print "Initial condition " + str(j) + " is > maximum conditions, please check inputs."; err = True
+            print("Initial condition " + str(j) + " is > maximum conditions, please check inputs."); err = True
         elif problem.zmin[j] > problem.zmax[j]:
-            print "Minimum condition " + str(j) + " is > maximum condition, please check inputs."; err = True
+            print("Minimum condition " + str(j) + " is > maximum condition, please check inputs."); err = True
     if err:
         return None
 
@@ -108,7 +108,7 @@ def runge_kutta_45(problem,options):
             # test for final time
             if problem.tf is not None: 
                 if np.abs(t_new - problem.tf) < options.tol_BCs:
-                    stop = True; h = 0.0; print "h ---> 0 due to tf"
+                    stop = True; h = 0.0; print("h ---> 0 due to tf")
                     solution.exit.j = m; solution.exit.err = np.abs(t_new - problem.tf) 
                     solution.exit.reason = "maximum time reached"
                 elif t_new > problem.tf:
@@ -117,14 +117,14 @@ def runge_kutta_45(problem,options):
             
             # in endpoint mode
             if (any(mins) or any(maxes)) and not stop:
-                print "endpoint mode"
+                print("endpoint mode")
                 for j in range(m):
                     if mins[j]:
                         dz = np.abs(problem.zmin[j] - z_new[0,j])
                         if dz < options.tol_BCs:
                             solution.exit.j = j; solution.exit.err = dz 
                             solution.exit.reason = "minimum value reached"
-                            stop = True; h = 0.0; print "h ---> 0 due to zmin"; break
+                            stop = True; h = 0.0; print("h ---> 0 due to zmin"); break
                         else:
                             slope = problem.f(t_new,z_new[0,:])
                             h += (problem.zmin[j] - z_new[0,j])/slope[j]
@@ -134,7 +134,7 @@ def runge_kutta_45(problem,options):
                         if dz < options.tol_BCs:
                             solution.exit.j = j; solution.exit.err = dz 
                             solution.exit.reason = "maximum value reached"
-                            stop = True; h = 0.0; print "h ---> 0 due to zmax"; break
+                            stop = True; h = 0.0; print("h ---> 0 due to zmax"); break
                         else:
                             slope = problem.f(t_new,z_new[0,:])
                             h += (problem.zmax[j] - z_new[0,j])/slope[j]
@@ -211,12 +211,12 @@ def pseudospectral(problem):
     # some packing and error checking (needs more work - MC)
     err = False
     if not problem.unpack:
-        print "Error: no unpacking function provided. Exiting..."
+        print("Error: no unpacking function provided. Exiting...")
         err = True; return []
 
     err = problem.initialize()
     if err:
-        print "Error: problem reported with initialization. Exiting..."
+        print("Error: problem reported with initialization. Exiting...")
         return[]
 
     x_state_0, x_control_0, dt = problem.unpack(problem.guess)
@@ -224,7 +224,7 @@ def pseudospectral(problem):
     try: 
         problem.options.N
     except AttributeError:
-        print "Warning: number of control points not specified. Using size of initial guess."
+        print("Warning: number of control points not specified. Using size of initial guess.")
         if len(x_state) == 0:
             problem.Nstate = 0
         else:
@@ -244,7 +244,7 @@ def pseudospectral(problem):
                 problem.Nstate = 1
         
                 if problem.options.N != rows:
-                    print "Warning: number of control points specified does not match size of initial guess. Overriding with size of guess."
+                    print("Warning: number of control points specified does not match size of initial guess. Overriding with size of guess.")
                     problem.options.N = rows
 
     if len(x_control_0) == 0:
@@ -256,7 +256,7 @@ def pseudospectral(problem):
             rows = np.shape(x_control_0)
 
         if problem.options.N != rows:
-            print "Warning: number of control points does not match between state and control variables. Exiting..."
+            print("Warning: number of control points does not match between state and control variables. Exiting...")
             err = True; return []
 
     if not dt:
@@ -301,7 +301,7 @@ def chebyshev_data(N,integration=False):
 
     # error checking:
     if N <= 0:
-        print "N must be > 0"
+        print("N must be > 0")
         return []   
 
     D = np.zeros((N,N));
@@ -339,7 +339,7 @@ def cosine_space(N,x0,xf):
 
     # error checking:
     if N <= 0:
-        print "N must be > 0"
+        print("N must be > 0")
         return []   
 
     # x array
@@ -353,7 +353,7 @@ def chebyshev_fit(x0,xf,f):
 
     # error checking:
     if N < 2:
-        print "N must be > 1"
+        print("N must be > 1")
         return []   
     else:
         c = np.zeros(N)
@@ -373,7 +373,7 @@ def chebyshev_interpolate(x0,xf,c,x):
 
     # error checking:
     if N < 2:
-        print "N must be > 1"
+        print("N must be > 1")
         return []   
     else:
         f = np.zeros(N)
@@ -533,18 +533,18 @@ def residuals0(x,problem):
 
         # call user-supplied dynamics function
         rhs = problem.dynamics(x_state,x_control,D,I)
-        print "begin dot product"
+        print("begin dot product")
         # evaluate residuals of EOMs
         Rs = np.zeros_like(x_state) 
         for var in range(problem.Nstate):
             #Rs[:,j] = np.dot(D,x_state[:,j]) - rhs[:,j]
             for i in range(N):
-                print i
+                print(i)
                 for j in range(N):
                     
                     Rs[i,var] += D[i,j]*x_state[j,var] 
                 Rs[i,var] -= rhs[i,var]
-        print "end dot product"
+        print("end dot product")
         Rs = Rs[1:].flatten('F')
 
     else:
@@ -566,7 +566,7 @@ def residuals0(x,problem):
     if problem.variable_final_time:  
         Rf = problem.final_condition(x_state,x_control,D,I)
         R = np.append(R,Rf)
-    print "end R"
+    print("end R")
     return R
 
 def residuals_unpowered(x,problem):
@@ -653,12 +653,12 @@ def jacobian_AD(x,problem):
 
     # Jacobian via AD 
     N = len(x); J = np.zeros((N,N)); xi = ad.adnumber(x)
-    print "begin Jacobian"
+    print("begin Jacobian")
     R = residuals0(xi,problem)  
     for i in range(N):
         for j in range(N):          
             J[i,j] = R[i].d(xi[j])
-    print "end Jacobian"
+    print("end Jacobian")
     return J
 
 def create_guess(problem,options):
@@ -684,7 +684,7 @@ def create_guess(problem,options):
 
         if problem.Ncontrol > 0:
             rhs = problem.f(np.append(zs,zc,axis=1))
-            rhs[0,range(problem.Nstate)] = problem.z0
+            rhs[0,list(range(problem.Nstate))] = problem.z0
         else:
             rhs = problem.dynamics(zs,D,I)
             rhs[0,:] = problem.z0
@@ -711,18 +711,18 @@ def unpack(x,problem):
     tf = x[-1]; x = x[0:-1]
 
     # get state data
-    indices = range((problem.Npoints-1)*problem.Nstate)
+    indices = list(range((problem.Npoints-1)*problem.Nstate))
     z = np.reshape(x[indices],(problem.Npoints-1,problem.Nstate),order="F") 
 
     # get control data if applicable
     if problem.Ncontrol > 0:
 
         # get control vector
-        indices = indices[-1] + range(problem.Npoints*problem.Ncontrol)
+        indices = indices[-1] + list(range(problem.Npoints*problem.Ncontrol))
         u = np.reshape(x[indices],(problem.Npoints,problem.Ncontrol),order="F") 
 
         # get throttle
-        indices = indices[-1] + range(problem.Npoints)
+        indices = indices[-1] + list(range(problem.Npoints))
         eta = x[indices]
 
         return z, u, eta, tf
@@ -748,7 +748,7 @@ def create_state_data(z,u,problem,eta=[]):
         z[:,4] *= problem.scale.L
         z[:,5] *= problem.scale.V
     else:
-        print "something went wrong in dimensionalize"
+        print("something went wrong in dimensionalize")
         return []
     
     state = State()
@@ -765,10 +765,10 @@ def assign_values(A,B,irange,jrange):
 
     n, m = np.shape(B)
     if n != len(irange):
-        print "Error: rows do not match between A and B"
+        print("Error: rows do not match between A and B")
         return
     if m != len(jrange):
-        print "Error: columsn do not match between A and B"
+        print("Error: columsn do not match between A and B")
         return
 
     ii = 0

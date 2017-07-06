@@ -1,3 +1,3 @@
 
-import Cross_Section
-import Planform
+from . import Cross_Section
+from . import Planform

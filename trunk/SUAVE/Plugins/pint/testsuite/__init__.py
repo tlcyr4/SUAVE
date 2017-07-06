@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division, unicode_literals, print_function, absolute_import
+
 
 import os
 import sys
@@ -27,7 +27,7 @@ if PYTHON3:
         return x
 else:
     import codecs
-    string_types = basestring
+    string_types = str
     def u(x):
         return codecs.unicode_escape_decode(x)[0]
 

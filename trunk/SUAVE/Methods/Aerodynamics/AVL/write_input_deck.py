@@ -7,7 +7,7 @@
 #  Imports
 # ----------------------------------------------------------------------
 
-from purge_files import purge_files
+from .purge_files import purge_files
 
 
 def write_input_deck(avl_object):

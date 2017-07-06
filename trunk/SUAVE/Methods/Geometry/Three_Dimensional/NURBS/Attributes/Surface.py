@@ -47,7 +47,7 @@ class Surface(Data):
         self.uknots = Curves[0].knots  
         for curve in Curves:
             if len(curve.knots) != len(self.uknots):
-                print "Knots vectors of curves have different lengths, no surface created"
+                print("Knots vectors of curves have different lengths, no surface created")
                 return 
 
         self.N = len(Curves[0].CPs.x)

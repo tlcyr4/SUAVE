@@ -1,2 +1,2 @@
 
-from Structures import Structures
+from .Structures import Structures

@@ -1,2 +1,2 @@
 
-from shevell import shevell
+from .shevell import shevell

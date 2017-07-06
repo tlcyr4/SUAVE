@@ -1,2 +1,2 @@
-import Battery
-import Fuel_Cell
+from . import Battery
+from . import Fuel_Cell

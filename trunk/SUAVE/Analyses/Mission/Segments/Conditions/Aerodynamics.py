@@ -11,8 +11,8 @@
 import numpy as np
 
 # SUAVE imports
-from Basic import Basic
-from Conditions import Conditions
+from .Basic import Basic
+from .Conditions import Conditions
 
 
 # ----------------------------------------------------------------------

@@ -26,7 +26,7 @@ def compute_component_centers_of_gravity(vehicle):
     landing_gear       = vehicle.landing_gear
     #main_landing_gear  = vehicle.main_landing_gear
     #nose_landing_gear  = vehicle.nose_landing_gear
-    propulsor_name     = vehicle.propulsors.keys()[0]
+    propulsor_name     = list(vehicle.propulsors.keys())[0]
     propulsor          = vehicle.propulsors[propulsor_name]
     electrical_systems = vehicle.electrical_systems
     avionics           = vehicle.avionics

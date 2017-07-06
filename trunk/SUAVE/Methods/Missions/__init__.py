@@ -1,2 +1,2 @@
 
-import Segments
+from . import Segments

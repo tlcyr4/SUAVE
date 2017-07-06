@@ -56,7 +56,7 @@ class AVL(Aerodynamics,Surrogate):
         
         if not self.finalized:
             
-            print 'Building AVL Surrogate'
+            print('Building AVL Surrogate')
             
             self.avl_callable.features = self.geometry
             self.avl_callable.finalize()
@@ -65,7 +65,7 @@ class AVL(Aerodynamics,Surrogate):
         
             self.finalized = True
             
-            print 'Done'
+            print('Done')
         
         return
 

@@ -8,7 +8,7 @@
 # ----------------------------------------------------------------------
 
 from SUAVE.Core import Data
-from Aerodynamics import Aerodynamics
+from .Aerodynamics import Aerodynamics
 from SUAVE.Analyses import Process
 
 # ----------------------------------------------------------------------

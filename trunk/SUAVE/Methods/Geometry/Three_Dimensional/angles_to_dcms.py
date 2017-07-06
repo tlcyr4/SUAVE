@@ -1,7 +1,7 @@
 
 import numpy as np
 from numpy import cos, sin
-from orientation_product import orientation_product
+from .orientation_product import orientation_product
 
 def angles_to_dcms(rotations,sequence=(2,1,0)):
     """ transform = angles_to_dcms([r1s,r2s,r3s],seq)
@@ -108,7 +108,7 @@ def new_tensor(a):
 if __name__ == '__main__':
     
     import numpy as np
-    from orientation_transpose import orientation_transpose
+    from .orientation_transpose import orientation_transpose
     
     n_t = 5
     
@@ -124,14 +124,14 @@ if __name__ == '__main__':
     
     F = np.array([Fx,Fy,Fz]).T
     
-    print rotations
-    print F
-    print '\n'
+    print(rotations)
+    print(F)
+    print('\n')
     
     T = angles_to_dcms(rotations,[2,1,0])
     
-    print T
-    print '\n'
+    print(T)
+    print('\n')
     
     F2 = orientation_product(T,F)
     
@@ -143,21 +143,21 @@ if __name__ == '__main__':
          [  7.04074369, -13.25444263,  -8.64567399]]        
     )
     
-    print F2
-    print '\n'
+    print(F2)
+    print('\n')
     
-    print 'should be nearly zero:'
-    print np.sum(F2-F2_expected)
-    print '\n'
+    print('should be nearly zero:')
+    print(np.sum(F2-F2_expected))
+    print('\n')
     
     Tt = orientation_transpose(T)
     F3 = orientation_product(Tt,F2)
     
-    print F3
-    print '\n'
+    print(F3)
+    print('\n')
     
-    print 'should be nearly zero:'
-    print np.sum(F - F3)
+    print('should be nearly zero:')
+    print(np.sum(F - F3))
     
     
     

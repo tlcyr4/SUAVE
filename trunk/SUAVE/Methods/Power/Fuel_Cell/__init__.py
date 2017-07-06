@@ -1,3 +1,3 @@
-import Discharge
-import Chemistry
-import Sizing
+from . import Discharge
+from . import Chemistry
+from . import Sizing

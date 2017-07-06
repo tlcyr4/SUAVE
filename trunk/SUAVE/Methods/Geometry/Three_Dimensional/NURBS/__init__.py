@@ -1,3 +1,3 @@
 
-import Attributes
-import Methods
+from . import Attributes
+from . import Methods

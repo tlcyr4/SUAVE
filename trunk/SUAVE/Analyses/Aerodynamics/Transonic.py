@@ -1,45 +1,25 @@
 # Transonic.py
 #
 # Created:  Jun 2017, Tigar Cyr
-# Modified: 
+# Modified: Jul 2017, Tigar Cyr
 
 # ----------------------------------------------------------------------
 #   Imports
 # ----------------------------------------------------------------------
 import SUAVE.Analyses.Aerodynamics.Aerodynamics as Aerodynamics
 import SUAVE.Analyses.Aerodynamics.Results as Results
+from SUAVE.Methods.Aerodynamics import Transonic as Methods
 import numpy as np
-import Fidelity_Zero
-import Supersonic_Zero
+import warnings
     
 # ----------------------------------------------------------------------
-#   Example
-# ----------------------------------------------------------------------   \
+#   Transonic
+# ----------------------------------------------------------------------
 class Transonic(Aerodynamics):
     """ SUAVE.Analyses.Aerodynamics.Transonic()
         Model based on NASA CRM Transonic Experimental Data (curve fits)
     """
-    
-    def __defaults__(self):
-        """ SUAVE.Analyses.Aerodynamics.Transonic.__defaults__()
-            initializes non-transonic models
-        """
-        # initialize subsonic model
-        model = Fidelity_Zero.Fidelity_Zero()
-        model.geometry = self.geometry    
-        model.process.compute.lift.inviscid_wings.geometry = self.geometry
-        model.process.compute.lift.inviscid_wings.initialize()
-        self.fzero = model
-        
-        # initialize supersonic model
-        model = Supersonic_Zero.Supersonic_Zero()
-        model.geometry = self.geometry
-        model.process.compute.lift.inviscid_wings.geometry = self.geometry
-        model.process.compute.lift.inviscid_wings.initialize()
-        self.szero = Supersonic_Zero.Supersonic_Zero()
-        
-    
-    
+
     def evaluate(self, state):
         """ SUAVE.Analyses.Aerodynamics.evaluate(state)
             evaluate aerodynamic analysis
@@ -64,64 +44,23 @@ class Transonic(Aerodynamics):
         
         
         mean = np.mean(mach)
-        # Subsonic model
+        # Check to see if model is transonic
         if mean < .8:
-            results = self.fzero(state)
-
-        # Supersonic model
+            warnings.warn("System is subsonic. Consider using different model")
         elif mean > 1.2:
-            results = self.szero(state)
+            warnings.warn("System is supersonic. Consider using different model")
+
             
-        else:
-            
-            cl, cd = tandem(alpha)
-            
-            results.lift.total = cl
-            results.drag.total = cd
+        cl = Methods.compute_lift(alpha)
+        
+        results.lift.total = cl
+        results.drag.total = Methods.compute_drag_from_lift(cl)
             
         return results
     
-def quadratic_single(aoa):
-    """ SUAVE.Analyses.Aerodynamics.Transonic.tandem(aoa)
-        Uses aoa to calculate cl and cd with quadratic curve fits
-        
-        Inputs:
-            aoa - angle of attack (column array)
-            
-        Outputs:
-            cl - lift coefficient (column array)
-            cd - drag coefficient (column array)
-    """
-    # model coefficients
-    bl = np.array([[-0.00717433179381432],	[0.144047701950893],	[0.126479444126983]])
-    bd = np.array([[0.00162236444781382],	[0.000443156656073951],	[0.0141465405789619]])
-    
-    # calculate coefficients
-    cl = bl[2] + bl[1] * aoa + bl[0] * np.square(aoa)
-    cd = bd[2] + bd[1] * aoa + bd[0] * np.square(aoa)
-    
-    return cl, cd
 
-def tandem(aoa):
-    """ SUAVE.Analyses.Aerodynamics.Transonic.tandem(aoa)
-        Uses aoa to calculate cl and cl to calculate cd
-        
-        Inputs:
-            aoa - angle of attack (column array)
-            
-        Outputs:
-            cl - lift coefficient (column array)
-            cd - drag coefficient (column array)
-    """
-    # model coefficients
-    bl = np.array([[-0.00717433179381432],	[0.144047701950893],	[0.126479444126983]])
-    bd = np.array([[0.177990108978307],	[0.04257289502394],	[0.010275150311500]])
-    
-    # calculate coefficients
-    cl = bl[2] + bl[1] * aoa + bl[0] * np.square(aoa)
-    cd = bd[2] + bd[1] * cl + bd[0] * np.square(cl)
-    
-    return cl, cd
+
+
 # ----------------------------------------------------------------------
 #   Module Testing
 # ----------------------------------------------------------------------   

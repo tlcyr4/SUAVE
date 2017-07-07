@@ -24,6 +24,9 @@ import numpy as np
 # ----------------------------------------------------------------------   
 
 class Property(object):
+    """ SUAVE.Core.DataOrdered
+        Ordered dictionary data structure with attribute-style access.
+    """
     
     def __init__(self,key=None):
         """ SUAVE.Core.DataOrdered.Property.__init__(key = None)
@@ -224,7 +227,6 @@ class DataOrdered(OrderedDict):
                 args - string representation of data object
 
         """
-        new_indent = '  '
         args = ''
         
         # trunk data name
@@ -389,12 +391,12 @@ class DataOrdered(OrderedDict):
         return self.__dict__.__len__()   
 
     ###duplicate method?
-    def __iter__(self):
-        root = self._root
-        curr = root[1]
-        while curr is not root:
-            yield curr[2]
-            curr = curr[1]
+#    def __iter__(self):
+#        root = self._root
+#        curr = root[1]
+#        while curr is not root:
+#            yield curr[2]
+#            curr = curr[1]
 
     def __reduce__(self):
         items = [( k, DataOrdered.__getitem2(self,k) ) for k in DataOrdered.iterkeys(self)]
@@ -600,7 +602,6 @@ if __name__ == '__main__':
     d.options.half  = 0.5
     print d
     
-    import numpy as np
     ones = np.ones([10,1])
         
     m = DataOrdered()

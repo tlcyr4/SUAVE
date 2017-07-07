@@ -25,28 +25,55 @@ class Analysis(Data):
         self.settings = Data()
     
     def compile(self,*args,**kwarg):
-        """ compile the data, settings, etc.
-            avoid analysis specific algorithms
+        """ SUAVE.Analyses.Analysis.compile(*args,**kwarg)
+            compile the data, settings, etc. avoid analysis specific algorithms
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
         """
         return
         
     def initialize(self,*args,**kwarg):
-        """ analysis specific initialization algorithms
+        """ SUAVE.Analyses.Analysis.initialize(*args,**kwarg)
+            analysis specific initialization algorithms
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
         """
         return
     
     def evaluate(self,*args,**kwarg):
-        """ analysis specific evaluation algorithms
+        """ SUAVE.Analyses.Analysis.evaluate(*args,**kwarg)
+            analysis specific evaluation algorithms
+            
+            Inputs:
+                *args, **kwarg - inputs for evaluation process
+            
+            Outputs:
+                any results of evaluation
         """        
         raise NotImplementedError
         return Results()
     
     def finalize(self,*args,**kwarg):
-        """ analysis specific finalization algorithms
+        """ SUAVE.Analyses.Analysis.finalize(*args,**kwarg)
+            analysis specific finalization algorithms
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
         """        
         return 
     
     def __call__(self,*args,**kwarg):
+        """ SUAVE.Analyses.Analysis.__call__(*args,**kwarg)
+            calls evaluate
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
+                
+            Outputs:
+                results of evaluation process
+        """
         return self.evaluate(*args,**kwarg)
     
 
@@ -59,16 +86,35 @@ class Container(ContainerBase):
     """
     
     def compile(self,*args,**kwarg):
+        """ SUAVE.Analyses.Analysis.Container.compile(*args,**kwarg)
+            compile all analyses
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
+        """
+        
         for tag,analysis in self.items():
             if hasattr(analysis,'compile'):
                 analysis.compile(*args,**kwarg)
         
     def initialize(self,*args,**kwarg):
+        """ SUAVE.Analyses.Analysis.Container.initialize(*args,**kwarg)
+            initialize all analyses
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
+        """
         for tag,analysis in self.items:
             if hasattr(analysis,'initialize'):
                 analysis.initialize(*args,**kwarg)
     
     def evaluate(self,*args,**kwarg):
+        """ SUAVE.Analyses.Analysis.Container.evaluate(*args,**kwarg)
+            evaluate all analyses
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
+        """
         results = Results()
         for tag,analysis in self.items(): 
             if hasattr(analysis,'evaluate'):
@@ -79,11 +125,23 @@ class Container(ContainerBase):
         return results
     
     def finalize(self,*args,**kwarg):
+        """ SUAVE.Analyses.Analysis.Container.finalize(*args,**kwarg)
+            finalize all analyses
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
+        """
         for tag,analysis in self.items():
             if hasattr(analysis,'finalize'):
                 analysis.finalize(*args,**kwarg)
     
     def __call__(self,*args,**kwarg):
+        """ SUAVE.Analyses.Analysis.Container.__call__(*args,**kwarg)
+            evaluate container
+            
+            Inputs:
+                *args, **kwarg - inputs for analysis specific implementations
+        """
         return self.evaluate(*args,**kwarg)
 
 

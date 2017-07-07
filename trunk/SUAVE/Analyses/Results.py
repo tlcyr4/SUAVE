@@ -6,4 +6,7 @@
 from SUAVE.Core import Data
 
 class Results(Data):
+    """ SUAVE.Analyses.Results()
+        Direct inheritance from Data (dictionary data structure w/ attribute style access)
+    """
     pass

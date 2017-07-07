@@ -17,8 +17,12 @@ from SUAVE.Core import Container as ContainerBase
 
 class Settings(Data):
     """ SUAVE.Analyses.Settings()
+        settings for execution of simulation
     """
     def __defaults__(self):
+        """ SUAVE.Analyses.Settings.__defaults__()
+            updates tag and sets verbose to false
+        """
         self.tag    = 'settings'
         
         self.verbose_process = False
@@ -30,6 +34,7 @@ class Settings(Data):
 
 class Container(ContainerBase):
     """ SUAVE.Analyses.Settings.Container()
+        container of settings
     """
     
 

@@ -17,9 +17,12 @@ from SUAVE.Analyses import Process
 
 class Markup(Aerodynamics):
     """ SUAVE.Analyses.Aerodynamics.Markup()
+        Base aerodynamic model with an object oriented process hierarchy
     """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Aerodynamics.Markup.__defaults__()
+            initializes tag, geometry and settings; begins initializing process hierarchy
+        """
         self.tag    = 'aerodynamics_markup'
         
         self.geometry = Data()
@@ -31,6 +34,15 @@ class Markup(Aerodynamics):
         
         
     def evaluate(self,state):
+        """ SUAVE.Analyses.Aerodynamics.Markup.evaluate(state)
+            executes analysis specific compute subprocess
+            
+            Inputs:
+                state - state of the system
+                
+            Outputs:
+                results - results of the analysis
+        """
         
         settings = self.settings
         geometry = self.geometry
@@ -40,6 +52,9 @@ class Markup(Aerodynamics):
         return results
         
     def initialize(self):
+        """ SUAVE.Analyses.Aerodynamics.Markup.initialize()
+            calls analysis specific initialization
+        """
         self.process.initialize(self)
     
         

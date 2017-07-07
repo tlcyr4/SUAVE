@@ -20,8 +20,12 @@ import numpy as np
 
 class Aerodynamics(Analysis):
     """ SUAVE.Analyses.Aerodynamics.Aerodynamics()
+        Base aerodynamic model
     """
     def __defaults__(self):
+        """ SUAVE.Analyses.Aerodynamics.Aerodynamics.__defaults__()
+            Sets up geometry and settings
+        """
         self.tag    = 'aerodynamics'
         
         self.geometry = Data()
@@ -30,17 +34,43 @@ class Aerodynamics(Analysis):
         
         
     def evaluate(self,state):
+        """ SUAVE.Analyses.Aerodynamics.Aerodynamics.evaluate(state)
+            evaluates model and returns results (analysis-specific)
+            
+            Inputs:
+                state - state of the system
+                
+            Outputs:
+                results.lift_coefficient - [[0]]
+                results.drag_coefficient - [[0]]
+                results.lift_force_vector - [[0]]
+                results.drag_force_vector - [[0]]
+        """
         
         results = Results()
         
         return results
     
     def finalize(self):
+        """ SUAVE.Analyses.Aerodynamics.Aerodynamics.finalize()
+            analysis specific finalization
+        """
         
         return     
     
     
     def compute_forces(self,conditions):
+        """ SUAVE.Analyses.Aerodynamics.Aerodynamics.comput_forces()
+            compute lift and drag forces
+            
+            Inputs:
+                conditions.aerodynamics.lift_coefficient - cl
+                conditions.aerodynamics.drag_coefficient - cd
+                
+            Outputs:
+                results.lift_force_vector - lift force vector
+                results.drag_force_vector - drag force vector
+        """
         
         # unpack
         q    = conditions.freestream.dynamic_pressure

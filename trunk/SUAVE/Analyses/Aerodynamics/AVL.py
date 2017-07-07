@@ -47,6 +47,10 @@ class AVL(Aero_Analysis):
     """
 
     def __defaults__(self):
+        """ SUAVE.Analyses.Aerodynamics.AVL.__defaults__()
+            set up settings and current status
+
+        """
         self.tag        = 'avl'
         self.keep_files = True
 
@@ -62,6 +66,10 @@ class AVL(Aero_Analysis):
 
 
     def finalize(self):
+        """ SUAVE.Analyses.Aerodynamics.AVL.finalize()
+            delete avl run files and remake run folder
+
+        """
 
         features = self.features
         self.tag      = 'avl_analysis_of_{}'.format(features.tag)
@@ -77,6 +85,19 @@ class AVL(Aero_Analysis):
 
 
     def evaluate(self,state,**args):
+        """ SUAVE.Analyses.Aerodynamics.AVL.evaluate(state, **args)
+            evaluate analysis
+            
+            Inputs:
+                state - state of the system
+                **args - unused
+                
+            Outputs:
+                results.conditions.aerodynamics.lift_coefficient - lift coefficient
+                results.conditions.aerodynamics.drag_coefficient - drag coefficient
+                results.conditions.aerodynamics.pitch_moment_coeffieicnt - pitch moment coefficient
+
+        """
         
         # unpack
         conditions = state.conditions
@@ -91,7 +112,8 @@ class AVL(Aero_Analysis):
 
 
     def evaluate_conditions(self,run_conditions):
-        """ process vehicle to setup geometry, condititon and configuration
+        """ SUAVE.Analyses.Aerodynamics.AVL.evaluate_conditions(run_conditions)
+            process vehicle to setup geometry, condititon and configuration
 
             Inputs:
                 run_conditions - DataDict() of aerodynamic conditions; until input
@@ -146,6 +168,18 @@ class AVL(Aero_Analysis):
 
 
     def __call__(self,*args,**kwarg):
+        """ SUAVE.Analyses.Aerodynamics.AVL.__call__(*args, **kwarg)
+            evaluate analysis
+            
+            Inputs:
+                *args - should include state
+                
+            Outputs:
+                results.conditions.aerodynamics.lift_coefficient - lift coefficient
+                results.conditions.aerodynamics.drag_coefficient - drag coefficient
+                results.conditions.aerodynamics.pitch_moment_coefficient - pitch moment coefficient
+
+        """
         return self.evaluate(*args,**kwarg)
     
     

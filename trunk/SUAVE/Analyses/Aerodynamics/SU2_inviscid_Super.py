@@ -30,9 +30,13 @@ from sklearn import svm
 # ----------------------------------------------------------------------
 
 class SU2_inviscid_Super(Aerodynamics):
-
+    """ SUAVE.Analyses.Aerodynamics.SU2_inviscid_Super()
+        Uses Stanford's SU2 CFD solver to generate a surrogate model for supersonic inviscid analysis.
+    """
     def __defaults__(self):
-
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid_Super.__defaults__()
+            initializes analyisis and surrogate training settings
+        """
         self.tag = 'SU2_inviscid'
 
         self.geometry = Data()
@@ -55,7 +59,9 @@ class SU2_inviscid_Super(Aerodynamics):
  
         
     def initialize(self):
-                   
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid_Super.initialize()
+            Builds and trains surrogate model
+        """           
         # Sample training data
         self.sample_training()
                     
@@ -64,7 +70,19 @@ class SU2_inviscid_Super(Aerodynamics):
 
 
     def evaluate(self,state,settings,geometry):
-
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid_Super.evaluate(state, settings, geometry)
+            Calculates lift and drag based on surrogate model of inviscid SU2 analysis and stores them in the conditions structure
+            
+            Inputs:
+                state.conditions.
+                    freestream.mach_number          - mach number
+                    aerodynamics.angle_of_attack    - aoa
+                    
+            Outputs:
+                inviscid_lift - lift under inviscid assumption
+                invisced_drag - drag under inviscid assumption
+                
+        """
         # Unpack
         surrogates = self.surrogates        
         conditions = state.conditions
@@ -97,7 +115,9 @@ class SU2_inviscid_Super(Aerodynamics):
 
 
     def sample_training(self):
-        
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid_Super.sample_training()
+            Creates training data based on running default test points through SU2
+        """
         # Unpack
         geometry = self.geometry
         settings = self.settings
@@ -149,7 +169,12 @@ class SU2_inviscid_Super(Aerodynamics):
         return
 
     def build_surrogate(self):
-
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid_Super.build_surrogate()
+            builds surrogate model with training data, then plots model
+            
+            Assumptions:
+                sample data has already been initialized (see sample_training)
+        """
         # Unpack data
         training  = self.training
         AoA_data  = training.angle_of_attack
@@ -237,7 +262,18 @@ class SU2_inviscid_Super(Aerodynamics):
 # ----------------------------------------------------------------------
 
 def call_SU2(conditions,settings,geometry):
-    """ calculate total vehicle lift coefficient with SU2
+    """ SUAVE.Analyses.Aerodynamics.SU2_inviscid_Super.call_SU2(conditions, settings, geometry)
+        calculate total vehicle lift coefficient with SU2
+        
+        Inputs:
+            conditions.aerodynamics.
+                mach - mach number
+                angle_of_attack - aoa
+            settings.
+                parallel - boolean for whether or not to run in parallel
+                processors - number of processors to use
+                maximum_iterations - max number of iterations to run
+            geometry.reference_area - reference area of vehicle
     """
 
     half_mesh_flag = settings.half_mesh_flag

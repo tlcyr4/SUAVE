@@ -25,9 +25,14 @@ from Vortex_Lattice import Vortex_Lattice
 #  Analysis
 # ----------------------------------------------------------------------
 class Fidelity_Zero(Markup):
+    """ SUAVE.Analyses.Aerodynamics.Fidelity_Zero()
+        Low fidelity aerodynamics model, uses surrogate of vortex lattice method for lift.
+    """
     
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Aerodynamics.Fidelity_Zero()
+            initializes settings and lift and drag computational processes
+        """
         self.tag    = 'fidelity_zero_markup'
         
         ## available from Markup
@@ -97,6 +102,9 @@ class Fidelity_Zero(Markup):
         
         
     def initialize(self):
+        """ SUAVE.Analyses.Aerodynamics.Fidelity_Zero()
+            initialize inviscid wings vortex lattice
+        """
         self.process.compute.lift.inviscid_wings.geometry = self.geometry
         self.process.compute.lift.inviscid_wings.initialize()
         

@@ -38,6 +38,9 @@ class Linear_Lift(Aerodynamics):
     """
 
     def __defaults__(self):
+        """ SUAVE.Analyses.Aerodynamics.Linear_Lift.__defaults__()
+            initializes default settings, tag and geometry
+        """
 
         self.tag = 'Fidelity_Zero'
 
@@ -54,7 +57,8 @@ class Linear_Lift(Aerodynamics):
 
 
     def evaluate(self,state,settings=None,geometry=None):
-        """ process vehicle to setup geometry, condititon and settings
+        """ SUAVE.Analyses.Aerodynamics.Linear_Lift.evaluate(state, settings = None, geometry = None)
+            process vehicle to setup geometry, condititon and settings
         
             Settings:
                 zero_lift_coefficient = 0.0

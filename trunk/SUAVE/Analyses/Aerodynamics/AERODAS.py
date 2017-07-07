@@ -19,11 +19,16 @@ from SUAVE.Methods.Aerodynamics import AERODAS as Methods
 # ----------------------------------------------------------------------
 
 class AERODAS(Markup):
-    """This model is based on the NASA TR: "Models of Lift and Drag Coefficients of Stalled and Unstalled Airfoils in
-     Wind Turbines and Wind Tunnels" by D. A. Spera"""
+    """ SUAVE.Analyses.Aerodynamics.AERODAS()
+        This model is based on the NASA TR: "Models of Lift and Drag
+        Coefficients of Stalled and Unstalled Airfoils in Wind Turbines 
+        and Wind Tunnels" by D. A. Spera
+    """
     
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Aerodynamics.AERODAS.__defaults__()
+            Set up settings and processes.
+        """
         self.tag = 'AERODAS Model'
         
         settings = self.settings

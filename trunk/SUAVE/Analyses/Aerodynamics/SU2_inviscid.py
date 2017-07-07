@@ -30,8 +30,14 @@ from sklearn import svm
 # ----------------------------------------------------------------------
 
 class SU2_inviscid(Aerodynamics):
+    """ SUAVE.Analyses.Aerodynamics.SU2_inviscid()
+        Uses Stanford's SU2 CFD solver to generate a surrogate model for inviscid analysis.
+    """
 
     def __defaults__(self):
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid.__defaults__()
+            initializes analyisis and surrogate training settings
+        """
 
         self.tag = 'SU2_inviscid'
 
@@ -55,6 +61,9 @@ class SU2_inviscid(Aerodynamics):
  
         
     def initialize(self):
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid.initialize()
+            Builds and trains surrogate model
+        """
                    
         # Sample training data
         self.sample_training()
@@ -64,6 +73,19 @@ class SU2_inviscid(Aerodynamics):
 
 
     def evaluate(self,state,settings,geometry):
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid.evaluate(state, settings, geometry)
+            Calculates lift and drag based on surrogate model of inviscid SU2 analysis and stores them in the conditions structure
+            
+            Inputs:
+                state.conditions.
+                    freestream.mach_number          - mach number
+                    aerodynamics.angle_of_attack    - aoa
+                    
+            Outputs:
+                inviscid_lift - lift under inviscid assumption
+                invisced_drag - drag under inviscid assumption
+                
+        """
 
         # Unpack
         surrogates = self.surrogates        
@@ -93,6 +115,9 @@ class SU2_inviscid(Aerodynamics):
 
 
     def sample_training(self):
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid.sample_training()
+            Creates training data based on running default test points through SU2
+        """
         
         # Unpack
         geometry = self.geometry
@@ -145,7 +170,12 @@ class SU2_inviscid(Aerodynamics):
         return
 
     def build_surrogate(self):
-
+        """ SUAVE.Analyses.Aerodynamics.SU2_inviscid.build_surrogate()
+            builds surrogate model with training data, then plots model
+            
+            Assumptions:
+                sample data has already been initialized (see sample_training)
+        """
         # Unpack data
         training  = self.training
         AoA_data  = training.angle_of_attack
@@ -183,7 +213,7 @@ class SU2_inviscid(Aerodynamics):
         self.surrogates.drag_coefficient = cd_surrogate
         
         # Standard subsonic test case
-        AoA_points = np.linspace(-1.,7.,100)*Units.deg
+        AoA_points = np.linspace(-1.,7.,100) * Units.deg
         mach_points = np.linspace(.25,.9,100)      
         
         AoA_mesh,mach_mesh = np.meshgrid(AoA_points,mach_points)
@@ -193,8 +223,8 @@ class SU2_inviscid(Aerodynamics):
         
         for jj in range(len(AoA_points)):
             for ii in range(len(mach_points)):
-                CL_sur[ii,jj] = cl_surrogate.predict(np.array([AoA_mesh[ii,jj],mach_mesh[ii,jj]]))
-                CD_sur[ii,jj] = cd_surrogate.predict(np.array([AoA_mesh[ii,jj],mach_mesh[ii,jj]]))
+                CL_sur[ii,jj] = cl_surrogate.predict(np.array([AoA_mesh[ii,jj], mach_mesh[ii,jj]]))
+                CD_sur[ii,jj] = cd_surrogate.predict(np.array([AoA_mesh[ii,jj], mach_mesh[ii,jj]]))
         
 
         fig = plt.figure('Coefficient of Lift Surrogate Plot')    
@@ -224,7 +254,18 @@ class SU2_inviscid(Aerodynamics):
 # ----------------------------------------------------------------------
 
 def call_SU2(conditions,settings,geometry):
-    """ calculate total vehicle lift coefficient with SU2
+    """ SUAVE.Analyses.Aerodynamics.SU2_inviscid.call_SU2(conditions, settings, geometry)
+        calculate total vehicle lift coefficient with SU2
+        
+        Inputs:
+            conditions.aerodynamics.
+                mach - mach number
+                angle_of_attack - aoa
+            settings.
+                parallel - boolean for whether or not to run in parallel
+                processors - number of processors to use
+                maximum_iterations - max number of iterations to run
+            geometry.reference_area - reference area of vehicle
     """
 
     half_mesh_flag = settings.half_mesh_flag

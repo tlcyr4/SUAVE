@@ -26,7 +26,7 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 class Supersonic_Zero(Markup):
-    """ SUAVE.Attributes.Aerodynamics.Fidelity_Zero
+    """ SUAVE.Analyses.Aerodynamics.Supersonic_Zero
         aerodynamic model that builds a surrogate model for clean wing 
         lift, using vortex lattic, and various handbook methods
         for everything else
@@ -36,7 +36,9 @@ class Supersonic_Zero(Markup):
     """
     
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Aerodynamics.Supersonic_Zero()
+            initializes settings and lift and drag computational processes
+        """
         self.tag = 'Fidelity_Zero_Supersonic'
         
         # correction factors
@@ -86,6 +88,9 @@ class Supersonic_Zero(Markup):
         
         
     def initialize(self):
+        """ SUAVE.Analyses.Aerodynamics.Supersonic_Zero()
+            initialize inviscid wings vortex lattice
+        """
         self.process.compute.lift.inviscid_wings.geometry = self.geometry
         self.process.compute.lift.inviscid_wings.initialize()
         

@@ -32,16 +32,18 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 class Vortex_Lattice(Aerodynamics):
-    """ SUAVE.Analyses.Aerodynamics.Fidelity_Zero
+    """ SUAVE.Analyses.Aerodynamics.Vortex_Lattice
         aerodynamic model that builds a surrogate model for clean wing
-        lift, using vortex lattice, and various handbook methods
-        for everything else
+        lift, using vortex lattice
 
         this class is callable, see self.__call__
 
     """
 
     def __defaults__(self):
+        """ SUAVE.Analyses.Aerodynamics.Vortex_Lattice.__defaults__()
+            initializes default geometry, settings and training test points and surrogate model
+        """
 
         self.tag = 'Vortex_Lattice'
 
@@ -71,7 +73,9 @@ class Vortex_Lattice(Aerodynamics):
  
         
     def initialize(self):
-                   
+        """ SUAVE.Analyses.Aerodynamics.Vortex_Lattice.initialize()
+            Builds and trains surrogate model
+        """             
         # sample training data
         self.sample_training()
                     
@@ -80,7 +84,8 @@ class Vortex_Lattice(Aerodynamics):
 
 
     def evaluate(self,state,settings,geometry):
-        """ process vehicle to setup geometry, condititon and settings
+        """ SUAVE.Analyses.Aerodynamics.Vortex_Lattice.evaluate()
+            process vehicle to setup geometry, condititon and settings
 
             Inputs:
                 conditions - DataDict() of aerodynamic conditions
@@ -90,7 +95,7 @@ class Vortex_Lattice(Aerodynamics):
                 CD - array of drag coefficients, same size as alpha
 
             Assumptions:
-                linear intperolation surrogate model on Mach, Angle of Attack
+                linear interpolation surrogate model on Mach, Angle of Attack
                     and Reynolds number
                 locations outside the surrogate's table are held to nearest data
                 no changes to initial geometry or settings
@@ -121,7 +126,9 @@ class Vortex_Lattice(Aerodynamics):
 
 
     def sample_training(self):
-        
+        """ SUAVE.Analyses.Aerodynamics.Vortex_Lattice.sample_training()
+            Creates training data based on running default test points through vortex lattice method
+        """
         # unpack
         geometry = self.geometry
         settings = self.settings
@@ -149,7 +156,12 @@ class Vortex_Lattice(Aerodynamics):
         return
 
     def build_surrogate(self):
-
+        """ SUAVE.Analyses.Aerodynamics.Vortex_Lattice.build_surrogate()
+            builds surrogate model with training data
+            
+            Assumptions:
+                sample data has already been initialized (see sample_training)
+        """
         # unpack data
         training = self.training
         AoA_data = training.angle_of_attack
@@ -175,7 +187,16 @@ class Vortex_Lattice(Aerodynamics):
 
 
 def calculate_lift_vortex_lattice(conditions,settings,geometry):
-    """ calculate total vehicle lift coefficient by vortex lattice
+    """ SUAVE.Analyses.Aerodynamics.Vortex_Lattice.calculate_lift_vortex_lattive(conditions, settings, geometry)
+        calculate total vehicle lift coefficient by vortex lattice
+        
+        Inputs:
+            conditions - conditions of system (state)
+            settings - settings of analysis (see weissinger_vortex_lattice)
+            geometry.reference_area - vehicle reference area (see weissinger_vortex_lattice)
+            
+        Outputs:
+            total_lift_coeff - lift coefficient
     """
 
     # unpack

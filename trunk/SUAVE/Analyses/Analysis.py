@@ -18,6 +18,7 @@ from SUAVE.Analyses import Results
 
 class Analysis(Data):
     """ SUAVE.Analyses.Analysis()
+        Base analysis model
     """
     def __defaults__(self):
         self.tag    = 'analysis'

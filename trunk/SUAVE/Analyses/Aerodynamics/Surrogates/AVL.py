@@ -23,13 +23,16 @@ from SUAVE.Analyses import Surrogate
 # ----------------------------------------------------------------------
 
 class AVL(Aerodynamics,Surrogate):
-    ''' This class only builds and evaluates an avl surrogate of aerodynamics
+    ''' SUAVE.Analyses.Aerodynamics.Surrogate.AVL()
+        This class only builds and evaluates an avl surrogate of aerodynamics
         It must be patched into a markup analysis if more fidelity is needed.
         The surrogate models lift coefficient, induced drag coefficient, and
         pitching moment coefficient versus angle of attack.
     '''
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Aerodynamcis.Surroates.AVL.__defaults__()
+            initializes training test points and surrogate model, sets up avl
+        """
         self.training = Data()
         self.training.angle_of_attack  = np.array([-10.,0.,10.]) * Units.deg
         self.training.lift_coefficient = None
@@ -53,7 +56,9 @@ class AVL(Aerodynamics,Surrogate):
 
 
     def finalize(self):
-        
+        """ SUAVE.Analyses.Aerodynamcis.Surroates.AVL.finalize()
+            ensures that original avl model is finalized and surrogate is built/trained
+        """
         if not self.finalized:
             
             print 'Building AVL Surrogate'
@@ -72,7 +77,9 @@ class AVL(Aerodynamics,Surrogate):
     initialize = finalize
     
     def sample_training(self):
-
+        """ SUAVE.Analyses.Aerodynamcis.Surroates.AVL.sample_training()
+            evaluates test point with avl model
+        """
         # define conditions for run cases
         run_conditions = Aero_Conditions()
         ones_1col      = run_conditions.ones_row(1)
@@ -100,7 +107,9 @@ class AVL(Aerodynamics,Surrogate):
 
 
     def build_surrogate(self):
-        
+        """ SUAVE.Analyses.Aerodynamcis.Surroates.AVL.build_surrogate()
+            builds surrogate model based off of results of training data
+        """
         # unpack
         training_data = self.training
         AoA_data = training_data.angle_of_attack
@@ -125,7 +134,27 @@ class AVL(Aerodynamics,Surrogate):
 
 
     def evaluate(self,state,settings=None,geometry=None):
-        
+        """ SUAVE.Analyses.Aerodynamcis.Surroates.AVL.evaluate(state, settings = None, geometry = None)
+            uses surrogate model to analyse aerodynamics
+            
+            Inputs:
+                state.conditions.aerodynamics.angle_of_attack - aoa
+                settings - settings of analysis
+                geometry - geometry of vehicle
+                
+            Outputs:
+                state.conditions.aerodynamics.
+                    lift_coefficient - cl
+                    drag_coefficient - cd
+                    induced_drag_coefficient - lift-induced cd
+                    pitch_moment_coefficient - pitch moment coefficient
+                results.
+                    lift_coefficient - cl
+                    drag_coefficient - cd
+                    induced_drag_coefficient - lift-induced cd
+                    pitch_moment_coefficient - pitch moment coefficient
+                    
+        """
         # unpack
         aoa           = state.conditions.aerodynamics.angle_of_attack
         Sref          = self.geometry.reference_area
@@ -153,7 +182,18 @@ class AVL(Aerodynamics,Surrogate):
 
 
     def evaluate_lift(self,state):
-        
+        """ SUAVE.Analyses.Aerodynamcis.Surroates.AVL.evaluate_lift(state)
+            calculate lift only
+            
+            Inputs:
+                state.conditions.aerodynamics.freestream.angle_of_attack - aoa
+                
+            Outputs:
+                results.lift_coefficient - cl
+                
+            Assumptions:
+                AVL has been initialized with the desired geometry
+        """
         # unpack
         aoa   = state.conditions.aerodynamics.freestream.angle_of_attack
         Sref  = self.geometry.reference_area

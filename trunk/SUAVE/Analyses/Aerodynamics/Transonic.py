@@ -8,6 +8,7 @@
 # ----------------------------------------------------------------------
 import SUAVE.Analyses.Aerodynamics.Aerodynamics as Aerodynamics
 import SUAVE.Analyses.Aerodynamics.Results as Results
+import SUAVE.Core.Units as Units
 from SUAVE.Methods.Aerodynamics import Transonic as Methods
 import numpy as np
 import warnings
@@ -25,12 +26,12 @@ class Transonic(Aerodynamics):
             evaluate aerodynamic analysis
             
             Inputs:
-                state.conditions.freestream.mach_number - mach number (column array)
-                state.conditions.aerodynamics.angle_of_attack - aoa (column array)
+                state.conditions.freestream.mach_number - mach number 
+                state.conditions.aerodynamics.angle_of_attack - aoa [radians]
                 
             Outputs:
-                results.lift.total - lift coefficient (column array)
-                results.drag.total - drag coefficient (column array)
+                results.lift.total - lift coefficient
+                results.drag.total - drag coefficient
         """
         
         # Initialize results object
@@ -40,7 +41,7 @@ class Transonic(Aerodynamics):
         
         # Unpack input
         mach = state.conditions.freestream.mach_number
-        alpha = state.conditions.aerodynamics.angle_of_attack
+        alpha = state.conditions.aerodynamics.angle_of_attack / Units.deg
         
         alphamax = 8
         alphamin = -3

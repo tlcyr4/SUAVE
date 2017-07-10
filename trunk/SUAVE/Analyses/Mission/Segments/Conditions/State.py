@@ -25,8 +25,13 @@ from SUAVE.Core import DataOrdered
 # ----------------------------------------------------------------------
 
 class State(Conditions):
-    
+    """ SUAVE.Analyses.Mission.Segments.State()
+        Encapsulates state of a physical system and its analysis.  Holds all the information necessary to carry out analyses.
+    """
     def __defaults__(self):
+        """ SUAVE.Analyses.Mission.Segments.State.__defaults__()
+            initializes unknowns, conditions, residuals, numerics, initials
+        """
         
         self.unknowns   = Unknowns()
         
@@ -40,7 +45,9 @@ class State(Conditions):
         
         
     def expand_rows(self,rows):
-        
+        """ SUAVE.Analyses.Mission.Segments.State.expand_rows()
+            recursively expands the arrays of conditions to have a given number of rows except for initials and numerics
+        """
         # store
         self._size = rows
         
@@ -62,11 +69,19 @@ class State(Conditions):
         
         
 class Container(State):
+    """ SUAVE.Analyses.Mission.Segments.State.Container()
+        Container of states
+    """
     def __defaults__(self):
+        """ SUAVE.Analyses.Mission.Segments.State.Container.__defaults__()
+            just initializes DataOrdered object to hold segments
+        """
         self.segments = DataOrdered()
         
     def merged(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.State.Container.merged()
+            Merges all states in container into one state, stacking conditions vertically
+        """
         state_out = State()
         
         for i,(tag,sub_state) in enumerate(self.segments.items()):
@@ -82,6 +97,9 @@ State.Container = Container
 
 
 def append_array(A,B=None):
+    """ SUAVE.Analyses.Mission.Segments.State.append_array()
+        Stack arrays vertically into one
+    """
     if isinstance(A,array_type) and isinstance(B,array_type):
         return np.vstack([A,B])
     else:

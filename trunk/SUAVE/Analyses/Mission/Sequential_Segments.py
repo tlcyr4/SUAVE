@@ -19,10 +19,14 @@ from Mission import Mission
 # ----------------------------------------------------------------------
 
 class Sequential_Segments(Mission):
-    """ Solves each segment one at time """
+    """ SUAVE.Analyses.Mission.Sequential_Segments()
+        Solves each segment one at time 
+    """
     
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Sequential_Segments.__defaults__()
+            Initializes initialize, converge, iterate, and finalize processes
+        """
         self.tag = 'mission'
         
         
@@ -53,6 +57,9 @@ class Sequential_Segments(Mission):
         return
     
     def finalize(self):
+        """ SUAVE.Analyses.Mission.Sequential_Segments.finalize()
+            Does nothing
+        """
         pass
 
 # ----------------------------------------------------------------------
@@ -60,8 +67,16 @@ class Sequential_Segments(Mission):
 # ----------------------------------------------------------------------
 
 class Container(ContainerBase):
-    
+    """ SUAVE.Analyses.Mission.Sequential_Segments.Container()
+        container for holding (sequential subsegment) missions
+    """
     def evaluate(self,state=None):
+        """ SUAVE.Analyses.Mission.Sequential_Segments.evaluate(state = None)
+            evaluates each mission in the container
+            
+            Inputs:
+                state - optionally use predetermined state rather than missions' own
+        """
         results = SUAVE.Analyses.Results()
         
         for key,mission in self.items():
@@ -71,6 +86,9 @@ class Container(ContainerBase):
         return results
     
     def finalize(self):
+        """ SUAVE.Analyses.Mission.Sequential_Segments.finalize()
+            Does nothing
+        """
         pass
 
 # Link container

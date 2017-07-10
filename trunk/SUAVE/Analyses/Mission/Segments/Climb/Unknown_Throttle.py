@@ -24,9 +24,15 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Unknown_Throttle(Aerodynamic):
-    
+    """ SUAVE.Analyses.Mission.Segments.Climb.Unknown_Throttle()
+        Mission segment where throttle is an unknown (as in tbd)
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Climb.Unknown_Throttle.__defaults__()
+            initializes aerodynamic conditions and analysis processes, 
+            mostly redundant from Aerodynamic (only adds acceleration,
+            differentials_altitude, altitude, residuals and unknowns)
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

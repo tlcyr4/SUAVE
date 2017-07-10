@@ -20,8 +20,14 @@ from Conditions import Conditions
 # ----------------------------------------------------------------------
 
 class Aerodynamics(Basic):
-    
+    """ SUAVE.Analyses.Mission.Segments.Basic()
+        Conditions for analysing an aerodynamic system
+    """
     def __defaults__(self):
+        """ SUAVE.Analyses.Mission.Segments.Basic.__defaults__()
+            initializes weights, frames, energies, freestream, stability, propulsion, and aerodynamics conditions 
+            (all array values at 0)
+        """
         self.tag = 'aerodynamic_conditions'
         
         # start default row vectors

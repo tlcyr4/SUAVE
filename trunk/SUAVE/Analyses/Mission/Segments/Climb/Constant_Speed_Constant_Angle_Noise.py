@@ -20,9 +20,14 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Speed_Constant_Angle_Noise(Unknown_Throttle):
-    
+    """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Speed_Constant_Angle_Noise()
+        Unknown_Throttle segment where air speed, noise and climb angle are fixed
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Speed_Constant_Angle_Noise.__defaults__()
+            initializes end altitude, climb angle, air speed and initialize conditions process
+            also expands state to incorporate microphone
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

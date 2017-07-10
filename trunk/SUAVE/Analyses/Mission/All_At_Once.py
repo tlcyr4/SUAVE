@@ -3,7 +3,7 @@
 # Created:  
 # Modified: Feb 2016, Andrew Wendorff
 
-""" Mission.py: Top-level mission class """
+""" All_At_Once: Solves all segments and sub segments at once """
 
 # ----------------------------------------------------------------------
 #  Imports
@@ -18,10 +18,14 @@ from Mission import Mission
 # ----------------------------------------------------------------------
 
 class All_At_Once(Mission):
-    """ Solves all segments and sub segments at once """
+    """ SUAVE.Analyses.Mission.All_At_Once()
+        Solves all segments and sub segments at once 
+    """
     
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.All_At_Once.__defaults__()
+            Initializes initialize, converge, iterate, and finalize processes
+        """
         self.tag = 'mission'
         
         # --------------------------------------------------------------
@@ -50,6 +54,9 @@ class All_At_Once(Mission):
         self.process.finalize.sub_segments          = Methods.Segments.Common.Sub_Segments.finalize_sub_segments
         
     def finalize(self):
+        """ SUAVE.Analyses.Mission.All_At_Once.finalize()
+            Does nothing
+        """
         pass
     
     

@@ -21,9 +21,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Linear_Mach_Constant_Rate(Unknown_Throttle):
-    
+    """ SUAVE.Analyses.Mission.Segments.Climb.Linear_Mach_Constant_Rate()
+        Unknown_Throttle segment where climb rate is fixed and mach number is changing in a fixed linear manner
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Climb.Linear_Mach_Constant_Rate.__defaults__()
+            initializes end altitude, climb rate, start and end mach number and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

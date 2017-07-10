@@ -16,8 +16,12 @@ from SUAVE.Analyses import Analysis
 
 class Costs(Analysis):
     """ SUAVE.Analyses.Costs.Costs()
+        Base class for analyzing costs of producing and operating vehicles
     """
     def __defaults__(self):
+        """ SUAVE.Analyses.Costs.Costs__defaults__()
+            Initializes settings with default cost-calculating methods
+        """
 
         self.tag = 'costs'
         self.vehicle  = Data()
@@ -30,6 +34,15 @@ class Costs(Analysis):
             SUAVE.Methods.Costs.Correlations.Industrial_Costs.compute_industrial_costs
 
     def evaluate(self,conditions=None):
+        """ SUAVE.Analyses.Costs.Costs.evaluate(conditions = None)
+            Determines manufacturing and operating costs
+            
+            Inputs:
+                conditions - conditions of system
+                
+            Outputs:
+                None
+        """
 
         # unpack
         vehicle             = self.vehicle

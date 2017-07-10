@@ -18,8 +18,13 @@ from Conditions import Conditions
 # ----------------------------------------------------------------------
 
 class Basic(Conditions):
-    
+    """ SUAVE.Analyses.Mission.Segments.Basic()
+        Basic conditions for analysing a general physical system
+    """
     def __defaults__(self):
+        """ SUAVE.Analyses.Mission.Segments.Basic.__defaults__()
+            initializes weights, frames and energies conditions (all array values at 0)
+        """
         self.tag = 'basic_conditions'
         
         # start default row vectors

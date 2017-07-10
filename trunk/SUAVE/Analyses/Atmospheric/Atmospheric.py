@@ -19,38 +19,40 @@ from SUAVE.Analyses import Analysis
 
 ## @ingroup analyses-atmospheric
 class Atmospheric(Analysis):
-    """ This is the base class for atmospheric analyses. It contains functions
-    that are build the default class.
+    """ SUAVE.Analyses.Atmospheric.Atmospheric()
+        This is the base class for atmospheric analyses.
     
-    Assumptions:
-    None
-    
-    Source:
-    N/A
-    """
-    def __defaults__(self):
-        """This sets the default values for the analysis to function. (I don't actually
-        understand what's happening here). Sets the class atmosphere attribute.
-        
         Assumptions:
         None
         
         Source:
         N/A
-        
-        Inputs:
-        None
-        
-        Outputs:
-        None
-        
-        Properties Used:
-        None.
-            """          
+    """
+    def __defaults__(self):
+        """ SUAVE.Analyses.Atmospheric.Atmospheric.__defaults__()
+            Initializes with default atmosphere properties.  See Atmosphere.py.
+            
+            Assumptions:
+            None
+            
+            Source:
+            N/A
+            
+            Inputs:
+            None
+            
+            Outputs:
+            None
+            
+            Properties Used:
+            None.
+        """          
         atmo_data = Atmosphere()
         self.update(atmo_data)
         
         
     def compute_values(self,altitude):
-        """This function is not implemented."""
+        """ SUAVE.Analyses.Atmospheric.Atmospheric.altitude(altitude)
+            This function is not implemented.
+        """
         raise NotImplementedError

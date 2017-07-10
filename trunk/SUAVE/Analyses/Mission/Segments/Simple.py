@@ -20,9 +20,13 @@ from SUAVE.Methods.Missions import Segments as Methods
 # ----------------------------------------------------------------------
 
 class Simple(Segment):
-    
+    """ SUAVE.Analyses.Mission.Segments.Simple()
+        Basic mission segment
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Simple()
+            initializes basic conditions and processes
+        """
         
         # --------------------------------------------------------------
         #   State
@@ -88,9 +92,13 @@ class Simple(Segment):
 # ----------------------------------------------------------------------
 
 class Container(Segment.Container):
-    
+    """ SUAVE.Analyses.Mission.Segments.Simple.Container()
+        Basic mission segment
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Simple.Container.__defaults__()
+            initializes basic processes
+        """
         # --------------------------------------------------------------
         #   The Solving Process
         # --------------------------------------------------------------

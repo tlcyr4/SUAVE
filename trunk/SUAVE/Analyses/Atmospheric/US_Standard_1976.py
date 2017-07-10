@@ -31,33 +31,34 @@ from SUAVE.Core.Arrays import atleast_2d_col
 ## @ingroup analyses-atmospheric
 class US_Standard_1976(Atmospheric):
 
-    """ Implements the U.S. Standard Atmosphere (1976 version)
+    """ SUAVE.Analyses.Atmospheric.US_Standard_1976()
+        Implements the U.S. Standard Atmosphere (1976 version)
         
-    Assumptions:
-    None
+        Assumptions:
+            None
     
-    Source:
-    U.S. Standard Atmosphere, 1976, U.S. Government Printing Office, Washington, D.C., 1976
+        Source:
+            U.S. Standard Atmosphere, 1976, U.S. Government Printing Office, Washington, D.C., 1976
     """
     
     def __defaults__(self):
-        """This sets the default values for the analysis to function. (I don't actually
-        understand what's happening here). Sets the class atmosphere attribute.
-
-        Assumptions:
-        None
-
-        Source:
-        N/A
-
-        Inputs:
-        None
-
-        Output:
-        None
-
-        Properties Used:
-        None
+        """ SUAVE.Analyses.Atmospheric.US_Standard_1976.__defaults__()
+            Initializes with default atmosphere properties.  See Atmosphere.py.
+    
+            Assumptions:
+                None
+    
+            Source:
+                N/A
+    
+            Inputs:
+                None
+    
+            Output:
+                None
+    
+            Properties Used:
+                None
         """     
         
         atmo_data = SUAVE.Attributes.Atmospheres.Earth.US_Standard_1976()
@@ -65,34 +66,34 @@ class US_Standard_1976(Atmospheric):
     
     def compute_values(self,altitude,temperature_deviation=0.0):
 
-        """Computes atmospheric values.
-
-        Assumptions:
-        US 1976 Standard Atmosphere
-
-        Source:
-        U.S. Standard Atmosphere, 1976, U.S. Government Printing Office, Washington, D.C., 1976
-
-        Inputs:
-        altitude                                 [m]
-        temperature_deviation                    [K]
-
-        Output:
-        atmo_data.
-          pressure                               [Pa]
-          temperature                            [K]
-          speed_of_sound                         [m/s]
-          dynamic_viscosity                      [kg/(m*s)]
-
-        Properties Used:
-        self.
-          fluid_properties.gas_specific_constant [J/(kg*K)]
-          planet.sea_level_gravity               [m/s^2]
-          planet.mean_radius                     [m]
-          breaks.
-            altitude                             [m]
-            temperature                          [K]
-            pressure                             [Pa]
+        """ SUAVE.Analyses.Atmospheric.US_Standard_1976.compute_values()
+            Computes atmospheric values.
+        
+            Assumptions:
+            Constant temperature atmosphere
+        
+            Source:
+            U.S. Standard Atmosphere, 1976, U.S. Government Printing Office, Washington, D.C., 1976
+        
+            Inputs:
+            altitude                                 [m]
+            temperature                              [K]
+    
+            Outputs:
+            atmo_data.
+              pressure                               [Pa]
+              temperature                            [K]
+              speed_of_sound                         [m/s]
+              dynamic_viscosity                      [kg/(m*s)]
+        
+            Properties Used:
+            self.
+              fluid_properties.gas_specific_constant [J/(kg*K)]
+              planet.sea_level_gravity               [m/s^2]
+              planet.mean_radius                     [m]
+              breaks.
+                altitude                             [m]
+                pressure                             [Pa]
         """
 
         # unpack

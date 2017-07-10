@@ -19,15 +19,27 @@ from SUAVE.Core                    import Data
 # ----------------------------------------------------------------------
 
 class Conditions(Data):
-
+    """ SUAVE.Analyses.Mission.Segments.Conditions()
+        Data structure for holding other Conditions and arrays of system conditions
+    """
     _size = 1
     
     def ones_row(self,cols):
-        """ returns a row vector of ones with given number of columns """
+        """ SUAVE.Analyses.Mission.Segments.Conditions.ones_row(cols)
+            returns a row vector of ones with given number of columns 
+            
+            Inputs:
+                cols - number of columns in numpy array matrix/array
+        """
         return np.ones([self._size,cols])
     
     def expand_rows(self,rows):
-        
+        """ SUAVE.Analyses.Mission.Segments.Conditions.expand_rows(cols)
+            initialize size and recursively set arrays to have given length 
+            
+            Inputs:
+                cols - number of columns in numpy array matrix/array
+        """
         # store
         self._size = rows
         
@@ -47,4 +59,7 @@ class Conditions(Data):
         return
 
     def compile(self):
+        """ SUAVE.Analyses.Mission.Segments.Conditions.compile(cols)
+            calls expand_rows 
+        """
         self.expand_rows()

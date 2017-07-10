@@ -24,9 +24,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Aerodynamic(Simple):
-    
+    """ SUAVE.Analyses.Mission.Segments.Aerodynamic()
+        Mission segment to undergo aerodynamic analysis
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Aerodynamic.__defaults__()
+            initializes aerodynamic conditions and analysis processes
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

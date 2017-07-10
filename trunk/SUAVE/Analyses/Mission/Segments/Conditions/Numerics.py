@@ -18,8 +18,15 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 class Numerics(Conditions):
-    
+    """ SUAVE.Analyses.Mission.Segments.Numerics()
+        Holds settings and metainformation numerical analysis
+    """
     def __defaults__(self):
+        """ SUAVE.Analyses.Mission.Segments.Numerics.__defaults__()
+            Initializes various mathematical methods and constants:
+            control points/discretization method, solver and tolerance info, and
+            dimensionless and time-based differentiation and integration matrices
+        """
         self.tag = 'numerics'
         
         self.number_control_points = 16

@@ -20,9 +20,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Mach_Constant_Angle(Unknown_Throttle):
-    
+    """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Mach_Constant_Angle()
+        Unknown_Throttle segment where mach number and climb angle are fixed
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Mach_Constant_Angle.__defaults__()
+            initializes end altitude, climb angle, mach number and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

@@ -17,11 +17,14 @@ from SUAVE.Core import Data
 
 class Atmosphere(Constant):
 
-    """ SUAVE.Attributes.Atmospheres.Atmosphere
-    Constant-property atmosphere model
+    """ SUAVE.Attributes.Atmospheres.Atmosphere()
+        Constant-property atmosphere model
     """
 
     def __defaults__(self):
+        """ SUAVE.Attributes.Atmospheres.Atmosphere.__defaults__()
+            sets tag and composition
+        """
         self.tag = 'Constant-property atmosphere'
         self.composition           = Data()
         self.composition.gas       = 1.0

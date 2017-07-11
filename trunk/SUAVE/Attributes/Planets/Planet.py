@@ -14,8 +14,13 @@ from SUAVE.Attributes.Constants import Constant
 # ----------------------------------------------------------------------
      
 class Planet(Constant):
-    """ Physical constants of big space rocks """
+    """ SUAVE.Attributes.Planets.Planet()
+        Physical constants of big space rocks 
+    """
     def __defaults__(self):
+        """ SUAVE.Attributes.Planets.Planet.__defaults__()
+            Mass, radius and gravity default to 0
+        """
         self.mass              = 0.0  # kg
         self.mean_radius       = 0.0  # m
         self.sea_level_gravity = 0.0  # m/s^2   

@@ -14,10 +14,14 @@ from Propellant import Propellant
 
 class Liquid_Natural_Gas(Propellant):
 
-    """ Physical properties of LNG; reactant = O2 """
+    """ SUAVE.Attributes.Propellants.Liquid_Natural_Gas()
+        Physical properties of LNG; reactant = O2 
+    """
 
     def __defaults__(self):
-
+        """ SUAVE.Attributes.Propellants.Liquid_Natural_Gas.__defaults__()
+            Initializes propellant properties
+        """
         self.tag             = 'Liquid_Natural_Gas'
         self.reactant        = 'O2'
         self.density         = 414.2                            # kg/m^3 

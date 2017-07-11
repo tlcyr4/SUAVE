@@ -16,10 +16,14 @@ from Propellant import Propellant
 
 class Liquid_H2(Propellant):
 
-    """ Physical properties of liquid H2 for propulsion use; reactant = O2 """
+    """ SUAVE.Attributes.Propellants.Liquid_H2()
+        Physical properties of liquid H2 for propulsion use; reactant = O2 
+    """
 
     def __defaults__(self):
-
+        """ SUAVE.Attributes.Propellants.Liquid_H2.__defaults__()
+            Initializes propellant properties
+        """
         self.tag             = 'Liquid_H2'
         self.reactant        = 'O2'
         self.density         = 59.9                             # kg/m^3

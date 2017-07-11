@@ -18,8 +18,13 @@ from SUAVE.Attributes.Atmospheres.Earth import US_Standard_1976
 
 # from background research, this appears true
 class International_Standard(US_Standard_1976):
-    """ International_Standard.py: International Standard Atmosphere (ISO2533:1975) """
+    """ SUAVE.Attributes.Atmosphere.Earth.International_Standard()
+        International_Standard.py: International Standard Atmosphere (ISO2533:1975) 
+    """
     def __defaults__(self):
+        """ SUAVE.Attributes.Atmospheres.Earth.International_Standard.__defaults__()
+            sets tag
+        """
         self.tag = 'International Standard Atmosphere'    
 
 # ----------------------------------------------------------------------

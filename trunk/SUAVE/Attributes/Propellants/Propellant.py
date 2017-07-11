@@ -16,10 +16,13 @@ from SUAVE.Core import Data
 
 class Propellant(Data):
 
-    """ Physical properties of propellants """
-
+    """ SUAVE.Attributes.Propellants.Propellant()
+        Physical constants of propellants 
+    """
     def __defaults__(self):
-
+        """ SUAVE.Attributes.Propellants.Propellant.__defaults__()
+            Initializes propellant properties
+        """
         self.tag                       = 'Propellant'
         self.reactant                  = 'O2'
         self.density                   = 0.0                       # kg/m^3

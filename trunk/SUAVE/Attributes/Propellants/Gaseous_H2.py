@@ -13,10 +13,14 @@ from SUAVE.Attributes.Constants import Composition
 
 class Gaseous_H2(Propellant):
 
-    """ Physical properties of gaseous H2 for propulsion use; reactant = O2 """
+    """ SUAVE.Attributes.Propellants.Gaseous_H2()
+        Physical properties of gaseous H2 for propulsion use; reactant = O2 
+    """
 
     def __defaults__(self):
-
+        """ SUAVE.Attributes.Propellants.Gaseous_H2.__defaults__()
+            Initializes propellant and gas properties
+        """
         self.tag                       = 'H2 Gas'
         self.reactant                  = 'O2'
         self.specific_energy           = 141.86e6                           # J/kg

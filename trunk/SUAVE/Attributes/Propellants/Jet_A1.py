@@ -15,10 +15,14 @@ from Propellant import Propellant
 
 class Jet_A1(Propellant):
 
-    """ Physical properties of Jet A-1; reactant = O2 """
+    """ SUAVE.Attributes.Propellants.Jet_A1()
+        Physical properties of Jet A-1; reactant = O2 
+    """
 
     def __defaults__(self):
-
+        """ SUAVE.Attributes.Propellants.Jet_A1.__defaults__()
+            Initializes propellant properties
+        """
         self.tag                       = 'Jet A1'
         self.reactant                  = 'O2'
         self.density                   = 804.0                            # kg/m^3 (15 C, 1 atm)

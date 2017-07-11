@@ -14,8 +14,11 @@ from SUAVE.Core import Data
 # ----------------------------------------------------------------------
     
 class Runway(Data):
-    """ SUAVE.Attributes.Airport.Runway
+    """ SUAVE.Attributes.Airport.Runway()
         Data object used to hold runway data
     """
     def __defaults__(self):
+        """ SUAVE.Attributes.Airports.Runway.__defaults__()
+            initializes tag
+        """
         self.tag = 'Runway'

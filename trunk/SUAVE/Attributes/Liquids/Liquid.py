@@ -15,10 +15,14 @@ from SUAVE.Core import Data
 
 class Liquid(Data):
 
-    """ Physical constants of a liquid """
+    """ SUAVE.Attributes.Liquids.Liquid()
+        Physical constants specific to a liquid 
+    """
 
     def __defaults__(self):
-
+        """ SUAVE.Attributes.Liquids.Liquid.__defaults__()
+            Initializes chemistry
+        """
         self.molecular_mass  = 0.0               
         self.composition    = Data()
         self.composition.liquid = 1.0

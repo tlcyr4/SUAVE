@@ -16,9 +16,13 @@ from Runway import Runway
 # ----------------------------------------------------------------------
 
 class Airport(Data):
-    """ SUAVE.Attributes.Airports.Airport
+    """ SUAVE.Attributes.Airports.Airport()
+        A place where vehicles can take off and land
     """
     def __defaults__(self):
+        """ SUAVE.Attributes.Airports.Airport.__defaults__()
+            initializes position and atmosphere
+        """
         self.tag = 'Airport'
         self.altitude = 0.0        # m
         self.atmosphere = Earth.US_Standard_1976()

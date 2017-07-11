@@ -15,8 +15,13 @@ from Constant import Constant
 # ----------------------------------------------------------------------
 
 class Universe(Constant):
-    """ Universal constants """
+    """ SUAVE.Attributes.Constants.Universe()
+        Universal constants 
+    """
     def __defaults__(self):
+        """ SUAVE.Attributes.Constants.Universe.__defaults__()
+            Sets universal constants 
+        """
         self.c     = 2.99792458e8 # m/s, speed of light in a vacuum
         self.G     = 6.67384e-11  # N-m^2/kg^2, gravitational constant in flat space
         self.N     = 6.023e23     # per mol, Avagandro's number

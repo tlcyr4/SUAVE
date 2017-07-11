@@ -16,10 +16,14 @@ from SUAVE.Core import Data
 
 class Water(Liquid):
 
-    """ Physical constants specific to Air """
+    """ SUAVE.Attributes.Liquids.Water()
+        Physical constants specific to water 
+    """
 
     def __defaults__(self):
-
+        """ SUAVE.Attributes.Liquids.Water.__defaults__()
+            Initializes chemical composition
+        """
         self.molecular_mass         = 18.             # kg/kmol
         self.composition.H2O        = 1.0
         self.heat_of_vaporization   =2260.*1000                #heat of vaporization of water [J/kg]
@@ -29,11 +33,20 @@ class Water(Liquid):
 
     def compute_cp(self,temperature=300,pressure=101325):
 
-        """  4th-order polynomial data fit:
+        """ SUAVE.Attributes.Liquids.Water.compute_cp(T=300.,p=101325.)
+            Calculates pressure coefficient 
+            4th-order polynomial data fit:
             cp(T) = c1*T^4 + c2*T^3 + c3*T^2 + c4*T+c5
 
             cp in J/kg-K, T in K
-            Valid for 278 K < T < 373.15 K """
+            Valid for 278 K < T < 373.15 K 
+            Inputs:
+                T - temperature [Kelvin]
+                p - pressure [Pa]
+                
+            Outputs:
+                cp - pressure coefficient
+        """
         T=temperature
         
         c = [3E-6, -.0036,  1.8124, -406.5, 38390]
@@ -44,7 +57,17 @@ class Water(Liquid):
 
     def compute_absolute_viscosity(self,temperature=300,pressure=101325):
         """
-        model accurate to within 2.5% between 0 C and 370C
+            SUAVE.Attributes.Liquids.Water.compute_absolute_viscosity(T=300.,p=101325.)
+            Computes dynamic viscosity
+            model accurate to within 2.5% between 0 C and 370C
+            
+            Inputs:
+                T - temperature [Kelvin]
+                p - pressure [Pa]
+                
+            Outputs:
+                dynamic viscosity [Pa*s]
+        
         """
         T=temperature
         mu=(2.414E-5)*10**(247.8/(T-140))

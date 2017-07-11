@@ -20,10 +20,14 @@ from SUAVE.Core import Units
 
 class US_Standard_1976(Atmosphere):
     
-    """ Implements the U.S. Standard Atmosphere (1976 version)
+    """ SUAVE.Attributes.Atmosphere.Earth.US_Standard_1976()
+        Implements the U.S. Standard Atmosphere (1976 version)
     """
     
     def __defaults__(self):
+        """ SUAVE.Attributes.Atmosphere.Earth.US_Standard_1976()
+            Initializes fluid properties, planet, and breaks
+        """
         self.tag = ' U.S. Standard Atmosphere (1976)'
 
         # break point data: 

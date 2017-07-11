@@ -14,8 +14,13 @@ from Planet import Planet
 # ----------------------------------------------------------------------
  
 class Earth(Planet):
-    """ Physical constants specific to Earth"""
+    """ SUAVE.Attributes.Planets.Earth()
+        Physical constants specific to Earth
+    """
     def __defaults__(self):
+        """ SUAVE.Attributes.Planets.Earth__defaults__()
+            Sets mass, radius, and gravity of Earth
+        """
         self.tag = 'Earth'
         self.mass              = 5.98e24  # kg
         self.mean_radius       = 6.371e6  # m

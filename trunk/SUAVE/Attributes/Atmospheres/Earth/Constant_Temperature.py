@@ -19,10 +19,13 @@ from SUAVE.Attributes.Atmospheres import Atmosphere
 # ----------------------------------------------------------------------
 
 class Constant_Temperature(Atmosphere):
-    """ SUAVE.Attributes.Atmospheres.Constant_Temp
+    """ SUAVE.Attributes.Atmospheres.Constant_Temperature()
         ISA Pressure variation with constant (or input) outside temperature
     """
     def __defaults__(self):
+        """ SUAVE.Attributes.Atmosphere.Earth.Constant_Temperature()
+            Initializes fluid properties, planet, and breaks
+        """
         self.fluid_properties = Air()
         self.planet = Earth()
         self.breaks = Data()

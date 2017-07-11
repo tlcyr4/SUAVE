@@ -15,11 +15,19 @@ from SUAVE.Core import Container as ContainerBase
 # ----------------------------------------------------------------------
 
 class Constant(Data):
-    """ Constant Base Class """
+    """ SUAVE.Attributes.Constants.Constant()
+        Constant Base Class, direct inheritance from Data
+    """
     def __defaults__(self):
+        """ SUAVE.Attributes.Constants.Constant.__defaults__()
+            Adds nothing to the defaults of Data
+        """
         pass
 
 class Container(ContainerBase):
+    """ SUAVE.Attributes.Constants.Constant.Container()
+        Constant Container base class, direct inheritance from Container
+    """
     pass
 
 # ----------------------------------------------------------------------

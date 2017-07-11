@@ -15,10 +15,14 @@ from SUAVE.Core import Data
 
 class Gas(Data):
 
-    """ Physical constants of a gas """
+    """ SUAVE.Attributes.Gases.Gas()
+        Physical constants specific to a gas 
+    """
 
     def __defaults__(self):
-
+        """ SUAVE.Attributes.Gases.Gas.__defaults__()
+            Initializes chemistry
+        """
         self.molecular_mass  = 0.0    
         self.gas_specific_constant              = 0.0              
         self.composition = Data()

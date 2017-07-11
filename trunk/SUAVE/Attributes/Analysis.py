@@ -16,20 +16,34 @@ from SUAVE.Core import Data
 # ----------------------------------------------------------------------
 
 class Analysis(Data):
-    """ SUAVE Data Class for Analysis
-        used for 
+    """ \deprecated
+        SUAVE.Attributes.Analysis()
+        SUAVE Data Class for Analysis
+        used for carrying out analyses
     """
     def __defaults__(self):
+        """ \deprecated
+            SUAVE.Attributes.Analysis.__defaults__()
+            Initializes vehicle, mission, and procedure (old version of process)
+        """
         self.Vehicle = None
         self.Mission = None
         self.Procedure = AnalysisMap()
         
     def solve(self):
+        """ \deprecated
+            SUAVE.Attributes.Analysis.solve()
+            solves all procedures
+        """
         procedure = self.procedure
         for segment,configuration in procedure.items():
             results = segment.solve(configuration)
         
     def __str__(self):
+        """ \deprecated
+            SUAVE.Attributes.Analysis.__str__()
+            String representation includes dataname, vehicle, mission, procedure, and subprocedures
+        """
         args = ''
         args += self.dataname() + '\n'
         args += 'Vehicle = %s\n' % self.Vehicle.tag
@@ -42,4 +56,8 @@ class Analysis(Data):
         return args
         
 class AnalysisMap(Data):
+    """ \deprecated
+        SUAVE.Attributes.Analysis.AnalysisMap()
+        Unimplemented
+    """
     pass

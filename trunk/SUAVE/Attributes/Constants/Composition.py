@@ -20,12 +20,19 @@ from warnings import warn
 # ----------------------------------------------------------------------
 
 class Composition(Constant):
-    """ Composition base class for gas mixtures """
+    """ SUAVE.Attributes.Constants.Composition()
+        Composition base class for gas mixtures 
+    """
     def __defaults__(self):
+        """ SUAVE.Attributes.Constants.Composition.__defaults__()
+            Adds nothing to Constant defaults 
+        """
         pass
     
     def __check__(self):
-        
+        """ SUAVE.Attributes.Constants.Composition.__check__()
+            checks to see that the composition adds to 1.0 
+        """
         # check that composition sums to 1.0
         total = 0.0
         for v in self.values():

@@ -25,7 +25,7 @@ from SUAVE.Core import Units
 
 class Constant_Throttle_Constant_Speed(Aerodynamic):
     """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Thottle_Constant_Speed()
-        Mission segment where throttle and air speed are fixed
+        Climb segment where throttle and air speed are fixed
     """
     def __defaults__(self):
         """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Throttle_Constant_Speed.__defaults__()

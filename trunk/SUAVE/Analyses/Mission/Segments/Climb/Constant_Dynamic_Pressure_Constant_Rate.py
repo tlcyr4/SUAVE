@@ -20,7 +20,7 @@ from SUAVE.Core import Units
 
 class Constant_Dynamic_Pressure_Constant_Rate(Unknown_Throttle):
     """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Dynamic_Pressure_Constant_Rate()
-        Unknown_Throttle segment where pressure and climb rate are fixed
+        Climb segment where pressure and climb rate are fixed
     """
     def __defaults__(self):
         """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Dynamic_Pressure_Constant_Rate.__defaults__()

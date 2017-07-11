@@ -26,9 +26,14 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Set_Speed_Set_Altitude(Aerodynamic):
-    
+    """ SUAVE.Analyses.Mission.Segments.Single_Point.Set_Speed_Set_Altitude()
+        Segment with only one control point and constant air speed and altitude
+    """
     def __defaults__(self):
-        
+       """ SUAVE.Analyses.Mission.Segments.Single_Point.Set_Speed_Set_Altitude.__defaults__()
+            initializes aerodynamic conditions and analysis processes, 
+            mostly redundant from Aerodynamic 
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

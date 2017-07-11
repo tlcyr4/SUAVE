@@ -18,8 +18,12 @@ from SUAVE.Analyses import Analysis
 
 class Weights(Analysis):
     """ SUAVE.Analyses.Weights.Weights()
+        Base analysis for analysing aircraft structures
     """
     def __defaults__(self):
+        """ SUAVE.Analyses.Weights.Weights.__defaults__()
+            Sets up geometry and settings
+        """
         self.tag = 'weights'
         self.vehicle  = Data()
         
@@ -29,7 +33,13 @@ class Weights(Analysis):
         
         
     def evaluate(self,conditions=None):
-        
+        """ SUAVE.Analyses.Weights.Weights.evaluate()
+            Evaluates weight distribution of vehicle and assigns weight breakdown to vehicle
+            see SUAVE.Methods.Weights.Correlations.Tube_Wing.empty
+            
+            Inputs:
+                conditions - conditions of the system
+        """
         # unpack
         vehicle = self.vehicle
         empty   = self.settings.empty_weight_method
@@ -48,6 +58,9 @@ class Weights(Analysis):
     
     
     def finalize(self):
+        """ SUAVE.Analyses.Weights.Weights.finalize()
+            resets mass properties to match vehicle's
+        """
         
         self.mass_properties = self.vehicle.mass_properties
         

@@ -20,13 +20,17 @@ from SUAVE.Analyses import Process
 # ----------------------------------------------------------------------
 
 class Constant_Throttle_Constant_Altitude(Aerodynamic):
-    
+    """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Throttle_Constant_Altitude()
+        Cruise segment where throttle and altitude are fixed
+    """
     # ------------------------------------------------------------------
     #   Data Defaults
     # ------------------------------------------------------------------  
 
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Throttle_Constant_Altitude.__defaults__()
+            initializes altitude, air speed start/end, throttle and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

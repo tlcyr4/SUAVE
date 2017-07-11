@@ -23,9 +23,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Speed_Constant_Angle_Noise(Unknown_Throttle):
-    
+    """ SUAVE.Analyses.Mission.Segments.Descent.Constant_Speed_Constant_Angle_Noise()
+        Descent segment where air speed and descent angle are fixed, start position determined by descent angle
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Descent.Constant_Speed_Constant_Angle_Noise.__defaults__()
+            initializes end altitude, descent angle, air speed and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

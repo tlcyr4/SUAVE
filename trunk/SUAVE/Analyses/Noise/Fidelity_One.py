@@ -12,9 +12,13 @@ from Noise import Noise
 #  Analysis
 # ----------------------------------------------------------------------
 class Fidelity_One(Noise):
-    
+    """ SUAVE.Analyses.Noise.Noise()
+        Low fidelity analysis model for noise (not implemented)
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Noise.Noise.__defaults__()
+            Sets up settings
+        """
         self.tag    = 'fidelity_zero_markup'              
     
         # correction factors

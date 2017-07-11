@@ -20,9 +20,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Acceleration_Constant_Altitude(Aerodynamic):
-    
+    """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Acceleration_Constant_Altitude()
+        Segment where acceleration and altitude are fixed
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Acceleration_Constant_Altitude.__defaults__()
+            initializes altitude, acceleration, initial and end speed, state, and processes
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

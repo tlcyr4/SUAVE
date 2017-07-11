@@ -21,9 +21,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Speed_Constant_Rate(Unknown_Throttle):
-    
+    """ SUAVE.Analyses.Mission.Segments.Descent.Constant_Dynamic_Pressure_Constant_Rate()
+        Descent segment where air speed and descent rate are fixed
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Descent.Constant_Dynamic_Pressure_Constant_Rate.__defaults__()
+            initializes end altitude, descent rate, air speed and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

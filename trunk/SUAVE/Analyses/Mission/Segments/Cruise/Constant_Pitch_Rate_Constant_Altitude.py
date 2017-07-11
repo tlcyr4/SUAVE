@@ -20,9 +20,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Pitch_Rate_Constant_Altitude(Aerodynamic):
-    
+    """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Pitch_Rate_Constant_Altitude()
+        Cruise segment where pitch rate and altitude are fixed
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Pitch_Rate_Constant_Altitude.__defaults__()
+            initializes altitude, start/end/rate of pitch and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

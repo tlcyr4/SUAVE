@@ -25,7 +25,7 @@ from SUAVE.Core import Units
 
 class Unknown_Throttle(Aerodynamic):
     """ SUAVE.Analyses.Mission.Segments.Climb.Unknown_Throttle()
-        Mission segment where throttle is an unknown (as in tbd)
+        Climb segment where throttle is an unknown
     """
     def __defaults__(self):
         """ SUAVE.Analyses.Mission.Segments.Climb.Unknown_Throttle.__defaults__()

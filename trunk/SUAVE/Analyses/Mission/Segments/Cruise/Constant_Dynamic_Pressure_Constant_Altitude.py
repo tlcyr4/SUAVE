@@ -20,9 +20,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Dynamic_Pressure_Constant_Altitude(Constant_Speed_Constant_Altitude):
-    
+    """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Dynamic_Pressure_Constant_Altitude()
+        Segment where pressure and altitude are fixed
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Dynamic_Pressure_Constant_Altitude.__defaults__()
+            initializes altitude, dynamic and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

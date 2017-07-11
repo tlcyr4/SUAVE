@@ -20,9 +20,14 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Hover(Aerodynamic):
-    
+    """ SUAVE.Analyses.Mission.Segments.Hover.Hover()
+        Hover segment: does not assume that vehicle will change position
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Hover.Hover.__defaults__()
+            initializes aerodynamic conditions and analysis processes, 
+            mostly redundant from Aerodynamic 
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

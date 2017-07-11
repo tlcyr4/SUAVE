@@ -18,10 +18,14 @@ from SUAVE.Analyses.Mission import All_At_Once
 # ----------------------------------------------------------------------
 
 class Given_Weight(All_At_Once):
-    """ Mission.py: Top-level mission class """
+    """ SUAVE.Analyses.Mission.Vary_Cruise.Given_Weight()
+        Solves all segments and sub segments at once, has a target landing weight
+    """
     
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Vary_Cruise.Given_Weight.__defaults__()
+            Initializes initialize, converge, iterate, and finalize processes and target weight
+        """
         self.tag = 'vary_cruise_given_weight'
         
         # --------------------------------------------------------------

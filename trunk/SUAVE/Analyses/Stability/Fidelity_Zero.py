@@ -35,12 +35,14 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 class Fidelity_Zero(Stability):
-    """ SUAVE.Analyses.Stability.Fidelity_Zero
-        
+    """ SUAVE.Analyses.Stability.Fidelity_Zero()
+        Low fidelity analysis for analysing vehicle stability
     """
     
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Stability.Fidelity_Zero.__defaults__()
+            initializes configuration and stability computational processes
+        """
         # Initialize quantities
         
         self.configuration = Data()
@@ -63,7 +65,9 @@ class Fidelity_Zero(Stability):
         return
     
     def finalize(self):
-                        
+        """ SUAVE.Analyses.Stability.Fidelity_Zero.finalize()
+            copies mass properties from geometry to configuration
+        """
         # unpack
         geometry         = self.geometry #really a vehicle object
         configuration    = self.configuration
@@ -82,10 +86,21 @@ class Fidelity_Zero(Stability):
         """ process vehicle to setup geometry, condititon and configuration
             
             Inputs:
-                conditions - DataDict() of aerodynamic conditions
-                results - DataDict() of 
+                conditions.
+                    freestream.
+                        dynamic__pressure - dynamic pressure in system
+                        mach_number - mach number
+                        velocity - velocity
+                        density - fluid density
+                    aerodynamics.
+                        drag_breakdown.parasite['main_wing'].parasite_drag_coefficient 
+                        drag_coefficient
+                        lift_coefficient
                 
             Outputs:
+                results.
+                    static_stability
+                    dynamic_stability
 
                 
             Assumptions:

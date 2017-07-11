@@ -21,7 +21,7 @@ from SUAVE.Core import Units
 
 class Constant_Speed_Constant_Angle(Unknown_Throttle):
     """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Speed_Constant_Angle()
-        Unknown_Throttle segment where air speed and climb angle are fixed
+        Climb segment where air speed and climb angle are fixed
     """
     def __defaults__(self):
         """ SUAVE.Analyses.Mission.Segments.Climb.Constant_Speed_Constant_Angle.__defaults__()

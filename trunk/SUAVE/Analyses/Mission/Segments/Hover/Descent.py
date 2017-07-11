@@ -21,9 +21,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Descent(Hover):
-    
+    """ SUAVE.Analyses.Mission.Segments.Hover.Descent()
+        Hover segment: assumes vehicle moves down but not necessarily horizontally
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Hover.Descent.__defaults__()
+            initializes end altitude and descent rate and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

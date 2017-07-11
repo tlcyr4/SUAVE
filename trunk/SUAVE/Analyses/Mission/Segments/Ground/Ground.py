@@ -25,7 +25,7 @@ from SUAVE.Core import Data
 # ----------------------------------------------------------------------
 
 class Ground(Aerodynamic):
-    """
+    """ SUAVE.Analyses.Mission.Segments.Ground.Ground()
         Base segment for takeoff and landing segments. Integrates equations of motion
         including rolling friction.
         Notes Regarding Friction Coefficients
@@ -46,7 +46,9 @@ class Ground(Aerodynamic):
     # ------------------------------------------------------------------  
 
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Ground.Ground.__defaults__()
+            initializes aerodynamic and ground conditions and analysis processes
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

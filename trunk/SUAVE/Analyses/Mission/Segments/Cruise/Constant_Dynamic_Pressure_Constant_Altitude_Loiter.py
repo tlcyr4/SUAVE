@@ -20,9 +20,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Dynamic_Pressure_Constant_Altitude_Loiter(Constant_Speed_Constant_Altitude):
-    
+    """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Dynamic_Pressure_Constant_Altitude_Loiter()
+        Segment where pressure and altitude are fixed, time intervals based on time directly, not distance
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Dynamic_Pressure_Constant_Altitude_Loiter.__defaults__()
+            initializes altitude, dynamic and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

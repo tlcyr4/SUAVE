@@ -15,9 +15,13 @@ from SUAVE.Analyses import Analysis
 # ----------------------------------------------------------------------
 
 class Planet(Analysis):
-    """ SUAVE.Analyses.Aerodynamics.Aerodynamics()
+    """ SUAVE.Analyses.Planet.Planet()
+        Base analysis model for analysing planets
     """
     def __defaults__(self):
+        """ SUAVE.Analyses.Planet.Planet.__defaults__()
+            Sets up geometry and settings
+        """
         self.tag    = 'planet'
         self.features = Data()
         self.settings = Data()

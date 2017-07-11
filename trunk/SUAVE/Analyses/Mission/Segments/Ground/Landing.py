@@ -20,13 +20,17 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Landing(Ground):
-
+    """ SUAVE.Analyses.Mission.Segments.Ground.Landing()
+        Segment for aircraft landings
+    """
     # ------------------------------------------------------------------
     #   Data Defaults
     # ------------------------------------------------------------------  
 
     def __defaults__(self):
-
+        """ SUAVE.Analyses.Mission.Segments.Ground.Landing.__defaults__()
+            initializes start and end velocity, friction coefficient, throttle and conditions initialization
+        """
         self.velocity_start       = 150 * Units.knots
         self.velocity_end         = 0.0
         self.friction_coefficient = 0.4

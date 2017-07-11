@@ -20,9 +20,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Constant_Mach_Constant_Altitude(Constant_Speed_Constant_Altitude):
-    
+    """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Mach_Constant_Altitude()
+        Cruise segment where mach number and altitude are fixed
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Cruise.Constant_Mach_Constant_Altitude.__defaults__()
+            initializes altitude, mach number and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

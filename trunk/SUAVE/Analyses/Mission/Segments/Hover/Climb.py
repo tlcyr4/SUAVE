@@ -21,9 +21,13 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 class Climb(Hover):
-    
+    """ SUAVE.Analyses.Mission.Segments.Hover.Climb()
+        Hover segment: assumes vehicle moves up but not necessarily horizontally
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Analyses.Mission.Segments.Hover.Climb.__defaults__()
+            initializes end altitude and climb rate and initialize conditions process
+        """
         # --------------------------------------------------------------
         #   User inputs
         # --------------------------------------------------------------

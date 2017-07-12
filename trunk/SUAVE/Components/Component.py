@@ -20,6 +20,9 @@ class Component(Data):
         the base component class
     """
     def __defaults__(self):
+        """ SUAVE.Components.Component.__defaults__()
+            sets tag and origin
+        """
         self.tag    = 'Component'
         self.origin = [[0.0,0.0,0.0]]
 

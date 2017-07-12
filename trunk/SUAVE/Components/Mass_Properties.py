@@ -20,7 +20,9 @@ class Mass_Properties(Data):
         mass properties for a physical component
     """
     def __defaults__(self):
-        
+        """ SUAVE.Components.Mass_Properties.__defaults__()
+            defaults mass, volume, cog, and moments of inertia to 0
+        """
         self.mass   = 0.0
         self.volume = 0.0
         self.center_of_gravity = np.array([0.0,0.0,0.0])

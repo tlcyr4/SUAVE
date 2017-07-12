@@ -16,7 +16,13 @@ from Component import Component
 # ----------------------------------------------------------------------
 
 class Envelope(Component):
+    """ SUAVE.Components.Envelope()
+        Flight Envelope: specification of the capabilities of the design
+    """
     def __defaults__(self):
+        """ SUAVE.Components.Envelope.__defaults__()
+            Defaults various airspeed, load, and maneuverability specs to 0
+        """
         self.tag = 'Envelope'
 
         self.ultimate_load = 0.0

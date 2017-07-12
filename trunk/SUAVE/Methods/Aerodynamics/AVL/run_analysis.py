@@ -14,7 +14,23 @@ from SUAVE.Core import redirect
 
 
 def run_analysis(avl_object):
-
+    """ SUAVE.Methods.Aerodynamics.run_analysis.call_avl(avl_object)
+        calls avl program on object's geometry and writes output to log file
+        
+        Inputs:
+            avl_object.
+                settings.filenames.
+                    log_filename
+                    err_filename
+                    avl_bin_name
+                    features
+                current_status.deck_file
+        
+        Outputs:
+            exit_status - exit status of avl subprocess
+            AVL process output written to log file
+            AVL process error output written to err file
+    """
     call_avl(avl_object)
     results = read_results(avl_object)
 
@@ -22,21 +38,43 @@ def run_analysis(avl_object):
 
 
 def call_avl(avl_object):
-
+    """ SUAVE.Methods.Aerodynamics.run_analysis.call_avl(avl_object)
+        calls avl program on object's geometry and writes output to log file
+        
+        Inputs:
+            avl_object.
+                settings.filenames.
+                    log_filename
+                    err_filename
+                    avl_bin_name
+                    features
+                current_status.deck_file
+        
+        Outputs:
+            exit_status - exit status of avl subprocess
+            AVL process output written to log file
+            AVL process error output written to err file
+    """
     import sys
     import time
     import subprocess
 
+    # unpack inputs
     log_file = avl_object.settings.filenames.log_filename
     err_file = avl_object.settings.filenames.err_filename
+    
+    # clear output files
     if isinstance(log_file,str):
         purge_files(log_file)
     if isinstance(err_file,str):
         purge_files(err_file)
+        
+    # and continue unpacking inputs
     avl_call = avl_object.settings.filenames.avl_bin_name
     geometry = avl_object.settings.filenames.features
     in_deck  = avl_object.current_status.deck_file
 
+    # redirect output of subprocess to log file
     with redirect.output(log_file,err_file):
 
         ctime = time.ctime() # Current date and time stamp
@@ -50,6 +88,8 @@ def call_avl(avl_object):
         avl_run.wait()
 
         exit_status = avl_run.returncode
+        
+        # end date and time stamp
         ctime = time.ctime()
         sys.stdout.write("\nProcess finished: {0}\nExit status: {1}\n".format(ctime,exit_status))
         sys.stderr.write("\nProcess finished: {0}\nExit status: {1}\n".format(ctime,exit_status))        

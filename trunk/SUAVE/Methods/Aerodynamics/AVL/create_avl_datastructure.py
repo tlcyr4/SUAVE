@@ -38,6 +38,15 @@ def create_avl_datastructure(geometry,conditions):
 
 
 def translate_avl_geometry(geometry):
+    """ SUAVE.Methods.Aerodynamics.AVL.create_avl_datastructure.translate_avl_geometry(geometry)
+        Translates SUAVE geometry of vehicle to a format AVL can understand
+        
+        Inputs:
+            geometry - SUAVE vehicle geometry
+            
+        Outputs:
+            aircraft - aircraft for AVL
+    """
 
 	aircraft = Aircraft()
 	aircraft.tag = geometry.tag

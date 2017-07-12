@@ -17,34 +17,35 @@ from SUAVE.Core import Units
 
 ## @ingroup methods-aerodynamics-AERODAS
 def finite_aspect_ratio(state,settings,geometry):
-    """Uses the AERODAS method to prestall parameters for lift and drag.
-
-    Assumptions:
-    None
-
-    Source:
-    NASA TR: "Models of Lift and Drag Coefficients of Stalled and Unstalled Airfoils in
-      Wind Turbines and Wind Tunnels" by D. A. Spera
-
-    Inputs:
-    geometry.
-      aspect_ratio                                [Unitless]
-      section.
-        maximum_coefficient_lift                  [Unitless]
-        angle_attack_max_prestall_lift            [radians]
-        pre_stall_maximum_drag_coefficient_angle  [radians]
-        pre_stall_maximum_drag_coefficient        [Unitless]
-    settings.section_lift_curve_slope             [radians?]
-
-    Outputs:
-    pre_stall_maximum_lift_coefficient            [Unitless]
-    pre_stall_maximum_lift_drag_coefficient       [Unitless]
-    pre_stall_lift_curve_slope                    [radians]
-    pre_stall_maximum_drag_coefficient_angle      [Unitless]
-    (these are also packed into geometry.)
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.AERODAS.finite_aspect_ratio(state,settings,geometry)
+        Uses the AERODAS method to prestall parameters for lift and drag.
+    
+        Assumptions:
+            None
+    
+        Source:
+            NASA TR: "Models of Lift and Drag Coefficients of Stalled and Unstalled Airfoils in
+              Wind Turbines and Wind Tunnels" by D. A. Spera
+        
+        Inputs:
+            geometry.
+              aspect_ratio                                [Unitless]
+              section.
+                maximum_coefficient_lift                  [Unitless]
+                angle_attack_max_prestall_lift            [radians]
+                pre_stall_maximum_drag_coefficient_angle  [radians]
+                pre_stall_maximum_drag_coefficient        [Unitless]
+            settings.section_lift_curve_slope             [radians?]
+        
+        Outputs:
+            pre_stall_maximum_lift_coefficient            [Unitless]
+            pre_stall_maximum_lift_drag_coefficient       [Unitless]
+            pre_stall_lift_curve_slope                    [radians]
+            pre_stall_maximum_drag_coefficient_angle      [Unitless]
+            (these are also packed into geometry.)
+        
+        Properties Used:
+            N/A
     """      
     
     # unpack inputs

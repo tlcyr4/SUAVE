@@ -10,8 +10,14 @@
 import os
 
 def purge_files(filenames_array,directory=''):
-	
-	for f in filenames_array:
+    """ SUAVE.Methods.Aerodynamics.AVL.purge_files(filenames_array,directory='')
+        Delete a group of files
+        
+        Inputs:
+            filenames_array - files to be deleted
+            directory - directory where files are located 
+    """
+    for f in filenames_array:
 		try:
 			os.remove(os.path.abspath(os.path.join(directory,f)))
 		except OSError:

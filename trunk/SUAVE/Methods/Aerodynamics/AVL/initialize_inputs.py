@@ -17,10 +17,21 @@ from write_input_deck         import write_input_deck
 
 
 def initialize_inputs(geometry,configuration,conditions):
+    """ \deprecated
+        SUAVE.Methods.Aerodynamics.AVL.initialize_inputs(geometry,configuration,conditions)
+        Initializes the input data structure to AVL
+        
+        Inputs:
+            geometry - geometry of vehicle
+            configuration - configuration of vehicle
+            conditions - conditions of system
+            
+        Outputs:
+            avl_inputs - AVL input data structure
+    """
+    avl_inputs = create_avl_datastructure(geometry,configuration,conditions)
+    avl_inputs = write_geometry(avl_inputs)
+    avl_inputs = write_run_cases(avl_inputs)
+    avl_inputs = write_input_deck(avl_inputs)
 	
-	avl_inputs = create_avl_datastructure(geometry,configuration,conditions)
-	avl_inputs = write_geometry(avl_inputs)
-	avl_inputs = write_run_cases(avl_inputs)
-	avl_inputs = write_input_deck(avl_inputs)
-	
-	return avl_inputs
+    return avl_inputs

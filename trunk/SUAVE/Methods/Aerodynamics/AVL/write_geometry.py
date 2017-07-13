@@ -13,7 +13,14 @@ from create_avl_datastructure import translate_avl_wing, translate_avl_body
 
 
 def write_geometry(avl_object):
-
+    """ SUAVE.Methods.Aerodynamics.AVL.write_geometry(avl_object)
+        Write the geometry of a SUAVE vehicle into a text file to be read by AVL
+        
+        Inputs:
+            avl_object. - AVL analysis object
+                features - avl geometry
+                settings.filenames.features - name of AVL geometry input file
+    """
     # unpack inputs
     aircraft      = avl_object.features
     geometry_file = avl_object.settings.filenames.features
@@ -40,6 +47,32 @@ def write_geometry(avl_object):
 
 
 def make_header_text(avl_object):
+    """ SUAVE.Methods.Aerodynamics.AVL.write_geometry.make_header_text(avl_object)
+        Make an AVL header based on avl object
+        
+        Inputs:
+            avl_object. - AVL analysis object
+                settings.flow_symmetry.
+                    xz_plane
+                    xy_parallel
+                    z_symmetry_plane
+                    ------------------------------------------
+                    Symmetry about the plane
+                    Antisymmetry (Cp constant on plane)
+                    Symmetry not guaranteed
+                    -------------------------------------
+                features.
+                    wings['main_wing'].
+                        areas.reference - reference area
+                        chords.mean_aerodynamic - chord length
+                        spans.projected - projected area
+                    mass_properties.
+                        center_of_gravity[0] - xyz coord
+                    tag - avl object tag
+            
+        Outputs:
+            header_text - header for AVL input file [string]
+    """
     # Template for header
     header_base = \
 '''{0}
@@ -76,6 +109,17 @@ def make_header_text(avl_object):
 
 
 def make_surface_text(avl_wing):
+    """ SUAVE.Methods.Aerodynamics.AVL.write_geometry.make_surface_text(avl_wing)
+        Make an AVL surface entry based on avl wing
+        
+        Inputs:
+            avl_wing. - AVL wing object
+                symmetric - whether wing is symmetric
+                tag - wing object tag
+            
+        Outputs:
+            surface_text - input text for AVL surface [string]
+    """
     # Template for a surface
     surface_base = \
 '''#=============================================
@@ -117,6 +161,17 @@ SURFACE
 
 
 def make_body_text(avl_body):
+    """ SUAVE.Methods.Aerodynamics.AVL.write_geometry.make_body_text(avl_body)
+        Make an AVL body entry based on avl body
+        
+        Inputs:
+            avl_body. - AVL body object
+                symmetric - whether or not body is symmetric
+                tag - avl_body tag
+            
+        Outputs:
+            body_text - input text for AVL body [string]
+    """
     # Template for a surface
     surface_base = \
 '''#=============================================
@@ -157,6 +212,21 @@ SURFACE
 
 
 def make_section_text(avl_section):
+    """ SUAVE.Methods.Aerodynamics.AVL.write_geometry.make_section_text(avl_section)
+        Make an AVL section entry based on avl section
+        
+        Inputs:
+            avl_section. - AVL section object
+                origin[0] - x coord
+                origin[1] - y coord
+                origin[2] - z coord
+                chord - chord length
+                twist - section twist
+                airfoil_coord_file - file for coordinates
+            
+        Outputs:
+            section_text - input text for AVL section [string]
+    """
     # Template for a section
     section_base = \
 '''#------------------------------------------------------------
@@ -192,6 +262,20 @@ AFILE
 
 
 def make_controls_text(avl_control_surface):
+    """ SUAVE.Methods.Aerodynamics.AVL.write_geometry.make_controls_text(avl_control_surface)
+        Make an AVL control surface entry based on avl control surface
+        
+        Inputs:
+            avl_control_surface. - AVL control object
+                tag - surface tag
+                gain  - surface gain multiplier
+                x_hinge - x coord of hinge
+                hinge_vector - vector rep of hinge
+                sign_duplicate - 1 for mirrored, -1 for aileron
+            
+        Outputs:
+            control_text - input text for AVL control [string]
+    """
     # Template for a control surface
     control_base = \
 '''CONTROL

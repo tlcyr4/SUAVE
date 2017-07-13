@@ -14,8 +14,23 @@ from SUAVE.Core import Data, Units
 from .Data.Cases import Run_Case
 
 def translate_conditions_to_cases(avl,conditions):
-    """ Takes SUAVE Conditions() data structure and translates to a Container of
+    """ SUAVE.Methods.Aerodynamics.AVL.translate_data.translate_conditions_to_cases(avl,conditions)
+        Takes SUAVE Conditions() data structure and translates to a Container of
         avl Run_Case()s.
+        
+        Inputs:
+            avl - AVL object
+            conditions. - SUAVE conditions
+                freestream.
+                    mach_number - mach number
+                    velocity - velocity
+                    density - density
+                aerodynamics.
+                    angle_of_attack - aoa
+                    side_slip_angle - side slip angle
+            
+        Outputs:
+            cases - container of AVL cases
     """
     # set up aerodynamic Conditions object
     cases = Run_Case.Container()
@@ -36,8 +51,50 @@ def translate_conditions_to_cases(avl,conditions):
     return cases
 
 def translate_results_to_conditions(cases,results):
-    """ Takes avl results structure containing the results of each run case stored
+    """ SUAVE.Methods.Aerodynamics.AVL.translate_data.translate_results_to_conditions(avl,conditions)
+        Takes avl results structure containing the results of each run case stored
         each in its own Data() object. Translates into the Conditions() data structure.
+        
+        Inputs:
+            cases[i]. - AVL cases
+                conditions. - SUAVE conditions
+                freestream.
+                    mach_number - mach number
+                    velocity - velocity
+                    density - density
+                    gravitational_acceleration - acceleration due to gravity
+                aerodynamics.
+                    angle_of_attack - aoa
+                    side_slip_angle - side slip angle
+                mass
+            results - results from AVL
+            
+        Outputs:
+            res. - SUAVE results
+                freestream.
+                    mach_number
+                    gravity
+                    density
+                aerodynamics.
+                    roll_moment_coefficient
+                    pitch_moment_coefficient
+                    yaw_moment_coefficient
+                    drag_breakdown
+                        induced.
+                            total
+                            efficiency_factor
+                    cz_alpha
+                    cy_alpha
+                    cl_alpha
+                    cm_alpha
+                    cn_alpha
+                    cz_beta
+                    cy_beta
+                    cl_beta
+                    cm_beta
+                    cn_beta
+                    neutral_point
+                weights.total_mass
     """
     # set up aerodynamic Conditions object
     res = SUAVE.Analyses.Mission.Segments.Conditions.Aerodynamics()

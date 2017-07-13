@@ -11,7 +11,15 @@ from purge_files import purge_files
 
 
 def write_input_deck(avl_object):
-
+    """ SUAVE.Methods.Aerodynamics.AVL.write_input_deck(avl_object)
+        Writes a set of commands to an AVL input text file for each case in the AVL object
+        
+        Inputs:
+            avl_object. - AVL analysis object
+                current_status.
+                    batch_file - filename
+                    deck_file - filename
+    """
     open_runs = \
 '''CASE {}
 '''
@@ -36,7 +44,19 @@ def write_input_deck(avl_object):
 
 
 def make_case_command(avl_object,case):
-
+    """ SUAVE.Methods.Aerodynamics.AVL.write_input_deck(avl_object)
+        Write a command to an AVL input text file for the case in the AVL object
+        
+        Inputs:
+            avl_object - AVL analysis object
+            case - case for object
+                index
+                tag
+                result_filename
+            
+        Outputs:
+            case_command - command for AVL [string]
+    """
     base_case_command = \
 '''{0}
 x

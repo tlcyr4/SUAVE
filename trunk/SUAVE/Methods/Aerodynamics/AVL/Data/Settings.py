@@ -15,6 +15,8 @@ from Cases import Run_Case
 # ------------------------------------------------------------
 
 class Settings(Data):
+    """ 
+    """
 
 	def __defaults__(self):
 		

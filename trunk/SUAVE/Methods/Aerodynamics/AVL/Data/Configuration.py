@@ -15,7 +15,8 @@ from SUAVE.Core import Data
 # ------------------------------------------------------------
 
 class Configuration(Data):
-	
+    """ \deprecated
+    """
 	def __defaults__(self):
 		
 		self.tag = 'configuration'

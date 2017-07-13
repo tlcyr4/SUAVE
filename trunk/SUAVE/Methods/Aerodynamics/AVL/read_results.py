@@ -11,7 +11,41 @@ from SUAVE.Core import Data
 from .Data.Results import Results
 
 def read_results(avl_object):
-
+    """ SUAVE.Methods.Aerodynamics.AVL.read_results(avl_object)
+        Reads results from AVL output files and packs them up into results objects
+        
+        Inputs:
+            avl_object.case.
+                stability_and_control.control_deflections.size - number of control surfaces
+                result_filename - filename for AVL output file
+                
+        Outputs:
+            results.case_res.
+                tag
+                aerodynamics
+                    roll_moment_coefficient
+                    pitch_moment_coefficient
+                    yaw_moment_coefficient
+                    total_lift_coefficient
+                    induced_drag_coefficient
+                    span_efficiency_factor
+                    (drag coefficient commented out)
+                stability.
+                    alpha_derivatives.
+                        lift_curve_slope
+                        side_force_derivative
+                        roll_moment_derivative
+                        pitch_moment_derivative
+                        yaw_moment_derivative
+                    beta_derivatives.
+                        lift_coefficient_derivative
+                        side_force_derivative
+                        roll_moment_derivative
+                        pitch_moment_derivative
+                        yaw_moment_derivative
+                    neutral_point
+            
+    """
     results = Data()
 
     for case in avl_object.current_status.cases:

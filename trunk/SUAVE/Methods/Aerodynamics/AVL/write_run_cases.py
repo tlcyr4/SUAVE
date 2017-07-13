@@ -11,7 +11,14 @@ from purge_files import purge_files
 #from SUAVE.Methods.Aerodynamics.AVL.write_run_cases import make_controls_case_text
 
 def write_run_cases(avl_object):
-
+    """ SUAVE.Methods.Aerodynamics.AVL.write_run_cases(avl_object)
+        Writes AVL run cases into text input file for AVL
+        
+        Inputs:
+            avl_object. - AVL analyses object
+                current_status.batchfile - filename
+                features - geometry
+    """
 
     # unpack avl_inputs
     batch_filename = avl_object.current_status.batch_file
@@ -105,7 +112,14 @@ def write_run_cases(avl_object):
 
 
 def make_controls_case_text(control_deflection):
-
+    """ SUAVE.Methods.Aerodynamics.AVL.write_run_cases.make_controls_case_text(control_deflection)
+        TODO figure out how to handle controls from the suave side
+        
+        Inputs:
+            control_deflection. - control deflection
+                tag
+                deflection
+    """
     base_control_cond_text = '{0}      ->  {0}     =   {1}    \n'
 
     # Unpack inputs

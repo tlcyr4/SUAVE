@@ -8,7 +8,19 @@
 # ----------------------------------------------------------------------
 
 def compute_mission_center_of_gravity(vehicle, mission_fuel_weight):
-    #computes the CG for the vehicle based on the mzfw cg of the vehicle, and an assigned fuel
+    """ SUAVE.Methods.Center_of_Gravity.compute_mission_center_of_gravity(vehicle, mission_fuel_weight)
+        computes the CG for the vehicle based on the mzfw cg of the vehicle, and an assigned fuel
+        
+        Inputs:
+            vehicle.
+                mass_properties.
+                    zero_fuel_center_of_gravity
+                    max_zero_fuel
+                fuel.mass_properties.center_of_gravity
+                
+        Outputs:
+            cg - center of gravity
+    """
 
     mzf_cg     = vehicle.mass_properties.zero_fuel_center_of_gravity
     mzf_weight = vehicle.mass_properties.max_zero_fuel

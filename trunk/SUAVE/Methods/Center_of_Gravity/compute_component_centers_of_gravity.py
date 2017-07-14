@@ -16,8 +16,33 @@ from SUAVE.Methods.Geometry.Three_Dimensional.compute_chord_length_from_span_loc
 # ----------------------------------------------------------------------
 
 def compute_component_centers_of_gravity(vehicle):
-    #computes the CG of all of the vehicle components based on correlations from AA241
-    
+    """ SUAVE.Methods.Center_of_Gravity.compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06)
+        computes the CG of all of the vehicle components based on correlations from AA241
+        
+        Inputs:
+            vehicle...mass_properties.mass
+                wings.
+                    main_wing
+                    horizontal_stabilizer
+                    vertical_stabilizer
+                control_systems
+                fuselages.fuselage
+                landing_gear
+                propulsors
+                electrical_systems
+                avionics
+                furnishing
+                passenger_weights
+                air_conditioner
+                fuel
+                apu
+                hydraulics
+                optionals
+                
+        Outputs:
+            vehicle.mass_properties.center_of_gravity
+                
+    """
     wing               = vehicle.wings['main_wing']
     h_tail             = vehicle.wings['horizontal_stabilizer']
     v_tail             = vehicle.wings['vertical_stabilizer']

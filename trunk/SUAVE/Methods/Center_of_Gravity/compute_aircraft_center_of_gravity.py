@@ -14,8 +14,34 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06):
-    #computes the CG for the vehicle from the assigned vehicle mass properties and locations
-    
+    """ SUAVE.Methods.Center_of_Gravity.compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06)
+        computes the CG for the vehicle from the assigned vehicle mass properties and locations
+        
+        Inputs:
+            vehicle...mass_properties.mass
+                wings.
+                    main_wing
+                    horizontal_stabilizer
+                    vertical_stabilizer
+                control_systems
+                fuselages.fuselage
+                landing_gear
+                propulsors
+                electrical_systems
+                avionics
+                furnishing
+                passenger_weights
+                air_conditioner
+                fuel
+                apu
+                hydraulics
+                optionals
+            nose_load_fraction
+                
+        Outputs:
+            vehicle.mass_properties.center_of_gravity
+                
+    """
     #unpack components
     wing               = vehicle.wings['main_wing']
     h_tail             = vehicle.wings['horizontal_stabilizer']

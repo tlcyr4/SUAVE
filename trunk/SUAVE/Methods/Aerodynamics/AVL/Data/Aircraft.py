@@ -19,7 +19,8 @@ from Body import Body
 # ------------------------------------------------------------
 
 class Aircraft(Data):
-	
+    """ \deprecated
+    """
 	def __defaults__(self):
 		
 		self.tag = 'aircraft'

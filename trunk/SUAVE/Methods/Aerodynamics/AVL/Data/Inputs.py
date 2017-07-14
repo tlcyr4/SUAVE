@@ -16,7 +16,8 @@ from SUAVE.Core import Data
 # ------------------------------------------------------------
 
 class Inputs(Data):
-
+    """ \deprecated
+    """
 	def __defaults__(self):
 		
 		self.configuration = Data()

@@ -15,12 +15,12 @@ from SUAVE.Core import Container as Container_Base
 # ------------------------------------------------------------
 
 class Run_Case(Data):
+    """ SUAVE.Methods.Aerodynamics.AVL.Data.Cases.Run_Case()
+        Data structure for an AVL Case
+    """
     def __defaults__(self):
-        """
-        OUTPUTS:
-        	- 'aerodynamic' (CL, CD, CM)
-        	- 'body derivatives' (CMa,CNb,Clb,
-        	- 'stability derivatives' (
+        """ SUAVE.Methods.Aerodynamics.AVL.Data.Cases.Run_Case.__defaults__()
+            Sets default index, tag, mass, conditions, stability_and control, and result_filename
 
         """
 
@@ -50,7 +50,13 @@ class Run_Case(Data):
 
 
     def append_control_deflection(self,control_tag,deflection):
-        """ adds a control deflection case """
+        """ SUAVE.Methods.Aerodynamics.AVL.Data.Cases.Run_Case.append_control_deflection(control_tag,deflection)
+            adds a control deflection case 
+            
+            Inputs:
+                control_tag - tag for deflection
+                deflection - control deflection
+        """
         control_deflection = Data()
         control_deflection.tag        = control_tag
         control_deflection.deflection = deflection
@@ -61,9 +67,16 @@ class Run_Case(Data):
         return
 
 class Container(Container_Base):
-
+    """ SUAVE.Methods.Aerodynamics.AVL.Data.Cases.Run_Case.Container()
+        set of AVL run cases 
+    """
     def append_case(self,case):
-        """ adds a case to the set of run cases """
+        """ SUAVE.Methods.Aerodynamics.AVL.Data.Cases.Run_Case.Container.append_case(case)
+            adds a case to the set of run cases 
+            
+            Inputs:
+                case - AVL case to be added
+        """
         case.index = len(self)+1
         self.append(case)
         #case = self.check_new_val(case)

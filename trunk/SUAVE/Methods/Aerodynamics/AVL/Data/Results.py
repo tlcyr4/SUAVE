@@ -13,7 +13,13 @@ from SUAVE.Core import Data
 # ------------------------------------------------------------
 
 class Results(Data):
+    """ SUAVE.Methods.Aerodynamics.AVL.Data.Results()
+        Results data structure for handling AVL output: aerodynamics and stability
+    """
     def __defaults__(self):
+        """ SUAVE.Methods.Aerodynamics.AVL.Data.Results.__defaults__()
+            Initializes aerodynamics and stability data structures
+        """
 
         self.aerodynamics = Data()
         self.stability    = Data()

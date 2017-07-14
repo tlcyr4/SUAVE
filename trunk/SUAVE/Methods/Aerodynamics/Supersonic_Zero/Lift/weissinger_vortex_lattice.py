@@ -15,16 +15,29 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def weissinger_vortex_lattice(conditions,configuration,wing):
-    """ SUAVE.Methods.Aerodynamics.Pass_fidelity.vlm(conditions,configuration,geometry)
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.weissinger_vortex_lattice(conditions,configuration,wing)
         Vortex lattice method to compute the lift coefficient and induced drag component
 
         Inputs:
-            wing - geometry dictionary with fields:
-                Sref - reference area
+            wing. - geometry dictionary with fields:
+                spans.projected
+                chords.
+                    root
+                    tip
+                sweeps.
+                    quarter_chord
+                taper
+                twists.
+                    root
+                    tip
+                symmetric
+                aspect_ratio
+                areas.reference
+                vertical
 
         Outputs:
-
-        Assumptions:
+            Cl - lift coefficient
+            Cd - drag coefficient
         
     """
 
@@ -171,13 +184,13 @@ def weissinger_vortex_lattice(conditions,configuration,wing):
 #   Helper Functions
 # ----------------------------------------------------------------------
 def whav(x1,y1,x2,y2):
-    """ Helper function of vortex lattice method      
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.weissinger_vortex_lattice.whav(x1,y1,x2,y2)
+        Helper function of vortex lattice method      
         Inputs:
             x1,x2 -x coordinates of bound vortex
             y1,y2 -y coordinates of bound vortex
 
-        Sref - reference area for non dimensionalization
-        Outpus:
+        Outputs:
             Cl_comp - lift coefficient
             Cd_comp - drag  coefficient       
 

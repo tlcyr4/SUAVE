@@ -17,37 +17,38 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def weissinger_vortex_lattice(conditions,configuration,wing):
-    """Uses the vortex lattice method to compute the lift coefficient and induced drag component
-
-    Assumptions:
-    None
-
-    Source:
-    Unknown
-
-    Inputs:
-    wing.
-      spans.projected                       [m]
-      chords.root                           [m]
-      chords.tip                            [m]
-      sweeps.quarter_chord                  [radians]
-      taper                                 [Unitless]
-      twists.root                           [radians]
-      twists.tip                            [radians]
-      symmetric                             [Boolean]
-      aspect_ratio                          [Unitless]
-      areas.reference                       [m^2]
-      vertical                              [Boolean]
-    configuration.number_panels_spanwise    [Unitless]
-    configuration.number_panels_chordwise   [Unitless]
-    conditions.aerodynamics.angle_of_attack [radians]
-
-    Outputs:
-    Cl                                      [Unitless]
-    Cd                                      [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.Lift.weissinger_vortex_lattice(conditions,configuration,wing)
+        Uses the vortex lattice method to compute the lift coefficient and induced drag component
+    
+        Assumptions:
+            None
+    
+        Source:
+            Unknown
+    
+        Inputs:
+            wing.
+              spans.projected                       [m]
+              chords.root                           [m]
+              chords.tip                            [m]
+              sweeps.quarter_chord                  [radians]
+              taper                                 [Unitless]
+              twists.root                           [radians]
+              twists.tip                            [radians]
+              symmetric                             [Boolean]
+              aspect_ratio                          [Unitless]
+              areas.reference                       [m^2]
+              vertical                              [Boolean]
+            configuration.number_panels_spanwise    [Unitless]
+            configuration.number_panels_chordwise   [Unitless]
+            conditions.aerodynamics.angle_of_attack [radians]
+    
+        Outputs:
+            Cl                                      [Unitless]
+            Cd                                      [Unitless]
+    
+        Properties Used:
+            N/A
     """ 
 
     #unpack

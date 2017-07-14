@@ -25,29 +25,30 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def parasite_drag_propulsor(state,settings,geometry):
-    """Computes the parasite drag due to the propulsor
-
-    Assumptions:
-    Basic fit
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    state.conditions.freestream.
-      mach_number                                [Unitless]
-      temperature                                [K]
-      reynolds_number                            [Unitless]
-    geometry.      
-      nacelle_diameter                           [m^2]
-      areas.wetted                               [m^2]
-      engine_length                              [m]
-
-    Outputs:
-    propulsor_parasite_drag                      [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.parasite_drag_propulsor(state,settings,geometry)
+        Computes the parasite drag due to the propulsor
+    
+        Assumptions:
+            Basic fit
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            state.conditions.freestream.
+              mach_number                                [Unitless]
+              temperature                                [K]
+              reynolds_number                            [Unitless]
+            geometry.      
+              nacelle_diameter                           [m^2]
+              areas.wetted                               [m^2]
+              engine_length                              [m]
+    
+        Outputs:
+            propulsor_parasite_drag                      [Unitless]
+    
+        Properties Used:
+            N/A
     """
 
     # unpack inputs

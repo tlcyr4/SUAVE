@@ -18,32 +18,33 @@ from SUAVE.Analyses import Results
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def parasite_drag_pylon(state,settings,geometry):
-    """Computes the parasite drag due to pylons as a proportion of the propulsor drag
-
-    Assumptions:
-    Basic fit
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    conditions.aerodynamics.drag_breakdown.parasite[propulsor.tag].
-      form_factor                                                   [Unitless]
-      compressibility_factor                                        [Unitless]
-      skin_friction_coefficient                                     [Unitless]
-      wetted_area                                                   [m^2]
-      parasite_drag_coefficient                                     [Unitless]
-      reynolds_number                                               [Unitless]
-    geometry.reference_area                                         [m^2]
-    geometry.propulsors. 
-      nacelle_diameter                                              [m]
-      number_of_engines                                             [Unitless]
-
-    Outputs:
-    propulsor_parasite_drag                                         [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_ZeroDrag..parasite_drag_pylon(state,settings,geometry)
+        Computes the parasite drag due to pylons as a proportion of the propulsor drag
+    
+        Assumptions:
+            Basic fit
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            conditions.aerodynamics.drag_breakdown.parasite[propulsor.tag].
+              form_factor                                                   [Unitless]
+              compressibility_factor                                        [Unitless]
+              skin_friction_coefficient                                     [Unitless]
+              wetted_area                                                   [m^2]
+              parasite_drag_coefficient                                     [Unitless]
+              reynolds_number                                               [Unitless]
+            geometry.reference_area                                         [m^2]
+            geometry.propulsors. 
+              nacelle_diameter                                              [m]
+              number_of_engines                                             [Unitless]
+    
+        Outputs:
+            propulsor_parasite_drag                                         [Unitless]
+    
+        Properties Used:
+            N/A
     """
     # unpack
     

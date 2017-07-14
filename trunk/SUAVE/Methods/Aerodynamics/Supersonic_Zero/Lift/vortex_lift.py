@@ -17,6 +17,29 @@ import numpy as np
 
 def vortex_lift(state,settings,geometry):
     # Based on http://adg.stanford.edu/aa241/highlift/sstclmax.html
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.vortex_lift(state,settings,geometry)
+        computes the vortex lift associated with an aircraft 
+        
+        Inputs:
+            state.conditions. - data dictionary with fields:
+                freestream.
+                    mach_number - float or 1D array of freestream mach numbers
+                aerodynamics.
+                    angle_of_attack - floar or 1D array of angle of attacks
+                
+            settings - data dictionary with fields:
+                fuselage_lift_correction - the correction to fuselage contribution to lift
+                    
+            geometry - used for wing
+            
+        
+        Outputs:
+            wings_lift - float or 1D array of lift coefficients of the total aircraft
+        
+        Updates:
+            state.conditions.aerodynamics.lift_breakdown.vortex_lift - stores results here
+        
+    """  
 
     Mc         = state.conditions.freestream.mach_number
     AoA        = state.conditions.aerodynamics.angle_of_attack

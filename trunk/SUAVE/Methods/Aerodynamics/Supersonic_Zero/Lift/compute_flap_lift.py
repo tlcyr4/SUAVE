@@ -15,7 +15,7 @@ import numpy as np
 #  compute_flap_lift
 # ----------------------------------------------------------------------
 def compute_flap_lift(t_c,flap_type,flap_chord,flap_angle,sweep,wing_Sref,wing_affected_area):
-    """ SUAVE.Methods.Aerodynamics.compute_flap_lift(vehicle):
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.compute_flap_lift(t_c,flap_type,flap_chord,flap_angle,sweep,wing_Sref,wing_affected_area):
         Computes the increase of lift due to trailing edge flap deployment
 
         Inputs:
@@ -28,7 +28,7 @@ def compute_flap_lift(t_c,flap_type,flap_chord,flap_angle,sweep,wing_Sref,wing_a
                                   NOTE.: do not confuse with flap area
 
         Outputs:
-            dcl_flap    - Lift coefficient increase due to trailing edge flap
+            dcl_max_flap    - Lift coefficient increase due to trailing edge flap
 
         Assumptions:
             if needed

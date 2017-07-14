@@ -18,28 +18,29 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def compute_flap_lift(t_c,flap_type,flap_chord,flap_angle,sweep,wing_Sref,wing_affected_area):
-    """Computes the increase of lift due to trailing edge flap deployment
-
-    Assumptions:
-    None
-
-    Source:
-    Unknown
-
-    Inputs:
-    t_c                 (wing thickness ratio)                 [Unitless]
-    flap_type                                                  [string]
-    flap_c_chord        (flap chord as fraction of wing chord) [Unitless]
-    flap_angle          (flap deflection)                      [radians]
-    sweep               (Wing sweep angle)                     [radians]
-    wing_Sref           (Wing reference area)                  [m^2]
-    wing_affected_area  (Wing area affected by flaps)          [m^2]
-
-    Outputs:
-    dcl_max_flaps       (Lift coefficient increase)            [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.Lift.compute_flap_lift(t_c,flap_type,flap_chord,flap_angle,sweep,wing_Sref,wing_affected_area)
+        Computes the increase of lift due to trailing edge flap deployment
+    
+        Assumptions:
+            None
+    
+        Source:
+            Unknown
+    
+        Inputs:
+            t_c                 (wing thickness ratio)                 [Unitless]
+            flap_type                                                  [string]
+            flap_c_chord        (flap chord as fraction of wing chord) [Unitless]
+            flap_angle          (flap deflection)                      [radians]
+            sweep               (Wing sweep angle)                     [radians]
+            wing_Sref           (Wing reference area)                  [m^2]
+            wing_affected_area  (Wing area affected by flaps)          [m^2]
+    
+        Outputs:
+            dcl_max_flaps       (Lift coefficient increase)            [Unitless]
+    
+        Properties Used:
+            N/A
     """          
 
     #unpack

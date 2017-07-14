@@ -14,26 +14,27 @@
 
 ## @ingroup methods-aerodynamics-Supersonic_Zero-Drag
 def untrimmed(state,settings,geometry):
-    """Sums aircraft drag before trim correction
-
-    Assumptions:
-    None
-
-    Source:
-    None
-
-    Inputs:
-    state.conditions.aerodynamics.drag_breakdown.
-      parasite.total                              [Unitless]
-      induced.total                               [Unitless]
-      compressible.total                          [Unitless]
-      miscellaneous.total                         [Unitless]
-
-    Outputs:
-    aircraft_untrimmed                            [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Drag.untrimmed(state,settings,geometry)
+        Sums aircraft drag before trim correction
+    
+        Assumptions:
+            None
+    
+        Source:
+            None
+    
+        Inputs:
+            state.conditions.aerodynamics.drag_breakdown.
+              parasite.total                              [Unitless]
+              induced.total                               [Unitless]
+              compressible.total                          [Unitless]
+              miscellaneous.total                         [Unitless]
+    
+        Outputs:
+            aircraft_untrimmed                            [Unitless]
+    
+        Properties Used:
+            N/A
     """      
 
     # unpack inputs

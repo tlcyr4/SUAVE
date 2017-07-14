@@ -15,7 +15,7 @@ import numpy as np
 #  compute_slat_lift
 # ----------------------------------------------------------------------
 def compute_slat_lift(slat_angle,sweep_angle):
-    """ SUAVE.Methods.Aerodynamics.compute_slat_lift(vehicle):
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.compute_slat_lift(slat_angle,sweep_angle):
         Computes the increase of lift due to slat deployment
 
         Inputs:

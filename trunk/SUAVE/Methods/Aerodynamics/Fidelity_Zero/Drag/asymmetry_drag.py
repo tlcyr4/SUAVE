@@ -20,33 +20,34 @@ from SUAVE.Analyses import Results
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def asymmetry_drag(state, geometry, windmilling_drag_coefficient = 0.):
-    """Computes asymmetry drag due to engine failure
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.asymmetry_drag(state, geometry, windmilling_drag_coefficient = 0.)
+        Computes asymmetry drag due to engine failure
 
-    Assumptions:
-    Two engine aircraft
-
-    Source:
-    Unknown source
-
-    Inputs:
-    state.conditions.freestream.dynamic_pressure                                                [Pa]
-    state.conditions.aerodynamics.drag_breakdown.windmilling_drag.windmilling_drag_coefficient  [Unitless]
-    geometry.
-      mass_properties.center_of_gravity                                                         [m]
-      propulsors. 
-        number_of_engines                                                                       [Unitless]
-      wings.
-        tag                                                                                     
-        sref (this function probably doesn't run)                                               [m^2]
-	spans.projected                                                                         [m]
-      reference_area                                                                            [m^2]
-
-    Outputs:
-    asymm_trim_drag_coefficient                                                                 [Unitless]
-    (packed in state.conditions.aerodynamics.drag_breakdown.asymmetry_trim_coefficient)
-
-    Properties Used:
-    N/A
+        Assumptions:
+            Two engine aircraft
+    
+        Source:
+            Unknown source
+    
+        Inputs:
+        state.conditions.freestream.dynamic_pressure                                                [Pa]
+        state.conditions.aerodynamics.drag_breakdown.windmilling_drag.windmilling_drag_coefficient  [Unitless]
+        geometry.
+            mass_properties.center_of_gravity                                                         [m]
+            propulsors. 
+                number_of_engines                                                                       [Unitless]
+            wings.
+                tag                                                                                     
+                sref (this function probably doesn't run)                                               [m^2]
+                spans.projected                                                                         [m]
+                reference_area                                                                            [m^2]
+    
+        Outputs:
+            asymm_trim_drag_coefficient                                                                 [Unitless]
+            (packed in state.conditions.aerodynamics.drag_breakdown.asymmetry_trim_coefficient)
+    
+        Properties Used:
+            N/A
     """ 
     # ==============================================
 	# Unpack

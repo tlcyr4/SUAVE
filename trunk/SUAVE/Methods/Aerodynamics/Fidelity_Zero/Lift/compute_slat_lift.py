@@ -19,23 +19,24 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def compute_slat_lift(slat_angle,sweep_angle):
-    """Computes the increase in lift due to slats
-
-    Assumptions:
-    None
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    slat_angle   [radians]
-    sweep_angle  [radians]
-
-    Outputs:
-    dcl_slat     [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.Lift.compute_slat_lift(slat_angle,sweep_angle)
+        Computes the increase in lift due to slats
+    
+        Assumptions:
+            None
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            slat_angle   [radians]
+            sweep_angle  [radians]
+    
+        Outputs:
+            dcl_slat     [Unitless]
+    
+        Properties Used:
+            N/A
     """     
 
     # unpack

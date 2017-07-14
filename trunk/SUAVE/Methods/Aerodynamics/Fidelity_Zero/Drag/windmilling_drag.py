@@ -21,29 +21,30 @@ from  SUAVE.Analyses import Results
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def windmilling_drag(geometry,state):
-    """Computes windmilling drag for turbofan engines
-
-    Assumptions:
-    None
-
-    Source:
-    http://www.dept.aoe.vt.edu/~mason/Mason_f/AskinThesis2002_13.pdf
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.windmilling_drag(geometry,state)
+        Computes windmilling drag for turbofan engines
     
-    Inputs:
-    geometry.
-      max_mach_operational        [Unitless]
-      reference_area              [m^2]
-      wings.sref                  [m^2]
-      propulsors. 
-        areas.wetted              [m^2]
-        nacelle_diameter          [m^2]
-        engine_length             [m^2]
-
-    Outputs:
-    windmilling_drag_coefficient  [Unitless]
-
-    Properties Used:
-    N/A
+        Assumptions:
+            None
+    
+        Source:
+            http://www.dept.aoe.vt.edu/~mason/Mason_f/AskinThesis2002_13.pdf
+        
+        Inputs:
+            geometry.
+              max_mach_operational        [Unitless]
+              reference_area              [m^2]
+              wings.sref                  [m^2]
+              propulsors. 
+                areas.wetted              [m^2]
+                nacelle_diameter          [m^2]
+                engine_length             [m^2]
+    
+        Outputs:
+            windmilling_drag_coefficient  [Unitless]
+    
+        Properties Used:
+            N/A
     """    
     # ==============================================
 	# Unpack

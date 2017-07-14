@@ -13,26 +13,27 @@
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def aircraft_total(state,settings,geometry):
-    """Returns total aircraft lift and stores values
-
-    Assumptions:
-    None
-
-    Source:
-    None
-
-    Inputs:
-    settings.fuselage_lift_correction  [Unitless]
-    state.conditions.
-      freestream.mach_number           [Unitless]
-      aerodynamics.angle_of_attack     [radians]
-      aerodynamics.lift_coefficient    [Unitless]
-
-    Outputs:
-    aircraft_lift_total                [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.Lift.aircraft_total(state,settings,geometry)
+        Returns total aircraft lift and stores values
+    
+        Assumptions:
+            None
+    
+        Source:
+            None
+    
+        Inputs:
+            settings.fuselage_lift_correction  [Unitless]
+            state.conditions.
+              freestream.mach_number           [Unitless]
+              aerodynamics.angle_of_attack     [radians]
+              aerodynamics.lift_coefficient    [Unitless]
+    
+        Outputs:
+            aircraft_lift_total                [Unitless]
+    
+        Properties Used:
+            N/A
     """      
 
     # unpack

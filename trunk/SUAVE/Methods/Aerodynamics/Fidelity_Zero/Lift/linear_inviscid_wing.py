@@ -18,23 +18,24 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def linear_inviscid_wing(state,settings,geometry):
-    """Computes wing lift base on simple linear theory
-
-    Assumptions:
-    Linear airfoil theory
-
-    Source:
-    Linear airfoil theory
-
-    Inputs:
-    state.conditions.freestream.mach_number        [Unitless]
-    state.conditions.aerodynamics.angle_of_attack  [Unitless]
-
-    Outputs:
-    wings_lift                                     [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.Lift.linear_inviscid_wing(state,settings,geometry)
+        Computes wing lift base on simple linear theory
+    
+        Assumptions:
+            Linear airfoil theory
+    
+        Source:
+            Linear airfoil theory
+    
+        Inputs:
+            state.conditions.freestream.mach_number        [Unitless]
+            state.conditions.aerodynamics.angle_of_attack  [Unitless]
+    
+        Outputs:
+            wings_lift                                     [Unitless]
+    
+        Properties Used:
+            N/A
     """             
 
     # unpack

@@ -18,25 +18,26 @@ from SUAVE.Analyses import Results
 
 ## @ingroup methods-aerodynamics-Supersonic_Zero-Drag
 def wave_drag_lift(conditions,configuration,wing):
-    """Computes wave drag due to lift
-
-    Assumptions:
-    Simplified equations
-
-    Source:
-    http://adg.stanford.edu/aa241/drag/ssdragcalc.html
-
-    Inputs:
-    conditions.freestream.mach_number        [Unitless]
-    conditions.aerodynamics.lift_coefficient [Unitless]
-    wing.total_length                        [m]
-    wing.areas.reference                     [m^2]
-
-    Outputs:
-    wave_drag_lift                           [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Drag.wave_drag_lift(conditions,configuration,wing)
+        Computes wave drag due to lift
+    
+        Assumptions:
+            Simplified equations
+    
+        Source:
+            http://adg.stanford.edu/aa241/drag/ssdragcalc.html
+    
+        Inputs:
+            conditions.freestream.mach_number        [Unitless]
+            conditions.aerodynamics.lift_coefficient [Unitless]
+            wing.total_length                        [m]
+            wing.areas.reference                     [m^2]
+    
+        Outputs:
+            wave_drag_lift                           [Unitless]
+    
+        Properties Used:
+            N/A
     """  
 
     # Unpack

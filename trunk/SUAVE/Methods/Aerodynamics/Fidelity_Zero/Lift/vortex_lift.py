@@ -17,23 +17,24 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def vortex_lift(AoA,configuration,wing):
-    """Computes vortex lift
-
-    Assumptions:
-    wing capable of vortex lift
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.Lift.vortex_lift(AoA,configuration,wing)
+        Computes vortex lift
     
-    Inputs:
-    wing.aspect_ratio         [Unitless]
-    wing.sweeps.quarter_chord [radians]
-
-    Outputs:
-    CL_prime  (added CL)      [Unitless]
-
-    Properties Used:
-    N/A
+        Assumptions:
+            wing capable of vortex lift
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+        
+        Inputs:
+            wing.aspect_ratio         [Unitless]
+            wing.sweeps.quarter_chord [radians]
+    
+        Outputs:
+            CL_prime  (added CL)      [Unitless]
+    
+        Properties Used:
+            N/A
     """  
     
     AR    = wing.aspect_ratio

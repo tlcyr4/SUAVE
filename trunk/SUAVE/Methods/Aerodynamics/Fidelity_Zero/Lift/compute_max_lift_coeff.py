@@ -24,39 +24,40 @@ from SUAVE.Methods.Aerodynamics.Fidelity_Zero.Lift.compute_flap_lift import comp
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def compute_max_lift_coeff(vehicle,conditions=None):
-    """Computes the maximum lift coefficient associated with an aircraft high lift system
-
-    Assumptions:
-    None
-
-    Source:
-    Unknown
-
-    Inputs:
-    vehicle.max_lift_coefficient_factor [Unitless]
-    vehicle.reference_area              [m^2]
-    vehicle.wings. 
-      areas.reference                   [m^2]
-      thickness_to_chord                [Unitless]
-      chords.mean_aerodynamic           [m]
-      sweeps.quarter_chord              [radians]
-      taper                             [Unitless]
-      flaps.chord                       [m]
-      flaps.angle                       [radians]
-      slats.angle                       [radians]
-      areas.affected                    [m^2]
-      flaps.type                        [string]
-    conditions.freestream.
-      velocity                          [m/s]
-      density                           [kg/m^3]
-      dynamic_viscosity                 [N s/m^2]
-
-    Outputs:
-    Cl_max_ls (maximum CL)              [Unitless]
-    Cd_ind    (induced drag)            [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.Lift.compute_max_lift_coeff(vehicle,conditions=None)
+        Computes the maximum lift coefficient associated with an aircraft high lift system
+    
+        Assumptions:
+            None
+    
+        Source:
+            Unknown
+    
+        Inputs:
+            vehicle.max_lift_coefficient_factor [Unitless]
+            vehicle.reference_area              [m^2]
+            vehicle.wings. 
+              areas.reference                   [m^2]
+              thickness_to_chord                [Unitless]
+              chords.mean_aerodynamic           [m]
+              sweeps.quarter_chord              [radians]
+              taper                             [Unitless]
+              flaps.chord                       [m]
+              flaps.angle                       [radians]
+              slats.angle                       [radians]
+              areas.affected                    [m^2]
+              flaps.type                        [string]
+            conditions.freestream.
+              velocity                          [m/s]
+              density                           [kg/m^3]
+              dynamic_viscosity                 [N s/m^2]
+    
+        Outputs:
+            Cl_max_ls (maximum CL)              [Unitless]
+            Cd_ind    (induced drag)            [Unitless]
+    
+        Properties Used:
+            N/A
     """    
 
 

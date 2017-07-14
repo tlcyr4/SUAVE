@@ -19,28 +19,29 @@ from SUAVE.Core import Data, Units
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def estimate_2ndseg_lift_drag_ratio(config):
-    """Estimates the 2nd segment climb lift to drag ratio (all engine operating)
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.estimate_2ndseg_lift_drag_ratio(config)
+        Estimates the 2nd segment climb lift to drag ratio (all engine operating)
+        
+        Assumptions:
+            All engines operating
     
-    Assumptions:
-    All engines operating
-
-    Source:
-    Fig. 27.34 of "Aerodynamic Design of Transport Airplane" - Obert
-
-    Inputs:
-    config.
-      V2_VS_ratio              [Unitless]
-      wings.
-        areas.reference        [m^2]
-	spans.projected        [m]
-	aspect_ratio           [Unitless]
-      maximum_lift_coefficient [Unitless]
-
-    Outputs:
-    lift_drag_ratio            [Unitless]
-
-    Properties Used:
-    N/A
+        Source:
+           Fig. 27.34 of "Aerodynamic Design of Transport Airplane" - Obert
+    
+        Inputs:
+            config.
+              V2_VS_ratio              [Unitless]
+              wings.
+                areas.reference        [m^2]
+                ns.projected        [m]
+                ect_ratio           [Unitless]
+              maximum_lift_coefficient [Unitless]
+    
+        Outputs:
+            lift_drag_ratio            [Unitless]
+    
+        Properties Used:
+            N/A
     """
     # ==============================================
 	# Unpack

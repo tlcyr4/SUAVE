@@ -21,11 +21,11 @@ from SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.compute_flap_lift import co
 #  compute_max_lift_coeff
 # ----------------------------------------------------------------------
 def compute_max_lift_coeff(vehicle,conditions=None):
-    """ SUAVE.Methods.Aerodynamics.compute_max_lift_coeff(vehicle):
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.compute_max_lift_coeff(vehicle, conditions=None):
         Computes the maximum lift coefficient associated with an aircraft high lift system
 
         Inputs:
-            vehicle - SUave type vehicle
+            vehicle - SUAVE type vehicle
 
             conditions - data dictionary with fields:
                 mach_number - float or 1D array of freestream mach numbers

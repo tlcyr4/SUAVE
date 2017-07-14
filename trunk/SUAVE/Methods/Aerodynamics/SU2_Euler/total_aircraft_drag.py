@@ -21,26 +21,27 @@ from SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag import \
 
 ## @ingroup methods-aerodynamics-SU2_Euler
 def total_aircraft_drag(state,settings,geometry):
-    """ This computes the total drag of an aircraft and stores
-    that data in the conditions structure.
-
-    Assumptions:
-    None
-
-    Source:
-    N/A
-
-    Inputs:
-    settings.drag_coefficient_increment            [Unitless]
-    state.conditions.aerodynamics.drag_breakdown.
-      trim_corrected_drag                          [Unitless]
-      spoiler_drag                                 [Unitless]
-      
-    Outputs:
-    aircraft_total_drag                            [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.SU2_Euler.total_aircraft_drag(state,settings,geometry)
+        This computes the total drag of an aircraft and stores
+        that data in the conditions structure.
+    
+        Assumptions:
+            None
+    
+        Source:
+            N/A
+    
+        Inputs:
+            settings.drag_coefficient_increment            [Unitless]
+            state.conditions.aerodynamics.drag_breakdown.
+              trim_corrected_drag                          [Unitless]
+              spoiler_drag                                 [Unitless]
+          
+        Outputs:
+            aircraft_total_drag                            [Unitless]
+    
+        Properties Used:
+            N/A
     """    
     
     # Unpack inputs

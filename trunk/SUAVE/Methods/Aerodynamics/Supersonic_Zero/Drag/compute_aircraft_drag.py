@@ -19,7 +19,7 @@ from SUAVE.Methods.Aerodynamics.Supersonic_Zero.Drag import \
 
 ## @ingroup methods-aerodynamics-Supersonic_Zero-Drag
 def compute_aircraft_drag(conditions,configuration,geometry=None):
-    """ Unused function
+    """ \deprecated
     """    
     
     # Unpack inputs

@@ -15,7 +15,29 @@ from SUAVE.Analyses import Results
 # ----------------------------------------------------------------------
 
 def fuselage_correction(state,settings,geometry):
-    
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.fuselage_correction(state,settings,geometry)
+        applier fuselage lift correction
+        
+        Inputs:
+            state.conditions. - data dictionary with fields:
+                freestream.
+                    mach_number - float or 1D array of freestream mach numbers
+                aerodynamics.
+                    angle_of_attack - floar or 1D array of angle of attacks
+                
+            settings - data dictionary with fields:
+                fuselage_lift_correction - the correction to fuselage contribution to lift
+                    
+            geometry - used for wing
+            
+        
+        Outputs:
+            aircraft_lift_total - float or 1D array of lift coefficients of the total aircraft
+        
+        Updates:
+            state.conditions.aerodynamics.lift_coefficient - stores results here
+        
+    """   
     # unpack
     fus_correction  = settings.fuselage_lift_correction
     Mc              = state.conditions.freestream.mach_number

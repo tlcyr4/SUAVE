@@ -20,26 +20,27 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def miscellaneous_drag_aircraft(conditions,configuration,geometry):
-    """Computes the miscellaneous drag associated with an aircraft
-
-    Assumptions:
-    Basic fit
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    configuration.trim_drag_correction_factor  [Unitless]
-    geometry.propulsors.nacelle_diameter       [m]
-    geometry.reference_area                    [m^2]
-    geometry.wings['main_wing'].aspect_ratio   [Unitless]
-    state.conditions.freestream.mach_number    [Unitless] (actual values are not used)
-
-    Outputs:
-    total_miscellaneous_drag                   [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.miscellaneous_drag_aircraft(conditions,configuration,geometry)
+        Computes the miscellaneous drag associated with an aircraft
+    
+        Assumptions:
+            Basic fit
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            configuration.trim_drag_correction_factor  [Unitless]
+            geometry.propulsors.nacelle_diameter       [m]
+            geometry.reference_area                    [m^2]
+            geometry.wings['main_wing'].aspect_ratio   [Unitless]
+            state.conditions.freestream.mach_number    [Unitless] (actual values are not used)
+    
+        Outputs:
+            total_miscellaneous_drag                   [Unitless]
+    
+        Properties Used:
+            N/A
     """
 
     # unpack inputs

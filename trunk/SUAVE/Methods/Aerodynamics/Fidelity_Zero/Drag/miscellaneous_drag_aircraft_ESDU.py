@@ -16,27 +16,28 @@ from SUAVE.Analyses import Results
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def miscellaneous_drag_aircraft_ESDU(state,settings,geometry):
-    """Computes the miscellaneous drag associated with an aircraft
-
-    Assumptions:
-    Basic fit
-
-    Source:
-    ESDU 94044, figure 1
-
-    Inputs:
-    state.conditions.freestream.mach_number    [Unitless] (actual values not used)
-    geometry.reference_area                    [m^2]
-    geometry.wings.areas.wetted                [m^2]
-    geometry.fuselages.areas.wetted            [m^2]
-    geometry.propulsor.areas.wetted            [m^2]
-    geometry.propulsor.number_of_engines       [Unitless]
-
-    Outputs:
-    cd_excrescence (drag)                      [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.miscellaneous_drag_aircraft_ESDU(state,settings,geometry)
+        Computes the miscellaneous drag associated with an aircraft
+    
+        Assumptions:
+            Basic fit
+    
+        Source:
+            ESDU 94044, figure 1
+    
+        Inputs:
+            state.conditions.freestream.mach_number    [Unitless] (actual values not used)
+            geometry.reference_area                    [m^2]
+            geometry.wings.areas.wetted                [m^2]
+            geometry.fuselages.areas.wetted            [m^2]
+            geometry.propulsor.areas.wetted            [m^2]
+            geometry.propulsor.number_of_engines       [Unitless]
+    
+        Outputs:
+            cd_excrescence (drag)                      [Unitless]
+    
+        Properties Used:
+            N/A
     """
 
     # unpack inputs

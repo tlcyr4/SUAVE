@@ -19,31 +19,32 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def parasite_drag_fuselage(state,settings,geometry):
-    """Computes the parasite drag due to the fuselage
-
-    Assumptions:
-    Basic fit
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    state.conditions.freestream.
-      mach_number                                [Unitless]
-      temperature                                [K]
-      reynolds_number                            [Unitless]
-    settings.fuselage_parasite_drag_form_factor  [Unitless]
-    geometry.fuselage.       
-      areas.front_projected                      [m^2]
-      areas.wetted                               [m^2]
-      lengths.total                              [m]
-      effective_diameter                         [m]
-
-    Outputs:
-    fuselage_parasite_drag                       [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.parasite_drag_fuselage(state,settings,geometry)
+        Computes the parasite drag due to the fuselage
+    
+        Assumptions:
+            Basic fit
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            state.conditions.freestream.
+              mach_number                                [Unitless]
+              temperature                                [K]
+              reynolds_number                            [Unitless]
+            settings.fuselage_parasite_drag_form_factor  [Unitless]
+            geometry.fuselage.       
+              areas.front_projected                      [m^2]
+              areas.wetted                               [m^2]
+              lengths.total                              [m]
+              effective_diameter                         [m]
+    
+        Outputs:
+            fuselage_parasite_drag                       [Unitless]
+    
+        Properties Used:
+            N/A
     """
 
     # unpack inputs

@@ -18,25 +18,26 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Supersonic_Zero-Drag
 def wave_drag_volume(conditions,configuration,wing):
-    """Computes wave drag due to volume
-
-    Assumptions:
-    Simplified equations for wing
-
-    Source:
-    http://adg.stanford.edu/aa241/drag/ssdragcalc.html
-
-    Inputs:
-    conditions.freestream.mach_number        [Unitless]
-    wing.thickness_to_chord                  [Unitless]
-    wing.total_length                        [m]
-    wing.areas.reference                     [m^2]
-
-    Outputs:
-    wave_drag_volume                         [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Drag.wave_drag_volume(conditions,configuration,wing)
+        Computes wave drag due to volume
+    
+        Assumptions:
+            Simplified equations for wing
+    
+        Source:
+            http://adg.stanford.edu/aa241/drag/ssdragcalc.html
+    
+        Inputs:
+            conditions.freestream.mach_number        [Unitless]
+            wing.thickness_to_chord                  [Unitless]
+            wing.total_length                        [m]
+            wing.areas.reference                     [m^2]
+    
+        Outputs:
+            wave_drag_volume                         [Unitless]
+    
+        Properties Used:
+            N/A
     """  
 
     # unpack inputs

@@ -16,23 +16,24 @@ from SUAVE.Analyses import Results
 
 ## @ingroup methods-aerodynamics-Supersonic_Zero-Drag
 def trim(state,settings,geometry):
-    """Adjusts aircraft drag based on a trim correction
-
-    Assumptions:
-    None
-
-    Source:
-    Unknown
-
-    Inputs:
-    settings.trim_drag_correction_factor                   [Unitless]
-    state.conditions.aerodynamics.drag_breakdown.untrimmed [Unitless]
-
-    Outputs:
-    aircraft_total_drag_trim_corrected                     [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Drag.trim(state,settings,geometry)
+        Adjusts aircraft drag based on a trim correction
+    
+        Assumptions:
+            None
+    
+        Source:
+            Unknown
+    
+        Inputs:
+            settings.trim_drag_correction_factor                   [Unitless]
+            state.conditions.aerodynamics.drag_breakdown.untrimmed [Unitless]
+    
+        Outputs:
+            aircraft_total_drag_trim_corrected                     [Unitless]
+    
+        Properties Used:
+            N/A
     """     
 
     # unpack inputs

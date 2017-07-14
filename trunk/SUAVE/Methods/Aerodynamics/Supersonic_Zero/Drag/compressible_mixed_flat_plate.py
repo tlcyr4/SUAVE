@@ -20,30 +20,31 @@ import pylab as plt
 
 ## @ingroup methods-aerodynamics-Supersonic_Zero-Drag
 def compressible_mixed_flat_plate(Re,Ma,Tc,xt):
-    """Computes the coefficient of friction for a flat plate given the 
-    input parameters. Also returns the correction terms used in the
-    computation.
-
-    Assumptions:
-    Reynolds number between 10e5 and 10e9
-    xt between 0 and 1
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    Re (Reynolds number)                                             [Unitless]
-    Ma (Mach number)                                                 [Unitless]
-    Tc (temperature)                                                 [K]
-    xt (turbulent transition point as a proportion of chord length)  [Unitless]
-
-    Outputs:
-    cf_comp (coefficient of friction)                                [Unitless]
-    k_comp (compressibility correction)                              [Unitless]
-    k_reyn (Reynolds number correction)                              [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Drag.compressible_mixed_flat_plate(Re,Ma,Tc,xt)
+        Computes the coefficient of friction for a flat plate given the 
+        input parameters. Also returns the correction terms used in the
+        computation.
+    
+        Assumptions:
+            Reynolds number between 10e5 and 10e9
+            xt between 0 and 1
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            Re (Reynolds number)                                             [Unitless]
+            Ma (Mach number)                                                 [Unitless]
+            Tc (temperature)                                                 [K]
+            xt (turbulent transition point as a proportion of chord length)  [Unitless]
+    
+        Outputs:
+            cf_comp (coefficient of friction)                                [Unitless]
+            k_comp (compressibility correction)                              [Unitless]
+            k_reyn (Reynolds number correction)                              [Unitless]
+    
+        Properties Used:
+            N/A
     """      
     
     if xt < 0.0 or xt > 1.0:

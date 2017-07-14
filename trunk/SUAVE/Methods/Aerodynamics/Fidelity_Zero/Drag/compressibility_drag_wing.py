@@ -27,27 +27,28 @@ import scipy as sp
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def compressibility_drag_wing(state,settings,geometry):
-    """Computes compressibility drag for a wing
-
-    Assumptions:
-    Subsonic to low transonic
-    Supercritical airfoil
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    state.conditions.
-      freestream.mach_number                         [Unitless]
-      aerodynamics.lift_breakdown.compressible_wings [Unitless]
-    geometry.thickness_to_chord                      [Unitless]
-    geometry.sweeps.quarter_chord                    [radians]
-
-    Outputs:
-    total_compressibility_drag                       [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.compressibility_drag_wing(state,settings,geometry)
+        Computes compressibility drag for a wing
+    
+        Assumptions:
+            Subsonic to low transonic
+            Supercritical airfoil
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            state.conditions.
+              freestream.mach_number                         [Unitless]
+              aerodynamics.lift_breakdown.compressible_wings [Unitless]
+            geometry.thickness_to_chord                      [Unitless]
+            geometry.sweeps.quarter_chord                    [radians]
+    
+        Outputs:
+            total_compressibility_drag                       [Unitless]
+    
+        Properties Used:
+            N/A
     """ 
     
     # unpack

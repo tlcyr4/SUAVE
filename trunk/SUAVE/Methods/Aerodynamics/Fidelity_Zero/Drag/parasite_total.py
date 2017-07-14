@@ -16,31 +16,32 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def parasite_total(state,settings,geometry):
-    """Sums component parasite drag
-
-    Assumptions:
-    None
-
-    Source:
-    None
-
-    Inputs:
-    geometry.reference_area                             [m^2]
-    geometry.wings.areas.reference                      [m^2]
-    geometry.fuselages.areas.front_projected            [m^2]
-    geometry.propulsors.number_of_engines               [Unitless]
-    geometry.propulsors.nacelle_diameter                [m]
-    conditions.aerodynamics.drag_breakdown.
-      parasite[wing.tag].parasite_drag_coefficient      [Unitless]
-      parasite[fuselage.tag].parasite_drag_coefficient  [Unitless]
-      parasite[propulsor.tag].parasite_drag_coefficient [Unitless]
-
-
-    Outputs:
-    total_parasite_drag                                 [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.parasite_total(state,settings,geometry)
+        Sums component parasite drag
+    
+        Assumptions:
+            None
+    
+        Source:
+            None
+    
+        Inputs:
+            geometry.reference_area                             [m^2]
+            geometry.wings.areas.reference                      [m^2]
+            geometry.fuselages.areas.front_projected            [m^2]
+            geometry.propulsors.number_of_engines               [Unitless]
+            geometry.propulsors.nacelle_diameter                [m]
+            conditions.aerodynamics.drag_breakdown.
+              parasite[wing.tag].parasite_drag_coefficient      [Unitless]
+              parasite[fuselage.tag].parasite_drag_coefficient  [Unitless]
+              parasite[propulsor.tag].parasite_drag_coefficient [Unitless]
+    
+    
+        Outputs:
+            total_parasite_drag                                 [Unitless]
+    
+        Properties Used:
+            N/A
     """
 
     # unpack

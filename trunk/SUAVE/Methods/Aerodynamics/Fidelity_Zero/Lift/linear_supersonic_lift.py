@@ -17,7 +17,7 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def linear_supersonic_lift(conditions,configuration,wing):
-    """This function is outdated and not used in Fidelity_Zero
+    """\deprecated
     """   
 
     # Unpack

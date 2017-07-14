@@ -23,39 +23,40 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Drag
 def parasite_drag_wing(state,settings,geometry):
-    """Computes the parasite drag due to wings
-
-    Assumptions:
-    Basic fit
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    settings.wing_parasite_drag_form_factor      [Unitless]
-    state.conditions.freestream.
-      mach_number                                [Unitless]
-      temperature                                [K]
-      reynolds_number                            [Unitless]
-    geometry.
-      areas.reference                            [m^2]
-      chords.mean_aerodynamic                    [m]
-      thickness_to_chord                         [Unitless]
-      sweeps.quarter_chord                       [radians]
-      aspect_ratio                               [Unitless]
-      spans.projected                            [m]
-      areas.exposed                              [m^2]
-      areas.affected                             [m^2]
-      areas.wetted                               [m^2]
-      transition_x_upper                         [Unitless]
-      transition_x_lower                         [Unitless]
-      
-      
-    Outputs:
-    wing_parasite_drag                           [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.parasite_drag_wing(state,settings,geometry)
+        Computes the parasite drag due to wings
+    
+        Assumptions:
+            Basic fit
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            settings.wing_parasite_drag_form_factor      [Unitless]
+            state.conditions.freestream.
+              mach_number                                [Unitless]
+              temperature                                [K]
+              reynolds_number                            [Unitless]
+            geometry.
+              areas.reference                            [m^2]
+              chords.mean_aerodynamic                    [m]
+              thickness_to_chord                         [Unitless]
+              sweeps.quarter_chord                       [radians]
+              aspect_ratio                               [Unitless]
+              spans.projected                            [m]
+              areas.exposed                              [m^2]
+              areas.affected                             [m^2]
+              areas.wetted                               [m^2]
+              transition_x_upper                         [Unitless]
+              transition_x_lower                         [Unitless]
+          
+          
+        Outputs:
+            wing_parasite_drag                           [Unitless]
+    
+        Properties Used:
+            N/A
     """
     
     # unpack inputs

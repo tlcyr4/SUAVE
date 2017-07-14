@@ -12,26 +12,27 @@
 
 ## @ingroup methods-aerodynamics-Fidelity_Zero-Lift
 def fuselage_correction(state,settings,geometry):  
-    """Corrects aircraft lift based on fuselage effects
-
-    Assumptions:
-    None
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    settings.fuselage_lift_correction  [Unitless]
-    state.conditions.
-      freestream.mach_number           [Unitless]
-      aerodynamics.angle_of_attack     [radians]
-      aerodynamics.lift_coefficient    [Unitless]
-
-    Outputs:
-    aircraft_lift_total                [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Fidelity_Zero.Drag.Lift.fuselage_correction(state,settings,geometry)
+        Corrects aircraft lift based on fuselage effects
+    
+        Assumptions:
+            None
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            settings.fuselage_lift_correction  [Unitless]
+            state.conditions.
+              freestream.mach_number           [Unitless]
+              aerodynamics.angle_of_attack     [radians]
+              aerodynamics.lift_coefficient    [Unitless]
+    
+        Outputs:
+            aircraft_lift_total                [Unitless]
+    
+        Properties Used:
+            N/A
     """         
    
     # unpack

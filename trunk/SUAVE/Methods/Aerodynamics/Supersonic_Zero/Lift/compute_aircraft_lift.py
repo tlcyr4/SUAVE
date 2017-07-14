@@ -20,24 +20,22 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def compute_aircraft_lift(conditions,configuration,geometry):
-    """ SUAVE.Methods.Aerodynamics.compute_aircraft_lift(conditions,configuration,geometry)
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Lift.compute_aircraft_lift(conditions,configuration,geometry)
         computes the lift associated with an aircraft 
         
         Inputs:
             conditions - data dictionary with fields:
-                mach_number - float or 1D array of freestream mach numbers
-                angle_of_attack - floar or 1D array of angle of attacks
+                freestream.mach_number - float or 1D array of freestream mach numbers
+                aerodynamics.angle_of_attack - floar or 1D array of angle of attacks
                 
             configuration - data dictionary with fields:
-                surrogate_models.lift_coefficient - a callable function or class 
-                    with inputs of angle of attack and outputs of lift coefficent
                 fuselage_lift_correction - the correction to fuselage contribution to lift
                     
             geometry - used for wing
             
         
         Outputs:
-            CL - float or 1D array of lift coefficients of the total aircraft
+            aircraft_lift_total - float or 1D array of lift coefficients of the total aircraft
         
         Updates:
             conditions.lift_breakdown - stores results here

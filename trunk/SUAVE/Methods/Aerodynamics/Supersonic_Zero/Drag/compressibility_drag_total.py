@@ -30,32 +30,33 @@ import numpy as np
 
 ## @ingroup methods-aerodynamics-Supersonic_Zero-Drag
 def compressibility_drag_total(state,settings,geometry):
-    """Computes compressibility drag for full aircraft
-
-    Assumptions:
-    Drag is only calculated for the wings, main fuselage, and propulsors
-    Main fuselage must have tag 'fuselage'
-    No lift on wings other than main wing
-
-    Source:
-    adg.stanford.edu (Stanford AA241 A/B Course Notes)
-
-    Inputs:
-    state.conditions.aerodynamics.lift_breakdown.compressible_wings  [Unitless]
-    state.conditions.freestream.mach_number                          [Unitless]
-    geometry.wings                             
-    geometry.fuselages['fuselages'].length_total                     [m]
-    geometry.fuselages['fuselages'].effective_diameter               [m]
-    geometry.propulsors[geometry.propulsors.keys()[0]].
-      nacelle_diameter                                               [m]
-      engine_length                                                  [m]
-      number_of_engines                                              [m]
-
-    Outputs:
-    total_compressibility_drag                                       [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.Supersonic_Zero.Drag.compressibility_drag_total(state,settings,geometry)
+        Computes compressibility drag for full aircraft
+    
+        Assumptions:
+            Drag is only calculated for the wings, main fuselage, and propulsors
+            Main fuselage must have tag 'fuselage'
+            No lift on wings other than main wing
+    
+        Source:
+            adg.stanford.edu (Stanford AA241 A/B Course Notes)
+    
+        Inputs:
+            state.conditions.aerodynamics.lift_breakdown.compressible_wings  [Unitless]
+            state.conditions.freestream.mach_number                          [Unitless]
+            geometry.wings                             
+            geometry.fuselages['fuselages'].length_total                     [m]
+            geometry.fuselages['fuselages'].effective_diameter               [m]
+            geometry.propulsors[geometry.propulsors.keys()[0]].
+              nacelle_diameter                                               [m]
+              engine_length                                                  [m]
+              number_of_engines                                              [m]
+    
+        Outputs:
+            total_compressibility_drag                                       [Unitless]
+    
+        Properties Used:
+            N/A
     """     
 
     # Unpack

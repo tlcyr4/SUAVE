@@ -8,27 +8,28 @@ import numpy as np # should be removed, need to determine how to handle this so 
 
 ## @ingroup methods-aerodynamics-SU2_Euler
 def untrimmed(state,settings,geometry):
-    """ This computes the total drag of an aircraft without trim
-    and stores that data in the conditions structure.
-
-    Assumptions:
-    None
-
-    Source:
-    N/A
-
-    Inputs:
-    state.conditions.aerodynamics.drag_breakdown.
-      parasite.total                               [Unitless]
-      induced.total                                [Unitless]
-      compressible.total                           [Unitless]
-      miscellaneous.total                          [Unitless]
-
-    Outputs:
-    aircraft_untrimmed                             [Unitless]
-
-    Properties Used:
-    N/A
+    """ SUAVE.Methods.Aerodynamics.SU2_Euler.untrimmed(state,settings,geometry)
+        This computes the total drag of an aircraft without trim
+        and stores that data in the conditions structure.
+    
+        Assumptions:
+            None
+    
+        Source:
+            N/A
+    
+        Inputs:
+            state.conditions.aerodynamics.drag_breakdown.
+              parasite.total                               [Unitless]
+              induced.total                                [Unitless]
+              compressible.total                           [Unitless]
+              miscellaneous.total                          [Unitless]
+    
+        Outputs:
+            aircraft_untrimmed                             [Unitless]
+    
+        Properties Used:
+            N/A
     """      
 
     # Unpack inputs

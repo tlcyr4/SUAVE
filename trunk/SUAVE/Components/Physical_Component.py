@@ -34,7 +34,8 @@ class Container(Component.Container):
                         any Comp.Mass_Properties.mass, and return the total sum
     """    
     def sum_mass(self):
-        """ an example of how to recursivly sum the mass of 
+        """ SUAVE.Components.Physical_Component.Container.sum_mass()
+            an example of how to recursivly sum the mass of 
             a tree of physical components
         """
         total = 0.0

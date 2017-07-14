@@ -15,9 +15,13 @@ from SUAVE.Core import Diffed_Data
 
 class Config(Diffed_Data):
     """ SUAVE.Components.Config()
+        Configurations of a vehicle/component, direct inheritance from Diffed_Data
     """
     
     def __defaults__(self):
+        """ SUAVE.Components.Config.__defaults__()
+            Just sets tag
+        """
         self.tag    = 'config'
         
 
@@ -27,6 +31,7 @@ class Config(Diffed_Data):
 
 class Container(Diffed_Data.Container):
     """ SUAVE.Components.Config.Container()
+        Container of configs, direct inheritance from Diffed_Data.Container
     """
     pass
 

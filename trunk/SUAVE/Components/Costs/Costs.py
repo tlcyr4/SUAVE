@@ -15,7 +15,13 @@ from SUAVE.Methods.Costs.Correlations.Industrial_Costs import estimate_hourly_ra
 # Operating Costs class
 # ----------------------------------------------------------------------
 class Operating_Costs(Data):
+    """ SUAVE.Components.Costs.Costs.Operating_Cost()
+        Constants associated with the operation of a vehicle
+    """
     def __defaults__(self):
+        """ SUAVE.Components.Costs.Costs.Operating_Cost.__defaults__()
+            Constants associated with the operation of a vehicle default to 0
+        """
         self.tag = 'operating_costs'
         self.depreciate_years = 0.0
         self.fuel_price       = 0.0
@@ -31,8 +37,13 @@ class Operating_Costs(Data):
 # Industrial Costs class
 # ----------------------------------------------------------------------
 class Industrial_Costs(Data):
+    """ SUAVE.Components.Costs.Costs.Industrial_Cost()
+        Constants associated with the design and manufacturing of a vehicle
+    """
     def __defaults__(self):
-
+        """ SUAVE.Components.Costs.Costs.Industrial_Cost.__defaults__()
+            Constants associated with the design and manufacturing of a vehicle default to 0
+        """
         # inputs
         self.tag                            = 'industrial_costs'
         self.reference_year                 = 0.0

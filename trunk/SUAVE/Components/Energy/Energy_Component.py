@@ -15,8 +15,13 @@ from SUAVE.Components import Physical_Component
 # ----------------------------------------------------------------------
 
 class Energy_Component(Physical_Component):
+    """ SUAVE.Components.Energy.Energy_Component()
+        Component of energy network
+    """
     def __defaults__(self):
-        
+        """ SUAVE.Components.Energy.Energy_Component.__defaults__()
+            Initializes inputs and outputs to component
+        """
         # function handles for input
         self.inputs  = Data()
         

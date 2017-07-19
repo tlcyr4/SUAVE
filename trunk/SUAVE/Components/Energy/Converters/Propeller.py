@@ -37,27 +37,38 @@ class Propeller(Energy_Component):
         self.thrust_angle                       = 0.0
         
     def spin(self,conditions):
-        """ Analyzes a propeller given geometry and operating conditions
+        """ SUAVE.Components.Energy.Converters.Propeller.spin(conditions)
+            Analyzes a propeller given geometry and operating conditions
                  
-                 Inputs:
-                     hub radius
-                     tip radius
-                     rotation rate
-                     freestream velocity
-                     number of blades
-                     number of stations
-                     chord distribution
-                     twist distribution
-                     airfoil data
+             Inputs:
+                 conditions.
+                    freestream.
+                        density
+                        dynamic_viscosity
+                        speed_of_sound
+                        temperature
+                    frames.inertial.velocity_vector [m/s]
+
+             Outputs:
+                 Thrust coefficient
+                 Torque
+                 Power coefficient
+                 Cp
+
+             Properties Used:
+                prop_attributes.
+                    number_blades
+                    tip_radius
+                    hub_radius
+                    twist_distribution
+                    chord_distribution
+                inputs.omega - rotation rate [rad/s]
+                thrust_angle [rad]
+
+             Assumptions:
+                 Based on Qprop Theory document
        
-                 Outputs:
-                     Power coefficient
-                     Thrust coefficient
-                     
-                 Assumptions:
-                     Based on Qprop Theory document
-       
-           """
+        """
            
         #Unpack    
         B      = self.prop_attributes.number_blades

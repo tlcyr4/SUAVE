@@ -28,27 +28,36 @@ class Propeller_Lo_Fid(Energy_Component):
 
         
     def spin(self,conditions):
-        """ Analyzes a propeller given geometry and operating conditions
-                 
-                 Inputs:
-                     hub radius
-                     tip radius
-                     rotation rate
-                     freestream velocity
-                     number of blades
-                     number of stations
-                     chord distribution
-                     twist distribution
-                     airfoil data
-       
-                 Outputs:
-                     Power coefficient
-                     Thrust coefficient
-                     
-                 Assumptions:
-                     Based on Qprop Theory document
-       
-           """
+        """ SUAVE.Components.Energy.Converters.Propeller_Lo_Fid.spin(conditions)
+            Analyzes a propeller given geometry and operating conditions
+
+             Inputs:
+                 conditions.
+                    freestream.
+                        density
+                        dynamic_viscosity
+                        velocity
+                        speed_of_sound
+                        temperature
+
+             Outputs:
+                 thrust - Thrust coefficient
+                 Qm - Torque
+                 power - Power coefficient
+                 Cp
+
+             Properties Used:
+                tip_radius
+                propulsive_efficiency
+                inputs.
+                    omega - rotation rate [rad/s]
+                    torque
+
+
+             Assumptions:
+                 Based on Qprop Theory document
+
+        """
            
         # Unpack    
         R     = self.tip_radius

@@ -37,7 +37,28 @@ class Gearbox(Energy_Component):
         
     
     def compute(self):
-        
+        """ SUAVE.Components.Energy.Converters.Gearbox.compute()
+                Method called when object is called, computes component output conditions
+
+                Inputs:
+                    See Properties Used
+
+                Outputs:
+                    See Updates
+
+                Properties Used:
+                    gearwhell_radius1
+                    gearwhell_radius2
+                    torque1
+                    speed_1
+                    efficiency
+
+                Updates:
+                    self.outputs.
+                        rotation_speed
+                        torque
+                        power
+        """
         # unpack the values
         
         

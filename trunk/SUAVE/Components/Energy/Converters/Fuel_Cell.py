@@ -34,6 +34,11 @@ class Fuel_Cell(Energy_Component):
         self.discharge_model= zero_fidelity
         
     def energy_calc(self,conditions,numerics):
+        """ SUAVE.Components.Energy.Converters.Fuel_Cell.energy_calc(conditions,numerics)
+            Calculates mass flow rate of fuel cell
+
+            See SUAVE.Methods.Power.Fuel_Cell.Discharge.zero_fidelity
+        """
         mdot = self.discharge_model(self, conditions, numerics)
         return mdot  
 

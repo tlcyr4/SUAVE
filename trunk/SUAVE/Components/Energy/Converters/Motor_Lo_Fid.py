@@ -30,23 +30,36 @@ class Motor_Lo_Fid(Energy_Component):
         self.motor_efficiency   = 0.0
     
     def omega(self,conditions):
-        """ The motor's rotation rate
-            
+        """ SUAVE.Components.Energy.Converters.Motor_Lo_Fid.omega(conditions)
+            The motor's rotation rate
+
             Inputs:
-                Motor resistance - in ohms
-                Motor zeros load current - in amps
-                Motor Kv - in rad/s/volt
-                Propeller radius - in meters
-                Propeller Cp - power coefficient
-                Freestream velocity - m/s
-                Freestream dynamic pressure - kg/m/s^2
-                
+                conditions.
+                    freestream.
+                        velocity [m/s]
+                        density
+                    propulsion.propeller_power_coefficient
             Outputs:
                 The motor's rotation rate
-               
+
+            Properties Used:
+                resistance [ohms]
+                gearbox_efficiency
+                expected_current [amps]
+                no_load_current - Motor zeros load current [amps]
+                gear_ratio
+                speed_constant - Motor Kv [rad/s/volt]
+                motor_efficiency
+                inputs.voltage [V]
+
+            Updates:
+                outputs.
+                    torque
+                    omega
+
             Assumptions:
-                The motor operates at a given efficiency
-               
+                Cp is invariant
+
         """
         # Unpack
         V     = conditions.freestream.velocity[:,0,None]
@@ -74,17 +87,31 @@ class Motor_Lo_Fid(Energy_Component):
         return omega1
     
     def current(self,conditions):
-        """ The motor's current
-            
+        """ SUAVE.Components.Energy.Converters.Motor.current(conditions)
+            The motor's current
+
             Inputs:
                 Motor resistance - in ohms
                 Motor Kv - in rad/s/volt
                 Voltage - volts
                 Gear ratio - ~
                 Rotation rate - rad/s
-                
+
             Outputs:
                 The motor's current
+
+            Properties Used:
+                gear_ratio
+                speed_constant - Motor Kv [rad/s/volt]
+                resistance [ohms]
+                inputs.voltage [V]
+                omega [function]
+                gearbox_efficiency
+                expected_current [amps]
+                no_load_current - Motor zeros load current [amps]
+
+            Updates:
+                outputs.current
                
             Assumptions:
                 Cp is invariant

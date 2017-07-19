@@ -47,7 +47,35 @@ class Turbine(Energy_Component):
     
     
     def compute(self,conditions):
-        
+        """ SUAVE.Components.Energy.Converters.Turbine.compute(conditions)
+            Method called when object is called, computes component output conditions
+
+            Inputs:
+                conditions.freestream.
+                    isentropic_expansion_factor
+                    specific_heat_at_constant_pressure
+
+            Outputs:
+                See Updates
+
+            Properties Used:
+                inputs.
+                    stagnation_temperature
+                    stagnation_pressure
+                    bypass_ratio
+                    fuel_to_air_ratio
+                    comperssor.work_done
+                    fan.work_done
+                    inputs.shaft_power_off_take.work_done
+                mechanical_efficiency
+                polytropic_efficiency
+
+            Updates:
+                self.outputs.
+                    stagnation_temperature
+                    stagnation_pressure
+                    stagnation_enthalpy
+        """
         #unpack the values
         
         #unpack from conditions

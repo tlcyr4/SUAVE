@@ -46,7 +46,42 @@ class Expansion_Nozzle(Energy_Component):
     
     
     def compute(self,conditions):
-        
+        """ SUAVE.Components.Energy.Converters.Expansion_Nozzle.compute(conditions)
+                Method called when object is called, computes component output conditions
+
+                Inputs:
+                    conditions.freestream.
+                        isentropic_expansion_factor
+                        specific_heat_at_constant_pressure
+                        pressure
+                        stagnation_pressure
+                        stagnation_temperature
+                        universal_gas_constant
+                        mach_number
+
+                Outputs:
+                    See Updates
+
+                Properties Used:
+                    inputs.
+                        stagnation_temperature
+                        stagnation_pressure
+                    pressure_ratio
+                    polytropic_efficiency
+
+                Updates:
+                    self.outputs.
+                        stagnation_temperature
+                        stagnation_pressure
+                        stagnation_enthalpy
+                        mach_number
+                        static_temperature
+                        density
+                        static_enthalpy
+                        velocity
+                        static_pressure
+                        area_ratio
+        """
         #unpack the values
         
         #unpack from conditions

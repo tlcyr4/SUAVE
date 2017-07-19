@@ -44,7 +44,34 @@ class Combustor(Energy_Component):
     
     
     def compute(self,conditions):
-        
+        """ SUAVE.Components.Energy.Converters.Combustor.compute(conditions)
+            Method called when object is called, computes component output conditions
+
+            Inputs:
+                conditions.freestream.
+                    isentropic_expansion_factor
+                    specific_heat_at_constant_pressure
+                    temperature
+                    stagnation_temperature
+
+            Outputs:
+                See Updates
+
+            Properties Used:
+                inputs.
+                    stagnation_temperature
+                    stagnation_pressure
+                turbine_inlet_temperature
+                pressure_ratio
+                efficiency
+
+            Updates:
+                self.outputs.
+                    stagnation_temperature
+                    stagnation_pressure
+                    stagnation_enthalpy
+                    fuel_to_air_ratio
+        """
         # unpack the values
         
         # unpacking the values from conditions

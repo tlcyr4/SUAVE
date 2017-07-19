@@ -38,7 +38,29 @@ class Shaft_Power_Off_Take(Energy_Component):
         self.reference_pressure = 1.01325 * 10 ** 5
 
     def compute(self, state):
+        """ SUAVE.Components.Energy.Converters.Shaft_Power_Off_Take.compute(conditions)
+            Method called when object is called, computes component output conditions
 
+            Inputs:
+                See Properties Used
+
+            Outputs:
+                See Updates
+
+            Properties Used:
+                power_draw
+                inputs.
+                    mdhc
+                    total_temperature_reference
+                    total_pressure_reference
+                reference_temperature
+                reference_pressure
+
+            Updates:
+                self.outputs.
+                    power
+                    work_done
+        """
         if self.power_draw == 0.0:
             self.outputs.work_done = np.array([0.0])
 

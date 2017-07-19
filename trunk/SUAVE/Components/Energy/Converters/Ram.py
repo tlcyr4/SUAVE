@@ -32,14 +32,43 @@ class Ram(Energy_Component):
     
     def __defaults__(self):
         
-        #set the deafult values
+        #set the default values
         self.tag = 'Ram'
         self.outputs.stagnation_temperature  = 1.0
         self.outputs.stagnation_pressure     = 1.0
         self.inputs.working_fluid = Data()
 
     def compute(self,conditions):
-        
+        """ SUAVE.Components.Energy.Converters.Ram.compute(conditions)
+            Method called when object is called, computes component output conditions
+
+            Inputs:
+                conditions.freestream.
+                    pressure
+                    temperature
+                    mach_number
+
+            Outputs:
+                See Updates
+
+            Properties Used:
+                inputs.working_fluid
+
+            Updates:
+                self.outputs.
+                    stagnation_temperature
+                    stagnation_pressure
+                    isentropic_expansion_factor
+                    specific_heat_at_constant_pressure
+                    universal_gas_constant
+                conditions.freestream.
+                    stagnation_temperature
+                    stagnation_pressure
+                    isentropic_expansion_factor
+                    specific_heat_at_constant_pressure
+                    universal_gas_constant
+                    speed_of_sound
+        """
         #unpack from conditions
         Po = conditions.freestream.pressure
         To = conditions.freestream.temperature

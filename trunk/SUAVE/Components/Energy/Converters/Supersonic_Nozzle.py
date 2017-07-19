@@ -68,46 +68,52 @@ class Supersonic_Nozzle(Energy_Component):
     
     
     def compute(self,conditions):
-        """ This computes the output values from the input values according to
-        equations from the source.
-        
-        Assumptions:
-        Constant polytropic efficiency and pressure ratio
-        
-        Source:
-        https://web.stanford.edu/~cantwell/AA283_Course_Material/AA283_Course_Notes/
-        
-        Inputs:
-          conditions data class with conditions.freestream.
-            isentropic_expansion_factor         [Unitless]
-            specific_heat_at_constant_pressure  [J/(kg K)]
-            pressure                            [Pa]
-            stagnation_pressure                 [Pa]
-            stagnation_temperature              [K]
-            universal_gas_constant              [J/(kg K)] (this is a bad name)
-            mach_number                         [Unitless]
-                
-          self.inputs.
-            stagnation_temperature              [K]
-            stagnation_pressure                 [Pa]
-                   
-        Outputs:
-          self.outputs.
-            stagnation_temperature              [K]  
-            stagnation_pressure                 [Pa]
-            stagnation_enthalpy                 [J/kg]
-            mach_number                         [Unitless]
-            static_temperature                  [K]
-            static_enthalpy                     [J/kg]
-            velocity                            [m/s]
-            static_pressure                     [Pa]
-            area_ratio                          [Unitless]
-                
-        Properties Used:
-          self.
-            pressure_ratio                      [Unitless]
-            polytropic_efficiency               [Unitless]
-            """           
+        """ SUAVE.Components.Energy.Converters.Supersonic_Nozzle.compute(conditions)
+            This computes the output values from the input values according to
+            equations from the source.
+
+            Assumptions:
+            Constant polytropic efficiency and pressure ratio
+
+            Source:
+            https://web.stanford.edu/~cantwell/AA283_Course_Material/AA283_Course_Notes/
+
+            Inputs:
+              conditions data class with conditions.freestream.
+                isentropic_expansion_factor         [Unitless]
+                specific_heat_at_constant_pressure  [J/(kg K)]
+                pressure                            [Pa]
+                stagnation_pressure                 [Pa]
+                stagnation_temperature              [K]
+                universal_gas_constant              [J/(kg K)] (this is a bad name)
+                mach_number                         [Unitless]
+
+
+
+            Outputs:
+                See Updates
+
+
+            Properties Used:
+              self.
+                pressure_ratio                      [Unitless]
+                polytropic_efficiency               [Unitless]
+                inputs.
+                  stagnation_temperature              [K]
+                  stagnation_pressure                 [Pa]
+
+            Updates:
+                self.outputs.
+                    stagnation_temperature              [K]
+                    stagnation_pressure                 [Pa]
+                    stagnation_enthalpy                 [J/kg]
+                    mach_number                         [Unitless]
+                    static_temperature                  [K]
+                    static_enthalpy                     [J/kg]
+                    velocity                            [m/s]
+                    static_pressure                     [Pa]
+                    area_ratio                          [Unitless]
+        """
         
         #unpack the values
         

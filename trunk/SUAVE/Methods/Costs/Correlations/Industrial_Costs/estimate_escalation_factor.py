@@ -8,7 +8,7 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def estimate_escalation_factor(reference_year):
-    """ SUAVE.Methods.Costs.Correlations.Industrial_Costs.estimate_escalation_factor(reference_year):
+    """ SUAVE.Methods.Costs.Correlations.Industrial_Costs.estimate_escalation_factor(reference_year)
         Estimate escaltion factor 
 
         Inputs:

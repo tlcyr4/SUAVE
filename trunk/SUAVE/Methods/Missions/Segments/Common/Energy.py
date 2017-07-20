@@ -14,7 +14,19 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def initialize_battery(segment,state):
-    
+    """ initialize_battery
+        initialize battery energy
+
+        Inputs:
+            state.initials.conditions.propulsion.battery_energy
+            segment.battery_energy
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.propulsion.battery_energy
+    """
     if state.initials:
         energy_initial  = state.initials.conditions.propulsion.battery_energy[-1,0]
     elif segment.has_key('battery_energy'):
@@ -39,10 +51,14 @@ def update_thrust(segment,state):
             state.conditions         - passed directly to the propulsion model
 
         Outputs -
-            thrust_force   - a 3-column array with rows of total thrust force vectors
-                for each control point, in the body frame
-            fuel_mass_rate - the total fuel mass flow rate for each control point
+
             power  -
+
+        Updates:
+            conditions.
+                frames.body.thrust_force_vector - thrust_force   - a 3-column array with rows of total thrust force vectors
+                for each control point, in the body frame
+            weights.vehicle_mass_rate - fuel_mass_rate - the total fuel mass flow rate for each control point
 
         Assumptions -
 

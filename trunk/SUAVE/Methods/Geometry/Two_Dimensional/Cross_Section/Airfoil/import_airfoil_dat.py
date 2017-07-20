@@ -15,7 +15,12 @@ import numpy as np
 
 
 def import_airfoil_dat(filename):
-    
+    """
+        create a dictionary of arrays of points in an airfoils sections.
+
+        Airfoil input should be line by line the points of the upper section,
+        a blank line, and then the points of the lower section
+    """
     filein = open(filename,'r')
     data = {}   
     data['header'] = filein.readline().strip() + filein.readline().strip()

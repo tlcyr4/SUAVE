@@ -10,7 +10,7 @@ from SUAVE.Core import Data
 # ----------------------------------------------------------------------
 
 def estimate_hourly_rates(year):
-    """ SUAVE.Methods.Costs.Correlations.Industrial_Costs.estimate_hourly_rates(year):
+    """ SUAVE.Methods.Costs.Correlations.Industrial_Costs.estimate_hourly_rates(year)
         Estimate hourly rates according to a trend line
 
         Inputs:

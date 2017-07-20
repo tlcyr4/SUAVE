@@ -14,7 +14,8 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def orientation_transpose(T):
-    
+    """ Returns transpose of matrix
+    """
     assert np.rank(T) == 3
     
     Tt = np.swapaxes(T,1,2)

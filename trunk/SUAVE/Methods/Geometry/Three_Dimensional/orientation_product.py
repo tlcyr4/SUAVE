@@ -14,7 +14,8 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def orientation_product(T,Bb):
-    
+    """ Returns product of matrices
+    """
     assert np.rank(T) == 3
     
     if np.rank(Bb) == 3:

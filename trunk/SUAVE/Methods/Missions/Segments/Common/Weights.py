@@ -15,7 +15,21 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def initialize_weights(segment,state):
- 
+    """ SUAVE.Methods.Missions.Segments.Common.Weights.initialize_weights(segment,state)
+        initialize weights
+
+        Inputs:
+            state.
+                initials.conditions.weights.total_mass
+                conditions.weights.total_mass
+            segment.analyses.weights.vehicle.mass_properties.takeoff
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.weights.total_mass
+    """
     if state.initials:
         m_initial = state.initials.conditions.weights.total_mass[-1,0]
     else:
@@ -33,7 +47,18 @@ def initialize_weights(segment,state):
 # ----------------------------------------------------------------------
 
 def update_gravity(segment,state):
+    """ SUAVE.Methods.Missions.Segments.Common.Weights.update_gravity(segment,state)
+        update gravity
 
+        Inputs:
+            segment.analyses.planet.features.sea_level_gravity
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.freestream.gravity
+    """
     # unpack
     planet = segment.analyses.planet
     g0 = planet.features.sea_level_gravity       # m/s^2
@@ -51,7 +76,28 @@ def update_gravity(segment,state):
 # ----------------------------------------------------------------------
 
 def update_weights(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Weights.update_weights(segment,state)
+        update weights
+
+        Inputs:
+            state.
+                conditions.
+                    weights.
+                        total_mass
+                        vehicle_mass_rate
+                    freestream.gravity
+                numerics.time.integrate
+            segment.analyses.weights.mass_properties.operating_empty
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                weights.total_mass
+                frames.inertial.gravity_force_vector
+
+    """
     # unpack
     conditions = state.conditions
     m0        = conditions.weights.total_mass[0,0]

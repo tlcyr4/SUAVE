@@ -14,7 +14,7 @@ import numpy as np
 #  Distribute non recurring costs, for cash flow proposes
 # ----------------------------------------------------------------------
 def distribute_non_recurring_cost(costs):
-    """ SUAVE.Methods.Costs.Correlations.Development_Costs.distribute_non_recurring_cost(costs):
+    """ SUAVE.Methods.Costs.Correlations.Development_Costs.distribute_non_recurring_cost(costs)
 
         Inputs:
             costs.industrial.development_total_years: Total development years

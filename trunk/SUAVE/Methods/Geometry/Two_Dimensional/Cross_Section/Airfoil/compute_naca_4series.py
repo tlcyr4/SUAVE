@@ -52,7 +52,9 @@ def compute_naca_4series(camber,camber_loc,thickness,npoints=200):
 
 
 def compute_naca_4series_lines(x,camber,camber_loc,thickness):
-
+    """
+        compute nacd 4-digit number
+    """
     xx = x*x
 
     # thickness

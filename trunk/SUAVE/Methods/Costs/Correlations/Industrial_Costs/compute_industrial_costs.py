@@ -14,7 +14,7 @@ from SUAVE.Methods.Costs.Correlations.Industrial_Costs import ( estimate_escalat
 #  Compute costs to develop and produce the vehicle (only airplanes)
 # ----------------------------------------------------------------------
 def compute_industrial_costs(vehicle):
-    """ SUAVE.Methods.Costs.Correlations.Industrial_Costs.compute_industrial_costs(vehicle):
+    """ SUAVE.Methods.Costs.Correlations.Industrial_Costs.compute_industrial_costs(vehicle)
         
         Compute Costs for Design, Development, Test and Manufacturing of an airplane program
 

@@ -14,7 +14,23 @@ from SUAVE.Core.Arrays import atleast_2d_col
 # ----------------------------------------------------------------------
 
 def initialize_differentials_dimensionless(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Numerics.initialize_differentials_dimensionless(segment,state)
+        initialize differentials
+
+        Inputs:
+            state.numerics.
+                number_control_points
+                discretization_method
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.numerics.dimensionless.
+                control_points
+                differentiate
+                integrate
+    """
     # unpack
     numerics = state.numerics
     N                     = numerics.number_control_points
@@ -36,7 +52,26 @@ def initialize_differentials_dimensionless(segment,state):
 # ----------------------------------------------------------------------
 
 def update_differentials_time(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Numerics.initialize_differentials_dimensionless(segment,state)
+        update differentials
+
+        Inputs:
+            state.
+                numerics.
+                    number_control_points
+                    discretization_method
+                    integrate
+                conditions.frames.inertial.time
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.numerics.dimensionless.
+                control_points
+                differentiate
+                integrate
+    """
     # unpack
     #print 'starting mission'
     #import time

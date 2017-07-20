@@ -18,7 +18,20 @@ from SUAVE.Methods.Geometry.Three_Dimensional \
 # ----------------------------------------------------------------------
 
 def initialize_inertial_position(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Frames.initialize_inertial_position(state)
+        initialize inertial position
+
+        Inputs:
+            state.
+                initials.conditions.frames.inertial.position_vector
+                conditions.frames.inertial.position_vector
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.inertial.position_vector
+    """
     if state.initials:
         r_initial = state.initials.conditions.frames.inertial.position_vector
         r_current = state.conditions.frames.inertial.position_vector
@@ -33,7 +46,24 @@ def initialize_inertial_position(segment,state):
 # ----------------------------------------------------------------------
 
 def initialize_time(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Frames.initialize_inertial_position(segment,state)
+        initialize time
+
+        Inputs:
+            state.
+                initials.conditions.frames.inertial.time
+                conditions.frames.
+                    inertial.time
+                    planet.start_time
+            segment_start_time
+
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.planet.start_time
+    """
     if state.initials:
         t_initial = state.initials.conditions.frames.inertial.time
         t_current = state.conditions.frames.inertial.time
@@ -57,7 +87,23 @@ def initialize_time(segment,state):
 # ----------------------------------------------------------------------
 
 def initialize_planet_position(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Frames.initialize_planet_position(segment,state)
+        initialize planet position
+
+        Inputs:
+            state.
+                initials.conditions.frames.planet.
+                    longitude
+                    latitude
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.planet.
+                            latitude
+                            longitude
+    """
     if state.initials:
         longitude_initial = state.initials.conditions.frames.planet.longitude[-1,0]
         latitude_initial  = state.initials.conditions.frames.planet.latitude[-1,0] 
@@ -80,7 +126,32 @@ def initialize_planet_position(segment,state):
 # ----------------------------------------------------------------------
 
 def update_planet_position(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Frames.update_planet_position(segment,state)
+        update planet position
+
+        Inputs:
+            state.
+                conditions.
+                    freestream.
+                        velocity
+                        altitude
+                    frames.
+                        body.inertial_rotations
+                        planet.
+                            latitude
+                            longitude
+                    aerodynamics.angle_of_attack
+                numerics.time.integrate
+            segment.analyses.planet.features.mean_radius
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.planet.
+                            latitude
+                            longitude
+    """
     # unpack
     conditions = state.conditions
     
@@ -123,7 +194,29 @@ def update_planet_position(segment,state):
 # ----------------------------------------------------------------------
 
 def update_orientations(segment,state):
+    """ SUAVE.Methods.Missions.Segments.Common.Frames.update_orientations(segment,state)
+        update orientations
 
+        Inputs:
+            state.conditions.
+                frames.
+                    inertial.velocity_vector
+                    body.inertial_rotations
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                aerodynamics.
+                    angle_of_attack
+                    side_slip_angle
+                    roll_angle
+                frames.
+                    body.transform_to_inertial
+                    wind.
+                        body_rotations
+                        transform_to_inertial
+    """
     # unpack
     conditions = state.conditions
     V_inertial = conditions.frames.inertial.velocity_vector
@@ -195,7 +288,27 @@ def update_orientations(segment,state):
 # ----------------------------------------------------------------------
 
 def update_forces(segment,state):
+    """ SUAVE.Methods.Missions.Segments.Common.Frames.update_forces(segment,state)
+        update forces
 
+        Inputs:
+            state.conditions.frames.
+                wind.
+                    lift_force_vector
+                    drag_force_vector
+                    transform_to_inertial
+                body.
+                    thrust_force_vector
+                    transform_to_inertial
+                inertial.gravity_force_vector
+
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.inertial.total_force_vector
+    """
     # unpack
     conditions = state.conditions
 
@@ -229,7 +342,22 @@ def update_forces(segment,state):
 # ----------------------------------------------------------------------
 
 def integrate_inertial_horizontal_position(segment,state):
+    """ SUAVE.Methods.Missions.Segments.Common.Frames.integrate_inertial_horizontal_position(segment,state)
+        integrate inertial horizontal position
 
+        Inputs:
+            state.
+                conditions.frames.inertial.
+                    position_vector
+                    velocity_vector
+                numerics.time.integrate
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.inertial.position_vector
+    """
     # unpack
     conditions = state.conditions
     x0 = conditions.frames.inertial.position_vector[0,None,0:1+1]
@@ -249,7 +377,20 @@ def integrate_inertial_horizontal_position(segment,state):
 # ----------------------------------------------------------------------
 
 def update_acceleration(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Frames.update_acceleration(segment,state)
+        update acceleration vector
+
+        Inputs:
+            state.
+                initials.conditions.frames.inertial.velocity_vector
+                numerics.time.differentiate
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.inertial.acceleration_vector
+    """
     # unpack conditions
     v = state.conditions.frames.inertial.velocity_vector
     D = state.numerics.time.differentiate

@@ -11,7 +11,22 @@ from copy import deepcopy
 # ----------------------------------------------------------------------
           
 def expand_sub_segments(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Sub_Segments.expand_sub_segments(segment,state)
+        initialize subsegments and expand their conditions
+
+        Inputs:
+            segment.items
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.
+                segments
+                unknowns
+                conditions
+                residuals
+    """
     from SUAVE.Analyses import Process
     
     last_tag = None
@@ -43,6 +58,18 @@ def expand_sub_segments(segment,state):
 # ----------------------------------------------------------------------        
 
 def update_sub_segments(segment,state):
+    """ SUAVE.Methods.Missions.Segments.Common.Sub_Segments.update_sub_segments(segment,state)
+        update subsegments and their conditions
+
+        Inputs:
+            segments.items
+
+        Outputs:
+            See Updates
+
+        Updates:
+            calls initialize, iterate. and finalize on each subsegment
+    """
     for tag,sub_segment in segment.segments.items():
         sub_segment.initialize(state.segments[tag])
         sub_segment.iterate(state.segments[tag])
@@ -53,7 +80,18 @@ def update_sub_segments(segment,state):
 # ----------------------------------------------------------------------
 
 def finalize_sub_segments(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Sub_Segments.finalize_sub_segments(segment,state)
+        postprocessing on subsegments
+
+        Inputs:
+            segment.items
+
+        Outputs:
+            See Updates
+
+        Updates:
+            each segment calls finalize
+    """
     from SUAVE.Analyses.Mission.Segments.Conditions import Conditions
     
     for tag,sub_segment in segment.segments.items():
@@ -65,6 +103,17 @@ def finalize_sub_segments(segment,state):
 # ----------------------------------------------------------------------
 
 def sequential_sub_segments(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Common.Sub_Segments.expand_sub_segments(segment,state)
+        initialize subsegments and expand their conditions
+
+        Inputs:
+            segment.items
+
+        Outputs:
+            See Updates
+
+        Updates:
+            each segment calls evaluate
+    """
     for tag,sub_segment in segment.segments.items():
         sub_segment.evaluate(state.segments[tag])

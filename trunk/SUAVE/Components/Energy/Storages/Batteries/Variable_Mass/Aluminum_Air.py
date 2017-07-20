@@ -19,7 +19,9 @@ from SUAVE.Components.Energy.Storages.Batteries  import Battery
 # ----------------------------------------------------------------------    
 
 class Aluminum_Air(Battery):
-    
+    """ SUAVE.Components.Energy.Storages.Batteries.Variable_Mass.Aluminum_Air()
+        Variable mass aluminum air battery
+    """
     def __defaults__(self):
         self.specific_energy        = 1300.*Units.Wh/Units.kg    # convert to Joules/kg
         self.specific_power         = 0.2*Units.kW/Units.kg      # convert to W/kg
@@ -32,9 +34,33 @@ class Aluminum_Air(Battery):
         self.ragone.upper_bound     = 1600.*Units.Wh/Units.kg
         
     def find_water_mass(self, energy):
+        """ SUAVE.Components.Energy.Storages.Batteries.Variable_Mass.Aluminum_Air.find_water_mass(energy)
+            Calculare water mass in battery
+
+            Inputs:
+                energy
+
+            Outputs:
+                water_mass
+
+            Properties Used:
+                water_mass_gain_factor
+        """
         water_mass = energy*self.water_mass_gain_factor
         return water_mass
         
     def find_aluminum_mass(self, energy):
+        """ SUAVE.Components.Energy.Storages.Batteries.Variable_Mass.Aluminum_Air.find_water_mass(energy)
+            Calculare aluminum mass in battery
+
+            Inputs:
+                energy
+
+            Outputs:
+                aluminum_mass
+
+            Properties Used:
+                aluminum_mass_factor
+        """
         aluminum_mass = energy*self.aluminum_mass_factor
         return aluminum_mass

@@ -21,7 +21,9 @@ from SUAVE.Methods.Power.Battery.Discharge.datta_discharge import datta_discharg
 # ----------------------------------------------------------------------    
 
 class Battery(Energy_Component):
-    
+    """ SUAVE.Components.Energy.Storages.Batteries.Battery()
+        A battery
+    """
     def __defaults__(self):
         self.mass_properties.mass = 0.0
         self.energy_density       = 0.0
@@ -38,5 +40,9 @@ class Battery(Energy_Component):
         self.ragone.upper_bound   = 0.0
         
     def energy_calc(self,numerics):
+        """ SUAVE.Components.Energy.Storages.Batteries.Battery.energy_calc()
+            see discharge_model documentation
+
+        """
         self.discharge_model(self, numerics)
         return  

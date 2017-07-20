@@ -20,6 +20,9 @@ from SUAVE.Core import Data
 #  Network
 # ----------------------------------------------------------------------
 class Solar_Low_Fidelity(Propulsor):
+    """ SUAVE.Components.Energy.Networks.Solar_Low_Fidelity()
+        Low fidelity version of solar-powered propeller
+    """
     def __defaults__(self):
         self.solar_flux        = None
         self.solar_panel       = None
@@ -37,7 +40,16 @@ class Solar_Low_Fidelity(Propulsor):
     
     # manage process with a driver function
     def evaluate_thrust(self,state):
-    
+        """ SUAVE.Components.Energy.Networks.Solar_Low_Fidelity.evaluate_thrust(state)
+            Function called when propulsor is called by Energy Analysis, evaluates thrust of propulsor
+
+            Passes state.conditions Through components and uses self.thrust to compute thrust.
+            See component documentation and Thrust documentation for more details.
+
+            IMPORTANT: For more details, see component documentations
+
+
+        """
         # unpack
         conditions  = state.conditions
         numerics    = state.numerics        

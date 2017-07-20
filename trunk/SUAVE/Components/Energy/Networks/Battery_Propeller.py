@@ -20,6 +20,9 @@ from SUAVE.Core import Data
 #  Network
 # ----------------------------------------------------------------------
 class Battery_Propeller(Propulsor):
+    """ SUAVE.Components.Energy.Networks.Battery_Propeller()
+        A battery connected to a propeller
+    """
     def __defaults__(self): 
         self.motor             = None
         self.propeller         = None
@@ -36,7 +39,47 @@ class Battery_Propeller(Propulsor):
     
     # manage process with a driver function
     def evaluate_thrust(self,state):
-    
+        """ SUAVE.Components.Energy.Networks.Battery_Propeller.evaluate_thrust(state)
+            Function called when propulsor is called by Energy Analysis, evaluates thrust of propulsor
+
+            Inputs:
+                state. - state of the system (See self.propulsor documentation)
+                    conditions. (passed to components, see documentation)
+                        propulsion.
+                            throttle
+                            rpm
+                            current
+                            battery_draw
+                            battery_energy
+                            voltage_open_circuit
+                            voltage_under_load
+                            motor_torque
+                            propeller_torque
+                    numerics (passed to battery.energy_calc)
+
+            Outputs:
+                results.
+                    vehicle_mass_rate
+                    See self.propulsor documentation
+
+            Properties Used:
+                motor
+                propeller
+                esc
+                avionics
+                payload
+                battery
+                number_of_engines
+                thrust_angle
+                voltage
+
+            Updates:
+                state.conditions.propulsion.
+                    battery_draw
+                    battery_energy
+                See self.propulsor documentation
+
+        """
         # unpack
         conditions = state.conditions
         numerics   = state.numerics
@@ -124,18 +167,52 @@ class Battery_Propeller(Propulsor):
     
     
     def unpack_unknowns(self,segment,state):
-        """"""        
-        
-        # Here we are going to unpack the unknowns (Cp) provided for this network
+        """ SUAVE.Components.Energy.Networks.Battery_Propeller.unpack_unknowns(segment,state)
+            Here we are going to unpack the unknowns (Cp) provided for this network
+
+            Inputs:
+                segment - unused
+                state.unknowns.
+                    propeller_power_coefficient
+                    battery_voltage_under_load
+
+            Outputs:
+                See Updates
+
+            Updates:
+                state.conditions.propulsion.
+                    propeller_power_coefficient
+                    battery_voltage_under_load
+        """
+
         state.conditions.propulsion.propeller_power_coefficient = state.unknowns.propeller_power_coefficient
         state.conditions.propulsion.battery_voltage_under_load  = state.unknowns.battery_voltage_under_load
         
         return
     
     def residuals(self,segment,state):
-        """"""        
+        """ SUAVE.Components.Energy.Networks.Battery_Propeller.residuals(segment,state)
+            Here we are going to pack the residuals (torque,voltage) from the network
+
+            Inputs:
+                segment - unused
+                state.conditions.propulsion.
+                    motor_torque
+                    propeller_torque
+                    voltage_under_load
+                unknowns.battery_voltage_under_load
+
+            Outputs:
+                See Updates
+
+            Properties Used:
+                voltage
+
+            Updates:
+                state.residuals.network
+        """
         
-        # Here we are going to pack the residuals (torque,voltage) from the network
+        #
         
         # Unpack
         q_motor   = state.conditions.propulsion.motor_torque

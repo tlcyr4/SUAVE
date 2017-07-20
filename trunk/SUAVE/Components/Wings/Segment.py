@@ -15,6 +15,9 @@ from SUAVE.Components import Component, Lofted_Body, Mass_Properties
 # ------------------------------------------------------------
 
 class Segment(Lofted_Body.Segment):
+    """ SUAVE.Components.Wings.Segment()
+        Segment of a wing
+    """
     def __defaults__(self):
         self.tag = 'segment'
         self.percent_span_location = 0.0

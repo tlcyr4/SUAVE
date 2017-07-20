@@ -20,6 +20,9 @@ from SUAVE.Core import Data
 #  Network
 # ----------------------------------------------------------------------
 class Solar(Propulsor):
+    """ SUAVE.Components.Energy.Networks.Solar()
+        Solar-powered propeller
+    """
     def __defaults__(self): 
         self.solar_flux        = None
         self.solar_panel       = None
@@ -37,7 +40,16 @@ class Solar(Propulsor):
     
     # manage process with a driver function
     def evaluate_thrust(self,state):
-    
+        """ SUAVE.Components.Energy.Networks.Solar.evaluate_thrust(state)
+            Function called when propulsor is called by Energy Analysis, evaluates thrust of propulsor
+
+            Passes state.conditions Through components and uses self.thrust to compute thrust.
+            See component documentation and Thrust documentation for more details.
+
+            IMPORTANT: For more details, see component documentations
+
+
+        """
         # unpack
         conditions  = state.conditions
         numerics    = state.numerics
@@ -134,17 +146,21 @@ class Solar(Propulsor):
     
     
     def unpack_unknowns(self,segment,state):
-        """"""        
+        """
+            Here we are going to unpack the unknowns (Cp) provided for this network
+        """
         
-        # Here we are going to unpack the unknowns (Cp) provided for this network
+        #
         state.conditions.propulsion.propeller_power_coefficient = state.unknowns.propeller_power_coefficient
 
         return
     
     def residuals(self,segment,state):
-        """"""        
+        """
+            Here we are going to pack the residuals from the network
+        """
         
-        # Here we are going to pack the residuals from the network
+        #
         
         # Unpack
         q_motor   = state.conditions.propulsion.motor_torque

@@ -19,5 +19,8 @@ from Payload import Payload
 # ----------------------------------------------------------------------
 
 class Cargo(Payload):
+    """ SUAVE.Components.Payloads.Cargo()
+        Cargo payload
+    """
     def __defaults__(self):
         self.tag = 'Cargo'

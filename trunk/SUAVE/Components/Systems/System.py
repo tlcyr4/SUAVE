@@ -16,10 +16,13 @@ from SUAVE.Components import Component
 
 
 # ----------------------------------------------------------------------
-#  Payload Base Class
+#  System Base Class
 # ----------------------------------------------------------------------
         
 class System(Component):
+    """ SUAVE.Components.Systems.System()
+        Control system
+    """
     def __defaults__(self):
         self.tag             = 'System'
         self.mass_properties = mass_properties()

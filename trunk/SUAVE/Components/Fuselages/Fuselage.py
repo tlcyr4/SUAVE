@@ -17,32 +17,34 @@ from SUAVE.Components import Physical_Component, Lofted_Body
 
 ## @ingroup components-fuselages
 class Fuselage(Lofted_Body):
-    """ This is a standard fuselage for a tube and wing aircraft.
+    """ SUAVE.Components.Fuselages.Fuselage()
+        This is a standard fuselage for a tube and wing aircraft.
     
-    Assumptions:
-    Conventional fuselage
-    
-    Source:
-    N/A
+        Assumptions:
+            Conventional fuselage
+
+        Source:
+            N/A
     """
     
     def __defaults__(self):
-        """ This sets the default values for the component to function.
+        """ SUAVE.Components.Fuselages.Fuselage.__defaults__()
+            This sets the default values for the component to function.
         
-        Assumptions:
-        None
-    
-        Source:
-        N/A
-    
-        Inputs:
-        None
-    
-        Outputs:
-        None
-    
-        Properties Used:
-        None
+            Assumptions:
+                None
+
+            Source:
+                N/A
+
+            Inputs:
+                None
+
+            Outputs:
+                None
+
+            Properties Used:
+                None
         """      
         
         self.tag = 'fuselage'

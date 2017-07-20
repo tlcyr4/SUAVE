@@ -16,6 +16,9 @@ from Airfoils import Airfoil
 # ------------------------------------------------------------
 
 class Wing(Lofted_Body):
+    """ SUAVE.Components.Wings.Wing()
+        Lofted body wing
+    """
     def __defaults__(self):
 
         self.tag             = 'wing'

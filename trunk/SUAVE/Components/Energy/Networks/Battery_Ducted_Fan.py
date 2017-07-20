@@ -23,6 +23,9 @@ from SUAVE.Components.Propulsors.Propulsor import Propulsor
 #  Network
 # ----------------------------------------------------------------------
 class Battery_Ducted_Fan(Propulsor):
+    """ SUAVE.Components.Energy.Networks.Battery_Ducted_Fan()
+        A battery connected to a ducted fan
+    """
     def __defaults__(self):
         self.propulsor        = None
         self.battery          = None
@@ -31,7 +34,32 @@ class Battery_Ducted_Fan(Propulsor):
     
     # manage process with a driver function
     def evaluate_thrust(self,state):
-        
+        """ SUAVE.Components.Energy.Networks.Battery_Ducted_Fan.evaluate_thrust(state)
+            Function called when propulsor is called by Energy Analysis, evaluates thrust of propulsor
+
+            Inputs:
+                state. - state of the system (See self.propulsor documentation)
+                    conditions
+                    numerics
+
+            Outputs:
+                results.
+                    vehicle_mass_rate
+                    See self.propulsor documentation
+
+            Properties Used:
+                propulsor
+                battery
+                motor_efficiency
+                See self.propulsor documentation
+
+            Updates:
+                state.conditions.propulsion.
+                    battery_draw
+                    battery_energy
+                See self.propulsor documentation
+
+        """
         # unpack
 
         propulsor   = self.propulsor

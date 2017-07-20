@@ -19,7 +19,9 @@ from SUAVE.Components.Energy.Storages.Batteries  import Battery
 # ----------------------------------------------------------------------    
 
 class Lithium_Ion(Battery):
-    
+    """ SUAVE.Components.Energy.Storages.Batteries.Constant_Mass.Lithium_Ion()
+        Constant mass lithium ion battery
+    """
     def __defaults__(self):
         self.specific_energy    = 200.    *Units.Wh/Units.kg
         self.specific_power     = 1.      *Units.kW/Units.kg

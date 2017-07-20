@@ -19,6 +19,9 @@ from Payload import Payload
 # ----------------------------------------------------------------------
         
 class Person(Payload):
+    """ SUAVE.Components.Payloads.Person()
+        Passenger
+    """
     def __defaults__(self):
         self.tag = 'Person'
         self.mass_properties.mass = 90.718474     # kg, = 200 lb

@@ -18,10 +18,13 @@ from SUAVE.Components.Energy.Energy_Component import Energy_Component
 #  Solar Class
 # ----------------------------------------------------------------------
 class Solar_Radiation(Energy_Component):
-
+    """ SUAVE.Components.Energy.Processes.Solar_Radiation()
+        This class should really just be a method or at least be callable
+    """
     def solar_radiation(self,conditions):  
         
-        """ Computes the adjusted solar flux in watts per square meter.
+        """ SUAVE.Components.Energy.Processes.Solar_Radiation.solar_radiation()
+            Computes the adjusted solar flux in watts per square meter.
               
               Inputs:
                   day - day of the year from Jan 1st

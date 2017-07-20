@@ -26,13 +26,20 @@ class Solar_Logic(Energy_Component):
         self.system_voltage  = 0.0
     
     def voltage(self):
-        """ The system voltage
+        """ SUAVE.Componenets.Energy.Distributors.Solar_Logic.voltage()
+            The system voltage
             
             Inputs:
-                voltage
+                See Properties Used
                
             Outputs:
-                voltage
+                volts
+
+            Properties Used:
+                system_voltage
+
+            Updates:
+                self.outputs.system_voltage
                
             Assumptions:
                 this function practically does nothing
@@ -45,17 +52,24 @@ class Solar_Logic(Energy_Component):
         return volts
 
     def logic(self,conditions,numerics):
-        """ The power being sent to the battery
+        """ SUAVE.Componenets.Energy.Distributors.Solar_Logic.logic()
+            The power being sent to the battery
             
             Inputs:
-                payload power
-                avionics power
-                current to the esc
-                voltage of the system
-                MPPT efficiency
+                numerics.time.integrate
                
             Outputs:
-                power to the battery
+                See Updates
+
+            Properties Used:
+                inputs.
+                    ppayload - payload power
+                    pavionics - avionics power
+                    currentesc - current to the esc
+                    powerin
+                    volts_motor
+                voltage() - voltage of the system
+                MPPT efficiency
                
             Assumptions:
                 Many: the system voltage is constant, the maximum power

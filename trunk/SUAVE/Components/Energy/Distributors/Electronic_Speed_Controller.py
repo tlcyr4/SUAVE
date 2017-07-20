@@ -23,14 +23,20 @@ class Electronic_Speed_Controller(Energy_Component):
         self.efficiency = 0.0
     
     def voltageout(self,conditions):
-        """ The electronic speed controllers voltage out
+        """ SUAVE.Components.Energy.Distributors.Electronic_Speed_Controller.voltageout(conditions)
+            The electronic speed controllers voltage out
             
             Inputs:
-                eta - [0-1] throttle setting
-                self.inputs.voltage() - a function that returns volts into the ESC
+                conditions.propulsion.throttle - eta - [0-1] throttle setting
                
             Outputs:
-                voltage out of the ESC
+                voltsout - voltage out of the ESC
+
+            Properties Used:
+                self.inputs.voltagein - a function that returns volts into the ESC
+
+            Updates:
+                self.outputs.voltageout - voltage out of the ESC
                
             Assumptions:
                 The ESC's output voltage is linearly related to throttle setting
@@ -54,14 +60,21 @@ class Electronic_Speed_Controller(Energy_Component):
         return voltsout
     
     def currentin(self):
-        """ The current going in
+        """ SUAVE.Components.Energy.Distributors.Electronic_Speed_Controller.currentin()
+            The current going in
             
             Inputs:
-                eff - [0-1] efficiency of the ESC
-                self.inputs.power() - a function that returns power
+                See Properties Used
                
             Outputs:
                 Current into the ESC
+
+            Properties Used:
+                efficiency - [0-1] efficiency of the ESC
+                inputs.currentout
+
+            Updates:
+                self.outputs.currentin
                
             Assumptions:
                 The ESC draws current.

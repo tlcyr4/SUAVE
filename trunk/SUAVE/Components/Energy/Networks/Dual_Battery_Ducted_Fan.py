@@ -36,7 +36,40 @@ class Dual_Battery_Ducted_Fan(Propulsor):
     
     # manage process with a driver function
     def evaluate_thrust(self,state):
-        
+        """ SUAVE.Components.Energy.Networks.Dual_Battery_Ducted_Fan.evaluate_thrust(state)
+            Function called when propulsor is called by Energy Analysis, evaluates thrust of propulsor
+
+            Incomplete: For more details, see component documentations
+
+            Inputs:
+                state. - state of the system
+                    conditions.
+                        propulsion.
+                            primary_battery_energy
+                            auxiliary_battery_energy
+                            primary_battery_draw
+                            auxiliary_battery_draw
+                        freestream.velocity
+                    numerics
+
+            Outputs:
+                results.
+                    vehicle_mass_rate
+
+
+            Properties Used:
+                propulsor
+                primary_battery
+                auliliary_battery
+
+
+            Updates:
+                state.conditions.propulsion.
+                    battery_draw
+                    battery_energy
+
+
+        """
         # unpack
 
         propulsor          = self.propulsor

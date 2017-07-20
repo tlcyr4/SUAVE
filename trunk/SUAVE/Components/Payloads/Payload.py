@@ -20,6 +20,9 @@ from SUAVE.Components import Physical_Component
 # ----------------------------------------------------------------------
         
 class Payload(Physical_Component):
+    """ SUAVE.Components.Payloads.Payload()
+        Payload
+    """
     def __defaults__(self):
         self.tag = 'Payload'
         

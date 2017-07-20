@@ -22,7 +22,9 @@ from SUAVE.Components.Propulsors.Propulsor import Propulsor
 # ----------------------------------------------------------------------
 
 class Turbofan(Propulsor):
-    
+    """ SUAVE.Components.Energy.Networks.Battery_Propeller()
+        Turbofan engine
+    """
     def __defaults__(self):
         
         #setting the default values
@@ -43,7 +45,16 @@ class Turbofan(Propulsor):
     
     # linking the different network components
     def evaluate_thrust(self,state):
+        """ SUAVE.Components.Energy.Networks.Turbofan.evaluate_thrust(state)
+            Function called when propulsor is called by Energy Analysis, evaluates thrust of propulsor
 
+            Passes state.conditions Through components and uses self.thrust to compute thrust.
+            See component documentation and Thrust documentation for more details.
+
+            IMPORTANT: For more details, see component documentations
+
+
+        """
     
         #Unpack
         
@@ -252,14 +263,29 @@ class Turbofan(Propulsor):
     
     
     def size(self,state):  
-        
+        """
+            See self.thrust.size()
+        """
         #Unpack components
         conditions = state.conditions
         thrust     = self.thrust
         thrust.size(conditions)
         
     def engine_out(self,state):
-        
+        """
+            Calculates engine outputs
+
+            Inputs:
+                state.conditions.propulsion.throttle
+
+            Outputs:
+                results.
+                    thrust_force_vector
+                    vehicle_mass_rate
+
+            Properties Used:
+                number_of_engines
+        """
         
         temp_throttle = np.zeros(len(state.conditions.propulsion.throttle))
         

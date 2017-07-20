@@ -16,6 +16,9 @@ from SUAVE.Components import Lofted_Body
 # ------------------------------------------------------------
 
 class Control_Surface(Lofted_Body):
+    """ SUAVE.Components.Wings.Control_Surface()
+        Control surface
+    """
     def __defaults__(self):
         self.tag                   = 'control_surface'
         self.span                  = 0.0
@@ -28,7 +31,9 @@ class Control_Surface(Lofted_Body):
         
 
     def append_section(self,section):
-        """adds a component to vehicle """
+        """ SUAVE.Components.Wings.Control_Surface.append_section(section)
+            adds a section to surface
+        """
 
         # assert database type
         if not isinstance(section,Data):
@@ -42,6 +47,9 @@ class Control_Surface(Lofted_Body):
 
 
 class Control_Surface_Section(Lofted_Body.Section):
+    """ SUAVE.Components.Wings.Control_Surface_Section()
+        Control surface section
+    """
     def __defaults__(self):
         self.tag            = 'control_section'
         self.chord          = 0.0

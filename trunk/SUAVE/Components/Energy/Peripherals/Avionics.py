@@ -16,13 +16,16 @@ from SUAVE.Components.Energy.Energy_Component import Energy_Component
 # ----------------------------------------------------------------------    
 
 class Avionics(Energy_Component):
-    
+    """ SUAVE.Components.Energy.Peripherals.Avionics()
+        The avionics component
+    """
     def __defaults__(self):
         
         self.power_draw = 0.0
         
     def power(self):
-        """ The avionics input power
+        """ SUAVE.Components.Energy.Peripherals.Avionics.power()
+            The avionics input power
             
             Inputs:
                 draw

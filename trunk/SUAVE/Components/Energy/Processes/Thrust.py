@@ -30,12 +30,12 @@ from SUAVE.Components.Propulsors.Propulsor import Propulsor
 # ----------------------------------------------------------------------
 
 class Thrust(Energy_Component):
-    """ SUAVE.Components.Energy.Gas_Turbine.Thrust
+    """ SUAVE.Components.Energy.Processes.Thrust()
         a component that computes the thrust and other output properties
-        
+
         this class is callable, see self.__call__
-        
-        """
+
+    """
     
     def __defaults__(self):
         
@@ -61,7 +61,52 @@ class Thrust(Energy_Component):
 	
  
     def compute(self,conditions):
-        
+        """ SUAVE.Components.Energy.Gas_Turbine.Thrust.compute(conditions)
+            Method called when class is called.  Computes thrust.
+
+            Inputs:
+                conditions.
+                    freestream.
+                        isentropic_expansion_factor
+                        specific_heat_at_constant_pressure
+                        velocity
+                        speed_of_sound
+                        mach_number
+                        pressure
+                        gravity
+                    propulsion.throttle
+
+            Outputs:
+                See Updates
+
+            Properties Used:
+                inputs.
+                    fuel_to_air_ratio
+                    total_temperature_reference
+                    total_pressure_reference
+                    core_nozzle.
+                        velocity
+                        area_ratio
+                    fan_nozzle.
+                        velocity
+                        area_ratio
+                    number_of_engines
+                    bypass_ratio
+                    flow_through_core
+                    flow_through_fan
+                reference_temperature
+                reference_pressure
+                compressor_nondimensional_massflow
+
+            Updates:
+                self.outputs.
+                    thrust
+                    thrust_specific_fuel_consumption
+                    non_dimensional_thrust
+                    core_mass_flow_rate
+                    fuel_flow_rate
+                    power
+        """
         #unpack the values
         
         #unpacking from conditions
@@ -142,7 +187,31 @@ class Thrust(Energy_Component):
         
     
     def size(self,conditions):
-        
+        """ SUAVE.Components.Energy.Gas_Turbine.Thrust.size(conditions)
+            handles mass flow computations
+
+            Inputs:
+                conditions.freestream.speed_of_sound
+
+            Outputs:
+                See Updates
+
+            Properties Used:
+                inputs.
+                    number_of_engines
+                    bypass_ratio
+                    total_temperature_reference
+                    total_pressure_reference
+                reference_temperature
+                reference_pressure
+                total_design
+                outputs.non_dimensional_thrust
+
+            Updates:
+                self.
+                    mass_flow_rate_design
+                    compressor_nondimensional_massflow
+        """
         #unpack inputs
         a0                   = conditions.freestream.speed_of_sound
         throttle             = 1.0

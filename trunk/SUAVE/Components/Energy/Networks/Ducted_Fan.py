@@ -22,7 +22,9 @@ from SUAVE.Components.Propulsors.Propulsor import Propulsor
 # ----------------------------------------------------------------------
 
 class Ducted_Fan(Propulsor):
-    
+    """ SUAVE.Components.Energy.Networks.Ducted_Fan()
+        Ducted fan
+    """
     def __defaults__(self):
         
         #setting the default values
@@ -38,7 +40,16 @@ class Ducted_Fan(Propulsor):
     
     # linking the different network components
     def evaluate_thrust(self,state):
+        """ SUAVE.Components.Energy.Networks.Ducted_Fan.evaluate_thrust(state)
+            Function called when propulsor is called by Energy Analysis, evaluates thrust of propulsor
 
+            Passes state.conditions Through components and uses self.thrust to compute thrust.
+            See component documentation and Thrust documentation for more details.
+
+            IMPORTANT: For more details, see component documentations
+
+
+        """
     
         #Unpack
         

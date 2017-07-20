@@ -19,7 +19,9 @@ from SUAVE.Components.Energy.Storages.Batteries  import Battery
 # ----------------------------------------------------------------------    
 
 class Lithium_Air(Battery):
-    
+    """ SUAVE.Components.Energy.Storages.Batteries.Variable_Mass.Lithium_Air()
+        Variable mass lithium air battery
+    """
     def __defaults__(self):
         self.specific_energy  = 2000.     *Units.Wh/Units.kg    # convert to Joules/kg
         self.specific_power   = 0.66      *Units.kW/Units.kg    # convert to W/kg

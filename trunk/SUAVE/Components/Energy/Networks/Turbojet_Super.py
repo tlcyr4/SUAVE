@@ -27,7 +27,9 @@ from SUAVE.Components.Propulsors.Propulsor import Propulsor
 # ----------------------------------------------------------------------
 
 class Turbojet_Super(Propulsor):
-    
+    """ SUAVE.Components.Energy.Networks.Turbojet_Super()
+        Turbojet engine
+    """
     def __defaults__(self):
         
         #setting the default values
@@ -41,7 +43,16 @@ class Turbojet_Super(Propulsor):
     
     # linking the different network components
     def evaluate_thrust(self,state):
+        """ SUAVE.Components.Energy.Networks.Turbojet_Super.evaluate_thrust(state)
+            Function called when propulsor is called by Energy Analysis, evaluates thrust of propulsor
 
+            Passes state.conditions Through components and uses self.thrust to compute thrust.
+            See component documentation and Thrust documentation for more details.
+
+            IMPORTANT: For more details, see component documentations
+
+
+        """
     
         #Unpack
         
@@ -193,8 +204,17 @@ class Turbojet_Super(Propulsor):
     
     
     
-    def size(self,state):  
-        
+    def size(self,state):
+        """ SUAVE.Components.Energy.Networks.Turbojet_Super.size(state)
+            Evaluates thrust of propulsor
+
+            Passes state.conditions Through components and uses self.thrust to compute thrust.
+            See component documentation and Thrust documentation for more details.
+
+            IMPORTANT: For more details, see component documentations
+
+
+        """
         #Unpack components
         
         conditions = state.conditions

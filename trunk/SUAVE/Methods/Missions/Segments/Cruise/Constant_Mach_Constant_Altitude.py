@@ -14,7 +14,35 @@ import SUAVE
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Cruise.Constant_Mach_Constant_Altitude.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                altitude
+                distance
+                mach
+            state.
+                initials.conditions.frames.inertial.position_vector
+                numerics.dimensionless.control_points
+                conditions.freestream.speed_of_sound
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                freestream.altitude
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                    time
+            segment.altitude
+
+    """
     # unpack
     alt        = segment.altitude
     xf         = segment.distance

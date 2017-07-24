@@ -16,7 +16,34 @@ from SUAVE.Methods.Geometry.Three_Dimensional \
 # ----------------------------------------------------------------------
 
 def unpack_unknowns(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Cruise.Constant_Throttle_Constant_Altitude.unpack_unknowns(segment,state)
+        Load unknowns in to state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            state.
+                unknowns.
+                    time
+                    velocity_x
+                    body_angle
+                conditions.frames.inertial.time
+                numerics.dimensionless.control_points
+            segment.
+                air_speed_start
+                air_speed_end
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.
+                inertial.
+                    velocity_vector
+                    time
+                body.inertial_rotations
+    """
     # unpack unknowns
     unknowns   = state.unknowns
     velocity_x = unknowns.velocity_x
@@ -101,7 +128,8 @@ def initialize_conditions(segment,state):
 # ----------------------------------------------------------------------    
 
 def solve_residuals(segment,state):
-    """ Segment.solve_residuals(conditions,numerics,unknowns,residuals)
+    """ \deprecated
+        Segment.solve_residuals(conditions,numerics,unknowns,residuals)
         the hard work, solves the residuals for the free unknowns
         called once per segment solver iteration
     """
@@ -132,7 +160,8 @@ def solve_residuals(segment,state):
 # ------------------------------------------------------------------    
 
 def post_process(segment,state):
-    """ Segment.post_process(conditions,numerics,unknowns)
+    """ \deprecated
+        Segment.post_process(conditions,numerics,unknowns)
         post processes the conditions after converging the segment solver.
         Packs up the final position vector to allow estimation of the ground
         roll distance (e.g., distance from brake release to rotation speed in

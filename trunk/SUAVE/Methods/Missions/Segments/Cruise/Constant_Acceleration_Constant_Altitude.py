@@ -1,4 +1,13 @@
+# Constant_Acceleration_Constant_Altitude.py
+#
+# Created:
+# Modified:
 
+# ----------------------------------------------------------------------
+#  Imports
+# ----------------------------------------------------------------------
+
+# N/A
 
 
 # ----------------------------------------------------------------------
@@ -6,7 +15,36 @@
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Cruise.Constant_Acceleration_Constant_Altitude.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                altitude
+                air_speed_initial
+                air_speed_final
+                acceleration
+            state.
+                initials.conditions.frames.inertial.position_vector
+                numerics.dimensionless.control_points
+                conditions.frames.inertial.time
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                freestream.altitude
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                    time
+            segment.altitude
+
+    """
     # unpack
     alt = segment.altitude 
     v0  = segment.air_speed_initial
@@ -38,7 +76,28 @@ def initialize_conditions(segment,state):
     
     
 def residual_total_forces(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Cruise.Constant_Acceleration_Constant_Altitude.residual_total_forces(segment,state)
+        Pack up forces into state.residuals
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                state.ones_row
+                acceleration
+            state.
+                conditions.
+                    frames.inertial.total_force_vector
+                    weights.total_mass
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.residuals.forces
+
+    """
     FT      = state.conditions.frames.inertial.total_force_vector
     ax      = segment.acceleration 
     m       = state.conditions.weights.total_mass  

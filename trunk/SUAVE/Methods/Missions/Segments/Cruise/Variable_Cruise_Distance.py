@@ -8,7 +8,20 @@
 # --------------------------------------------------------------
 
 def initialize_cruise_distance(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Cruise.Variable_Cruise_Distance.initialize_cruise_distance(segment,state)
+        Initialize unknowns
+
+        Inputs:
+            segment.
+                cruise_tag
+                segments[segment.cruise_tag].distance
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.unknowns.cruise_distance
+    """
     # unpack
     cruise_tag = segment.cruise_tag
     distance   = segment.segments[cruise_tag].distance
@@ -24,7 +37,20 @@ def initialize_cruise_distance(segment,state):
 # --------------------------------------------------------------
 
 def unknown_cruise_distance(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Cruise.Variable_Cruise_Distance.unknown_cruise_distance(segment,state)
+        Load unknowns into segments
+
+        Inputs:
+            segment.
+                cruise_tag
+                cruise_distance
+
+        Outputs:
+            See Updates
+
+        Updates:
+            segment.segments[segment.cruise_tag].distance
+    """
     # unpack
     distance = state.unknowns.cruise_distance
     cruise_tag = segment.cruise_tag
@@ -40,7 +66,20 @@ def unknown_cruise_distance(segment,state):
 # --------------------------------------------------------------
 
 def residual_landing_weight(segment,state):
-    
+    """ SUAVE.Methods.Missions.Segments.Cruise.Variable_Cruise_Distance.residual_landing_weight(segment,state)
+        Initialize unknowns
+
+        Inputs:
+            segment.
+                cruise_tag
+                segments."tag".distance
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.unknowns.cruise_distance
+    """
     # unpack
     landing_weight = state.segments[-1].conditions.weights.total_mass[-1]
     target_weight  = segment.target_landing_weight

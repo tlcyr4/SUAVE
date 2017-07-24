@@ -8,7 +8,36 @@
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Cruise.Constant_Speed_Constant_Altitude.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                altitude
+                distance
+                air_speed
+            state.
+                initials.conditions.frames.inertial.position_vector
+                numerics.dimensionless.control_points
+                conditions.frames.inertial.time
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                freestream.altitude
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                    time
+            segment.
+                altitude
+
+    """
     # unpack
     alt        = segment.altitude
     xf         = segment.distance

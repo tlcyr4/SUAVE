@@ -14,7 +14,26 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def unpack_unknowns(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Cruise.Common.unpack_unknowns(segment,state)
+        Copy unknowns from state.unknowns to state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            state.unknowns.
+                throttle
+                body_angle
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                propulsion.throttle
+                frames.body.inertial_rotations
+
+    """
     # unpack unknowns
     throttle   = state.unknowns.throttle
     body_angle = state.unknowns.body_angle
@@ -29,7 +48,24 @@ def unpack_unknowns(segment,state):
 # ----------------------------------------------------------------------
 
 def residual_total_forces(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Cruise.Common.residual_total_forces(segment,state)
+        Copy residuals from state.conditions to state.residuals
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            state.conditions.
+                frames.inertial.total_force_vector
+                weights.total_mass
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.residual.forces
+
+    """
     FT = state.conditions.frames.inertial.total_force_vector
     m  = state.conditions.weights.total_mass[:,0] 
     

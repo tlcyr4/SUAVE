@@ -15,7 +15,28 @@ import numpy as np
 # ----------------------------------------------------------------------  
 
 def initialize_conditions(segment,state):
+    """ SUAVE.Methods.Mission.Segments.Ground.Takeoff.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+        See Common.initialize_conditions
+        Rest of docstring is about affects in addition to that
 
+        Assumptions:
+        N/A
+
+        Inputs:
+            state.conditions.frames.inertial.position_vector
+            segment.
+                analyses.weights.vehicle.mass_properties.takeoff
+                throttle
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                weights.total_mass
+                propulsion.throttle
+
+    """
     Common.initialize_conditions(segment,state)
     conditions = state.conditions
 

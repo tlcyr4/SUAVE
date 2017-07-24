@@ -17,7 +17,35 @@ from SUAVE.Methods.Geometry.Three_Dimensional \
 # ----------------------------------------------------------------------
 
 def unpack_unknowns(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Ground.Common.unpack_unknowns(segment,state)
+        Load unknowns
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                descent_angle
+                altitude_start
+                altitude_end
+                mach_start
+                mach_end
+            state.
+                unknowns.
+                    velocity_x
+                    time
+                conditions.frames.inertial.time
+                numerics.dimensionless.control_points
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.inertial.
+                    position_vector
+                    velocity_vector
+
+    """
     # unpack unknowns
     unknowns   = state.unknowns
     velocity_x = unknowns.velocity_x
@@ -45,7 +73,7 @@ def unpack_unknowns(segment,state):
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    """ Segment.initialize_conditions(conditions,numerics,initials=None)
+    """ SUAVE.Methods.Mission.Segments.Ground.Common.initialize_conditions(segment,state)
         update the segment conditions
         pin down as many condition variables as possible in this function
         Inputs:
@@ -91,7 +119,39 @@ def initialize_conditions(segment,state):
 # ----------------------------------------------------------------------
 
 def compute_ground_forces(segment,state):
-    """ Compute the rolling friction on the aircraft """
+    """ SUAVE.Methods.Mission.Segments.Ground.Common.compute_ground_forces(segment,state)
+        Compute the rolling friction on the aircraft
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                descent_angle
+                altitude_start
+                altitude_end
+                mach_start
+                mach_end
+            state.
+                unknowns.
+                    velocity_x
+                    time
+                conditions.
+                    frames.
+                        inertial.time
+                        wind.
+                            lift_force_vector
+                            transform_to_inertial
+                    ground.friction_coefficient
+                numerics.dimensionless.control_points
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.inertial.ground_force_vector
+
+    """
 
     # unpack
     conditions             = state.conditions
@@ -118,7 +178,24 @@ def compute_ground_forces(segment,state):
 # ----------------------------------------------------------------------
 
 def compute_forces(segment,state):
+    """ SUAVE.Methods.Mission.Segments.Ground.Common.compute_ground_forces(segment,state)
+        Compute the rolling friction on the aircraft
 
+        Assumptions:
+        N/A
+
+        Inputs:
+            state.conditions.frames.inertial.
+                total_force_vector
+                ground_force_vector
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.frames.inertial.total_force_vector
+
+    """
 
     SUAVE.Methods.Missions.Segments.Common.Frames.update_forces(segment,state)
 
@@ -138,9 +215,31 @@ def compute_forces(segment,state):
 # ----------------------------------------------------------------------
 
 def solve_residuals(segment,state):
-    """ Segment.solve_residuals(conditions,numerics,unknowns,residuals)
+    """ SUAVE.Methods.Mission.Segments.Ground.Common.solve_residuals(segment,state)
         the hard work, solves the residuals for the free unknowns
         called once per segment solver iteration
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            state.conditions.
+                frames.inertial.
+                    total_force_vector
+                    velocity_vector
+                    acceleration_vector
+                weights.total_mass
+            segment.velocity_end
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.residuals.
+                final_velocity_error
+                acceleration_x
+
+
     """
 
     # unpack inputs
@@ -163,7 +262,7 @@ def solve_residuals(segment,state):
 # ------------------------------------------------------------------    
 
 def post_process(segment,state):
-    """ Segment.post_process(conditions,numerics,unknowns)
+    """ SUAVE.Methods.Mission.Segments.Ground.Common.solve_residuals(segment,state)
         post processes the conditions after converging the segment solver.
         Packs up the final position vector to allow estimation of the ground
         roll distance (e.g., distance from brake release to rotation speed in

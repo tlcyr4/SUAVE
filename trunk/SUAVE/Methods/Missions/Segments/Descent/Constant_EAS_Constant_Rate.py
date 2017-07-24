@@ -15,7 +15,36 @@ import numpy as np
 #  Initialize Conditions
 # ----------------------------------------------------------------------
 def initialize_conditions(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Descent.Constant_EAS_Constant_Rate.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                altitude_start
+                altitude_end
+                descent_rate
+                equivalent_air_speed
+                freestream.density
+                analyses.atmosphere.compute_values
+            state.
+                initials.conditions.frames.inertial.position_vector
+                numerics.dimensionless.control_points
+                conditions.frames.inertial.time
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                freestream.altitude
+
+    """
     # unpack
     descent_rate = segment.descent_rate
     eas          = segment.equivalent_air_speed   

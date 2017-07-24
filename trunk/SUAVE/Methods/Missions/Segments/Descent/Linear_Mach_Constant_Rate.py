@@ -15,7 +15,35 @@ import SUAVE
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Descent.Constant_Speed_Constant_Rate.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                descent_angle
+                altitude_start
+                altitude_end
+                mach_start
+                mach_end
+            state.
+                initials.conditions.frames.inertial.position_vector
+                numerics.dimensionless.control_points
+                conditions.freestream.speed_of_sound
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                freestream.altitude
+
+    """
     # unpack
     descent_rate = segment.descent_rate
     Mo           = segment.mach_start

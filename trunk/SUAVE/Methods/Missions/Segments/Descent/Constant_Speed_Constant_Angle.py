@@ -14,7 +14,33 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Descent.Constant_Speed_Constant_Angle.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                altitude_start
+                altitude_end
+                descent_angle
+                air_speed
+            state.
+                initials.conditions.frames.inertial.position_vector
+                numerics.dimensionless.control_points
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                freestream.altitude
+
+    """
     # unpack
     descent_angle= segment.descent_angle
     air_speed    = segment.air_speed   

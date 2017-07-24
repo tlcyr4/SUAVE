@@ -1,4 +1,4 @@
-# Constant_Speed_Constant_Angle_noise.py
+# Constant_Speed_Constant_Angle_Noise.py
 # 
 # Created:  Nov 2015, C. Ilario
 # Modified: Jan 2016, E. Botero
@@ -15,7 +15,27 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 def expand_state(segment,state):
+    """ SUAVE.Methods.Mission.Segments.Descent.Constant_Speed_Constant_Angle_Noise.expand_state(segment,state)
+        Expands arrays of conditions within state object
 
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                descent_angle
+                air_speed
+            state.
+                initials.conditions.frames.inertial.position_vector
+                numerics.dimensionless.control_points
+
+        Outputs:
+            See Updates
+
+        Updates:
+            calls state.expand_rows
+
+    """
     
     #Modification 11/04:
     #Necessary input for determination of noise trajectory    
@@ -45,8 +65,32 @@ def expand_state(segment,state):
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    
-    # unpack
+    """ SUAVE.Methods.Mission.Segments.Descent.Constant_Speed_Constant_Angle_Noise.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                descent_angle
+                air_speed
+            state.
+                initials.conditions.frames.inertial.position_vector
+                numerics.dimensionless.control_points
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                freestream.altitude
+
+    """
+# unpack
     descent_angle= segment.descent_angle
     air_speed    = segment.air_speed   
     t_nondim     = state.numerics.dimensionless.control_points

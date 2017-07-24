@@ -1,12 +1,48 @@
-import numpy as np
+# Descent.py
+#
+# Created:
+# Modified:
 
+# ----------------------------------------------------------------------
+#  Imports
+# ----------------------------------------------------------------------
+
+#import numpy as np
 
 # ----------------------------------------------------------------------
 #  Unpack Unknowns
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Hover.Descent.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                descent_rate
+                altitude_start
+                altitude_end
+
+            state.
+                initials.conditions.frames.inertial.position_vector
+                conditions.frames.inertial.time
+                numerics.dimensionless.control_points
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                    time
+                freestream.altitude
+
+    """
     # unpack
     descent_rate = segment.descent_rate
     alt0       = segment.altitude_start 

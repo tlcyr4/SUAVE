@@ -1,12 +1,46 @@
-#import numpy as np
-
+# Hover.py
+#
+# Created:
+# Modified:
 
 # ----------------------------------------------------------------------
-#  Unpack Unknowns
+#  Imports
+# ----------------------------------------------------------------------
+
+#import numpy as np
+
+# ----------------------------------------------------------------------
+#  Initialize Conditions
 # ----------------------------------------------------------------------
 
 def initialize_conditions(segment,state):
-    
+    """ SUAVE.Methods.Mission.Segments.Hover.Hover.initialize_conditions(segment,state)
+        Set up initial conditions of state.conditions
+
+        Assumptions:
+        N/A
+
+        Inputs:
+            segment.
+                time
+                altitude
+
+            state.
+                initials.conditions.frames.inertial.position_vector
+                conditions.frames.inertial.time
+                numerics.dimensionless.control_points
+
+        Outputs:
+            See Updates
+
+        Updates:
+            state.conditions.
+                frames.inertial.
+                    position_vector
+                    velocity_vector
+                freestream.altitude
+
+    """
     # unpack
     alt        = segment.altitude
     duration   = segment.time

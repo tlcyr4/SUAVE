@@ -39,7 +39,7 @@ class Conditions(Data):
             if isinstance(v,Conditions):
                 v.expand_rows(rows)
             # need arrays here
-            elif np.rank(v) == 2:
+            elif np.ndim(v) == 2:
                 self[k] = np.resize(v,[rows,v.shape[1]])
             #: if type
         #: for each key,value
@@ -48,3 +48,44 @@ class Conditions(Data):
 
     def compile(self):
         self.expand_rows()
+
+    def __add__(self, other):
+
+        # recursively add the contents of conditions
+
+        result = Conditions()
+
+        for k, v in self.iteritems():
+            # recursion
+            if isinstance(v, Conditions):
+                result[k] = v.__add__(other[k])
+            # need arrays here
+            elif np.ndim(v) == 2:
+                result[k] = v + other[k]
+            #: if type
+        #: for each key,value
+        return result
+
+    def __div__(self, other):
+        # recursively add the contents of conditions
+
+        result = Conditions()
+
+        for k, v in self.iteritems():
+            # recursion
+            if isinstance(v, Conditions):
+                result[k] = v.__div__(other)
+            # need arrays here
+            elif np.ndim(v) == 2:
+                result[k] = np.divide(v,other)
+                #: if type
+        #: for each key,value
+        return result
+#testing
+a = Conditions()
+a.frames = Conditions()
+a.ones = a.ones_row(3)
+a.frames.ones = a.ones_row(3)
+
+b = a + a
+print b / 2

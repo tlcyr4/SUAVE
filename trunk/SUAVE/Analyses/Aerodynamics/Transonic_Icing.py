@@ -10,8 +10,6 @@ import SUAVE.Analyses.Aerodynamics.Aerodynamics as Aerodynamics
 import SUAVE.Analyses.Aerodynamics.Results as Results
 import SUAVE.Core.Units as Units
 from SUAVE.Methods.Aerodynamics import Transonic as Transonic
-from SUAVE.Methods.Aerodynamics import Transonic_Icing as Icing
-import Icing_Adjust
 import numpy as np
 import warnings
 
@@ -40,11 +38,12 @@ class Transonic_Icing(Aerodynamics):
         return cl - self.cl_adjust
 
     def adjust_cd(self, cd):
-        return cd - self.cd_adjust
+        return cd #+ self.cd_adjust
 
     def reset(self):
-        self.cl_adjust = self.cl_dist()
-        self.cd_adjust = self.cd_dist()
+        self.cl_adjust = abs(self.cl_dist(scale=.1) + .1)
+        self.cd_adjust = abs(self.cd_dist(scale=.1) + .1)
+
 
 
     def evaluate(self, state):
@@ -112,7 +111,7 @@ def main():
     state.conditions.aerodynamics.side_slip_angle = np.array([[0], [0], [0]])
     state.conditions.aerodynamics.roll_angle = np.array([[180.0], [180], [180]])
 
-    transonic = Transonic()
+    transonic = Transonic_Icing()
     result = transonic.evaluate(state)
     print result.drag.total
     print result.lift.total

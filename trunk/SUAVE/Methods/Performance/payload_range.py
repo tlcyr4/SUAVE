@@ -43,9 +43,9 @@ def payload_range(vehicle,mission,cruise_segment_tag,reserves=0.):
     start_time = time.time()
 
     # Flags for printing results in command line, write output file, and plot
-    iprint = 1      # Flag for print output data in the prompt line
-    iwrite = 1      # Flag for write an output file
-    iplot  = 1      # Flag for plot payload range diagram
+    iprint = 0      # Flag for print output data in the prompt line
+    iwrite = 0      # Flag for write an output file
+    iplot  = 0      # Flag for plot payload range diagram
     ### could be an user input.
     ##      output_type: 1: Print only              (light)
     ##      output_type: 2: Print + Write           (medium)
@@ -98,7 +98,7 @@ def payload_range(vehicle,mission,cruise_segment_tag,reserves=0.):
         print('\n\n\n .......... PAYLOAD RANGE DIAGRAM CALCULATION ..........\n')
 
     # loop for each point of Payload Range Diagram
-    for i in range(len(TOW)):
+    for i in [2]:#range(len(TOW)):
 ##    for i in [2]:
         if iprint:
             print('   EVALUATING POINT : ' + str(i+1))

@@ -81,11 +81,3 @@ class Conditions(Data):
                 #: if type
         #: for each key,value
         return result
-#testing
-a = Conditions()
-a.frames = Conditions()
-a.ones = a.ones_row(3)
-a.frames.ones = a.ones_row(3)
-
-b = a + a
-print b / 2

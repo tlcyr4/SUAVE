@@ -9,3 +9,4 @@ import Supersonic_Zero
 import SU2_Euler
 import Example
 import Transonic
+import Icing

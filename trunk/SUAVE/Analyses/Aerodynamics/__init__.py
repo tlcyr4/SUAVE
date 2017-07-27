@@ -17,6 +17,8 @@ from SU2_Euler        import SU2_Euler
 from SU2_inviscid     import SU2_inviscid
 from SU2_Euler_Super  import SU2_Euler_Super
 from SU2_inviscid_Super import SU2_inviscid_Super
+# from Transonic import Transonic
+# from Transonic_Icing import Transonic_Icing
 
 import Surrogates
 

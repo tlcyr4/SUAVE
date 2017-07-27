@@ -72,3 +72,4 @@ nosetests.xml
 *.png
 
 ide/Wing/SUAVE.wpr
+trunk/SUAVE/.idea

@@ -14,7 +14,28 @@ import numpy as np
 # ----------------------------------------------------------------------   
 
 def primary_noise_component (SPL_p,Velocity_primary,Temperature_primary,R_gas,theta_p,DVPS,sound_ambient,Velocity_secondary,Velocity_aircraft,Area_primary,Area_secondary,DSPL_p,EX_p,Str_p):
-    """This function calculates the noise contribution of the primary jet component"""
+    """ SUAVE.Methods.Noise.Fidelity_One.Engine.primary_noise_component (SPL_p,Velocity_primary,Temperature_primary,R_gas,theta_p,DVPS,sound_ambient,Velocity_secondary,Velocity_aircraft,Area_primary,Area_secondary,DSPL_p,EX_p,Str_p)
+        This function calculates the noise contribution of the primary jet component
+
+        Inputs:
+            SPL_p
+            Velocity_primary
+            Temperature_primary
+            R_gas
+            theta_p
+            DVPS
+            sound_ambient
+            Velocity_secondary
+            Velocity_aircraft
+            Area_primary
+            Area_secondary
+            DSPL_p
+            EX_p
+            Str_p
+
+        Outputs:
+            SPL_p - primary noise component [db]
+    """
 
     #Flow parameters of the primary jet
     sound_primary    = np.float(np.sqrt(1.4*R_gas*Temperature_primary))

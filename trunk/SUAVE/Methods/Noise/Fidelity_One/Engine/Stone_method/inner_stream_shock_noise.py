@@ -10,12 +10,13 @@
 #-------------------------------------------------------------------------------
 
 def inner_stream_shock_noise ():
-#Mi: inner stream Mach number fully expanded to ambient conditions
-#Md_I: inner stream nozzle design Mach number
-#D1iex: inner stream nozzle exit inner diamenter
-#D2iex: inner stream nozzle exit outer diamenter
-#Vi: fully expanded jet velocity of the inner stream
-#Dhiex: hydraulic diameter of the inner stream nozzle exit
+    """incomplete interface"""
+    #Mi: inner stream Mach number fully expanded to ambient conditions
+    #Md_I: inner stream nozzle design Mach number
+    #D1iex: inner stream nozzle exit inner diamenter
+    #D2iex: inner stream nozzle exit outer diamenter
+    #Vi: fully expanded jet velocity of the inner stream
+    #Dhiex: hydraulic diameter of the inner stream nozzle exit
 
     Dhiex = D2iex - D1iex
 

@@ -8,11 +8,12 @@
 # ----------------------------------------------------------------------
 
 def plug_downstream_shock_noise ():
-#Am: fully expanded merged area
-#Md: isentropically-calculated Mach number based the mass-average specif heat ratio and the fully expanded are-weight pressure ratio
-#Md_D: overall nozzle design Mach number
-#Dhdex: total hydraulic nozzle exit diameter
-#Dm: equivalent diameter based on total fan plus core fully-expanded merged area
+    """incomplete interface"""
+    #Am: fully expanded merged area
+    #Md: isentropically-calculated Mach number based the mass-average specif heat ratio and the fully expanded are-weight pressure ratio
+    #Md_D: overall nozzle design Mach number
+    #Dhdex: total hydraulic nozzle exit diameter
+    #Dm: equivalent diameter based on total fan plus core fully-expanded merged area
 
     Am=Ai+Ao
     Pd=(Pi*Ai+Po*Ao)/(Ao+Ai)

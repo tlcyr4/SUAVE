@@ -8,6 +8,7 @@
 # ----------------------------------------------------------------------
 
 def shock_noise_components():
+    """incomplete interface"""
     beta=((M**2-Md**2)**2+0.01*Md/(1-D1/D2))**0.25
     theta_M = 180 - np.degrees.asin(1/M)
 

@@ -15,7 +15,21 @@ from SUAVE.Core import Units, Data
 # ----------------------------------------------------------------------
 
 def shevell(weight_landing, number_of_engines, thrust_sea_level, thrust_landing):
+    """ SUAVE.Methods.Noise.Correlation.shevell(weight_landing, number_of_engines, thrust_sea_level, thrust_landing)
+        Calculates noise at takeoff and landing for mission
 
+        Inputs:
+            weight_landing - weight at landing
+            number_of_engines - nubmer of engines in vehicle
+            thrust_sea_level - thrust
+            thrust_landing - thrust at landing
+
+        Outputs:
+            output.
+                takeoff [db]
+                sideline [db]
+                landing [db]
+    """
     #process
     baseline_noise    = 101. 
     thrust_percentage = (thrust_sea_level/ Units.force_pound)/25000 * 100.

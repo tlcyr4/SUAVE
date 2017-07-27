@@ -13,8 +13,21 @@ import numpy as np
 #   Ground Proximity Effect
 # ---------------------------------------------------------------------- 
 
-def ground_proximity_effect (Velocity_mixed,sound_ambient,theta_m,engine_height,Diameter_mixed,frequency):
-    """This function calculates the ground proximity effect, in decibels, and is used for full-scale engine test stand."""
+def ground_proximity_effect(Velocity_mixed,sound_ambient,theta_m,engine_height,Diameter_mixed,frequency):
+    """ SUAVE.Methods.Noise.Fidelity_One.Engine.ground_proximity_effect(Velocity_mixed,sound_ambient,theta_m,engine_height,Diameter_mixed,frequency)
+        This function calculates the ground proximity effect, in decibels, and is used for full-scale engine test stand.
+
+        Inputs:
+            Velocity_mixed
+            sound_ambient
+            theta_m
+            engine_height
+            Diameter_mixed
+            frequency
+
+        Outputs:
+            GPROX_m - ground proximity effect [db]
+    """
 
     #Ground proximity is applied only for the mixed jet component
     GPROX_m = (5*Velocity_mixed/sound_ambient)*np.exp(-(9*(theta_m/np.pi)-6.75)**2- \

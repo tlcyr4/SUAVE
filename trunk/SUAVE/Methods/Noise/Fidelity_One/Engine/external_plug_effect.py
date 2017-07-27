@@ -13,9 +13,28 @@ import numpy as np
 #   External Plug Effect
 # ---------------------------------------------------------------------- 
 
-def external_plug_effect (Velocity_primary,Velocity_secondary, Velocity_mixed, Diameter_primary,Diameter_secondary,Diameter_mixed, Plug_diameter, sound_ambient, theta_p,theta_s,theta_m):
-    """This function calculates the adjustments, in decibels, to be added to the predicted jet noise levels due to
-    external plugs in coaxial jets."""
+def external_plug_effect(Velocity_primary,Velocity_secondary, Velocity_mixed, Diameter_primary,Diameter_secondary,Diameter_mixed, Plug_diameter, sound_ambient, theta_p,theta_s,theta_m):
+    """ SUAVE.Methods.Noise.Fidelity_One.Engine.external_plug_effect(Velocity_primary,Velocity_secondary, Velocity_mixed, Diameter_primary,Diameter_secondary,Diameter_mixed, Plug_diameter, sound_ambient, theta_p,theta_s,theta_m)
+        This function calculates the adjustments, in decibels, to be added to the predicted jet noise levels due to external plugs in coaxial jets.
+
+        Inputs:
+            Velocity_primary
+            Velocity_secondary
+            Velocity_mixed
+            Diameter_primary
+            Diameter_secondary
+            Diameter_mixed
+            Plug_diameter
+            sound_ambien
+            theta_p
+            theta_s
+            theta_m
+
+        Outputs:
+            PG_p - primary jet effect [db]
+            PG_s - Secondary jet effect [db]
+            PG_m - Mixed jet effect [db]
+    """
 
     #Primary jet
     PG_p = 0.1*(Velocity_primary/sound_ambient)*(10-(18*theta_p/np.pi))*Plug_diameter/Diameter_primary

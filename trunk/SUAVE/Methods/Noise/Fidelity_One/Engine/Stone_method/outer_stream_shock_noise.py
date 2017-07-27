@@ -8,11 +8,12 @@
 # ----------------------------------------------------------------------
 
 def outer_stream_shock_noise ():
-#Ao: fully expanded area of the outer stream
-#Mo: outer stream Mach number fully expanded to ambient conditions
-#Md_O: outer stream nozzle design Mach number
-#Dhoex: hydraulic diameter of the outer stream nozzle exit
-#Deqoex: equivalent diameter of the outer stream nozzle exit
+    """incomplete interface"""
+    #Ao: fully expanded area of the outer stream
+    #Mo: outer stream Mach number fully expanded to ambient conditions
+    #Md_O: outer stream nozzle design Mach number
+    #Dhoex: hydraulic diameter of the outer stream nozzle exit
+    #Deqoex: equivalent diameter of the outer stream nozzle exit
 
     Dhoex = D2oex - D1oex
     Deqoex = (D2oex**2 - D1oex**2)**0.5

@@ -13,8 +13,37 @@ import numpy as np
 #   Noise Source Location
 # ----------------------------------------------------------------------   
 
-def noise_source_location (B,Xo,zk,Diameter_primary,theta_p,Area_primary,Area_secondary,distance_microphone,Diameter_secondary,theta,theta_s,theta_m,Diameter_mixed,Velocity_primary,Velocity_secondary,Velocity_mixed,Velocity_aircraft,sound_ambient,Str_m,Str_s):
-    
+def noise_source_location(B,Xo,zk,Diameter_primary,theta_p,Area_primary,Area_secondary,distance_microphone,Diameter_secondary,theta,theta_s,theta_m,Diameter_mixed,Velocity_primary,Velocity_secondary,Velocity_mixed,Velocity_aircraft,sound_ambient,Str_m,Str_s):
+    """ SUAVE.Methods.Noise.Fidelity_One.Engine.noise_source_location(B,Xo,zk,Diameter_primary,theta_p,Area_primary,Area_secondary,distance_microphone,Diameter_secondary,theta,theta_s,theta_m,Diameter_mixed,Velocity_primary,Velocity_secondary,Velocity_mixed,Velocity_aircraft,sound_ambient,Str_m,Str_s)
+        Finds jet noise source locations
+
+        Inputs:
+            B
+            Xo
+            zk
+            Diameter_primary
+            theta_p
+            Area_primary
+            Area_secondary
+            distance_microphone
+            Diameter_secondary
+            theta
+            theta_s
+            theta_m
+            Diameter_mixed
+            Velocity_Primary
+            Velocity_secondary
+            Velocity_mixed
+            Velocity_aircraft
+            sound_ambient
+            Str_m
+            Str_s
+
+        Outputs:
+            theta_p
+            theta_s
+            theta_m
+    """
     #Primary jet source location
     XJ = np.zeros(24)
     

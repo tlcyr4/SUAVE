@@ -13,8 +13,20 @@ import numpy as np
 #   Jet Installation Effect
 # ---------------------------------------------------------------------- 
 
-def jet_installation_effect (Xe,Ye,Ce,theta_s,Diameter_mixed):
-    """This function calculates the installation effect, in decibels, to be added to the predicted secondary jet noise level."""
+def jet_installation_effect(Xe,Ye,Ce,theta_s,Diameter_mixed):
+    """ SUAVE.Methods.Noise.Fidelity_One.Engine.jet_installation_effect(Xe,Ye,Ce,theta_s,Diameter_mixed)
+        This function calculates the installation effect, in decibels, to be added to the predicted secondary jet noise level.
+
+        Inputs:
+            Xe
+            Ye
+            Ce
+            thera_s
+            Diameter_mixed
+
+        Outputs:
+            INST_s - jet installation effect [db]
+    """
     
     #Ce = wing chord lenght at the engine location - as figure 7.3 of the SAE ARP 876D
     #Xe = fan exit location downstream of the leading edge (Xe<Ce) - as figure 7.3 of the SAE ARP 876D

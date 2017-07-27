@@ -13,8 +13,26 @@ import numpy as np
 #   Secondary Noise Component
 # ---------------------------------------------------------------------- 
 
-def secondary_noise_component (SPL_s,Velocity_primary,theta_s,sound_ambient,Velocity_secondary,Velocity_aircraft,Area_primary,Area_secondary,DSPL_s,EX_s,Str_s):
-    """This function calculates the noise contribution of the secondary jet component"""
+def secondary_noise_component(SPL_s,Velocity_primary,theta_s,sound_ambient,Velocity_secondary,Velocity_aircraft,Area_primary,Area_secondary,DSPL_s,EX_s,Str_s):
+    """ SUAVE.Methods.Noise.Fidelity_One.Engine.secondary_noise_component(SPL_s,Velocity_primary,theta_s,sound_ambient,Velocity_secondary,Velocity_aircraft,Area_primary,Area_secondary,DSPL_s,EX_s,Str_s)
+        This function calculates the noise contribution of the secondary jet component
+
+        Inputs:
+            SPL_s
+            Velocity_primary
+            theta_s
+            sound_ambient
+            Velocity_secondary
+            Velocity_aircraft
+            Area_primary
+            Area_secondary
+            DSPL_s
+            EX_s
+            Str_s
+
+        Outputs:
+            SPL_s - secondary noise component [db]
+    """
 
     #Calculation of the velocity exponent
     velocity_exponent = 0.5 * 0.1*theta_s

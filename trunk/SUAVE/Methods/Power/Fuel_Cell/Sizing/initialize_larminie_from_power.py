@@ -17,8 +17,26 @@ from SUAVE.Methods.Power.Fuel_Cell.Discharge.find_power_larminie import find_pow
 #  Initialize Larminie from Power
 # ----------------------------------------------------------------------
 
-def initialize_larminie_from_power(fuel_cell,power): 
-    
+def initialize_larminie_from_power(fuel_cell,power):
+    """ SUAVE.Methods.Power.Fuel_Cell.Sizing.initialize_larminie_from_power(fuel_cell,power)
+      sets up fuel cell based on power
+
+      Inputs:
+         fuel_cell
+         power
+
+      Outputs:
+         See Updates
+
+      Updates:
+        fuel_cell.
+            number_of _cell
+            max_power
+            volume
+            mass_properties
+            mass_density
+            specific_power
+   """
     fc                      = fuel_cell
     lb                      = .1*Units.mA/(Units.cm**2.)    #lower bound on fuel cell current density
     ub                      = 1200.0*Units.mA/(Units.cm**2.)

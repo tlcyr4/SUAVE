@@ -18,7 +18,17 @@ from find_power_diff_larminie import find_power_diff_larminie
 # ----------------------------------------------------------------------
 
 def larminie(fuel_cell,conditions,numerics):
+    """ SUAVE.Methods.Power.Fuel_Cell.Discharge.larminie(fuel_cell,conditions,numerics)
+        calculates mass flow rate of fuel cell
 
+        Inputs:
+            fuel_cell.inputs.power_in
+            conditions
+            numerics
+
+        Outputs:
+            mdot
+    """
     power           = fuel_cell.inputs.power_in  
     lb              = .1*Units.mA/(Units.cm**2.)    #lower bound on fuel cell current density
     ub              = 1200.0*Units.mA/(Units.cm**2.)

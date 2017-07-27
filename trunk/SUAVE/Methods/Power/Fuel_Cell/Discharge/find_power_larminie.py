@@ -17,7 +17,17 @@ from find_voltage_larminie import find_voltage_larminie
 # ----------------------------------------------------------------------
 
 def find_power_larminie(current_density, fuel_cell, sign=1.0):
-    
+    """ SUAVE.Methods.Power.Fuel_Cell.Discharge.find_power_larminie(current_density, fuel_cell, sign=1.0)
+        function that determines the actual power, based on an input current density
+
+        Inputs:
+            current_density                [Amps/m**2]
+            fuel_cell
+
+
+        Outputs:
+            power_out
+    """
     # sign variable is used so that you can maximize the power, by minimizing the -power
     i1            = current_density/(Units.mA/(Units.cm**2.)) 
     A             = fuel_cell.interface_area/(Units.cm**2.)

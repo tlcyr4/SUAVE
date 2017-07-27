@@ -18,8 +18,26 @@ from larminie import larminie
 
 #default values representative of a hydrogen fuel cell
 def setup_larminie(fuel_cell):                     
-   """ sets up additional values of fuel cell to run method from Larminie and 
-   Dicks (Fuel Cell Systems Explained) """   
+   """ SUAVE.Methods.Power.Fuel_Cell.Discharge.setup_larminie(fuel_cell)
+      sets up additional values of fuel cell to run method from Larminie and Dicks (Fuel Cell Systems Explained)
+
+      Inputs:
+         fuel_cell
+
+      Outputs:
+         fuel_cell.
+            number_of_cells - number of fuel cells in the stack
+            interface_area - area of the fuel cell interface
+            r - area specific resistance [k-Ohm-cm^2]
+            Eoc - effective activation energy (V)
+            A1 - slope of the Tafel line (models activation losses) (V)
+            m - constant in mass-transfer overvoltage equation (V)
+            n - constant in mass-transfer overvoltage equation
+            ideal_voltage
+            wall_thickness - thickness of cell wall in meters
+            cell_density - cell density in kg/m^3
+            porosity_coefficient - porosity coefficient
+   """
    
    fuel_cell.number_of_cells       = 0.0                                  #number of fuel cells in the stack
    fuel_cell.interface_area        = 875.*(Units.cm**2.)                  # area of the fuel cell interface

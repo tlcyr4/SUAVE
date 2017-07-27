@@ -15,7 +15,17 @@ from SUAVE.Core import Units
 # ----------------------------------------------------------------------
 
 def find_voltage_larminie(fuel_cell,current_density):
-    
+    """ SUAVE.Methods.Power.Fuel_Cell.Discharge.find_voltage_larminie(fuel_cell,current_density)
+        function that determines the output voltage based on an input current density
+
+        Inputs:
+            current_density                [Amps/m**2]
+            fuel_cell
+
+
+        Outputs:
+            v - voltage
+    """
     r   = fuel_cell.r/(Units.kohm*(Units.cm**2))
     Eoc = fuel_cell.Eoc 
     A1  = fuel_cell.A1  

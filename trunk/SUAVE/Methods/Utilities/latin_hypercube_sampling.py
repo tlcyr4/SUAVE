@@ -19,7 +19,17 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def latin_hypercube_sampling(num_dimensions,num_samples,criterion='random'):
-    
+    """ SUAVE.Methods.Utilities.latin_hypercube_sampling(num_dimensions,num_samples,criterion='random')
+        latin hypercube sampling
+
+        Inputs:
+            num_dimensions
+            num_samples
+            criterion
+
+        Outputs:
+            lhd - latin hypercube distribution
+    """
     n = num_dimensions
     samples = num_samples
     

@@ -15,7 +15,23 @@ import numpy as np
 from SUAVE.Core import Units
 
 def size_from_kv(motor,kv):
+    """ SUAVE.Methods.Propulsion.size_from_kv(motor,kv)
+        create and evaluate a electric motor network based on speed contant
 
+        Inputs:
+            motor
+            kv - speed constant
+
+
+        Outputs:
+            See Updates
+
+        Updates:
+            motor.
+                resistance
+                no_load_current
+                mass_properties.mass
+    """
     # Set the KV    
     motor.speed_constant = kv 
     
@@ -40,7 +56,21 @@ def size_from_kv(motor,kv):
 
 
 def size_from_mass(motor,mass):
-    
+    """ SUAVE.Methods.Propulsion.size_from_mass(motor,mass)
+        create and evaluate a electric motor based on motor mass
+
+        Inputs:
+            motor
+            mass - motor mass
+
+
+        Outputs:
+            See Updates
+
+        Updates:
+            motor.
+                mass_properties
+    """
     # Unpack the motor
     res  = motor.resistance
     i0   = motor.no_load_current

@@ -15,8 +15,20 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def turbofan_nox_emission_index(turbofan, state):
-    '''correlation taken from Antione, Nicholas, Aircraft Optimization for Minimal Environmental Impact, pp. 31 (PhD Thesis)
-    based on NASA's Engine Performance Program (NEPP)"'''
+    """ SUAVE.Methods.Propulsion.turbofan_nox_emission_index(turbofan, state)
+        correlation taken from Antione, Nicholas, Aircraft Optimization for Minimal Environmental Impact, pp. 31 (PhD Thesis)based on NASA's Engine Performance Program (NEPP)
+
+        Inputs:
+            turbofan.combustor
+                inputs.
+                    stagnation_pressure
+                    stagnation_temperature
+                outputs.stagnation_temperature
+            state
+
+        Outputs:
+            nox_emission_index
+    """
     
     results = turbofan(state)
     p3      = turbofan.combustor.inputs.stagnation_pressure/Units.psi

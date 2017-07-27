@@ -17,7 +17,22 @@ from SUAVE.Core import Data
 # ----------------------------------------------------------------------
 
 def turbofan_sizing(turbofan,mach_number = None, altitude = None, delta_isa = 0, conditions = None):  
-    """ create and evaluate a gas turbine network
+    """ SUAVE.Methods.Propulsion.turbofan_sizing(turbofan,mach_number = None, altitude = None, delta_isa = 0, conditions = None)
+        create and evaluate a turbofan network
+
+        Inputs:
+            turbofan
+            mach_number - used if conditions not provided
+            altitude - used if conditions not provided
+            delta_isa - used if conditions not provided
+            conditions - passed to components
+
+
+        Outputs:
+            See Updates
+
+        Updates:
+            see components for more details (calls the components)
     """
 
     #Unpack components

@@ -16,12 +16,19 @@ from SUAVE.Core import (
 
 def Empty(vehicle):
     
-    """
-    Structural Weight correlation from all 415 samples of fixed-wing UAVs and sailplanes
-    Equation 3.16 from 'Design of Solar Powered Airplanes for Continuous Flight' by Andre Noth
-    Relatively valid for a wide variety of vehicles, may be optimistic
-    Assumes a 'main wing' is attached
-    
+    """ SUAVE.Methods.Weights.Correlations.UAV.Empty(vehicle)
+        Structural Weight correlation from all 415 samples of fixed-wing UAVs and sailplanes
+        Equation 3.16 from 'Design of Solar Powered Airplanes for Continuous Flight' by Andre Noth
+        Relatively valid for a wide variety of vehicles, may be optimistic
+        Assumes a 'main wing' is attached
+
+        Inputs:
+            vehicle.
+                reference_area
+                wings['main_wing'].aspect_ratio
+
+        Outputs:
+            weight.empty - airframe weight
     """
     
     # Unpack

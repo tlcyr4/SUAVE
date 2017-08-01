@@ -24,6 +24,24 @@ import time
 
 
 def build_svr_models(obj_values, inputs, constraints, kernel = 'rbf', C = 1E5, epsilon =.01):
+    """ SUAVE.Surrogate.svr_surrogate_functions.build_svr_models(obj_values, inputs, constraints, kernel = 'rbf', C = 1E5, epsilon =.01)
+        Builds support vector regression model
+
+        See sklearn documentation
+
+        Inputs:
+            obj_values
+            inputs
+            constraints - array
+            kernel
+            C
+            epsilon
+
+        Outputs:
+            obj_surrogate
+            constrainte_surrogates
+            surrogate_function
+    """
     #now build surrogates based on these
     t1=time.time()
 
@@ -47,9 +65,21 @@ def build_svr_models(obj_values, inputs, constraints, kernel = 'rbf', C = 1E5, e
     
     return obj_surrogate, constraints_surrogates, surrogate_function    
     
-def check_svr_accuracy(x, data_inputs, data_outputs, imin = -1): #set up so you can frame as an optimization problem
-    # x is inputs that you have option to optimize over
-    #imin is index you want to leave out (default is last entry
+def check_svr_accuracy(x, data_inputs, data_outputs, imin = -1):
+    """ SUAVE.Surrogate.svr_surrogate_functions.check_svr_accuracy(x, data_inputs, data_outputs, imin = -1)
+        set up so you can frame as an optimization problem
+
+        Inputs:
+            x - inputs that you have option to optimize over
+            data_inputs - inputs to svr
+            data_outputs - outputs from svr
+            imin - index you want to leave out (default is last entry)
+
+        Outputs:
+            obj_surrogate
+            constrainte_surrogates
+            surrogate_function
+    """
     #use log base 10 inputs to find parameters
     Cval= 10**x[0]
     eps = 10**x[1]

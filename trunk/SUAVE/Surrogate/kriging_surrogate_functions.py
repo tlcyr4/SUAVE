@@ -26,6 +26,21 @@ import time
 
 
 def build_kriging_models(obj_values, inputs, constraints):
+    """ SUAVE.Surrogate.krigin_surrogate_functions.build_krigin_models()
+        Builds pyKriging kriging object
+
+        See pyKriging documentation
+
+        Inputs:
+            obj_values
+            inputs
+            constraints - array
+
+        Outputs:
+            obj_surrogate
+            constrainte_surrogates
+            surrogate_function
+    """
 
     #now build surrogates based on these
     t1=time.time()

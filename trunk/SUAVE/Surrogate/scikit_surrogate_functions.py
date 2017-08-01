@@ -21,6 +21,22 @@ import time
 
 
 def build_scikit_models(surrogate_optimization, obj_values, inputs, constraints):
+    """ SUAVE.Surrogate.krigin_surrogate_functions.build_krigin_models()
+        Builds scikit kriging object
+
+        See scikit documentation
+
+        Inputs:
+            surrogate_optimization
+            obj_values
+            inputs
+            constraints - array
+
+        Outputs:
+            obj_surrogate
+            constrainte_surrogates
+            surrogate_function
+    """
     #now build surrogates based on these
     t1=time.time()
     regr = surrogate_optimization.surrogate_model()

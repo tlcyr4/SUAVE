@@ -15,11 +15,29 @@ import numpy as np
 
 class Surrogate_Problem(Data):
     def __defaults__(self):
+        """ SUAVE.Surrogate.Surrogate_Problem.__defaults__()
+            Sets default values
+
+            Updates:
+                self.
+                    obj_surrogate - data object
+                    constraints_surrogates - constraints
+        """
         self.obj_surrogate = None
         self.constraints_surrogates = None
     
     def compute(self, x):
-       
+        """ SUAVE.Surrogate.Surrogate_Problem.__defaults__()
+            Computes surrogate predictions
+
+            Inputs:
+                x - point to be examined
+
+            Outputs:
+                f - output from surrogate object
+                g - output from constraints
+                fail - did either one produce and NaNs
+        """
         f = self.obj_surrogate.predict(x)
         g = []
         for j in range(len(self.constraints_surrogates)):

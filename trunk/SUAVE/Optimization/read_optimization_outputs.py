@@ -11,13 +11,21 @@
 import numpy as np
 
 # ----------------------------------------------------------------------
-#  read_optimization_outputs_inputs
+#  read_optimization_outputs
 # ----------------------------------------------------------------------
 
 
 
 def format_input_data(data):
+    """ SUAVE.Optimization.read_optimization_outputs.format_input_data(data)
+        format input data
 
+        Inputs:
+            data - lines from output file
+
+        Outputs:
+            data_out - data in numpy array form
+    """
     data_out=[]
   
     for line in data:
@@ -44,6 +52,20 @@ def format_input_data(data):
     
     
 def read_optimization_outputs(filename, base_inputs, constraint_inputs):
+    """ SUAVE.Optimization.read_optimization_outputs.format_input_data(data)
+        read optimization outputs
+
+        Inputs:
+            filename - output file
+            base_inputs - base inputs
+            constraint_inputs - constraints
+
+        Outputs:
+            iterations
+            obj_values
+            inputs
+            constraints
+    """
     #need vector of initial inputs to determine where to separate 
     #inputs from constraints in text file
     file_in = open(filename)

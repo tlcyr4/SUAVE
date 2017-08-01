@@ -17,7 +17,13 @@ from helper_functions import get_values, scale_obj_values, scale_const_values
 
 
 def write_optimization_outputs(nexus, filename):
- 
+    """ SUAVE.Optimization.write_optimization_outputs(nexus, filename)
+        write optimization data to a file
+
+        Inputs:
+            nexus - represents whole optimization problem
+            filename - where to write
+    """
     #unpack optimization problem values
     objective          = nexus.optimization_problem.objective
     aliases            = nexus.optimization_problem.aliases

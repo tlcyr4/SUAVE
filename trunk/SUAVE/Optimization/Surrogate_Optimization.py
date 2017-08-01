@@ -21,13 +21,14 @@ import time
 #  Surrogate_Optimization
 # ----------------------------------------------------------------------
 
-'''
-Takes a SUAVE Optimization problem, builds a surrogate around it, 
-and iteratively finds the optimum of the surrogate, then samples at that point.
-Stops when you hit max_iterations or it converges
-'''
+
 
 class Surrogate_Optimization(Data):
+    """ SUAVE.Optimization.Surrogate_Optimization()
+        Takes a SUAVE Optimization problem, builds a surrogate around it,
+        and iteratively finds the optimum of the surrogate, then samples at that point.
+        Stops when you hit max_iterations or it converges
+    """
     def __defaults__(self):
         self.sample_plan           = None #VyPy.sampling.lhc_uniform
         self.problem               = None #SUAVE nexus object
@@ -38,6 +39,9 @@ class Surrogate_Optimization(Data):
         self.max_iterations        = 100
         
     def build_surrogate(self):
+        """ SUAVE.Optimization.Surrogate_Optimization.build_surrogate()
+            Build surrogate around problem
+        """
         #unpack
         npoints           = self.number_of_points
         problem           = self.problem
@@ -79,7 +83,13 @@ class Surrogate_Optimization(Data):
         #now set up optimization problem on surrogate
         
     def iterative_optimization(self):
-        
+        """ SUAVE.Optimization.Surrogate_Optimization.iterative_optimization()
+            Iterative optimization based on surrogate
+
+            Outputs:
+                output_real
+                surrogate_problem
+        """
         filename  = self.optimization_filename
         problem   = self.problem
         optimizer = self.optimizer

@@ -16,7 +16,17 @@ import scipy as sp
 # ----------------------------------------------------------------------
 
 def SciPy_Solve(problem,solver='SLSQP', sense_step = 1.4901161193847656e-08): #1.4901161193847656e-08 is SLSQP default FD step in scipy
-    
+    """ SUAVE.Optimization.Package_Setups.scipy_setup.SciPy_Solve(problem,solver='SLSQP', sense_step = 1.4901161193847656e-08)
+        solve problem with scipy
+
+        Inputs:
+            problem
+            solver
+            sense_step
+
+        Outputs:
+            outputs
+    """
     inp = problem.optimization_problem.inputs
     obj = problem.optimization_problem.objective
     con = problem.optimization_problem.constraints
@@ -47,7 +57,16 @@ def SciPy_Solve(problem,solver='SLSQP', sense_step = 1.4901161193847656e-08): #1
 
 
 def SciPy_Problem(problem,x):
-    
+    """ SUAVE.Optimization.Package_Setups.scipy_setup.SciPy_Problem(problem,x)
+        problem wrapper
+
+        Inputs:
+            problem
+            x
+
+        Outputs:
+            obj
+    """
     print 'Inputs'
     print x        
     obj   = problem.objective(x)

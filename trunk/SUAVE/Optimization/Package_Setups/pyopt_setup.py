@@ -17,7 +17,19 @@ from SUAVE.Optimization import helper_functions as help_fun
 # ----------------------------------------------------------------------
 
 def Pyopt_Solve(problem,solver='SNOPT',FD='single', sense_step=1.0E-6,  nonderivative_line_search=False):
-   
+    """ SUAVE.Optimization.Package_Setups.pyopt_setup.Pyopt_Solve(problem,solver='SNOPT',FD='single', sense_step=1.0E-6,  nonderivative_line_search=False)
+        solve problem with pyopt
+
+        Inputs:
+            problem
+            solver
+            FD
+            sense_step
+            nonderivative_line_search
+
+        Outputs:
+            opt
+    """
     # Have the optimizer call the wrapper
     mywrap = lambda x:PyOpt_Problem(problem,x)
    
@@ -132,7 +144,18 @@ def Pyopt_Solve(problem,solver='SNOPT',FD='single', sense_step=1.0E-6,  nonderiv
 # ----------------------------------------------------------------------
 
 def PyOpt_Problem(problem,x):
-   
+    """ SUAVE.Optimization.Package_Setups.pyopt_setup.PyOpt_Problem(problem,x)
+        problem wrapper
+
+        Inputs:
+            problem
+            x
+
+        Outputs:
+            obj
+            const
+            fail - did this fail?
+    """
     obj   = problem.objective(x)
     const = problem.all_constraints(x).tolist()
     fail  = np.array(np.isnan(obj.tolist()) or np.isnan(np.array(const).any())).astype(int)

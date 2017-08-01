@@ -33,7 +33,12 @@ class Nexus(Data):
         self.evaluation_count       = 0
     
     def evaluate(self,x = None):
-        
+        """ SUAVE.Optimization.Nexus.evaluate(x = None)
+            Evaluate optimization/mission
+
+            Inputs:
+                x - last-minute inputs
+        """
         self.unpack_inputs(x)
         # This function calls really_evaluate
         if np.all(self.optimization_problem.inputs==self.last_inputs):
@@ -43,7 +48,10 @@ class Nexus(Data):
         
     
     def _really_evaluate(self):
-        
+        """ SUAVE.Optimization.Nexus.evaluate(x = None)
+            Evaluate optimization/mission, starts executing
+            Procedure (subprocesses)
+        """
         nexus = self
         
         self.evaluation_count += 1
@@ -60,7 +68,15 @@ class Nexus(Data):
           
     
     def objective(self,x = None):
-        
+        """ SUAVE.Optimization.Nexus.objective(x = None)
+            Evaluate and return objectives
+
+            Inputs:
+                x - last-minute inputs
+
+            Outputs:
+                scaled_objective - objectives from optimization
+        """
         self.evaluate(x)
         
         aliases     = self.optimization_problem.aliases
@@ -73,7 +89,15 @@ class Nexus(Data):
         return scaled_objective
     
     def inequality_constraint(self,x = None):
-        
+        """ SUAVE.Optimization.Nexus.inequality_constraint(x = None)
+            Evaluate and return inequality constraints
+
+            Inputs:
+                x - last-minute inputs
+
+            Outputs:
+                scaled_constraints - inequality constraints from optimization
+        """
         self.evaluate(x)
         
         aliases     = self.optimization_problem.aliases
@@ -98,7 +122,15 @@ class Nexus(Data):
         return scaled_constraints      
     
     def equality_constraint(self,x = None):
-        
+        """ SUAVE.Optimization.Nexus.equality_constraint(x = None)
+            Evaluate and return equality constraints
+
+            Inputs:
+                x - last-minute inputs
+
+            Outputs:
+                scaled_constraints - equality constraints from optimization
+        """
         self.evaluate(x)
 
         aliases     = self.optimization_problem.aliases
@@ -123,7 +155,15 @@ class Nexus(Data):
         return scaled_constraints   
     
     def all_constraints(self,x = None):
-        
+        """ SUAVE.Optimization.Nexus.all_constraints(x = None)
+            Evaluate and return all constraints
+
+            Inputs:
+                x - last-minute inputs
+
+            Outputs:
+                scaled_constraints - all constraints from optimization
+        """
         self.evaluate(x)
         
         aliases     = self.optimization_problem.aliases
@@ -137,7 +177,12 @@ class Nexus(Data):
     
     
     def unpack_inputs(self,x = None):
-        
+        """ SUAVE.Optimization.Nexus.unpack_inputs(x = None)
+            Unpack inputs into nexus
+
+            Inputs:
+                x - inputs
+        """
         # Scale the inputs if given
         inputs = self.optimization_problem.inputs
         if x is not None:
@@ -153,10 +198,20 @@ class Nexus(Data):
         self = help_fun.set_values(self,inputs,converted_values,aliases)     
     
     def constraints_individual(self,x = None):
+        """pass"""
         pass     
 
     def finite_difference(self,x):
-        
+        """ SUAVE.Optimization.Nexus.finit_difference(x)
+            finite difference method
+
+            Inputs:
+                x - inputs
+
+            Outputs:
+                grad_obj - objective grad(ient?)
+                jac_con - constraints difference?
+        """
         obj = self.objective(x)
         con = self.all_constraints(x)
         
@@ -189,7 +244,16 @@ class Nexus(Data):
     
     
     def translate(self,x = None):
-        
+        """ SUAVE.Optimization.Nexus.finit_difference(x)
+            make a table out of constraints
+
+            Inputs:
+                x - inputs
+
+            Outputs:
+                inpu - inputs to optimization
+                const_table - constraints table
+        """
         # Run the problem just in case
         self.evaluate(x)
         

@@ -16,9 +16,26 @@ import matplotlib.pyplot as plt
 # ----------------------------------------------------------------------
 
 
-def carpet_plot(problem, number_of_points,  plot_obj=1, plot_const=0, sweep_index_0=0, sweep_index_1=1): 
-    #takes in an optimization problem and runs a carpet plot of the first 2 variables
-    #sweep_index_0, sweep_index_1 is index of variables you want to run carpet plot (i.e. sweep_index_0=0 means you want to sweep first variable, sweep_index_0 = 4 is the 5th variable)
+def carpet_plot(problem, number_of_points,  plot_obj=1, plot_const=0, sweep_index_0=0, sweep_index_1=1):
+    """ SUAVE.Optimization.carpet_plot(problem, number_of_points,  plot_obj=1, plot_const=0, sweep_index_0=0, sweep_index_1=1)
+        takes in an optimization problem and runs a carpet plot of the first 2 variables
+
+        Inputs:
+            problem.optimization_problem.inputs
+            number_of_points
+            plot_obj
+            plot_const
+            sweep_index_0
+            sweep_index_1 - sweep_index_0, sweep_index_1 is index of variables you want to run carpet plot (i.e. sweep_index_0=0 means you want to sweep first variable, sweep_index_0 = 4 is the 5th variable)
+
+        Outputs:
+            outputs.
+                inputs
+                objective
+                constraint_val
+    """
+    #
+    #
     #unpack
     
     idx0            = sweep_index_0 # local name

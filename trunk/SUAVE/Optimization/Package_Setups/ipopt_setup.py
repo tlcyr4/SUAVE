@@ -15,7 +15,18 @@ import numpy as np
 # ----------------------------------------------------------------------
 
 def Ipopt_Solve(problem):
-    
+    """ SUAVE.Optimization.Package_Setups.ipopt_setup.Ipopt_Solve(problem)
+        solve optimization problem with pyipopt
+
+        Inputs:
+            problem.optimization_problem.
+                inputs
+                objective
+                constraints
+
+        Outputs:
+            results
+    """
     # Pull out the basic problem
     inp = problem.optimization_problem.inputs
     obj = problem.optimization_problem.objective
@@ -89,14 +100,33 @@ def Ipopt_Solve(problem):
 # ----------------------------------------------------------------------
 
 def eval_grad_f(x, problem):
-    
+    """ SUAVE.Optimization.Package_Setups.ipopt_setup.eval_grad_f(x, problem)
+        evaluate objective gradient
+
+        Inputs:
+            x - inputs
+            problem
+
+        Outputs:
+            grad
+    """
     grad_f, jac_g = problem.finite_difference(x)
     grad = grad_f.astype(float)
 
     return grad
 
 def eval_jac_g(x, flag, problem):
-    
+    """ SUAVE.Optimization.Package_Setups.ipopt_setup.eval_jac_g(x, flag, problem)
+        evaluate constraints jacobian
+
+        Inputs:
+            x - inputs
+            problem
+            flag - should I make structure?
+
+        Outputs:
+            jac_g
+    """
     if flag:
         matrix = make_structure(problem)
         return matrix
@@ -107,21 +137,47 @@ def eval_jac_g(x, flag, problem):
         return jac_g
 
 def eval_f(x, problem):
-    
+    """ SUAVE.Optimization.Package_Setups.ipopt_setup.eval_f(x, problem)
+        evaluate objectives
+
+        Inputs:
+            x - inputs
+            problem
+
+        Outputs:
+            obj
+    """
     obj = problem.objective(x)
     obj = obj.astype(float)[0]
 
     return obj
 
 def eval_g(x, problem):
-    
+    """ SUAVE.Optimization.Package_Setups.ipopt_setup.eval_g(x, problem)
+        evaluate constraints
+
+        Inputs:
+            x - inputs
+            problem
+
+        Outputs:
+            con
+    """
     con = problem.all_constraints(x)
     con = con.astype(float)
 
     return con
 
 def make_structure(problem):
-    
+    """ SUAVE.Optimization.Package_Setups.ipopt_setup.make_structure(problem)
+        convert problem into numpy matrix
+
+        Inputs:
+            problem
+
+        Outputs:
+            array
+    """
     # Pull out the basic problem
     inp = problem.optimization_problem.inputs
     con = problem.optimization_problem.constraints

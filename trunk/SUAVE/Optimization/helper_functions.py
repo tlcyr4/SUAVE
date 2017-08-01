@@ -15,7 +15,18 @@ import numpy as np
 # ----------------------------------------------------------------------    
 
 def set_values(dictionary,input_dictionary,converted_values,aliases):
-    
+    """ SUAVE.Optimization.helper_functions.set_values(dictionary,input_dictionary,converted_values,aliases)
+        Set values in dictionary based on input dict and converted values
+
+        Inputs:
+            dictionary - dict to initialize
+            input_dictionary - structure for new dictionary
+            converted_values - values for new dictionary
+            aliases - keys that should make it into new dict
+
+        Outputs:
+            dictionary - new dictionary
+    """
     provided_names = input_dictionary[:,0]
         
     # Correspond aliases to inputs
@@ -58,31 +69,66 @@ def set_values(dictionary,input_dictionary,converted_values,aliases):
         
 
 def find_a_star(dictionary,string):
+    """ SUAVE.Optimization.helper_functions.find_a_star(dictionary,string)
+        Treat star in string as a wildcard, representing all keys at that level of the dict's
+        tree-structure.
+
+        Inputs:
+            dictionary - top of tree-like dict-structure
+            string - dot-access path down tree to star marker
+
+        Outputs:
+            newstrings - list of strings to separate out all paths represented by string with wildcard
+    """
     splitstring = string.split('.')
     for ii in xrange(0,len(splitstring)):
         if '*' in splitstring[ii]:
+            # if '*' is first string, set newkeys to top-level keys in dict
             if ii==0:
                 newkeys = dictionary.keys()
+            # else set newkeys to keys from deepget into dictionary
             elif ii !=0:
+
+                # deep get using parts of string as keys down path
                 strtoeval = 'dictionary.'+'.'.join(splitstring[0:ii])+'.keys()'
+                # path leads to a dict, set newkeys to be its keys
                 newkeys = eval(strtoeval)
+            # remember index actually associated with newkeys
             lastindex   = ii
             
     newstrings = []
+    # create strings showing where the new keys fit in a path
     for ii in xrange(0,len(newkeys)):
         newstrings.append('.'.join(splitstring[0:lastindex])+'.'+newkeys[ii]+'.'+'.'.join(splitstring[lastindex+1:]))
         
     return newstrings
 
 def scale_input_values(inputs,x):
-    
+    """ SUAVE.Optimization.helper_functions.scale_input_values(inputs,x)
+        Scale 2nd row of inputs based on 4th row
+
+        Inputs:
+            inputs - input values
+            x - scaling
+
+        Outputs:
+            inputs - after scaling
+    """
     provided_scale = inputs[:,3]
     inputs[:,1] =  x*provided_scale
     
     return inputs
 
-def convert_values(inputs): 
-    
+def convert_values(inputs):
+    """ SUAVE.Optimization.helper_functions.convert_values(inputs)
+        Convert units
+
+        Inputs:
+            inputs - input values
+
+        Outputs:
+            converted_values - after scaling
+    """
     provided_values  = inputs[:,1] 
     
     # Most important 2 lines of these functions
@@ -99,7 +145,17 @@ def convert_values(inputs):
 # ----------------------------------------------------------------------  
 
 def get_values(dictionary,outputs,aliases):
-    
+    """ SUAVE.Optimization.helper_function.get_values(dictionary,outputs,aliases)
+        get some values from dict
+
+        Inputs:
+            dictionary - dict to access
+            outputs - what to look for
+            aliases - what to call them
+
+        Outputs:
+            values
+    """
     npoutputs   = np.array(outputs)
     output_names = npoutputs[:,0]
         
@@ -118,7 +174,16 @@ def get_values(dictionary,outputs,aliases):
     return values
 
 def scale_obj_values(inputs,x):
-    
+    """ SUAVE.Optimization.helper_function.scale_obj_values(inputs,x)
+        scale objectives
+
+        Inputs:
+            inputs - input values
+            x - scaling
+
+        Outputs:
+            scaled
+    """
     provided_scale = inputs[:,1]
     provided_units   = inputs[:,-1]*1.0
     inputs[:,-1] = provided_units
@@ -128,14 +193,32 @@ def scale_obj_values(inputs,x):
     return scaled
 
 def scale_const_values(inputs,x):
-    
+    """ SUAVE.Optimization.helper_function.scale_const_values(inputs,x)
+        scale constraints
+
+        Inputs:
+            inputs - input values
+            x - scaling
+
+        Outputs:
+            scaled
+    """
     provided_scale = np.array(inputs[:,3],dtype = float)
     scaled =  x/provided_scale
     
     return scaled
 
 def scale_const_bnds(inputs):
-    
+    """ SUAVE.Optimization.helper_function.scale_const_bnds(inputs)
+        scale bounds
+
+        Inputs:
+            inputs - input values
+            x - scaling
+
+        Outputs:
+            scaled
+    """
     provided_bounds = np.array(inputs[:,2],dtype = float)
     
     # Most important 2 lines of these functions
@@ -147,7 +230,16 @@ def scale_const_bnds(inputs):
     return converted_values
 
 def unscale_const_values(inputs,x):
-    
+    """ SUAVE.Optimization.helper_function.unscale_const_values(inputs,x)
+        reverse scaling
+
+        Inputs:
+            inputs - input values
+            x - scaling
+
+        Outputs:
+            scaled
+    """
     provided_units   = inputs[:,-1]*1.0
     provided_scale = np.array(inputs[:,3],dtype = float)
     scaled =  x*provided_scale/provided_units

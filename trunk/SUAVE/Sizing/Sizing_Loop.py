@@ -22,7 +22,37 @@ import scipy as sp
 import time
 
 class Sizing_Loop(Data):
+    """ SUAVE.Sizing.Sizing_Loop()
+        Use to iteratively size components in an optimization problem, choose from various methods to use
+    """
     def __defaults__(self):
+        """ SUAVE.Sizing.Sizing_Loop.__defaults__()
+            Sets default values
+
+            Updates:
+                self.
+                    tolerance -             error tolerance
+                    initial_step -          'Default', 'Table', 'SVR'
+                    update_method -         'successive_substitution', 'newton-raphson', ;broyden
+                    default_y -             default inputs in case the guess is very far from
+                    default_scaling -       scaling value to make sizing parameters ~1
+                    maximum_iterations -    cutoff point for sizing loop to close
+                    output_filename -       where outputs are written
+                    sizing_evaluation -     defined in the Procedure script
+                    write_threshold -       number of iterations before it writes, regardless of how close it is to currently written values
+                    iteration_options. -    Data()
+                        newton_raphson_tolerance -          threshhold of convergence when you start using newton raphson
+                        max_newton_raphson_tolerance -      threshhold at which newton raphson is no longer used (to prevent overshoot and extra iterations)
+                        h -                                 finite difference step for Newton iteration
+                        initialize_jacobian -               how Jacobian is initialized for broyden; newton-raphson by default
+                        max_initial_step -                  maximum distance at which interpolation is allowed
+                        mix_fix_point_iterations -          minimum number of iterations to perform fixed-point iteration before starting newton-raphson
+                        min_surrogate_step -                minimum distance at which SVR is used (if closer, table lookup is used)
+                        min_write_step -                    minimum distance at which sizing data are written
+                        min_surrogate_length -              minimum number data points needed before SVR is used
+                        number_of_surrogate_calls -         unused
+                        newton_raphson_damping_threshhold - threshhold at which newton raphson damping is no longer used (to prevent overshoot and extra iterations)
+        """
         #parameters common to all methods
         self.tolerance             = None
         self.initial_step          = None  #'Default', 'Table', 'SVR'
@@ -51,7 +81,9 @@ class Sizing_Loop(Data):
         
 
     def evaluate(self, nexus):
-        
+        """ SUAVE.Sizing.Sizing_Loop.evaluate()
+            Perform sizing
+        """
         if nexus.optimization_problem != None: #make it so you can run sizing without an optimization problem
             unscaled_inputs = nexus.optimization_problem.inputs[:,1] #use optimization problem inputs here
             input_scaling   = nexus.optimization_problem.inputs[:,3]
@@ -297,12 +329,18 @@ class Sizing_Loop(Data):
         return nexus
         
     def successive_substitution_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options):
+        """ SUAVE.Sizing.Sizing_Loop.successive_substitution_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options)
+            Run one iteration of sizing evaluation
+        """
         err_out, y_out = sizing_evaluation(y, nexus, scaling)
         iter += 1
         iteration_options.err_save = err
         return err_out, y_out, iter
     
     def newton_raphson_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options):
+        """ SUAVE.Sizing.Sizing_Loop.newton_raphson_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options)
+            Runs one iteration of Newton's Method
+        """
         h = iteration_options.h
         print '###begin Finite Differencing###'
         J, iter = Finite_Difference_Gradient(y,err, sizing_evaluation, nexus, scaling, iter, h)
@@ -338,6 +376,9 @@ class Sizing_Loop(Data):
         return err_out, y_update, iter
         
     def broyden_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options):
+        """ SUAVE.Sizing.Sizing_Loop.broyden_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options)
+            Runs one iteration of Broyden's Method
+        """
         y_save      = iteration_options.y_save
         err_save    = iteration_options.err_save 
         dy          = y - y_save
@@ -361,7 +402,9 @@ class Sizing_Loop(Data):
         return err_out, y_update, iter
         
     def damped_newton_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options):
-        #uses newton raphson, does backtracking linesearch if it goes too far
+        """ SUAVE.Sizing.Sizing_Loop.damped_newton_update(self,y, err, sizing_evaluation, nexus, scaling, iter, iteration_options)
+            uses newton raphson, does backtracking linesearch if it goes too far
+        """
         tol = self.tolerance
         h = iteration_options.h
         print '###begin Finite Differencing###'
@@ -411,7 +454,9 @@ class Sizing_Loop(Data):
 
     
 def Finite_Difference_Gradient(x,f , my_function, inputs, scaling, iter, h):
-    #use forward difference
+    """ SUAVE.Sizing.Sizing_Loop.Finite_Difference_Gradient(x,f , my_function, inputs, scaling, iter, h)
+        use forward difference
+    """
 
     J=np.nan*np.ones([len(x), len(x)])
     for i in range(len(x)):

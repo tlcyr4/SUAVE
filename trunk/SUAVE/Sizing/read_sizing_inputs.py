@@ -14,6 +14,18 @@ import numpy as np
 
 
 def read_sizing_inputs(sizing_loop, opt_inputs):
+    """ SUAVE.Sizing.read_sizing_inputs(sizing_loop, opt_inputs)
+        Reads sizing inputs from a file
+
+        Inputs:
+            sizing_loop.output_filename
+            opt_inputs
+
+        Outputs:
+            data_inputs - values from optimization problem
+            data_outputs - variables we iterate on in sizing loop
+            read_success - did this work?
+    """
     try:
         file_in        = open(sizing_loop.output_filename)
         read_success   = 1
@@ -48,7 +60,15 @@ def read_sizing_inputs(sizing_loop, opt_inputs):
     return data_inputs, data_outputs, read_success
     
 def format_input_data(data):
+    """ SUAVE.Sizing.format_input_data(data)
+        format data so we can work with it
 
+        Inputs:
+            data
+
+        Outputs:
+            data_out
+    """
     data_out=[]
     for line in data:
    

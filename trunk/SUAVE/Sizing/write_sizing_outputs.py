@@ -15,7 +15,17 @@ import numpy as np
 
 
 def write_sizing_outputs(sizing_loop, y_save, opt_inputs):
+    """ SUAVE.Sizing.read_sizing_inputs(sizing_loop, opt_inputs)
+        Write sizing outputs to a file
 
+        Inputs:
+            sizing_loop.output_filename
+            y_save
+            opt_inputs
+
+        Outputs:
+            writes to file
+    """
     file=open(sizing_loop.output_filename, 'ab')
     if len(opt_inputs) == 1:
         #weird python formatting issue when writing a 1 entry array

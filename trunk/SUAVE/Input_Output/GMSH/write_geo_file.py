@@ -7,9 +7,14 @@ from SUAVE.Core import Data
 import numpy as np
 
 def write_geo_file(tag):
-    
-    # Create .geo file
-    # This is essentially a list of commands used to build a volume for meshing
+    """ SUAVE.Input_Output.GMSH.write_geo_file(tag)
+        Create .geo file
+        This is essentially a list of commands used to build a volume for meshing
+
+        Inputs:
+            tag
+    """
+
     
     vehicle_nums, farfield_num, symmetry_num = read_keys(tag)
     
@@ -53,8 +58,17 @@ def write_geo_file(tag):
     f.close
     
 def read_keys(tag):
-    
-    # Read OpenVSP key file to determine which surfaces exist
+    """ SUAVE.Input_Output.GMSH.write_geo_file.read_keys(tag)
+        Read OpenVSP key file to determine which surfaces exist
+
+        Inputs:
+            tag
+
+        Outputs:
+            vehicle_nums
+            farfield_nums
+            symmetry_num
+    """
     
     filename = tag + '.key'
     f = open(filename)

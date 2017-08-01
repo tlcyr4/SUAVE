@@ -4,9 +4,12 @@ import os
 
 # new keys by wild card integer
 def next_path(path_wild,format='%i'):
-    """ finds the next index to use on a indexed key and applies it to key_wild
+    """ SUAVE.Input_Output.next_path(path_wild,format='%i')
+        finds the next index to use on a indexed key and applies it to key_wild
         key_wild is a string containing '*' to indicate where to increment
         the key
+        ***BROKEN***
+
     """
     
     ksplit = key_wild.split('*')

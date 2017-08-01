@@ -18,6 +18,14 @@ import json
 # ----------------------------------------------------------------------
 
 def save_tree(data,filename,root_name=None):
+    """ SUAVE.Input_Output.D3JS.save_tree(data,filename,root_name=None)
+        Writes a data object as a tree to a D3.js file
+
+        Inputs:
+            data - data object
+            filename - file to write to
+            root_name - name for data tree
+    """
 
     if not isinstance(data,Tree_Element):
         if 'tag' in data:
@@ -44,7 +52,13 @@ def save_tree(data,filename,root_name=None):
 # ----------------------------------------------------------------------
 
 def to_d3(tree,data):
-    
+    """ SUAVE.Input_Output.D3JS.save_tree.to_d3(tree,data)
+        Redursively converts a Data() object to a data tree
+
+        Inputs:
+            tree - tree to build
+            data - data to convert
+    """
     tree.children = []
     
     for k,v in data.items():

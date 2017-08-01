@@ -8,7 +8,16 @@ from SUAVE.Core import Data
 import sys, os
 
 def call_SU2_CFD(tag,parallel=False,processors=1):
-    
+    """ SUAVE.Input_Output.SU2.call_SU2_CFD(tag,parallel=False,processors=1)
+        Calls SU2 to do some CFD work
+
+        Inputs:
+            tag - keep consistent with write_SU2_cfg
+
+        Outputs:
+            CL
+            CD
+    """
     if parallel==True:
         sys.path.append(os.environ['SU2_HOME'])
         from parallel_computation import parallel_computation

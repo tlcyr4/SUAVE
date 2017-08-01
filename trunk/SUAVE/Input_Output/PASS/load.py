@@ -25,11 +25,16 @@ from SUAVE.Attributes import Constants
 
 def load(vehicle,input_file,mass_props_file=""):
 
-    """ ImportFromPASS: Import PASS model
+    """ SUAVE.Input_Output.PASS.load(vehicle,input_file,mass_props_file="")
+        ImportFromPASS: Import PASS model
 
-        Inputs:     vehcile             Vehicle class instance (required) 
-        Inputs:     pass_file           PASS model file (required)  
-        Outputs:    err                 Error status 
+        Inputs:
+            vehicle             Vehicle class instance (required)
+            pass_file           PASS model file (required)
+            mass_props_file     mass properties file (optional)
+
+        Outputs:
+            err                 Error status
     """
 
     import xml.etree.ElementTree as et

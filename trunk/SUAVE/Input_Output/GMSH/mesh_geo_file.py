@@ -7,7 +7,11 @@ import subprocess
 import os
 
 def mesh_geo_file(tag):
-    
+    """ SUAVE.Input_Output.GMSH.mesh_geo_file(tag)
+        Calls GMSH with su2
+
+        See GMSH documentation
+    """
     if os.path.isfile(tag+'.su2') == True:
         os.remove(tag+'.su2') # This prevents an leftover mesh from being used when SU2 is called
                               # This is important because otherwise the code will continue even if gmsh fails

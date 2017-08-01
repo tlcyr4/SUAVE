@@ -18,8 +18,13 @@ import time
 # ----------------------------------------------------------------------
 
 def save(data,filename):
-    ''' filename extension should be *.mm
-    '''
+    """ SUAVE.Input_Output.FreeMind.save(data,filename)
+        saves data for freemind
+
+        Inputs:
+            data - data object
+            filename  - extension should be *.mm
+    """
     
     try:
         tag = data.tag
@@ -35,7 +40,16 @@ def save(data,filename):
     fm_data.attributes.version = "1.0.0"
     
     def build_nodes(prev,data):
-        
+        """ SUAVE.Input_Output.FreeMind.save.build_nodes(prev,data)
+            recursively builds nodes in freemind datastructure
+
+            Inputs:
+                prev - parent or root node
+                data - SUAVE data object
+
+            Updates:
+                builds prev to be a full tree
+        """
         if isinstance(data,dict):
             for key,val in data.items():
                 node = new_fm_node(prev,key)
@@ -56,7 +70,12 @@ def save(data,filename):
     return
 
 def new_fm_node(node,text):
-    
+    """ SUAVE.Input_Output.FreeMind.save.new_fm_node(node,text)
+        initializes a freemind node
+
+        Inputs:
+            node -
+    """
     node = node.new_element('node')
     
     node.attributes.TEXT     = text

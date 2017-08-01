@@ -19,7 +19,15 @@ from .Data import Data as XML_Data
 # ----------------------------------------------------------------------
 
 def load(file_in):
-    """ A simple function to converts XML data into native Python object. """
+    """ SUAVE.Input_Output.XML.load(file_in)
+        A simple function to converts XML data into native Python object.
+
+        Inputs:
+            file_in - filename for XML input
+
+        Outputs:
+            xml_data - XML_Data() object
+    """
     
     # open file, read conents
     if isinstance(file_in,str):
@@ -47,9 +55,20 @@ def load(file_in):
 # ----------------------------------------------------------------------
 
 class TreeBuilder(xml.sax.handler.ContentHandler):
-    
+    """ SUAVE.Input_Output.XML.load.TreeBuilder()
+        A simple class that builds an XML data tree
+    """
     def __init__(self):
+        """ SUAVE.Input_Output.XML.load.TreeBuilder.__init__()
+            initializes treebuilder
 
+            Updates:
+                self.
+                    root
+                    stack
+                    current
+                    text_parts
+        """
         self.root = XML_Data()
         
         self.stack = []
@@ -57,7 +76,21 @@ class TreeBuilder(xml.sax.handler.ContentHandler):
         self.text_parts = []
         
     def startElement(self, name, attrs):
-        
+        """ SUAVE.Input_Output.XML.load.TreeBuilder.startElement(name, attrs)
+            starts a new element
+
+            Inputs:
+                name - element name/tag
+                attrs
+
+            Updates:
+                self.
+                    stack
+                    current.
+                        tag
+                        attributes
+                    text_parts
+        """
         self.stack.append((self.current, self.text_parts))
         
         self.current = XML_Data()
@@ -69,7 +102,20 @@ class TreeBuilder(xml.sax.handler.ContentHandler):
             self.current.attributes[k] = v
             
     def endElement(self, name):
-        
+        """ SUAVE.Input_Output.XML.load.TreeBuilder.startElement(name, attrs)
+            ends an element and adds it to document
+
+            Inputs:
+                name
+
+            Updates:
+                self.
+                    text_parts
+                    current.
+                        content
+                        elements
+
+        """
         text = ''.join(self.text_parts).strip()
         
         self.current.content = text
@@ -80,7 +126,16 @@ class TreeBuilder(xml.sax.handler.ContentHandler):
         self.current.elements.append(element)
         
     def characters(self, content):
-        
+        """ SUAVE.Input_Output.XML.load.TreeBuilder.characters(self, content)
+            adds content to current element
+
+            Inputs:
+                content
+
+            Updates:
+                self.
+                    text_parts
+        """
         self.text_parts.append(content)
 
         

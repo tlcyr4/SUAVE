@@ -22,8 +22,12 @@ from collections import OrderedDict
 # ----------------------------------------------------------------------
 
 def archive(data,filename):
-    """ archive data to file 
-        converts a SUAVE data structure to a JSON file
+    """ SUAVE.Input_Output.SUAVE.archive(data,filename)
+        archive data to file: converts a SUAVE data structure to a JSON file
+
+        Inputs:
+            data - SUAVE data object
+            filename - where to write
     """
     
     # Create a dictionary structure with the results
@@ -39,7 +43,15 @@ def archive(data,filename):
        
 
 def build_dict_base(base):
-    
+    """ SUAVE.Input_Output.SUAVE.archive.build_dict_base(base)
+        Convert SUAVE data structure into standard OrderedDict structure
+
+        Inputs:
+            base - SUAVE data structure
+
+        Outputs:
+            base_dict - standard OrderedDict version of datastructure
+    """
     keys = base.keys() # keys from top level
     base_dict = OrderedDict() # initialize dictionary
     # Ordered is used because some post processing currently
@@ -52,6 +64,15 @@ def build_dict_base(base):
     return base_dict
     
 def build_dict_r(v):
+    """ SUAVE.Input_Output.SUAVE.archive.build_dict_r(v)
+        Recurses down datastructure if necessary
+
+        Inputs:
+            v - value in SUAVE data structure
+
+        Outputs:
+            ret - standard OrderedDict version of v
+    """
     tv = type(v) # Get value type
     
     # Transform to basic python data type as appropriate

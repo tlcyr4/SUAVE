@@ -18,7 +18,16 @@ except ImportError:
 import numpy as np
 
 def write(vehicle,tag):
-    
+    """ SUAVE.Input_Output.OpenVSP.vsp_write(vehicle,tag)
+        Write vehicle to a file for OpenVSP to read
+
+        Inputs:
+            vehicle - SUAVE vehicle
+            tag
+
+        Outputs:
+            area_tags - for wetted area assignment
+    """
     # Reset OpenVSP to avoid including a previous vehicle
     try:
         vsp.ClearVSPModel()

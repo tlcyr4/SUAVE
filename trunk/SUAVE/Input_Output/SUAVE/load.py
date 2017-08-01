@@ -21,7 +21,12 @@ from collections import OrderedDict
 # ----------------------------------------------------------------------
 
 def load(filename):
-    """ load data from a JSON file containing SUAVE data """
+    """ SUAVE.Input_Output.SUAVE.load(filename)
+        load data from a JSON file containing SUAVE data
+
+        Inputs:
+            filename - where to load from
+    """
     
     # Get JSON string
     f = open(filename)
@@ -37,6 +42,15 @@ def load(filename):
     return data
 
 def read_SUAVE_json_dict(res_dict):
+    """ SUAVE.Input_Output.SUAVE.read_SUAVE_json_dict(res_dict)
+        build SUAVE data structure from dict
+
+        Inputs:
+            res_dict - dict
+
+        Outputs:
+            SUAVE_data - SUAVE data structure version
+    """
     keys = res_dict.keys() # keys from top level
     SUAVE_data = Data() # initialize SUAVE data structure
     
@@ -48,6 +62,15 @@ def read_SUAVE_json_dict(res_dict):
     return SUAVE_data
 
 def build_data_r(v):
+    """ SUAVE.Input_Output.SUAVE.load.build_data_r(v)
+        Recurses down datastructure if necessary
+
+        Inputs:
+            v - value in dict structure
+
+        Outputs:
+            ret - SUAVE data structure version of v
+    """
     tv = type(v) # Get value type
     
     # Transform to SUAVE data structure with appropriate types

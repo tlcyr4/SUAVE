@@ -12,7 +12,16 @@ import time
 import fileinput
 
 def write_vsp_mesh(geometry,tag,half_mesh_flag,growth_ratio,growth_limiting_flag):
-    
+    """ SUAVE.Input_Output.OpenVSP.write_vsp_mesh(geometry,tag,half_mesh_flag,growth_ratio,growth_limiting_flag)
+        Write mesh to file for OpenVSP to read
+
+        Inputs:
+            geometry
+            tag
+            half_mesh_flag - is this a half-mesh
+            growth_ratio
+            growth_limiting_flag
+    """
     # Reset OpenVSP to avoid including a previous vehicle
     vsp.ClearVSPModel()
 
@@ -82,8 +91,14 @@ def write_vsp_mesh(geometry,tag,half_mesh_flag,growth_ratio,growth_limiting_flag
     print 'VSP meshing for ' + tag + ' completed in ' + str(dt) + ' s'
     
 def SetSources(geometry):
-    # Extract information on geometry type (for some reason it seems VSP doesn't have a simple 
-    # way to do this)
+    """ SUAVE.Input_Output.OpenVSP.write_vsp_mesh.SetSources(geometry)
+        Extract information on geometry type (for some reason it seems VSP doesn't have a simple
+        way to do this)
+
+        Inputs:
+            geometry
+    """
+
     comp_type_dict = dict()
     comp_dict      = dict()
     for wing in geometry.wings:
@@ -229,6 +244,19 @@ def SetSources(geometry):
         
 
 def AddSegmentSources(comp,cr,ct,ii,u_start,num_secs,custom_flag,wingtip_flag,seg):
+    """ SUAVE.Input_Output.OpenVSP.write_vsp_mesh.AddSegmentSources(comp,cr,ct,ii,u_start,num_secs,custom_flag,wingtip_flag,seg)
+        See vsp documentation
+        Inputs:
+            comp
+            cr
+            ct
+            ii
+            u_start
+            num_secs
+            custom_flag
+            wingtip_flag
+            seg - wing segment
+    """
     if custom_flag == True:
         len1 = seg.vsp_mesh.inner_length
         len2 = seg.vsp_mesh.outer_length

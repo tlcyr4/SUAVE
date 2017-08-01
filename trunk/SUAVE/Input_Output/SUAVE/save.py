@@ -16,7 +16,13 @@ from SUAVE.Core.Input_Output import save_data
 # ----------------------------------------------------------------------
 
 def save(data,filename):
-    """ save data to file """
+    """ SUAVE.Input_Output.SUAVE.load(filename)
+        save data to a file (pickle format)
+
+        Inputs:
+            data - data to save
+            filename - where to save
+    """
     
     save_data(data,filename,file_format='pickle')
     

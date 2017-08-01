@@ -34,7 +34,13 @@ except NameError:
 # ----------------------------------------------------------------------
 
 def save(xml_data,filename):
+	""" SUAVE.Input_Output.XML.save(xml_data,filename)
+		save xml_data() to a file
 
+		Inputs:
+			xml_data - xml_data structure
+			filename - file to write to
+	"""
 	# translate to xml data if not already
 	if not isinstance(xml_data,XML_Data):
 		xml_data = XML_Data.from_dict(xml_data)
@@ -86,7 +92,14 @@ def save(xml_data,filename):
 
 
 def indent(elem, level=0):
-	# Indentation helper from http://effbot.org/zone/element-lib.htm
+	""" SUAVE.Input_Output.XML.save.indent(elem, level=0)
+		Indentation helper from http://effbot.org/zone/element-lib.htm
+
+		Inputs:
+			elem - xml element
+			level - indent level
+	"""
+	#
 	i = "\n" + level*"  "
 	if len(elem):
 		if not elem.text or not elem.text.strip():

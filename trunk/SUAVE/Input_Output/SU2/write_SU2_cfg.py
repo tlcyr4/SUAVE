@@ -5,7 +5,17 @@
 
 
 def write_SU2_cfg(tag,SU2_settings):
-    
+    """ SUAVE.Input_Output.SU2.write_SU2_cfg(tag,SU2_settings)
+        Write SE2 setup to file fo SU2
+
+        Inputs:
+            tag - keep consistent with call_SU2_CFD
+            SU2_settings. - settings for CFD, like state of system
+                reference_area
+                mach_number
+                angle_of_attack
+                maximum_iterations
+    """
     ref_area = SU2_settings.reference_area
     mach     = SU2_settings.mach_number
     AoA      = SU2_settings.angle_of_attack

@@ -10,7 +10,15 @@ except ImportError:
 import numpy as np
 
 def get_vsp_areas(tag):
-    
+    """ SUAVE.Input_Output.OpenVSP.get_vsp_areas(tag)
+        Gets wetted areas from OpenVSP
+
+        Inputs:
+            tag
+
+        Outputs:
+            wetted_areas - dictionary of component wetted areas
+    """
     half_mesh = False # Note that this does not affect the Gmsh/SU2 meshing process
     # it only affects how much area of a component is included in the output
     try:

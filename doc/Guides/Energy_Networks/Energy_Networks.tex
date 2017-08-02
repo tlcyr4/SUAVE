@@ -1,0 +1,90 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+\usepackage{listings}
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{SUAVE Guide: Energy Networks}
+\author{Tigar Cyr}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+
+
+In SUAVE, the Energy Analysis and energy network encapsulate energy production. storage, and usage within the vehicle.  While it tracks and manages the others, the energy network's main job is to calculate the thrust force vector acting on a vehicle.  SUAVE groups this process under Energy Analysis, so a segment's Energy() object is the one that calls an energy network's evaluate\_thrust() method.  Like any other part of a SUAVE Analysis process, propulsors take a state object as input.  This helps to keep the interfaces standardized between the propulsors and Analysis objects.  The propulsor then calculates the thrust and returns it up to the Energy Analysis object, updating the state object along the way. 
+\section{Energy Components}
+\par An energy network is made up of multiple components: motors, propellers, batteries, turbines, etc, which are descendants of the Energy\_Component class.  The key inheritances here are the inputs and outputs attributes, SUAVE Data() objects (dictionaries with attribute-style access) which hold the input and output conditions of the component.  While executing evaluate\_thrust, the energy network object creates a (sometimes branching) chain out of its components, copying the outputs of one component to the inputs of the next, in addition to passing each component the state's conditions.  After all the components have executed, the network works with the outputs of the final component(s) to pack up its outputs (this means accessing the outputs object except in the case of a propeller, which directly returns outputs).  It updates conditions.propulsion based on the state of its components and returns the thrust force vector and vehicle mass rate packed up in a results object.
+\section{Example: Turbofan}
+\begin{itemize}
+\item The user is responsible for building the turbofan and initializing its component in their script see the SUAVE B737 tutorial for more details.
+\item When the turbofan is called, python calls the network's \_\_call\_\_ method, which has been set to evaluate\_thrust.  
+\item The network unpacks conditions from the state object is is passed; this is all it will be accessing from the state object. 
+\item The inputs to the first component, ram, are copied from the network's attributes and ram is called.
+\item Stagnation temperature and stagnation pressure are passed from the ouputs of ram to the inputs of inlet\_nozzle and inlet\_nozzle is called
+\item Inlet nozzle's outputs are linked to both low pressure compressor and fan, splitting the process, but from then on, inputs and outputs are similarly linked.
+\item Both fan nozzle's and core nozzle's outputs are linked the thrust's inputs.
+\item Thrust component calculates thrust as an output and network packs it up into a Results() object.
+\item Network updates conditions based on the state of the components.
+\item Network returns results to energy analysis.
+\end{itemize}
+\begin{figure}
+\includegraphics[width=6in]{Diagrams/Turbofan_Flowchart}
+\caption{Control Flow of Turbofan}
+\end{figure}
+
+For source code: See SUAVE.Components.Energy.Networks.Turbofan
+%\lstinputlisting[language=python]{"Source Code/Turbofan.py"}
+\end{document}

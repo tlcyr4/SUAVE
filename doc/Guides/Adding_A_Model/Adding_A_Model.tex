@@ -1,0 +1,57 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{listings}
+
+\title{Adding an Aerodynamic Model to SUAVE}
+\author{Tigar Cyr}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section{Background}
+One of the main features of SUAVE is extensibility.  Users are intended to customize and add to its vehicles and analyses.  To accomplish this, SUAVE supports adding new Python modules for different analytical models, and works to keep this aerodynamic analysis self-contained and independent from the inner workings of SUAVE's processes.  An aerodynamics module in SUAVE simply extends the SUAVE.Analyses.Aerodynamics.Aerodynamics class and overrides its evaluate method.  In doing so, it takes a state as an input, does some calculation and outputs lift and drag coefficients packed up in a Results object.  Technically, that's all it takes to make an aerodynamic model in SUAVE, but it is useful to get a better understanding of how SUAVE uses its aerodynamics modules to better leverage the state variable as an input and SUAVE's program flow structure.
+\section{Mission Evaluation}
+A simulation in SUAVE is based around the idea of a mission that the vehicle carries out.  The mission has one or more segments, which each have their own state datastructure, defining conditions and settings for analyzing the segment.  The state variable breaks the segment into control points and keeps track of the conditions of the system at each control point. As the mission is evaluated, the segment calls its analyses to evaluate the state of the segment.
+\subsection{Segment Structure}
+\includegraphics[width = 5in]{segment}\\
+A segment has five components: Features, Settings, Aerodynamics, Process, and State.  For evaluation, only the last three are important. Process is callable and called when the segment is evaluated.  It is passed the state to work with, and passes the state to any methods and classes used in the evaluation, including the analysis objects.
+\subsection{Processes and Methods}
+\includegraphics[width = 5in]{process}\\
+SUAVE takes an object oriented approach to its call structure by maintaining processes and subprocesses.  When called, a process calls a mix of subprocesses and method and returns the results from all of them.  The forms a tree of subprocesses, with the original process call at the root, and method calls at the leaves.  These methods are kept in the Methods package and contain the bulk of the computation in SUAVE.\par
+During evaluation, a segment goes through its processes in the following order:
+\begin{itemize}
+\item Initialize: initializes the analyses and state of the segment
+\item Converge: Runs an iterative process to reduce residuals to 0 (passes iterate process as a function to scipy.fsolve).  This changes the state of the segment from the initial guess to one that fits the requirements of the mission and model of reality.
+\item Finalize: post processing after appropriate state has been found
+\end{itemize}
+\subsection{The State Variable}
+\includegraphics[width = 5in]{state}\\
+The state variable encapsulates the entire state of the system being investigated.  It holds all the information about the vehicle's status and environment.  It serves as the main piece of data passed down the process tree, providing the necessary input information about the system to various processes.  As such, it is the input for an aerodynamics module.  The module will access the information it needs primarily through the state's conditions variable.  Within the conditions datastructure, data is separated into substructures such as freestream and aerodynamics.  Within these, variables like angle\_of\_attack and lift\_coefficient are held as numpy column vectors, with an element for each control point in the segment.\par
+
+
+\section{Implementing an Aerodynamic Analysis Model}
+In SUAVE, an aerodynamic model is implemented as a callable class in the Analyses/Aerodynamics package, and called by the update\_aerodynamics method in \\SUAVE.Methods.Missions.Segments.Common.Aerodynamics.py.  In order to fill this role, it needs to:
+\begin{enumerate}
+\item Be either a callable class or method.
+\item Take a state and optionally settings and geometry variables as its inputs.
+\item Return a results object containing lift and drag coefficients.
+\end{enumerate}
+Below is an example of a simple aerodynamics module:\\
+\lstinputlisting[language=python]{Example.py}
+Note the output format, that results are packed up and named results.drag.total and results.lift.total.  It is important to follow this naming convention, but beyond that, SUAVE doesn't care how you calculate the coefficients.
+\par This program fits into SUAVE and performs as it should, but it is doesn't fit the style and modularity common in SUAVE.  To accomplish that, as much of the computation as possible is to be outsourced to independent methods in the Methods directory.  By convention, a module would be made in Methods/Aerodynamics named after the model, and it would hold all the methods for carrying out computations.  Following this style, the same model would look like this:\\
+\lstinputlisting[language=python]{Structured_Example.py}
+\begin{center}\includegraphics[width = 5in]{finder}\end{center}
+\lstinputlisting[language=python]{example_lift.py}
+\lstinputlisting[language=python]{example_drag.py}
+%\subsection{}
+
+
+
+\end{document}  

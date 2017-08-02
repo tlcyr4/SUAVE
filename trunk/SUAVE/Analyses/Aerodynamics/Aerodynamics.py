@@ -45,6 +45,8 @@ class Aerodynamics(Analysis):
                 results.drag_coefficient - [[0]]
                 results.lift_force_vector - [[0]]
                 results.drag_force_vector - [[0]]
+
+                results - all implementations should hold lift and drag coefficients
         """
         
         results = Results()
@@ -53,14 +55,14 @@ class Aerodynamics(Analysis):
     
     def finalize(self):
         """ SUAVE.Analyses.Aerodynamics.Aerodynamics.finalize()
-            analysis specific finalization
+            analysis-specific finalization
         """
         
-        return     
+        return
     
     
     def compute_forces(self,conditions):
-        """ SUAVE.Analyses.Aerodynamics.Aerodynamics.comput_forces()
+        """ SUAVE.Analyses.Aerodynamics.Aerodynamics.compute_forces()
             compute lift and drag forces
             
             Inputs:

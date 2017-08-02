@@ -51,7 +51,7 @@ class Conditions(Data):
             if isinstance(v,Conditions):
                 v.expand_rows(rows)
             # need arrays here
-            elif np.rank(v) == 2:
+            elif np.ndim(v) == 2:
                 self[k] = np.resize(v,[rows,v.shape[1]])
             #: if type
         #: for each key,value
@@ -59,7 +59,55 @@ class Conditions(Data):
         return
 
     def compile(self):
-        """ SUAVE.Analyses.Mission.Segments.Conditions.compile(cols)
+        """ SUAVE.Analyses.Mission.Segments.Conditions.compile()
             calls expand_rows 
         """
         self.expand_rows()
+
+    def __add__(self, other):
+        """ SUAVE.Analyses.Mission.Segments.Conditions.__add__(other)
+            Add the contents of conditions 
+            
+            Inputs:
+                other - another Conditions object
+                
+            Output:
+                result - new conditions object
+        """
+
+        result = Conditions()
+
+        for k, v in self.iteritems():
+            # recursion
+            if isinstance(v, Conditions):
+                result[k] = v.__add__(other[k])
+            # need arrays here
+            elif np.ndim(v) == 2:
+                result[k] = v + other[k]
+            #: if type
+        #: for each key,value
+        return result
+
+    def __div__(self, other):
+        """ SUAVE.Analyses.Mission.Segments.Conditions.__add__(other)
+            Divide the contents of conditions by scalar
+            
+            Inputs:
+                other - divisor
+                
+            Output:
+                result - new conditions object
+        """
+
+        result = Conditions()
+
+        for k, v in self.iteritems():
+            # recursion
+            if isinstance(v, Conditions):
+                result[k] = v.__div__(other)
+            # need arrays here
+            elif np.ndim(v) == 2:
+                result[k] = np.divide(v,other)
+                #: if type
+        #: for each key,value
+        return result

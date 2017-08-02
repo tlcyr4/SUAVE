@@ -48,31 +48,40 @@ class ad(object):
             self.der = der
     
     def copy(self):
+        """ SUAVE.Plugins.ADiPy.ad.copy()
+            Make a copy of the object
+
+            Outputs:
+                copy of self
+        """
         return copy.copy(self)
         
     @property
     def nom(self):
-        """
-        Get the 0th-order value (i.e., the nominal value
+        """ SUAVE.Plugins.ADiPy.ad.nom()
+            Get the 0th-order value (i.e., the nominal value)
+
+            Outputs:
+                nominal value
         """
         return taylornominal(self)
     
     def d(self, n):
-        """
-        Get the nth derivative
-        
-        Example
-        -------
-        A 3rd-order differentiable object at 1.5::
-        
-            >>> x = adn(1.5, 3)
-            >>> y = x**2
-            >>> y.d(1)
-            3.0
-            >>> y.d(2)
-            2.0
-            >>> y.d(3)
-            0.0
+        """ SUAVE.Plugins.ADiPy.ad.d(n)
+            Get the nth derivative
+
+            Example
+            -------
+            A 3rd-order differentiable object at 1.5::
+
+                >>> x = adn(1.5, 3)
+                >>> y = x**2
+                >>> y.d(1)
+                3.0
+                >>> y.d(2)
+                2.0
+                >>> y.d(3)
+                0.0
             
         """
         assert n>=0, 'Derivative order must not be negative.'
@@ -85,42 +94,133 @@ class ad(object):
             return derivs[n - 1]
     
     def __getitem__(self, idx):
+        """ SUAVE.Plugins.ADiPy.ad.__getitem__(idx)
+            Getter
+
+            Inputs:
+                idx - key
+
+            Outputs:
+                value
+        """
         return ad(self.val[idx], self.der[idx])
     
     def __len__(self):
+        """ SUAVE.Plugins.ADiPy.ad.__len__()
+            Length of val
+
+            Outputs:
+                length of val
+        """
         return len(self.val)
         
     def __repr__(self):
+        """ SUAVE.Plugins.ADiPy.ad.__repr__()
+            String representation: val and der
+
+            Outputs:
+                string repr
+        """
         return 'ad' + repr((self.val, self.der))
     
     def __str__(self):
+        """ SUAVE.Plugins.ADiPy.ad.__str__()
+            String representation: nom, taylorder
+
+            Outputs:
+                string repr
+        """
         return 'ad' + repr((self.nom, taylorderivatives(self)))
         
     def double(self):
-        """
-        Convert ad object to vector of doubles
+        """ SUAVE.Plugins.ADiPy.ad.double()
+            Convert ad object to vector of doubles
+
+            Outputs:
+                vector of doubles
         """
         return np.hstack((self.val*1.0, self.der*1.0))
         
     def __add__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__add__(other)
+            If other is ad:
+                add vals and ders
+            Otherwise:
+                add other to val
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         if isinstance(other, ad):
             return ad(self.val + other.val, self.der + other.der)
         else:
             return ad(self.val + other, self.der)
     
     def __radd__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__radd__(other)
+            If other is ad:
+                add vals and ders
+            Otherwise:
+                add other to val
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return self + other
         
     def __neg__(self):
+        """ SUAVE.Plugins.ADiPy.ad.__neg__()
+            Multiply object by -1
+
+            Outputs:
+                -1 times self
+        """
         return -1*self
         
     def __sub__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__sub__(other)
+            Add -1 times other
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return self + (-1)*other
     
     def __rsub__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__rsub__(other)
+            Add -1 times self to other
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return (-1)*self + other
     
     def __mul__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__mul__(other)
+            If other is ad:
+                val becomes val * val
+                val*der + der*val
+            Otherwise:
+                mutiply der and val by other
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         if isinstance(other, ad):
             return ad(self.val*other.val, 
                 self.val*other.der + self.der*other.val)
@@ -128,21 +228,84 @@ class ad(object):
             return ad(self.val*other, self.der*other)
     
     def __rmul__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__rmul__(other)
+            If other is ad:
+                val becomes val * val
+                val*der + der*val
+            Otherwise:
+                mutiply der and val by other
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return self*other
     
     def __div__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__div__(other)
+            multiply by other to negative one
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return self*(other**-1)
     
     def __rdiv__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__rdiv__(other)
+            multiply other by self to negative one
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return other*(self**-1)
     
     def __truediv__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__truediv__(other)
+            multiply by other to negative one
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return self.__div__(other)
     
     def __rtruediv__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__rtruediv__(other)
+            multiply other by self to negative one
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return self.__rdiv__(other)
     
     def __pow__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__pow__(other)
+            Raise to a power:
+            If other is num:
+                raise val and der to other
+            If other is ad:
+                self.val**other.val
+                other.val*self.val**(other.val - 1)*self.der + self.val**other.val*log(self.val)*other.der
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         if isinstance(other, ad):
             return ad(self.val**other.val, 
                 other.val*self.val**(other.val - 1)*self.der + \
@@ -151,54 +314,116 @@ class ad(object):
             return ad(self.val**other, other*self.val**(other - 1)*self.der)
     
     def __rpow__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__rpow__(other)
+            Raise to a power:
+            If other is num:
+                raise val and der to other
+            If other is ad:
+                self.val**other.val
+                other.val*self.val**(other.val - 1)*self.der + self.val**other.val*log(self.val)*other.der
+
+            Inputs:
+                other: ad object or val
+
+            Outputs:
+                new ad object
+        """
         return ad(other**self.val, other**self.val*log(other)*self.der)
     
     def __abs__(self):
+        """ SUAVE.Plugins.ADiPy.ad.__abs__()
+            absolute value of val and der
+
+            Outputs:
+                new ad object
+        """
         if self==0:
             return ad(0*self.val, 0*self.der)
         else:
             return (self**2)**0.5
     
     def __eq__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__eq__(other)
+            based on nom
+
+            Outputs:
+                boolean
+        """
         if isinstance(other, ad):
             return self.nom==other.nom
         else:
             return self.nom==other
         
     def __lt__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__lt__(other)
+            based on nom
+
+            Outputs:
+                boolean
+        """
         if isinstance(other, ad):
             return self.nom<other.nom
         else:
             return self.nom<other
         
     def __le__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__le__(other)
+            based on nom
+
+            Outputs:
+                boolean
+        """
         return self<other or self==other
     
     def __gt__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__gt__(other)
+            based on nom
+
+            Outputs:
+                boolean
+        """
         return not self<=other
     
     def __ge__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__ge__(other)
+            based on nom
+
+            Outputs:
+                boolean
+        """
         return not self<other
     
     def __ne__(self, other):
+        """ SUAVE.Plugins.ADiPy.ad.__ne__(other)
+            based on nom
+
+            Outputs:
+                boolean
+        """
         return not self==other
     
     def __nonzero__(self):
+        """ SUAVE.Plugins.ADiPy.ad.__nonzero__(other)
+            based on nom
+
+            Outputs:
+                boolean
+        """
         return self!=0
         
 def adn(nom, order=1):
-    """
-    Construct an ad object that tracks derivatives up to ``order``.
-    
-    Parameters
-    ----------
-    nom : scalar
-        The base, nominal value where the derivatives will be calculated at.
-    
-    Optional
-    --------
-    order : int
-        The greatest order of derivatives to be tracked (Default: 1)
+    """ SUAVE.Plugins.ADiPy.ad.adn(nom, order=1)
+        Construct an ad object that tracks derivatives up to ``order``.
+
+        Parameters
+        ----------
+        nom : scalar
+            The base, nominal value where the derivatives will be calculated at.
+
+        Optional
+        --------
+        order : int
+            The greatest order of derivatives to be tracked (Default: 1)
     """
     if order==1:
         return ad(nom)
@@ -313,6 +538,12 @@ def taylorfunc(u, at=None):
     return approxfunc
     
 def exp(u):
+    """ SUAVE.Plugins.ADiPy.exp(u)
+        apply exponential to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:
@@ -324,6 +555,12 @@ def exp(u):
         return [exp(ui) for ui in u]
 
 def log(u):
+    """ SUAVE.Plugins.ADiPy.log(u)
+        apply logarithm to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:
@@ -335,6 +572,12 @@ def log(u):
         return [log(ui) for ui in u]
 
 def sqrt(u):
+    """ SUAVE.Plugins.ADiPy.sqrt(u)
+        apply sqrt to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:
@@ -346,6 +589,12 @@ def sqrt(u):
         return [sqrt(ui) for ui in u]
 
 def sin(u):
+    """ SUAVE.Plugins.ADiPy.sin(u)
+        apply sine to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:
@@ -357,6 +606,12 @@ def sin(u):
         return [sin(ui) for ui in u]
 
 def cos(u):
+    """ SUAVE.Plugins.ADiPy.cos(u)
+        apply cosine to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:
@@ -368,6 +623,12 @@ def cos(u):
         return [cos(ui) for ui in u]
     
 def tan(u):
+    """ SUAVE.Plugins.ADiPy.tan(u)
+        apply tangent to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:
@@ -379,6 +640,12 @@ def tan(u):
         return [tan(ui) for ui in u]
     
 def asin(u):
+    """ SUAVE.Plugins.ADiPy.asin(u)
+        apply arcsine to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:
@@ -390,6 +657,12 @@ def asin(u):
         return [asin(ui) for ui in u]
 
 def acos(u):
+    """ SUAVE.Plugins.ADiPy.acos(u)
+        apply arccosine to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:
@@ -401,6 +674,12 @@ def acos(u):
         return [acos(ui) for ui in u]
     
 def atan(u):
+    """ SUAVE.Plugins.ADiPy.atan(u)
+        apply arctan to ad or num
+
+        Outputs:
+            new ad object or num
+    """
     try:
         u[0]
     except:

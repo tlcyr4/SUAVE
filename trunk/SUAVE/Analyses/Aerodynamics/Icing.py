@@ -17,10 +17,17 @@ from SUAVE.Methods.Aerodynamics import Icing as Methods
 # ----------------------------------------------------------------------
 class Icing(Aerodynamics):
     """ SUAVE.Analyses.Aerodynamics.Icing()
-        Model based on NASA CRM Transonic Experimental Data (curve fits)
-        With corrections for effects of icing
+        Applies corrections for icing to a preexisting model, defaults to
+        Transonic.  To Use: set model and cl_dist and cd_dist, functions
+        that sample probability distributions for max lift and drag corrections.
+
+        Currently applies lift correction evenly across any cl.
+
     """
     def __init__(self, model = Transonic.Transonic(), cl_dist = Methods.default_dist.default_dist, cd_dist = Methods.default_dist.default_dist):
+        """ SUAVE.Analyses.Aerodynamics.Icing.__init__(model = Transonic.Transonic(), cl_dist = Methods.default_dist.default_dist, cd_dist = Methods.default_dist.default_dist)
+            Option to set model and/or distribution methods upon initialization
+        """
         self.model = model
         self.cl_dist = cl_dist
         self.cd_dist = cd_dist
